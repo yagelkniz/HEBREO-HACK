@@ -5,24 +5,20 @@ import { Button } from "@/components/ui/button";
 import { RadioGroup, RadioGroupItem } from "@/components/ui/radio-group";
 
 interface Props {
-  lang?: "he" | "en";
   onBack: () => void;
 }
 
-const PossessivePronounsPractice: React.FC<Props> = ({ lang = "he", onBack }) => {
+const PossessivePronounsPractice: React.FC<Props> = ({ onBack }) => {
   const [current, setCurrent] = useState(0);
   const [selected, setSelected] = useState<string>("");
   const [showAnswer, setShowAnswer] = useState(false);
   const [score, setScore] = useState(0);
 
+  const total = questions.length;
   const q = questions[current];
 
-  // אפשרויות לשאלה הנוכחית
-  const options = lang === "he" ? q.optionsHe : q.optionsEn;
-  const correctAnswer = lang === "he" ? q.answerHe : q.answerEn;
-
   const handleCheck = () => {
-    if (selected.trim().toLowerCase() === correctAnswer.trim().toLowerCase()) {
+    if (selected === q.answer) {
       setScore((s) => s + 1);
     }
     setShowAnswer(true);
@@ -39,7 +35,7 @@ const PossessivePronounsPractice: React.FC<Props> = ({ lang = "he", onBack }) =>
       <div className="flex flex-col items-center gap-6 p-4">
         <h2 className="text-xl font-bold text-violet-900" dir="rtl">סיימת!</h2>
         <div className="text-lg" dir="rtl">
-          צברת {score} מתוך {questions.length} נקודות.
+          צברת {score} מתוך {total} נקודות.
         </div>
         <Button className="mt-4" onClick={onBack}>⬅ חזרה</Button>
       </div>
@@ -56,16 +52,17 @@ const PossessivePronounsPractice: React.FC<Props> = ({ lang = "he", onBack }) =>
         <span className="text-base text-slate-700 font-normal" dir="ltr">Possessive Pronouns Practice</span>
       </h2>
       <div className="w-full bg-slate-50 rounded-xl shadow p-6 mb-2">
-        <div className="mb-4" dir={lang === "he" ? "rtl" : "ltr"}>
-          <span className="font-bold">{lang === "he" ? q.hebrewExample : q.englishExample}</span>
+        <div className="mb-4 flex flex-col gap-2" dir="rtl">
+          <span className="font-bold">{q.question}</span>
+          <span className="text-gray-600 text-sm" dir="ltr">{q.translation}</span>
         </div>
         <RadioGroup
           className="flex flex-col gap-3 mb-3"
           value={selected}
           onValueChange={setSelected}
-          dir={lang === "he" ? "rtl" : "ltr"}
+          dir="rtl"
         >
-          {options.map((option) => (
+          {q.options.map((option) => (
             <label key={option} className="flex items-center gap-3 cursor-pointer text-lg">
               <RadioGroupItem value={option} id={option} disabled={showAnswer} />
               <span>{option}</span>
@@ -78,10 +75,10 @@ const PossessivePronounsPractice: React.FC<Props> = ({ lang = "he", onBack }) =>
           </Button>
         ) : (
           <div className="mt-2 space-y-2">
-            <div className="text-lg" dir={lang === "he" ? "rtl" : "ltr"}>
+            <div className="text-lg" dir="rtl">
               תשובה נכונה:{" "}
               <span className="font-bold text-green-700">
-                {correctAnswer}
+                {q.answer}
               </span>
             </div>
             <Button className="w-full bg-teal-600 text-white" onClick={handleNext}>
@@ -90,7 +87,7 @@ const PossessivePronounsPractice: React.FC<Props> = ({ lang = "he", onBack }) =>
           </div>
         )}
       </div>
-      <div className="text-base text-gray-500">שאלה {current + 1} מתוך {questions.length}</div>
+      <div className="text-base text-gray-500">שאלה {current + 1} מתוך {total}</div>
     </div>
   );
 };

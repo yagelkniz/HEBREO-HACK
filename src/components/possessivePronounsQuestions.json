@@ -1,103 +1,123 @@
 
 [
   {
-    "hebrew": "שלי",
-    "english": "My",
-    "hebrewExample": "זה הספר ___ (שלי).",
-    "englishExample": "This is ___ book.",
-    "answerHe": "שלי",
-    "answerEn": "my",
-    "optionsHe": ["שלי", "שלך", "שלו", "שלנו"],
-    "optionsEn": ["my", "your", "his", "our"]
+    "question": "זה ___ התיק, הוא תמיד לוקח אותו לעבודה.",
+    "options": ["שלי", "שלו", "שלה", "שלנו"],
+    "answer": "שלו",
+    "translation": "It's ___ bag, he always takes it to work."
   },
   {
-    "hebrew": "שלך (זכר)",
-    "english": "Your (m. sg.)",
-    "hebrewExample": "הכובע ___ (שלך) יפה.",
-    "englishExample": "___ hat is nice.",
-    "answerHe": "שלך",
-    "answerEn": "your",
-    "optionsHe": ["שלי", "שלך", "שלה", "שלכם"],
-    "optionsEn": ["my", "your", "her", "your (pl.)"]
+    "question": "המפתחות האלה הם ___, לא שלך.",
+    "options": ["שלי", "שלנו", "שלך", "שלם"],
+    "answer": "שלי",
+    "translation": "These keys are ___, not yours."
   },
   {
-    "hebrew": "שלך (נקבה)",
-    "english": "Your (f. sg.)",
-    "hebrewExample": "המחברת ___ (שלך) על השולחן.",
-    "englishExample": "___ notebook is on the table.",
-    "answerHe": "שלך",
-    "answerEn": "your",
-    "optionsHe": ["שלך", "שלה", "שלו", "שלכן"],
-    "optionsEn": ["your", "her", "his", "your (f. pl.)"]
+    "question": "זו המכונית ___? היא מאוד יפה.",
+    "options": ["שלו", "שלך", "שלכם", "שלכן"],
+    "answer": "שלך",
+    "translation": "Is this ___ car? It's very nice."
   },
   {
-    "hebrew": "שלו",
-    "english": "His",
-    "hebrewExample": "התיק ___ (שלו) על הכיסא.",
-    "englishExample": "___ bag is on the chair.",
-    "answerHe": "שלו",
-    "answerEn": "his",
-    "optionsHe": ["שלך", "שלי", "שלו", "שלכם"],
-    "optionsEn": ["your", "my", "his", "your (pl.)"]
+    "question": "אנחנו אוהבים את הבית ___. הוא נעים ושקט.",
+    "options": ["שלי", "שלו", "שלנו", "שלהם"],
+    "answer": "שלנו",
+    "translation": "We love ___ house. It's cozy and quiet."
   },
   {
-    "hebrew": "שלה",
-    "english": "Her",
-    "hebrewExample": "הטלפון ___ (שלה) חדש.",
-    "englishExample": "___ phone is new.",
-    "answerHe": "שלה",
-    "answerEn": "her",
-    "optionsHe": ["שלה", "שלך", "שלו", "שלהם"],
-    "optionsEn": ["her", "your", "his", "their"]
+    "question": "הספרים האלו הם ___, לא של המורה.",
+    "options": ["שלהם", "שלי", "שלכם", "שלה"],
+    "answer": "שלהם",
+    "translation": "These books are ___, not the teacher's."
   },
   {
-    "hebrew": "שלנו",
-    "english": "Our",
-    "hebrewExample": "הבית ___ (שלנו) גדול.",
-    "englishExample": "___ house is big.",
-    "answerHe": "שלנו",
-    "answerEn": "our",
-    "optionsHe": ["שלי", "שלנו", "שלכם", "שלהם"],
-    "optionsEn": ["my", "our", "your", "their"]
+    "question": "האם זו המחברת ___?",
+    "options": ["שלו", "שלך", "שלהם", "שלנו"],
+    "answer": "שלך",
+    "translation": "Is this ___ notebook?"
   },
   {
-    "hebrew": "שלכם",
-    "english": "Your (m. pl.)",
-    "hebrewExample": "המבחנים ___ (שלכם) קשים.",
-    "englishExample": "___ exams are hard.",
-    "answerHe": "שלכם",
-    "answerEn": "your",
-    "optionsHe": ["שלכם", "שלך", "שלנו", "שלהם"],
-    "optionsEn": ["your", "your (sg.)", "our", "their"]
+    "question": "הילדים מצאו את הכלב ___.",
+    "options": ["שלם", "שלהם", "שלך", "שלנו"],
+    "answer": "שלהם",
+    "translation": "The kids found their dog."
   },
   {
-    "hebrew": "שלכן",
-    "english": "Your (f. pl.)",
-    "hebrewExample": "החברות ___ (שלכן) נחמדות.",
-    "englishExample": "___ friends are nice.",
-    "answerHe": "שלכן",
-    "answerEn": "your",
-    "optionsHe": ["שלכן", "שלהן", "שלה", "שלכם"],
-    "optionsEn": ["your", "their (f.)", "her", "your (m. pl.)"]
+    "question": "אני לא מוצא את הטלפון ___.",
+    "options": ["שלי", "שלך", "שלו", "שלכם"],
+    "answer": "שלי",
+    "translation": "I can't find my phone."
   },
   {
-    "hebrew": "שלהם",
-    "english": "Their (m.)",
-    "hebrewExample": "הספרים ___ (שלהם) בספרייה.",
-    "englishExample": "___ books are in the library.",
-    "answerHe": "שלהם",
-    "answerEn": "their",
-    "optionsHe": ["שלהם", "שלך", "שלה", "שלי"],
-    "optionsEn": ["their", "your", "her", "my"]
+    "question": "החולצה הזו היא לא ___, היא של אחי.",
+    "options": ["שלך", "שלי", "שלו", "שלנו"],
+    "answer": "שלי",
+    "translation": "This shirt is not ___, it's my brother's."
   },
   {
-    "hebrew": "שלהן",
-    "english": "Their (f.)",
-    "hebrewExample": "הדעות ___ (שלהן) שונות.",
-    "englishExample": "___ opinions are different.",
-    "answerHe": "שלהן",
-    "answerEn": "their",
-    "optionsHe": ["שלהן", "שלהם", "שלך", "שלכן"],
-    "optionsEn": ["their", "their (m.)", "your", "your (f. pl.)"]
+    "question": "המורה ביקשה מאיתנו להביא את הספר ___ מחר.",
+    "options": ["שלי", "שלנו", "שלכם", "שלו"],
+    "answer": "שלכם",
+    "translation": "The teacher asked us to bring your book tomorrow."
+  },
+  {
+    "question": "הם שכחו את הארנק ___.",
+    "options": ["שלו", "שלהם", "שלי", "שלך"],
+    "answer": "שלהם",
+    "translation": "They forgot their wallet."
+  },
+  {
+    "question": "אני תמיד כותב במחברת ___.",
+    "options": ["שלי", "שלך", "שלנו", "שלהם"],
+    "answer": "שלי",
+    "translation": "I always write in my notebook."
+  },
+  {
+    "question": "זאת הדירה ___, נכון?",
+    "options": ["שלך", "שלנו", "שלה", "שלי"],
+    "answer": "שלך",
+    "translation": "This is your apartment, right?"
+  },
+  {
+    "question": "שכחתם את הספרים ___ בבית.",
+    "options": ["שלך", "שלכם", "שלי", "שלו"],
+    "answer": "שלכם",
+    "translation": "You (plural) forgot your books at home."
+  },
+  {
+    "question": "החתול הזה הוא לא ___, הוא של השכנים.",
+    "options": ["שלי", "שלנו", "שלהם", "שלך"],
+    "answer": "שלי",
+    "translation": "This cat isn't mine, it's the neighbors'."
+  },
+  {
+    "question": "המטבח בבית ___ מאוד גדול.",
+    "options": ["שלכם", "שלי", "שלה", "שלנו"],
+    "answer": "שלנו",
+    "translation": "The kitchen in our house is very big."
+  },
+  {
+    "question": "האם זה הילד ___?",
+    "options": ["שלך", "שלי", "שלנו", "שלהם"],
+    "answer": "שלך",
+    "translation": "Is this your child?"
+  },
+  {
+    "question": "הזוג הזה בנה את הבית ___ לבד.",
+    "options": ["שלכם", "שלהם", "שלי", "שלו"],
+    "answer": "שלהם",
+    "translation": "This couple built their house themselves."
+  },
+  {
+    "question": "החדר הזה שייך לאחות ___.",
+    "options": ["שלי", "שלך", "שלו", "שלנו"],
+    "answer": "שלי",
+    "translation": "This room belongs to my sister."
+  },
+  {
+    "question": "זאת התמונה ___, היא צולמה אתמול.",
+    "options": ["שלי", "שלה", "שלו", "שלכם"],
+    "answer": "שלה",
+    "translation": "That's her photo, it was taken yesterday."
   }
 ]
