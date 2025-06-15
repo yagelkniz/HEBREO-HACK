@@ -15,6 +15,7 @@ import InterviewQuestionnaire from "@/components/InterviewQuestionnaire";
 import { supabase } from "@/integrations/supabase/client";
 import { useNavigate } from "react-router-dom";
 import PronounsTable from "@/components/PronounsTable";
+import PossessivePronounsTable from "@/components/PossessivePronounsTable";
 
 // Add lazy import for food levels
 const LazyTextComprehensionFoodLevels = React.lazy(() =>
@@ -71,6 +72,7 @@ const Index = () => {
   const [selectedTextComp, setSelectedTextComp] = useState<
     null | "food" | "animals-easy" | "food-order-medium" | "social-media" | "food-levels" | "countries-levels" | "movies-series-levels" | "places-food-easy"
   >(null);
+  const [showPossessivePronouns, setShowPossessivePronouns] = useState(false);
   const nav = useNavigate();
   const [showPronounsTable, setShowPronounsTable] = useState(false);
 
@@ -137,6 +139,17 @@ const Index = () => {
     );
   }
 
+  if (showPossessivePronouns) {
+    return (
+      <div className="w-full">
+        <div className="flex justify-end mb-4">
+          <Button variant="outline" onClick={() => setShowPossessivePronouns(false)}>⬅ חזרה</Button>
+        </div>
+        <PossessivePronounsTable />
+      </div>
+    );
+  }
+
   if (selectedTextComp) {
     return (
       <div className="w-full">
@@ -184,6 +197,14 @@ const Index = () => {
             >
               <span className="text-3xl">👤</span>
               <span dir="rtl">טבלת שמות גוף (עברית-אנגלית)</span>
+            </button>
+            {/* כפתור לטבלת מילות שייכות */}
+            <button
+              className="w-full flex items-center justify-center gap-4 py-6 font-bold text-2xl rounded-xl border-2 shadow transition hover:scale-105 focus:outline-none bg-teal-100 text-teal-900 border-teal-300"
+              onClick={() => setShowPossessivePronouns(true)}
+            >
+              <span className="text-3xl">🔗</span>
+              <span dir="rtl">טבלת מילות שייכות (עברית-אנגלית)</span>
             </button>
             {practiceOptions.map((option) => (
               <button
