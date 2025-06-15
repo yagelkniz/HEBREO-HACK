@@ -1,14 +1,24 @@
 
 import React, { useState } from "react";
+import {
+  pastTenseQuestionsPart1,
+  pastTenseQuestionsPart2,
+  pastTenseQuestionsPart3,
+  pastTenseQuestionsPart4,
+} from "./pastTenseQuestionsParts";
 import type { PastTenseQuestion } from "./pastTenseQuestions";
-import { pastTenseQuestionsPart1 } from "./pastTenseQuestionsParts";
 
-type Props = {
-  questions?: PastTenseQuestion[];
-};
-export default function PastTenseVerbPractice({
-  questions = pastTenseQuestionsPart1,
-}: Props) {
+const parts = [
+  { label: "חלק 1", data: pastTenseQuestionsPart1 },
+  { label: "חלק 2", data: pastTenseQuestionsPart2 },
+  { label: "חלק 3", data: pastTenseQuestionsPart3 },
+  { label: "חלק 4", data: pastTenseQuestionsPart4 },
+];
+
+export default function PastTenseVerbPractice() {
+  const [currentPart, setCurrentPart] = useState(0); // מתחילים בחלק 1
+  const questions = parts[currentPart].data;
+
   const [selections, setSelections] = useState<{ [i: number]: string | null }>({});
   const [feedbacks, setFeedbacks] = useState<{ [i: number]: "correct" | "incorrect" | null }>({});
   const [showVowels, setShowVowels] = useState(false);
@@ -22,13 +32,18 @@ export default function PastTenseVerbPractice({
     }));
   }
 
-  const totalAnswered = Object.keys(selections).length;
+  // כאשר מחליפים חלק, מאפסים בחירות ומשובים
+  function handlePartChange(idx: number) {
+    setCurrentPart(idx);
+    setSelections({});
+    setFeedbacks({});
+  }
+
   const correctAnswers = Object.values(feedbacks).filter((f) => f === "correct").length;
   const incorrectAnswers = Object.values(feedbacks).filter((f) => f === "incorrect").length;
 
   function displayWithVowels(text: string) {
     if (!showVowels) return text;
-    // הדגמת ניקוד; לשיפור בהמשך.
     return text.normalize("NFC");
   }
 
@@ -38,6 +53,24 @@ export default function PastTenseVerbPractice({
         <h1 className="text-3xl font-bold text-primary mb-4" dir="rtl">
           בחר את הפועל הנכון בזמן עבר
         </h1>
+        <div className="flex gap-2 mb-3">
+          {parts.map((part, idx) => (
+            <button
+              key={part.label}
+              className={`px-3 py-1 text-base font-semibold rounded-xl border ${
+                idx === currentPart
+                  ? "bg-blue-500 text-white border-blue-700"
+                  : "bg-white text-blue-600 border-blue-300 hover:bg-blue-100"
+              } transition`}
+              onClick={() => handlePartChange(idx)}
+              disabled={idx === currentPart}
+              aria-disabled={idx === currentPart}
+              type="button"
+            >
+              {part.label}
+            </button>
+          ))}
+        </div>
         <label className="flex gap-2 mb-3 items-center text-base cursor-pointer" dir="rtl">
           <input
             type="checkbox"
