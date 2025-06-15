@@ -1,6 +1,5 @@
 
 [
-  // --- Restaurant section ---
   {
     "id": 1,
     "category": "restaurant",
@@ -201,8 +200,6 @@
     "correctAnswer": "הזמנתי",
     "translation": "I didn't get what I ordered."
   },
-
-  // --- Supermarket section (החלק שהיה קיים קודם) ---
   {
     "id": 26,
     "category": "supermarket",
