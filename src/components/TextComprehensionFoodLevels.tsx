@@ -1,5 +1,5 @@
 
-import React, { useState } from "react";
+import React, { useState, useEffect } from "react";
 import { BookOpen } from "lucide-react";
 import { FoodReadingData } from "./FoodReadingData";
 import { FoodQuestions } from "./FoodQuestions";
@@ -18,6 +18,35 @@ export default function TextComprehensionFoodLevels() {
   const [feedbacks, setFeedbacks] = useState<{ [i: number]: "correct" | "incorrect" | null }>({});
   const [finished, setFinished] = useState(false);
 
+  // Place all hooks above any returns/branches to obey hooks rules.
+
+  // These depend on selectedLevel, so set values only if selectedLevel is set:
+  useEffect(() => {
+    setAnswers({});
+    setFeedbacks({});
+    setFinished(false);
+  }, [selectedLevel]);
+
+  // Safe defaults for when nothing is selected
+  const text = selectedLevel ? FoodReadingData[selectedLevel] : "";
+  const questions = selectedLevel ? FoodQuestions[selectedLevel] : [];
+  const totalQuestions = questions.length;
+
+  function check(qIdx: number, option: string) {
+    setAnswers((prev) => ({ ...prev, [qIdx]: option }));
+    setFeedbacks((prev) => ({
+      ...prev,
+      [qIdx]: option === questions[qIdx].answer ? "correct" : "incorrect",
+    }));
+    // Updated: Check finished only if all answers are filled
+    if (Object.keys({ ...answers, [qIdx]: option }).length === totalQuestions) {
+      setFinished(true);
+    }
+  }
+
+  const correctCount = Object.values(feedbacks).filter((val) => val === "correct").length;
+
+  // UI
   if (!selectedLevel) {
     return (
       <div className="flex flex-col items-center py-10 px-4 gap-6 bg-yellow-50 rounded-2xl shadow-lg border-2 border-yellow-300 max-w-lg mx-auto mt-8">
@@ -41,30 +70,6 @@ export default function TextComprehensionFoodLevels() {
       </div>
     );
   }
-
-  const text = FoodReadingData[selectedLevel];
-  const questions = FoodQuestions[selectedLevel];
-  const totalQuestions = questions.length;
-
-  // Reset when switching levels
-  React.useEffect(() => {
-    setAnswers({});
-    setFeedbacks({});
-    setFinished(false);
-  }, [selectedLevel]);
-
-  function check(qIdx: number, option: string) {
-    setAnswers((prev) => ({ ...prev, [qIdx]: option }));
-    setFeedbacks((prev) => ({
-      ...prev,
-      [qIdx]: option === questions[qIdx].answer ? "correct" : "incorrect",
-    }));
-    if (Object.keys(answers).length + 1 === totalQuestions) {
-      setFinished(true);
-    }
-  }
-
-  const correctCount = Object.values(feedbacks).filter((val) => val === "correct").length;
 
   return (
     <div className="flex flex-col items-center py-8 px-4 gap-7 bg-yellow-50 rounded-2xl shadow-lg border-[3px] border-yellow-300 max-w-2xl mx-auto mt-8">
