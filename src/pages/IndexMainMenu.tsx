@@ -9,7 +9,7 @@ interface IndexMainMenuProps {
   setShowPossessivePronouns: (b: boolean) => void;
   setShowQuestionnaire: (b: boolean) => void;
   setSelectedPractice: (val: null | "verb" | "nounAdj") => void;
-  setSelectedTextComp: (val: string | null) => void;
+  setSelectedTextComp: (val: string | null) => void; // <-- מתוקן כאן
   setShowEverydayHebrew: (b: boolean) => void;
 }
 

@@ -1,150 +1,175 @@
 
 [
   {
+    "id": 1,
     "question": "איפה נמצא ___? אני לא מצליח למצוא אותו.",
     "options": ["החלב", "המקרר", "הסכין", "המנקה"],
     "correctAnswer": "החלב",
     "translation": "Where is the ___? I can't find it."
   },
   {
+    "id": 2,
     "question": "אפשר ___ איפה הקפה נמצא?",
     "options": ["לשאול", "לשתות", "לקנות", "לטעום"],
     "correctAnswer": "לשאול",
     "translation": "Can I ___ where the coffee is?"
   },
   {
+    "id": 3,
     "question": "אני צריך שקית בשביל ___.",
     "options": ["הקניות", "החלון", "הטלוויזיה", "הכיסא"],
     "correctAnswer": "הקניות",
     "translation": "I need a bag for the ___."
   },
   {
+    "id": 4,
     "question": "אפשר לשלם כאן או שצריך ללכת ל___?",
     "options": ["קופה", "דלת", "עץ", "מטבח"],
     "correctAnswer": "קופה",
     "translation": "Can I pay here or should I go to the ___?"
   },
   {
+    "id": 5,
     "question": "אני מחפש ___ טריים, איפה זה נמצא?",
     "options": ["ירקות", "בגדים", "ספרים", "מגבות"],
     "correctAnswer": "ירקות",
     "translation": "I'm looking for fresh ___. Where is it?"
   },
   {
+    "id": 6,
     "question": "יש לכם לחם ___?",
     "options": ["טרי", "מהיר", "ארוך", "כחול"],
     "correctAnswer": "טרי",
     "translation": "Do you have fresh bread?"
   },
   {
+    "id": 7,
     "question": "סליחה, איפה אני יכול למצוא ___?",
     "options": ["שמן זית", "שעון", "מחשב", "כיסא"],
     "correctAnswer": "שמן זית",
     "translation": "Excuse me, where can I find olive oil?"
   },
   {
+    "id": 8,
     "question": "אני לוקח את ___ האחרון. מקווה שזה בסדר.",
     "options": ["החלב", "הקיר", "הספר", "השולחן"],
     "correctAnswer": "החלב",
     "translation": "I'm taking the last ___. Hope it's okay."
   },
   {
+    "id": 9,
     "question": "כמה ___ יש במבצע היום?",
     "options": ["עגבניות", "מחשבים", "קירות", "חלונות"],
     "correctAnswer": "עגבניות",
     "translation": "How many tomatoes are on sale today?"
   },
   {
+    "id": 10,
     "question": "האם אפשר לשלם ב___?",
     "options": ["כרטיס אשראי", "כוס", "מזלג", "סכין"],
     "correctAnswer": "כרטיס אשראי",
     "translation": "Can I pay with a credit card?"
   },
   {
+    "id": 11,
     "question": "אני לא מוצא את מדף ה___.",
     "options": ["חטיפים", "כיסאות", "תמונות", "שעונים"],
     "correctAnswer": "חטיפים",
     "translation": "I can't find the snack shelf."
   },
   {
+    "id": 12,
     "question": "האם יש ___ ללא סוכר?",
     "options": ["מיץ", "שולחן", "בקבוק", "מטאטא"],
     "correctAnswer": "מיץ",
     "translation": "Do you have juice without sugar?"
   },
   {
+    "id": 13,
     "question": "אפשר לקבל עזרה עם ___?",
     "options": ["המוצרים", "המפתחות", "הידיים", "האוזניים"],
     "correctAnswer": "המוצרים",
     "translation": "Can I get help with the groceries?"
   },
   {
+    "id": 14,
     "question": "אני צריך ___ לעגלה.",
     "options": ["מטבע", "סכין", "כוס", "דבק"],
     "correctAnswer": "מטבע",
     "translation": "I need a coin for the cart."
   },
   {
+    "id": 15,
     "question": "יש לכם ___ ללא גלוטן?",
     "options": ["לחם", "מים", "אוויר", "תקרה"],
     "correctAnswer": "לחם",
     "translation": "Do you have gluten-free bread?"
   },
   {
+    "id": 16,
     "question": "כמה עולה ___ הזה?",
     "options": ["הגבינה", "הקיר", "המחשב", "הטלפון"],
     "correctAnswer": "הגבינה",
     "translation": "How much does this cheese cost?"
   },
   {
+    "id": 17,
     "question": "האם אפשר להחזיר ___ אם אין קבלה?",
     "options": ["מוצר", "חבר", "ספר", "חלון"],
     "correctAnswer": "מוצר",
     "translation": "Can I return a product without a receipt?"
   },
   {
+    "id": 18,
     "question": "האם זה ___ ביתי?",
     "options": ["רוטב", "מכנס", "שלט", "כיסא"],
     "correctAnswer": "רוטב",
     "translation": "Is this a homemade sauce?"
   },
   {
+    "id": 19,
     "question": "אני רוצה לבדוק את התוקף של ___ הזה.",
     "options": ["החלב", "המכנס", "המנורה", "הכורסה"],
     "correctAnswer": "החלב",
     "translation": "I want to check the expiration date of this milk."
   },
   {
+    "id": 20,
     "question": "יש לכם ___ מהתנור?",
     "options": ["לחם", "תמונה", "ספר", "מכסה"],
     "correctAnswer": "לחם",
     "translation": "Do you have bread from the oven?"
   },
   {
+    "id": 21,
     "question": "האם צריך ___ את הבקבוק לפני השתייה?",
     "options": ["לנער", "לחתוך", "ללבוש", "לצייר"],
     "correctAnswer": "לנער",
     "translation": "Do I need to shake the bottle before drinking?"
   },
   {
+    "id": 22,
     "question": "אני אלרגי ל___. יש לכם משהו אחר?",
     "options": ["בוטנים", "כיסאות", "סוללות", "חלונות"],
     "correctAnswer": "בוטנים",
     "translation": "I'm allergic to peanuts. Do you have something else?"
   },
   {
+    "id": 23,
     "question": "הילד שלי אוהב ___ עם שוקולד בפנים.",
     "options": ["עוגיות", "עיתונים", "כובעים", "כוסות"],
     "correctAnswer": "עוגיות",
     "translation": "My kid loves cookies with chocolate inside."
   },
   {
+    "id": 24,
     "question": "אני צריך ___ לשבוע שלם.",
     "options": ["קניות", "שולחן", "כיסא", "חולצה"],
     "correctAnswer": "קניות",
     "translation": "I need groceries for the whole week."
   },
   {
+    "id": 25,
     "question": "האם יש כאן ___ לקנייה במשקל?",
     "options": ["אגוזים", "תמונות", "דלתות", "טלוויזיות"],
     "correctAnswer": "אגוזים",
