@@ -16,6 +16,7 @@ import { supabase } from "@/integrations/supabase/client";
 import { useNavigate } from "react-router-dom";
 import PronounsTable from "@/components/PronounsTable";
 import PossessivePronounsTable from "@/components/PossessivePronounsTable";
+import LinkingWordsTable from "@/components/LinkingWordsTable";
 
 // Add lazy import for food levels
 const LazyTextComprehensionFoodLevels = React.lazy(() =>
@@ -73,6 +74,7 @@ const Index = () => {
     null | "food" | "animals-easy" | "food-order-medium" | "social-media" | "food-levels" | "countries-levels" | "movies-series-levels" | "places-food-easy"
   >(null);
   const [showPossessivePronouns, setShowPossessivePronouns] = useState(false);
+  const [showLinkingWords, setShowLinkingWords] = useState(false);
   const nav = useNavigate();
   const [showPronounsTable, setShowPronounsTable] = useState(false);
 
@@ -150,6 +152,19 @@ const Index = () => {
     );
   }
 
+  if (showLinkingWords) {
+    return (
+      <div className="w-full">
+        <div className="flex justify-end mb-4">
+          <Button variant="outline" onClick={() => setShowLinkingWords(false)}>
+            ⬅ חזרה
+          </Button>
+        </div>
+        <LinkingWordsTable />
+      </div>
+    );
+  }
+
   if (selectedTextComp) {
     return (
       <div className="w-full">
@@ -190,6 +205,14 @@ const Index = () => {
             איזה תרגול תרצה לתרגל?
           </h1>
           <div className="grid gap-6 w-full">
+            {/* כפתור חדש — טבלת מילות קישור */}
+            <button
+              className="w-full flex items-center justify-center gap-4 py-6 font-bold text-2xl rounded-xl border-2 shadow transition hover:scale-105 focus:outline-none bg-fuchsia-100 text-fuchsia-900 border-fuchsia-300"
+              onClick={() => setShowLinkingWords(true)}
+            >
+              <span className="text-3xl">🔗</span>
+              <span dir="rtl">טבלת מילות קישור (קטגוריות ודוגמאות)</span>
+            </button>
             {/* כפתור חדש — טבלת שמות גוף */}
             <button
               className="w-full flex items-center justify-center gap-4 py-6 font-bold text-2xl rounded-xl border-2 shadow transition hover:scale-105 focus:outline-none bg-indigo-100 text-indigo-900 border-indigo-300"
