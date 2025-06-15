@@ -2,198 +2,259 @@
 import React, { useState } from "react";
 import { Button } from "@/components/ui/button";
 
-type Level = "קל" | "בינוני" | "קשה";
-
-type Question = {
-  noun: string;
-  adjective: string;
-  textBefore: string;
-  blank: string;
-  textAfter: string;
+type Q = {
+  sentence: string;
   options: string[];
   correct: string;
+  translation?: string;
 };
 
-// שאלות לדוגמה לכל רמה
-const questionsByLevel: Record<Level, Question[]> = {
-  "קל": [
-    {
-      noun: "כלב",
-      adjective: "שחור",
-      textBefore: "זה",
-      blank: "______",
-      textAfter: ".",
-      options: ["כלב שחור", "כלב שחורה", "כלבה שחור"],
-      correct: "כלב שחור",
-    },
-    {
-      noun: "חתולה",
-      adjective: "לבנה",
-      textBefore: "זו",
-      blank: "______",
-      textAfter: ".",
-      options: ["חתול לבן", "חתולה לבנה", "חתולה לבן"],
-      correct: "חתולה לבנה",
-    }
-  ],
-  "בינוני": [
-    {
-      noun: "ספרים",
-      adjective: "ישנים",
-      textBefore: "אלה",
-      blank: "______",
-      textAfter: "מעניינים.",
-      options: ["ספר ישן", "ספרים ישנים", "ספרים ישנה", "ספרים ישן"],
-      correct: "ספרים ישנים",
-    },
-    {
-      noun: "שאלה",
-      adjective: "קשה",
-      textBefore: "זו",
-      blank: "______",
-      textAfter: "מאוד.",
-      options: ["שאלה קשה", "שאלה קשהים", "שאלה קשים", "שאלה קל"],
-      correct: "שאלה קשה",
-    }
-  ],
-  "קשה": [
-    {
-      noun: "תלמידות",
-      adjective: "חכמות",
-      textBefore: "הן",
-      blank: "______",
-      textAfter: ".",
-      options: ["תלמידה חכמה", "תלמידות חכמות", "תלמידות חכם", "תלמידים חכמות"],
-      correct: "תלמידות חכמות",
-    },
-    {
-      noun: "תפוחים",
-      adjective: "אדומים",
-      textBefore: "אלה",
-      blank: "______",
-      textAfter: "וטריים.",
-      options: ["תפוח אדום", "תפוחים אדומים", "תפוחים אדום", "תפוחה אדומה"],
-      correct: "תפוחים אדומים",
-    }
-  ],
-};
+const questions: Q[] = [
+  // קל
+  {
+    sentence: "הילד ______ (גדול/קטן/כחול/ישן)",
+    options: ["גדול", "קטן", "כחול", "ישן"],
+    correct: "גדול",
+    translation: "The boy is big."
+  },
+  {
+    sentence: "התפוז ______ (טעים/שמח/יפה/חדש)",
+    options: ["טעים", "שמח", "יפה", "חדש"],
+    correct: "טעים",
+    translation: "The orange is tasty."
+  },
+  {
+    sentence: "הספר ______ (חדש/ישן/שחור/חם)",
+    options: ["חדש", "ישן", "שחור", "חם"],
+    correct: "חדש",
+    translation: "The book is new."
+  },
+  {
+    sentence: "המורה ______ (טובה/קרה/רחבה/עצובה)",
+    options: ["טובה", "קרה", "רחבה", "עצובה"],
+    correct: "טובה",
+    translation: "The teacher (f) is good."
+  },
+  {
+    sentence: "הילדה ______ (יפה/קטנה/שמחה/ארוכה)",
+    options: ["יפה", "קטנה", "שמחה", "ארוכה"],
+    correct: "יפה",
+    translation: "The girl is beautiful."
+  },
+  {
+    sentence: "הבית ______ (גדול/קר/שמח/ירוק)",
+    options: ["גדול", "קר", "שמח", "ירוק"],
+    correct: "גדול",
+    translation: "The house is big."
+  },
+  {
+    sentence: "הכלב ______ (ישן/שמח/חום/קטן)",
+    options: ["שמח", "ישן", "חום", "קטן"],
+    correct: "שמח",
+    translation: "The dog is happy."
+  },
+  {
+    sentence: "הדלת ______ (חדשה/ישנה/חמה/קצרה)",
+    options: ["חדשה", "ישנה", "חמה", "קצרה"],
+    correct: "חדשה",
+    translation: "The door is new."
+  },
 
-export default function NounAdjectivePractice({
-  onBack,
-}: {
-  onBack?: () => void;
-}) {
-  const [level, setLevel] = useState<Level | null>(null);
-  const [current, setCurrent] = useState(0);
-  const [selected, setSelected] = useState<string | null>(null);
-  const [feedback, setFeedback] = useState<"correct" | "incorrect" | null>(null);
+  // בינוני
+  {
+    sentence: "האופניים ______ (ישנים/חדשים/חכמים/קרים)",
+    options: ["חדשים", "ישנים", "חכמים", "קרים"],
+    correct: "חדשים",
+    translation: "The (bi)cycle is new."
+  },
+  {
+    sentence: "השולחנות ______ (נקיים/קטנים/שמחים/ישנים)",
+    options: ["נקיים", "קטנים", "שמחים", "ישנים"],
+    correct: "נקיים",
+    translation: "The tables are clean."
+  },
+  {
+    sentence: "החתולים ______ (יפים/גדולים/טעימים/כבדים)",
+    options: ["יפים", "גדולים", "טעימים", "כבדים"],
+    correct: "יפים",
+    translation: "The cats are pretty."
+  },
+  {
+    sentence: "המורות ______ (טובות/ישנות/נמוכות/מהירות)",
+    options: ["טובות", "ישנות", "נמוכות", "מהירות"],
+    correct: "טובות",
+    translation: "The teachers (f) are good."
+  },
+  {
+    sentence: "התלמידות ______ (חכמות/חמות/גבוהות/מגעילות)",
+    options: ["חכמות", "חמות", "גבוהות", "מגעילות"],
+    correct: "חכמות",
+    translation: "The students (f) are smart."
+  },
+  {
+    sentence: "הכיסאות ______ (שחורים/יקרים/ישנים/טעימים)",
+    options: ["שחורים", "יקרים", "ישנים", "טעימים"],
+    correct: "שחורים",
+    translation: "The chairs are black."
+  },
+  {
+    sentence: "הנסיעה ______ (ארוכה/קצרה/מהירה/חמה)",
+    options: ["ארוכה", "קצרה", "מהירה", "חמה"],
+    correct: "ארוכה",
+    translation: "The ride is long."
+  },
+  {
+    sentence: "הילדים ______ (שמחים/טובים/יפים/קטנים)",
+    options: ["שמחים", "טובים", "יפים", "קטנים"],
+    correct: "שמחים",
+    translation: "The children are happy."
+  },
 
-  const questions = level ? questionsByLevel[level] : [];
+  // קשה
+  {
+    sentence: "המשפחה שלי ______ (מאושרת/ענייה/עשירה/קטנה)",
+    options: ["מאושרת", "ענייה", "עשירה", "קטנה"],
+    correct: "מאושרת",
+    translation: "My family is happy."
+  },
+  {
+    sentence: "החברים שלי ______ (נאמנים/יקרים/מוזרים/עשירים)",
+    options: ["נאמנים", "יקרים", "מוזרים", "עשירים"],
+    correct: "נאמנים",
+    translation: "My friends are loyal."
+  },
+  {
+    sentence: "העיר ______ (עמוסה/יפה/נקייה/ים)",
+    options: ["עמוסה", "יפה", "נקייה", "ים"],
+    correct: "נקייה",
+    translation: "The city is clean."
+  },
+  {
+    sentence: "הרחובות בעיר ______ (סואנים/מוארים/יפים/ריקים)",
+    options: ["סואנים", "מוארים", "יפים", "ריקים"],
+    correct: "מוארים",
+    translation: "The streets in the city are lit."
+  },
+  {
+    sentence: "הארוחה במסעדה הייתה ______ (טעימה/מהירה/חמה/קשה)",
+    options: ["טעימה", "מהירה", "חמה", "קשה"],
+    correct: "טעימה",
+    translation: "The meal at the restaurant was tasty."
+  },
+  {
+    sentence: "המלצרית ______ (אדיבה/יפה/עצלנית/קרה)",
+    options: ["אדיבה", "יפה", "עצלנית", "קרה"],
+    correct: "אדיבה",
+    translation: "The waitress was polite."
+  },
+  {
+    sentence: "הכלבים של השכן ______ (רועשים/מפחידים/שקטים/זריזים)",
+    options: ["רועשים", "מפחידים", "שקטים", "זריזים"],
+    correct: "רועשים",
+    translation: "The neighbor's dogs are noisy."
+  },
+  {
+    sentence: "הים בקיץ ______ (חם/מלוח/כחול/ריק)",
+    options: ["חם", "מלוח", "כחול", "ריק"],
+    correct: "חם",
+    translation: "The sea in summer is hot."
+  },
 
-  function handleSelectLevel(lvl: Level) {
-    setLevel(lvl);
-    setCurrent(0);
-    setSelected(null);
-    setFeedback(null);
+  // בונוס
+  {
+    sentence: "המטבח בבית שלי ______ (נקי/מלוכלך/קטן/ישן)",
+    options: ["נקי", "מלוכלך", "קטן", "ישן"],
+    correct: "נקי",
+    translation: "The kitchen in my house is clean."
+  },
+  {
+    sentence: "אחי ואחותי ______ (חכמים/שמחים/צעירים/יפים)",
+    options: ["חכמים", "שמחים", "צעירים", "יפים"],
+    correct: "צעירים",
+    translation: "My brother and sister are young."
+  },
+  {
+    sentence: "הכיתה ______ (רחבה/גבוהה/חדשה/נקייה)",
+    options: ["נקייה", "רחבה", "גבוהה", "חדשה"],
+    correct: "נקייה",
+    translation: "The classroom is clean."
+  },
+  {
+    sentence: "החגים בישראל ______ (מיוחדים/עמוסים/נעימים/ארוכים)",
+    options: ["מיוחדים", "עמוסים", "נעימים", "ארוכים"],
+    correct: "מיוחדים",
+    translation: "The holidays in Israel are special."
+  },
+  {
+    sentence: "הילדים בכיתה ______ (חכמים/בדיחה/חמים/חכמות)",
+    options: ["חכמים", "חמים", "חכמות", "בדיחה"],
+    correct: "חכמים",
+    translation: "The children in the class are smart."
   }
+];
 
-  function checkAnswer(opt: string) {
-    setSelected(opt);
-    if (opt === questions[current].correct) {
-      setFeedback("correct");
-    } else {
-      setFeedback("incorrect");
-    }
+export default function NounAdjectivePractice({ onBack }: { onBack?: () => void }) {
+  const [answers, setAnswers] = useState<{ [i: number]: string | null }>({});
+  const [feedbacks, setFeedbacks] = useState<{ [i: number]: "correct" | "incorrect" | null }>({});
+
+  const total = questions.length;
+  const correct = Object.values(feedbacks).filter((f) => f === "correct").length;
+  const incorrect = Object.values(feedbacks).filter((f) => f === "incorrect").length;
+
+  function check(i: number, option: string) {
+    setAnswers((prev) => ({ ...prev, [i]: option }));
+    setFeedbacks((prev) => ({ ...prev, [i]: option === questions[i].correct ? "correct" : "incorrect" }));
   }
-
-  function handleNext() {
-    setSelected(null);
-    setFeedback(null);
-    setCurrent((c) => c + 1);
-  }
-
-  function handleRestart() {
-    setLevel(null);
-    setCurrent(0);
-    setSelected(null);
-    setFeedback(null);
-  }
-
-  if (!level) {
-    return (
-      <div className="flex flex-col items-center gap-7 p-8 bg-background rounded-2xl shadow-md border max-w-md mx-auto">
-        <h2 className="text-2xl font-bold text-primary mb-2" dir="rtl">בחר/י רמת קושי</h2>
-        <div className="flex flex-col gap-4 w-full">
-          {(["קל", "בינוני", "קשה"] as Level[]).map((lvl) => (
-            <Button key={lvl} className="w-full text-lg" onClick={() => handleSelectLevel(lvl)}>{lvl}</Button>
-          ))}
-        </div>
-        {onBack && (
-          <Button variant="outline" className="mt-8" onClick={onBack}>⬅ חזרה</Button>
-        )}
-      </div>
-    );
-  }
-
-  if (current >= questions.length) {
-    return (
-      <div className="flex flex-col items-center gap-5 p-8 bg-background rounded-2xl shadow-md border max-w-md mx-auto">
-        <h2 className="text-2xl font-bold text-primary mb-2" dir="rtl">סיימת את התרגול!</h2>
-        <Button onClick={handleRestart}>נסה שוב</Button>
-        <Button variant="outline" onClick={onBack}>⬅ חזרה</Button>
-      </div>
-    );
-  }
-
-  const q = questions[current];
 
   return (
-    <div className="flex flex-col items-center justify-center p-8 gap-6 min-h-[55vh] bg-background rounded-2xl shadow-md border max-w-xl mx-auto rtl">
-      <div className="flex items-center justify-between w-full mb-2">
-        <span className="text-base text-gray-600" dir="rtl">רמה: <strong>{level}</strong></span>
-        {onBack && (
-          <Button variant="outline" size="sm" onClick={handleRestart}>רמות</Button>
-        )}
+    <div className="flex flex-col items-center justify-center p-8 gap-8 min-h-[60vh] bg-background rounded-2xl shadow-md border max-w-xl mx-auto rtl">
+      <div className="flex justify-end w-full mb-2">
+        {onBack && <Button variant="outline" onClick={onBack}>⬅ חזרה</Button>}
       </div>
-      <h2 className="text-xl font-bold mb-2" dir="rtl">בחר/י את הצירוף הנכון</h2>
-      <p className="text-lg mb-4 flex flex-wrap items-center justify-center" dir="rtl">
-        {q.textBefore} <span className="mx-1 font-bold">{q.blank}</span> {q.textAfter}
-      </p>
-      <div className="grid grid-cols-1 md:grid-cols-2 gap-4 w-full max-w-xs">
-        {q.options.map((opt) => (
-          <button
-            key={opt}
-            onClick={() => checkAnswer(opt)}
-            className={`rounded-xl px-4 py-2 text-lg font-medium hover:scale-105 transition whitespace-nowrap
-              ${selected === opt
-                ? (opt === q.correct ? "bg-green-300" : "bg-red-200")
-                : "bg-white hover:bg-gray-200"}
-            `}
-            dir="rtl"
-            disabled={!!selected}
-            aria-disabled={!!selected}
-            style={{ border: selected === opt ? "2px solid #a3a3a3" : "" }}
-          >
-            {opt}
-          </button>
-        ))}
+      <h2 className="text-2xl font-bold text-primary mb-2" dir="rtl">
+        בחר/י את שם התואר המתאים למשפט
+      </h2>
+      {questions.map((q, i) => (
+        <div key={i} className="w-full max-w-md flex flex-col items-center mb-2">
+          <p className="text-lg mb-2 flex flex-wrap items-center justify-center" dir="rtl">{q.sentence}</p>
+          {q.translation && (
+            <div className="text-sm text-gray-500 italic mb-1 text-center" dir="ltr">
+              ({q.translation})
+            </div>
+          )}
+          <div className="grid grid-cols-2 gap-3 mb-1 w-full max-w-xs">
+            {q.options.map((opt) => (
+              <button
+                key={opt}
+                onClick={() => check(i, opt)}
+                className={`rounded-2xl px-4 py-2 bg-gray-200 text-lg hover:bg-gray-300 transition whitespace-nowrap disabled:opacity-60 ${
+                  answers[i] === opt ? "ring-2 ring-primary" : ""
+                }`}
+                dir="rtl"
+                disabled={!!answers[i]}
+                aria-disabled={!!answers[i]}
+              >
+                {opt}
+              </button>
+            ))}
+          </div>
+          {feedbacks[i] === "correct" && (
+            <div className="text-md font-semibold mt-1 text-green-600" dir="rtl">
+              ✅ תשובה נכונה!
+            </div>
+          )}
+          {feedbacks[i] === "incorrect" && (
+            <div className="text-md font-semibold mt-1 text-red-500" dir="rtl">
+              ❌ נסה שוב
+            </div>
+          )}
+        </div>
+      ))}
+      <div className="flex flex-col items-center gap-2 mt-6 w-full">
+        <div className="font-bold text-lg text-gray-700" dir="rtl">
+          סטטיסטיקה: {correct} נכונות / {incorrect} שגויות / {total} סה"כ
+        </div>
       </div>
-      {feedback === "correct" && (
-        <div className="text-md font-semibold mt-2 text-green-600" dir="rtl">
-          ✅ תשובה נכונה!
-        </div>
-      )}
-      {feedback === "incorrect" && (
-        <div className="text-md font-semibold mt-2 text-red-500" dir="rtl">
-          ❌ נסה שוב
-        </div>
-      )}
-      {selected && feedback === "correct" && current < questions.length - 1 && (
-        <Button className="mt-2" onClick={handleNext}>לשאלה הבאה</Button>
-      )}
-      {selected && feedback === "correct" && current === questions.length - 1 && (
-        <Button className="mt-2" onClick={handleNext}>לסיום</Button>
-      )}
     </div>
   );
 }
