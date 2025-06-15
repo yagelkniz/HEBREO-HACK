@@ -10,10 +10,12 @@ import {
 } from "@/components/ui/table";
 import { cn } from "@/lib/utils";
 
+// עדכון הקטגוריות עם label באנגלית
 const categories = [
   {
     key: "addition",
     label: "הוספה",
+    englishLabel: "Addition",
     emoji: "🟩",
     color: "bg-green-100 text-green-900 border-green-300",
     rows: [
@@ -43,6 +45,7 @@ const categories = [
   {
     key: "contrast",
     label: "ניגוד",
+    englishLabel: "Contrast",
     emoji: "🟦",
     color: "bg-blue-100 text-blue-900 border-blue-300",
     rows: [
@@ -72,6 +75,7 @@ const categories = [
   {
     key: "cause",
     label: "סיבה ותוצאה",
+    englishLabel: "Cause and Effect",
     emoji: "🟨",
     color: "bg-yellow-100 text-yellow-900 border-yellow-300",
     rows: [
@@ -101,6 +105,7 @@ const categories = [
   {
     key: "condition",
     label: "תנאי",
+    englishLabel: "Condition",
     emoji: "🟧",
     color: "bg-orange-100 text-orange-900 border-orange-300",
     rows: [
@@ -130,6 +135,7 @@ const categories = [
   {
     key: "time",
     label: "זמן",
+    englishLabel: "Time",
     emoji: "🟥",
     color: "bg-red-100 text-red-900 border-red-300",
     rows: [
@@ -159,6 +165,7 @@ const categories = [
   {
     key: "purpose",
     label: "מטרה",
+    englishLabel: "Purpose",
     emoji: "🟪",
     color: "bg-purple-100 text-purple-900 border-purple-300",
     rows: [
@@ -210,11 +217,21 @@ const LinkingWordsTable = () => {
             )}
             onClick={() => setSelectedCategory(cat.key)}
             aria-current={cat.key === selectedCategory}
+            title={`${cat.label} (${cat.englishLabel})`}
           >
             <span className="text-xl">{cat.emoji}</span>
-            <span dir="rtl">{cat.label}</span>
+            <span dir="rtl">
+              {cat.label} <span className="text-gray-500 text-base">({cat.englishLabel})</span>
+            </span>
           </button>
         ))}
+      </div>
+      {/* כותרת קטגוריה עם תרגום */}
+      <div className="text-xl font-bold my-3 flex justify-center items-center gap-2">
+        <span className="text-2xl">{currentCat.emoji}</span>
+        <span dir="rtl">
+          {currentCat.label} <span className="text-gray-600 text-lg">({currentCat.englishLabel})</span>
+        </span>
       </div>
       {/* טבלה */}
       <div className="overflow-x-auto">
@@ -246,3 +263,4 @@ const LinkingWordsTable = () => {
 };
 
 export default LinkingWordsTable;
+
