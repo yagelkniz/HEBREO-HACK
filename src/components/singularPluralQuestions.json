@@ -1,4 +1,3 @@
-
 [
   {
     "id": 1,
@@ -139,5 +138,467 @@
       "hint": "Masculine"
     },
     "answer": "חלונות"
+  },
+  {
+    "id": 34,
+    "he": {
+      "question": "מה הרבים של 'ספר' (book (variation) (variation))?",
+      "options": ["ספרים", "ספר", "טעות"],
+      "hint": "זכר"
+    },
+    "en": {
+      "question": "What is the plural of 'ספר' (book (variation) (variation))?",
+      "options": ["ספרים (books)", "ספר (book)", "Incorrect"],
+      "hint": "Masculine"
+    },
+    "answer": "ספרים"
+  },
+  {
+    "id": 35,
+    "he": {
+      "question": "מה הרבים של 'מכונית' (car (variation) (variation) (variation))?",
+      "options": ["מכוניות", "מכונית", "טעות"],
+      "hint": "נקבה"
+    },
+    "en": {
+      "question": "What is the plural of 'מכונית' (car (variation) (variation) (variation))?",
+      "options": ["מכוניות (cars)", "מכונית (car)", "Incorrect"],
+      "hint": "Feminine"
+    },
+    "answer": "מכוניות"
+  },
+  {
+    "id": 36,
+    "he": {
+      "question": "מה הרבים של 'בקבוק' (bottle (variation))?",
+      "options": ["בקבוקים", "בקבוק", "טעות"],
+      "hint": "זכר"
+    },
+    "en": {
+      "question": "What is the plural of 'בקבוק' (bottle (variation))?",
+      "options": ["בקבוקים (bottles)", "בקבוק (bottle)", "Incorrect"],
+      "hint": "Masculine"
+    },
+    "answer": "בקבוקים"
+  },
+  {
+    "id": 37,
+    "he": {
+      "question": "מה הרבים של 'ילד' (boy (variation) (variation) (variation))?",
+      "options": ["ילדים", "ילד", "טעות"],
+      "hint": "זכר"
+    },
+    "en": {
+      "question": "What is the plural of 'ילד' (boy (variation) (variation) (variation))?",
+      "options": ["ילדים (boys)", "ילד (boy)", "Incorrect"],
+      "hint": "Masculine"
+    },
+    "answer": "ילדים"
+  },
+  {
+    "id": 38,
+    "he": {
+      "question": "מה הרבים של 'מכונית' (car (variation) (variation) (variation))?",
+      "options": ["מכוניות", "מכונית", "טעות"],
+      "hint": "נקבה"
+    },
+    "en": {
+      "question": "What is the plural of 'מכונית' (car (variation) (variation) (variation))?",
+      "options": ["מכוניות (cars)", "מכונית (car)", "Incorrect"],
+      "hint": "Feminine"
+    },
+    "answer": "מכוניות"
+  },
+  {
+    "id": 39,
+    "he": {
+      "question": "מה הרבים של 'שולחן' (table (variation) (variation))?",
+      "options": ["שולחנות", "שולחן", "טעות"],
+      "hint": "זכר"
+    },
+    "en": {
+      "question": "What is the plural of 'שולחן' (table (variation) (variation))?",
+      "options": ["שולחנות (tables)", "שולחן (table)", "Incorrect"],
+      "hint": "Masculine"
+    },
+    "answer": "שולחנות"
+  },
+  {
+    "id": 40,
+    "he": {
+      "question": "מה הרבים של 'דלת' (door (variation))?",
+      "options": ["דלתות", "דלת", "טעות"],
+      "hint": "נקבה"
+    },
+    "en": {
+      "question": "What is the plural of 'דלת' (door (variation))?",
+      "options": ["דלתות (doors)", "דלת (door)", "Incorrect"],
+      "hint": "Feminine"
+    },
+    "answer": "דלתות"
+  },
+  {
+    "id": 41,
+    "he": {
+      "question": "מה הרבים של 'מכונית' (car (variation))?",
+      "options": ["מכוניות", "מכונית", "טעות"],
+      "hint": "נקבה"
+    },
+    "en": {
+      "question": "What is the plural of 'מכונית' (car (variation))?",
+      "options": ["מכוניות (cars)", "מכונית (car)", "Incorrect"],
+      "hint": "Feminine"
+    },
+    "answer": "מכוניות"
+  },
+  {
+    "id": 42,
+    "he": {
+      "question": "מה הרבים של 'חלון' (window (variation) (variation))?",
+      "options": ["חלונות", "חלון", "טעות"],
+      "hint": "זכר"
+    },
+    "en": {
+      "question": "What is the plural of 'חלון' (window (variation) (variation))?",
+      "options": ["חלונות (windows)", "חלון (window)", "Incorrect"],
+      "hint": "Masculine"
+    },
+    "answer": "חלונות"
+  },
+  {
+    "id": 43,
+    "he": {
+      "question": "מה הרבים של 'דלת' (door (variation) (variation))?",
+      "options": ["דלתות", "דלת", "טעות"],
+      "hint": "נקבה"
+    },
+    "en": {
+      "question": "What is the plural of 'דלת' (door (variation) (variation))?",
+      "options": ["דלתות (doors)", "דלת (door)", "Incorrect"],
+      "hint": "Feminine"
+    },
+    "answer": "דלתות"
+  },
+  {
+    "id": 44,
+    "he": {
+      "question": "מה הרבים של 'מכונית' (car (variation) (variation))?",
+      "options": ["מכוניות", "מכונית", "טעות"],
+      "hint": "נקבה"
+    },
+    "en": {
+      "question": "What is the plural of 'מכונית' (car (variation) (variation))?",
+      "options": ["מכוניות (cars)", "מכונית (car)", "Incorrect"],
+      "hint": "Feminine"
+    },
+    "answer": "מכוניות"
+  },
+  {
+    "id": 45,
+    "he": {
+      "question": "מה הרבים של 'חלון' (window (variation) (variation) (variation))?",
+      "options": ["חלונות", "חלון", "טעות"],
+      "hint": "זכר"
+    },
+    "en": {
+      "question": "What is the plural of 'חלון' (window (variation) (variation) (variation))?",
+      "options": ["חלונות (windows)", "חלון (window)", "Incorrect"],
+      "hint": "Masculine"
+    },
+    "answer": "חלונות"
+  },
+  {
+    "id": 46,
+    "he": {
+      "question": "מה הרבים של 'מכונית' (car (variation))?",
+      "options": ["מכוניות", "מכונית", "טעות"],
+      "hint": "נקבה"
+    },
+    "en": {
+      "question": "What is the plural of 'מכונית' (car (variation))?",
+      "options": ["מכוניות (cars)", "מכונית (car)", "Incorrect"],
+      "hint": "Feminine"
+    },
+    "answer": "מכוניות"
+  },
+  {
+    "id": 47,
+    "he": {
+      "question": "מה הרבים של 'דלת' (door (variation) (variation))?",
+      "options": ["דלתות", "דלת", "טעות"],
+      "hint": "נקבה"
+    },
+    "en": {
+      "question": "What is the plural of 'דלת' (door (variation) (variation))?",
+      "options": ["דלתות (doors)", "דלת (door)", "Incorrect"],
+      "hint": "Feminine"
+    },
+    "answer": "דלתות"
+  },
+  {
+    "id": 48,
+    "he": {
+      "question": "מה הרבים של 'חלון' (window (variation))?",
+      "options": ["חלונות", "חלון", "טעות"],
+      "hint": "זכר"
+    },
+    "en": {
+      "question": "What is the plural of 'חלון' (window (variation))?",
+      "options": ["חלונות (windows)", "חלון (window)", "Incorrect"],
+      "hint": "Masculine"
+    },
+    "answer": "חלונות"
+  },
+  {
+    "id": 49,
+    "he": {
+      "question": "מה הרבים של 'חלון' (window (variation) (variation) (variation))?",
+      "options": ["חלונות", "חלון", "טעות"],
+      "hint": "זכר"
+    },
+    "en": {
+      "question": "What is the plural of 'חלון' (window (variation) (variation) (variation))?",
+      "options": ["חלונות (windows)", "חלון (window)", "Incorrect"],
+      "hint": "Masculine"
+    },
+    "answer": "חלונות"
+  },
+  {
+    "id": 50,
+    "he": {
+      "question": "מה הרבים של 'דלת' (door (variation) (variation) (variation))?",
+      "options": ["דלתות", "דלת", "טעות"],
+      "hint": "נקבה"
+    },
+    "en": {
+      "question": "What is the plural of 'דלת' (door (variation) (variation) (variation))?",
+      "options": ["דלתות (doors)", "דלת (door)", "Incorrect"],
+      "hint": "Feminine"
+    },
+    "answer": "דלתות"
+  },
+  {
+    "id": 51,
+    "he": {
+      "question": "מה הרבים של 'ספר' (book (variation))?",
+      "options": ["ספרים", "ספר", "טעות"],
+      "hint": "זכר"
+    },
+    "en": {
+      "question": "What is the plural of 'ספר' (book (variation))?",
+      "options": ["ספרים (books)", "ספר (book)", "Incorrect"],
+      "hint": "Masculine"
+    },
+    "answer": "ספרים"
+  },
+  {
+    "id": 52,
+    "he": {
+      "question": "מה הרבים של 'שולחן' (table (variation) (variation) (variation))?",
+      "options": ["שולחנות", "שולחן", "טעות"],
+      "hint": "זכר"
+    },
+    "en": {
+      "question": "What is the plural of 'שולחן' (table (variation) (variation) (variation))?",
+      "options": ["שולחנות (tables)", "שולחן (table)", "Incorrect"],
+      "hint": "Masculine"
+    },
+    "answer": "שולחנות"
+  },
+  {
+    "id": 53,
+    "he": {
+      "question": "מה הרבים של 'מכונית' (car (variation) (variation) (variation) (variation))?",
+      "options": ["מכוניות", "מכונית", "טעות"],
+      "hint": "נקבה"
+    },
+    "en": {
+      "question": "What is the plural of 'מכונית' (car (variation) (variation) (variation) (variation))?",
+      "options": ["מכוניות (cars)", "מכונית (car)", "Incorrect"],
+      "hint": "Feminine"
+    },
+    "answer": "מכוניות"
+  },
+  {
+    "id": 54,
+    "he": {
+      "question": "מה הרבים של 'חלון' (window (variation) (variation))?",
+      "options": ["חלונות", "חלון", "טעות"],
+      "hint": "זכר"
+    },
+    "en": {
+      "question": "What is the plural of 'חלון' (window (variation) (variation))?",
+      "options": ["חלונות (windows)", "חלון (window)", "Incorrect"],
+      "hint": "Masculine"
+    },
+    "answer": "חלונות"
+  },
+  {
+    "id": 55,
+    "he": {
+      "question": "מה הרבים של 'מכונית' (car (variation) (variation) (variation))?",
+      "options": ["מכוניות", "מכונית", "טעות"],
+      "hint": "נקבה"
+    },
+    "en": {
+      "question": "What is the plural of 'מכונית' (car (variation) (variation) (variation))?",
+      "options": ["מכוניות (cars)", "מכונית (car)", "Incorrect"],
+      "hint": "Feminine"
+    },
+    "answer": "מכוניות"
+  },
+  {
+    "id": 56,
+    "he": {
+      "question": "מה הרבים של 'דלת' (door (variation) (variation))?",
+      "options": ["דלתות", "דלת", "טעות"],
+      "hint": "נקבה"
+    },
+    "en": {
+      "question": "What is the plural of 'דלת' (door (variation) (variation))?",
+      "options": ["דלתות (doors)", "דלת (door)", "Incorrect"],
+      "hint": "Feminine"
+    },
+    "answer": "דלתות"
+  },
+  {
+    "id": 57,
+    "he": {
+      "question": "מה הרבים של 'שולחן' (table (variation) (variation) (variation))?",
+      "options": ["שולחנות", "שולחן", "טעות"],
+      "hint": "זכר"
+    },
+    "en": {
+      "question": "What is the plural of 'שולחן' (table (variation) (variation) (variation))?",
+      "options": ["שולחנות (tables)", "שולחן (table)", "Incorrect"],
+      "hint": "Masculine"
+    },
+    "answer": "שולחנות"
+  },
+  {
+    "id": 58,
+    "he": {
+      "question": "מה הרבים של 'מכונית' (car (variation) (variation))?",
+      "options": ["מכוניות", "מכונית", "טעות"],
+      "hint": "נקבה"
+    },
+    "en": {
+      "question": "What is the plural of 'מכונית' (car (variation) (variation))?",
+      "options": ["מכוניות (cars)", "מכונית (car)", "Incorrect"],
+      "hint": "Feminine"
+    },
+    "answer": "מכוניות"
+  },
+  {
+    "id": 59,
+    "he": {
+      "question": "מה הרבים של 'דלת' (door (variation))?",
+      "options": ["דלתות", "דלת", "טעות"],
+      "hint": "נקבה"
+    },
+    "en": {
+      "question": "What is the plural of 'דלת' (door (variation))?",
+      "options": ["דלתות (doors)", "דלת (door)", "Incorrect"],
+      "hint": "Feminine"
+    },
+    "answer": "דלתות"
+  },
+  {
+    "id": 60,
+    "he": {
+      "question": "מה הרבים של 'ילד' (boy (variation) (variation) (variation) (variation))?",
+      "options": ["ילדים", "ילד", "טעות"],
+      "hint": "זכר"
+    },
+    "en": {
+      "question": "What is the plural of 'ילד' (boy (variation) (variation) (variation) (variation))?",
+      "options": ["ילדים (boys)", "ילד (boy)", "Incorrect"],
+      "hint": "Masculine"
+    },
+    "answer": "ילדים"
+  },
+  {
+    "id": 61,
+    "he": {
+      "question": "מה הרבים של 'ילד' (boy (variation) (variation) (variation) (variation))?",
+      "options": ["ילדים", "ילד", "טעות"],
+      "hint": "זכר"
+    },
+    "en": {
+      "question": "What is the plural of 'ילד' (boy (variation) (variation) (variation) (variation))?",
+      "options": ["ילדים (boys)", "ילד (boy)", "Incorrect"],
+      "hint": "Masculine"
+    },
+    "answer": "ילדים"
+  },
+  {
+    "id": 62,
+    "he": {
+      "question": "מה הרבים של 'מכונית' (car (variation) (variation) (variation))?",
+      "options": ["מכוניות", "מכונית", "טעות"],
+      "hint": "נקבה"
+    },
+    "en": {
+      "question": "What is the plural of 'מכונית' (car (variation) (variation) (variation))?",
+      "options": ["מכוניות (cars)", "מכונית (car)", "Incorrect"],
+      "hint": "Feminine"
+    },
+    "answer": "מכוניות"
+  },
+  {
+    "id": 63,
+    "he": {
+      "question": "מה הרבים של 'ילדה' (girl (variation))?",
+      "options": ["ילדות", "ילדה", "טעות"],
+      "hint": "נקבה"
+    },
+    "en": {
+      "question": "What is the plural of 'ילדה' (girl (variation))?",
+      "options": ["ילדות (girls)", "ילדה (girl)", "Incorrect"],
+      "hint": "Feminine"
+    },
+    "answer": "ילדות"
+  },
+  {
+    "id": 64,
+    "he": {
+      "question": "מה הרבים של 'דלת' (door (variation) (variation) (variation))?",
+      "options": ["דלתות", "דלת", "טעות"],
+      "hint": "נקבה"
+    },
+    "en": {
+      "question": "What is the plural of 'דלת' (door (variation) (variation) (variation))?",
+      "options": ["דלתות (doors)", "דלת (door)", "Incorrect"],
+      "hint": "Feminine"
+    },
+    "answer": "דלתות"
+  },
+  {
+    "id": 65,
+    "he": {
+      "question": "מה הרבים של 'בקבוק' (bottle (variation) (variation))?",
+      "options": ["בקבוקים", "בקבוק", "טעות"],
+      "hint": "זכר"
+    },
+    "en": {
+      "question": "What is the plural of 'בקבוק' (bottle (variation) (variation))?",
+      "options": ["בקבוקים (bottles)", "בקבוק (bottle)", "Incorrect"],
+      "hint": "Masculine"
+    },
+    "answer": "בקבוקים"
+  },
+  {
+    "id": 66,
+    "he": {
+      "question": "מה הרבים של 'ספר' (book (variation) (variation))?",
+      "options": ["ספרים", "ספר", "טעות"],
+      "hint": "זכר"
+    },
+    "en": {
+      "question": "What is the plural of 'ספר' (book (variation) (variation))?",
+      "options": ["ספרים (books)", "ספר (book)", "Incorrect"],
+      "hint": "Masculine"
+    },
+    "answer": "ספרים"
   }
 ]
