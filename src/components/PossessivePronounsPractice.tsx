@@ -1,142 +1,131 @@
-
 import React, { useState } from "react";
-import questionsData from "./possessivePronounsQuestions.json";
 import { Button } from "@/components/ui/button";
-import { RadioGroup, RadioGroupItem } from "@/components/ui/radio-group";
+import questions from "./possessivePronounsQuestions.json";
 
-// Category type for TS inference
-interface Category {
-  id: string;
-  label: string;
-  questions: {
+interface PossessivePronounQuestion {
+  id: number;
+  he: {
     question: string;
     options: string[];
-    answer: string;
-    translation: string;
-  }[];
+    hint: string;
+  };
+  en: {
+    question: string;
+    options: string[];
+    hint: string;
+  };
+  answer: string;
 }
 
-interface Props {
-  onBack: () => void;
+type Lang = "he" | "en";
+
+interface PossessivePronounsPracticeProps {
+  lang?: Lang;
+  onBack?: () => void;
 }
 
-const PossessivePronounsPractice: React.FC<Props> = ({ onBack }) => {
-  // Parse and type questions
-  const categories: Category[] = (questionsData as any).categories;
-  const [selectedCategory, setSelectedCategory] = useState<string | null>(null);
+export default function PossessivePronounsPractice({
+  lang = "he",
+  onBack,
+}: PossessivePronounsPracticeProps) {
+  const [step, setStep] = useState(0);
+  const [selected, setSelected] = useState<number | null>(null);
+  const [showFeedback, setShowFeedback] = useState(false);
+  const [showTranslation, setShowTranslation] = useState(false);
 
-  // Find the category
-  const category = categories.find(c => c.id === selectedCategory);
-  const questions = category ? category.questions : [];
+  const q: PossessivePronounQuestion = (questions as PossessivePronounQuestion[])[step];
 
-  const [current, setCurrent] = useState(0);
-  const [selected, setSelected] = useState<string>("");
-  const [showAnswer, setShowAnswer] = useState(false);
-  const [score, setScore] = useState(0);
-
-  // If user hasn't picked category yet
-  if (!selectedCategory) {
-    return (
-      <div className="flex flex-col items-center gap-7 p-6 w-full">
-        <div className="flex justify-end w-full">
-          <Button variant="outline" onClick={onBack}>⬅ חזרה</Button>
-        </div>
-        <h2 className="text-2xl font-bold text-teal-900 mb-2" dir="rtl">בחר קטגוריית תרגול</h2>
-        <div className="flex flex-col gap-5 w-full max-w-xs">
-          {categories.map(cat => (
-            <Button key={cat.id} onClick={() => setSelectedCategory(cat.id)} className="text-lg py-4">
-              {cat.label}
-            </Button>
-          ))}
-        </div>
-      </div>
-    );
+  function handleOption(idx: number) {
+    setSelected(idx);
+    setShowFeedback(true);
   }
 
-  // Questions flow
-  const total = questions.length;
-  const q = questions[current];
-
-  const handleCheck = () => {
-    if (selected === q.answer) {
-      setScore((s) => s + 1);
-    }
-    setShowAnswer(true);
-  };
-
-  const handleNext = () => {
-    setSelected("");
-    setShowAnswer(false);
-    setCurrent((c) => c + 1);
-  };
-
-  if (current >= total) {
-    return (
-      <div className="flex flex-col items-center gap-6 p-4">
-        <h2 className="text-xl font-bold text-violet-900" dir="rtl">סיימת!</h2>
-        <div className="text-lg" dir="rtl">
-          צברת {score} מתוך {total} נקודות.
-        </div>
-        <Button className="mt-4" onClick={() => {
-          setSelectedCategory(null);
-          setCurrent(0);
-          setScore(0);
-        }}>
-          תרגול מחדש / New Practice
-        </Button>
-        <Button variant="outline" onClick={onBack}>⬅ חזרה</Button>
-      </div>
-    );
+  function next() {
+    setSelected(null);
+    setShowFeedback(false);
+    setShowTranslation(false);
+    setStep((prev) => (prev < questions.length - 1 ? prev + 1 : 0));
   }
+
+  const t = (h: string, e: string) => (lang === "he" ? h : e);
+
+  function getCorrectOptionIdx() {
+    // התאמה לפי אופציות בעברית בלבד — זו תשובה נכונה לכל שפה
+    return q.he.options.findIndex(opt => opt === q.answer);
+  }
+
+  // מציגים את האופציות — תמיד גם בעברית וגם באנגלית לפרנטיה
+  const joinedOptions = q.he.options.map((heOpt, idx) => {
+    const enOpt = q.en.options[idx];
+    return `${heOpt} (${enOpt})`;
+  });
 
   return (
-    <div className="w-full max-w-xl mx-auto flex flex-col items-center gap-6 p-6 bg-background rounded-2xl shadow border">
-      <div className="flex justify-end w-full">
-        <Button variant="outline" onClick={onBack}>⬅ חזרה</Button>
+    <div className="flex flex-col items-center max-w-lg mx-auto bg-white dark:bg-gray-900 rounded-2xl shadow p-8 gap-6 min-h-[60vh]">
+      <div className="self-end">
+        <Button variant="ghost" onClick={onBack}>
+          ⬅ {t("חזרה", "Back")}
+        </Button>
       </div>
-      <h2 className="text-2xl font-bold text-teal-900 mb-1" dir="rtl">
-        תרגול מילות שייכות<br />
-        <span className="text-base text-slate-700 font-normal" dir="ltr">Possessive Pronouns Practice</span>
+      <h2 className="text-2xl md:text-3xl font-bold mt-2 mb-2" dir={lang === "he" ? "rtl" : "ltr"}>
+        {t("תרגול מילות שייכות", "Possessive Pronouns Practice")}
       </h2>
-      <div className="w-full bg-slate-50 rounded-xl shadow p-6 mb-2">
-        <div className="mb-4 flex flex-col gap-2" dir="rtl">
-          <span className="font-bold">{q.question}</span>
-          <span className="text-gray-600 text-sm" dir="ltr">{q.translation}</span>
-        </div>
-        <RadioGroup
-          className="flex flex-col gap-3 mb-3"
-          value={selected}
-          onValueChange={setSelected}
-          dir="rtl"
-        >
-          {q.options.map((option) => (
-            <label key={option} className="flex items-center gap-3 cursor-pointer text-lg">
-              <RadioGroupItem value={option} id={option} disabled={showAnswer} />
-              <span>{option}</span>
-            </label>
-          ))}
-        </RadioGroup>
-        {!showAnswer ? (
-          <Button className="w-full" onClick={handleCheck} disabled={!selected}>
-            בדוק / Check
-          </Button>
+      <div className="mb-2" dir={lang === "he" ? "rtl" : "ltr"}>
+        {showTranslation ? (
+          <span>{q.en.question}</span>
         ) : (
-          <div className="mt-2 space-y-2">
-            <div className="text-lg" dir="rtl">
-              תשובה נכונה:{" "}
-              <span className="font-bold text-green-700">
-                {q.answer}
-              </span>
-            </div>
-            <Button className="w-full bg-teal-600 text-white" onClick={handleNext}>
-              שאלה הבאה / Next Question
-            </Button>
-          </div>
+          <span>{q.he.question}</span>
+        )}
+        <Button
+          variant="link"
+          size="sm"
+          className="ml-2"
+          onClick={() => setShowTranslation((b) => !b)}
+        >
+          {showTranslation
+            ? t("הסתר תרגום", "Hide translation")
+            : t("הצג תרגום", "Show translation")}
+        </Button>
+      </div>
+      <div className="flex flex-col gap-3 w-full">
+        {joinedOptions.map((opt, idx) => (
+          <Button
+            key={idx}
+            variant={selected === idx ? "default" : "outline"}
+            onClick={() => !showFeedback && handleOption(idx)}
+            className="w-full text-xl py-4"
+            disabled={showFeedback}
+          >
+            {opt}
+          </Button>
+        ))}
+      </div>
+      {showFeedback && (
+        <div
+          className={`rounded-xl p-4 w-full text-lg font-bold ${
+            selected === getCorrectOptionIdx()
+              ? "bg-green-100 text-green-900"
+              : "bg-red-100 text-red-900"
+          }`}
+        >
+          {selected === getCorrectOptionIdx()
+            ? t("נכון! מעולה!", "Correct! Well done!")
+            : t(
+                `לא נכון. התשובה: ${joinedOptions[getCorrectOptionIdx()]} (${q.he.hint})`,
+                `Incorrect. The answer: ${joinedOptions[getCorrectOptionIdx()]} (${q.en.hint})`
+              )}
+        </div>
+      )}
+      <div className="flex justify-between w-full mt-4">
+        <span className="text-gray-500 text-sm">
+          {t(`שאלה ${step + 1} מתוך ${questions.length}`, `Question ${step + 1} of ${questions.length}`)}
+        </span>
+        {showFeedback && (
+          <Button variant="secondary" onClick={next}>
+            {t("המשך", "Next")}
+          </Button>
         )}
       </div>
-      <div className="text-base text-gray-500">שאלה {current + 1} מתוך {total}</div>
     </div>
   );
-};
-
-export default PossessivePronounsPractice;
+}
