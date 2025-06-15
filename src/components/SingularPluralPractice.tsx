@@ -34,6 +34,13 @@ export default function SingularPluralPractice({
 
   const q: SingularPluralQuestion = (questions as SingularPluralQuestion[])[step];
 
+  // אופציות מוצגות תמיד גם בעברית וגם באנגלית
+  const joinedOptions = q.he.options.map((heOpt, idx) => {
+    // ניקוי סוגריים באנגלית אם זה אותו דבר (למניעת כפילות)
+    const enOpt = q.en.options[idx];
+    return `${heOpt} (${enOpt.replace(/.*\(([^)]+)\).*/, '$1').trim()})`;
+  });
+
   function handleOption(idx: number) {
     setSelected(idx);
     setShowFeedback(true);
@@ -47,6 +54,12 @@ export default function SingularPluralPractice({
   }
 
   const t = (h: string, e: string) => (lang === "he" ? h : e);
+
+  // התאמת תשובה גם ללוגיקה החדשה הכוללת אנגלית ועברית
+  function getCorrectOptionIdx() {
+    // בקרת התאמת תשובה לפי ערך עברי
+    return q.he.options.findIndex(opt => opt === q.answer);
+  }
 
   return (
     <div className="flex flex-col items-center max-w-lg mx-auto bg-white dark:bg-gray-900 rounded-2xl shadow p-8 gap-6 min-h-[60vh]">
@@ -62,7 +75,7 @@ export default function SingularPluralPractice({
         {showTranslation ? (
           <span>{q.en.question}</span>
         ) : (
-          <span>{q[lang].question}</span>
+          <span>{q.he.question}</span>
         )}
         <Button
           variant="link"
@@ -76,7 +89,7 @@ export default function SingularPluralPractice({
         </Button>
       </div>
       <div className="flex flex-col gap-3 w-full">
-        {q[lang].options.map((opt, idx) => (
+        {joinedOptions.map((opt, idx) => (
           <Button
             key={idx}
             variant={selected === idx ? "default" : "outline"}
@@ -91,16 +104,16 @@ export default function SingularPluralPractice({
       {showFeedback && (
         <div
           className={`rounded-xl p-4 w-full text-lg font-bold ${
-            q[lang].options[selected!] === q.answer
+            selected === getCorrectOptionIdx()
               ? "bg-green-100 text-green-900"
               : "bg-red-100 text-red-900"
           }`}
         >
-          {q[lang].options[selected!] === q.answer
+          {selected === getCorrectOptionIdx()
             ? t("נכון! מעולה!", "Correct! Well done!")
             : t(
-                `לא נכון. התשובה: ${q.answer} (${q[lang].hint})`,
-                `Incorrect. The answer: ${q.answer} (${q.en.hint})`
+                `לא נכון. התשובה: ${joinedOptions[getCorrectOptionIdx()]} (${q.he.hint})`,
+                `Incorrect. The answer: ${joinedOptions[getCorrectOptionIdx()]} (${q.en.hint})`
               )}
         </div>
       )}
@@ -117,3 +130,4 @@ export default function SingularPluralPractice({
     </div>
   );
 }
+
