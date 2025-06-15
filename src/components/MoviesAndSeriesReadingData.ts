@@ -1,0 +1,6 @@
+
+export const MoviesAndSeriesReadingData = {
+  easy: `נועה אוהבת (loves) לצפות (to watch) בטלוויזיה (TV) כל ערב (every evening). היא הכי אוהבת סדרות (series) קומדיה (comedy), במיוחד כאלו שמתרחשות בבית ספר (school). היא יושבת (sits) עם אח שלה (her brother) וצוחקת (laughs) בקול רם (out loud).`,
+  medium: `דניאל הוא תלמיד תיכון (high school student) שמבלה (spends) הרבה זמן בצפייה (watching) בסדרות. הסדרה האהובה עליו (his favorite) היא דרמה (drama) ישראלית על קבוצת חברים (group of friends) בתל אביב. הוא אוהב את הדמויות (characters), המוזיקה (music), והסיפור הרגשי (emotional story) שמתפתח (develops) בכל פרק (episode). דניאל אומר שהסדרה עוזרת לו להבין מצבים חברתיים (social situations) ולדבר עליהם עם חבריו.`,
+  hard: `טל הוא חוקר קולנוע (film researcher) שכותב ביקורות (writes reviews) על סדרות וסרטים חדשים מכל העולם. לאחרונה (recently), הוא חקר סדרת מדע בדיוני (science fiction) יפנית שבוחנת (examines) את הקשר בין טכנולוגיה (technology) לזהות אנושית (human identity). הסדרה מציגה עלילה מורכבת (complex plot), צילום קולנועי מתקדם (cinematic photography), ופסקול (soundtrack) מקורי. טל טוען שהצפייה בסדרה מעוררת (stimulates) מחשבה על העתיד (the future) והשפעת המדיה על החברה המודרנית (modern society).`
+};

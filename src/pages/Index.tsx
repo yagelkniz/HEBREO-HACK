@@ -8,6 +8,7 @@ import TextComprehensionAnimalsEasy from "@/components/TextComprehensionAnimalsE
 import TextComprehensionFoodOrderMedium from "@/components/TextComprehensionFoodOrderMedium";
 import TextComprehensionSocialMedia from "@/components/TextComprehensionSocialMedia";
 import TextComprehensionCountriesLevels from "@/components/TextComprehensionCountriesLevels";
+import TextComprehensionMoviesAndSeriesLevels from "@/components/TextComprehensionMoviesAndSeriesLevels";
 
 // Add lazy import for food levels
 const LazyTextComprehensionFoodLevels = React.lazy(() =>
@@ -15,6 +16,9 @@ const LazyTextComprehensionFoodLevels = React.lazy(() =>
 );
 const LazyTextComprehensionCountriesLevels = React.lazy(() =>
   import("@/components/TextComprehensionCountriesLevels")
+);
+const LazyTextComprehensionMoviesAndSeriesLevels = React.lazy(() =>
+  import("@/components/TextComprehensionMoviesAndSeriesLevels")
 );
 
 const tenseOptions = [
@@ -58,7 +62,7 @@ const Index = () => {
   const [selectedPractice, setSelectedPractice] = useState<null | "verb" | "nounAdj">(null);
   const [selectedTense, setSelectedTense] = useState<null | "past" | "present" | "future">(null);
   const [selectedTextComp, setSelectedTextComp] = useState<
-    null | "food" | "animals-easy" | "food-order-medium" | "social-media" | "food-levels" | "countries-levels"
+    null | "food" | "animals-easy" | "food-order-medium" | "social-media" | "food-levels" | "countries-levels" | "movies-series-levels"
   >(null);
 
   function handleBack() {
@@ -116,6 +120,11 @@ const Index = () => {
         {selectedTextComp === "countries-levels" && (
           <Suspense fallback={<div>טוען...</div>}>
             <LazyTextComprehensionCountriesLevels />
+          </Suspense>
+        )}
+        {selectedTextComp === "movies-series-levels" && (
+          <Suspense fallback={<div>טוען...</div>}>
+            <LazyTextComprehensionMoviesAndSeriesLevels />
           </Suspense>
         )}
       </div>
@@ -179,6 +188,14 @@ const Index = () => {
             >
               <span className="text-3xl">🌏</span>
               <span dir="rtl">הבנת הנקרא - מדינות (שלוש רמות)</span>
+            </button>
+            {/* כפתור חדש: טלוויזיה וסדרות (שלוש רמות) */}
+            <button
+              className="w-full flex items-center justify-center gap-4 py-6 font-bold text-2xl rounded-xl border-2 shadow transition hover:scale-105 focus:outline-none bg-blue-50 text-blue-900 border-blue-400"
+              onClick={() => setSelectedTextComp("movies-series-levels")}
+            >
+              <span className="text-3xl">📺</span>
+              <span dir="rtl">הבנת הנקרא - טלוויזיה וסדרות (שלוש רמות)</span>
             </button>
           </div>
         </div>
