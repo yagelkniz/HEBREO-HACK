@@ -1,4 +1,3 @@
-
 import React, { useState } from "react";
 import {
   Table,
@@ -191,6 +190,64 @@ const categories = [
         englishExample: "So that you understand – you must read again.",
       },
     ],
+  },
+  {
+    key: "everyday",
+    label: "עברית יומיומית",
+    englishLabel: "Everyday Hebrew",
+    emoji: "🟫",
+    color: "bg-stone-100 text-stone-900 border-stone-300",
+    rows: [
+      {
+        hebrew: "בסדר",
+        translit: "beseder",
+        english: "okay / fine",
+        hebrewExample: "הכול בסדר, תודה.",
+        englishExample: "Everything is okay, thanks.",
+      },
+      {
+        hebrew: "אפשר",
+        translit: "efshar",
+        english: "may I / can I",
+        hebrewExample: "אפשר לקבל כוס מים?",
+        englishExample: "May I get a glass of water?",
+      },
+      {
+        hebrew: "תודה",
+        translit: "toda",
+        english: "thank you",
+        hebrewExample: "תודה על העזרה.",
+        englishExample: "Thank you for the help.",
+      },
+      {
+        hebrew: "סליחה",
+        translit: "slikha",
+        english: "sorry / excuse me",
+        hebrewExample: "סליחה, אפשר לעבור?",
+        englishExample: "Excuse me, may I pass?",
+      },
+      {
+        hebrew: "בבקשה",
+        translit: "bevakasha",
+        english: "please / here you go",
+        hebrewExample: "תיכנס, בבקשה.",
+        englishExample: "Come in, please.",
+      },
+      {
+        hebrew: "מה נשמע?",
+        translit: "ma nishma?",
+        english: "how's it going?",
+        hebrewExample: "היי! מה נשמע?",
+        englishExample: "Hi! How's it going?",
+      },
+      {
+        hebrew: "אין בעיה",
+        translit: "ein be'aya",
+        english: "no problem",
+        hebrewExample: "אין בעיה, אעשה זאת.",
+        englishExample: "No problem, I'll do it.",
+      },
+    ]
   }
 ];
 
@@ -263,4 +320,3 @@ const LinkingWordsTable = () => {
 };
 
 export default LinkingWordsTable;
-
