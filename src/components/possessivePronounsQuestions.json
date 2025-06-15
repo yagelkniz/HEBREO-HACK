@@ -6,7 +6,9 @@
     "hebrewExample": "זה הספר ___ (שלי).",
     "englishExample": "This is ___ book.",
     "answerHe": "שלי",
-    "answerEn": "my"
+    "answerEn": "my",
+    "optionsHe": ["שלי", "שלך", "שלו", "שלנו"],
+    "optionsEn": ["my", "your", "his", "our"]
   },
   {
     "hebrew": "שלך (זכר)",
@@ -14,7 +16,9 @@
     "hebrewExample": "הכובע ___ (שלך) יפה.",
     "englishExample": "___ hat is nice.",
     "answerHe": "שלך",
-    "answerEn": "your"
+    "answerEn": "your",
+    "optionsHe": ["שלי", "שלך", "שלה", "שלכם"],
+    "optionsEn": ["my", "your", "her", "your (pl.)"]
   },
   {
     "hebrew": "שלך (נקבה)",
@@ -22,7 +26,9 @@
     "hebrewExample": "המחברת ___ (שלך) על השולחן.",
     "englishExample": "___ notebook is on the table.",
     "answerHe": "שלך",
-    "answerEn": "your"
+    "answerEn": "your",
+    "optionsHe": ["שלך", "שלה", "שלו", "שלכן"],
+    "optionsEn": ["your", "her", "his", "your (f. pl.)"]
   },
   {
     "hebrew": "שלו",
@@ -30,7 +36,9 @@
     "hebrewExample": "התיק ___ (שלו) על הכיסא.",
     "englishExample": "___ bag is on the chair.",
     "answerHe": "שלו",
-    "answerEn": "his"
+    "answerEn": "his",
+    "optionsHe": ["שלך", "שלי", "שלו", "שלכם"],
+    "optionsEn": ["your", "my", "his", "your (pl.)"]
   },
   {
     "hebrew": "שלה",
@@ -38,7 +46,9 @@
     "hebrewExample": "הטלפון ___ (שלה) חדש.",
     "englishExample": "___ phone is new.",
     "answerHe": "שלה",
-    "answerEn": "her"
+    "answerEn": "her",
+    "optionsHe": ["שלה", "שלך", "שלו", "שלהם"],
+    "optionsEn": ["her", "your", "his", "their"]
   },
   {
     "hebrew": "שלנו",
@@ -46,7 +56,9 @@
     "hebrewExample": "הבית ___ (שלנו) גדול.",
     "englishExample": "___ house is big.",
     "answerHe": "שלנו",
-    "answerEn": "our"
+    "answerEn": "our",
+    "optionsHe": ["שלי", "שלנו", "שלכם", "שלהם"],
+    "optionsEn": ["my", "our", "your", "their"]
   },
   {
     "hebrew": "שלכם",
@@ -54,7 +66,9 @@
     "hebrewExample": "המבחנים ___ (שלכם) קשים.",
     "englishExample": "___ exams are hard.",
     "answerHe": "שלכם",
-    "answerEn": "your"
+    "answerEn": "your",
+    "optionsHe": ["שלכם", "שלך", "שלנו", "שלהם"],
+    "optionsEn": ["your", "your (sg.)", "our", "their"]
   },
   {
     "hebrew": "שלכן",
@@ -62,7 +76,9 @@
     "hebrewExample": "החברות ___ (שלכן) נחמדות.",
     "englishExample": "___ friends are nice.",
     "answerHe": "שלכן",
-    "answerEn": "your"
+    "answerEn": "your",
+    "optionsHe": ["שלכן", "שלהן", "שלה", "שלכם"],
+    "optionsEn": ["your", "their (f.)", "her", "your (m. pl.)"]
   },
   {
     "hebrew": "שלהם",
@@ -70,7 +86,9 @@
     "hebrewExample": "הספרים ___ (שלהם) בספרייה.",
     "englishExample": "___ books are in the library.",
     "answerHe": "שלהם",
-    "answerEn": "their"
+    "answerEn": "their",
+    "optionsHe": ["שלהם", "שלך", "שלה", "שלי"],
+    "optionsEn": ["their", "your", "her", "my"]
   },
   {
     "hebrew": "שלהן",
@@ -78,6 +96,8 @@
     "hebrewExample": "הדעות ___ (שלהן) שונות.",
     "englishExample": "___ opinions are different.",
     "answerHe": "שלהן",
-    "answerEn": "their"
+    "answerEn": "their",
+    "optionsHe": ["שלהן", "שלהם", "שלך", "שלכן"],
+    "optionsEn": ["their", "their (m.)", "your", "your (f. pl.)"]
   }
 ]

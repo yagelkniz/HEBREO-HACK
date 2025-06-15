@@ -2,6 +2,7 @@
 import React, { useState } from "react";
 import questions from "./possessivePronounsQuestions.json";
 import { Button } from "@/components/ui/button";
+import { RadioGroup, RadioGroupItem } from "@/components/ui/radio-group";
 
 interface Props {
   lang?: "he" | "en";
@@ -10,22 +11,25 @@ interface Props {
 
 const PossessivePronounsPractice: React.FC<Props> = ({ lang = "he", onBack }) => {
   const [current, setCurrent] = useState(0);
-  const [input, setInput] = useState("");
+  const [selected, setSelected] = useState<string>("");
   const [showAnswer, setShowAnswer] = useState(false);
   const [score, setScore] = useState(0);
 
   const q = questions[current];
 
+  // אפשרויות לשאלה הנוכחית
+  const options = lang === "he" ? q.optionsHe : q.optionsEn;
+  const correctAnswer = lang === "he" ? q.answerHe : q.answerEn;
+
   const handleCheck = () => {
-    const answer = lang === "he" ? q.answerHe : q.answerEn;
-    if (input.trim().toLowerCase() === answer.trim().toLowerCase()) {
+    if (selected.trim().toLowerCase() === correctAnswer.trim().toLowerCase()) {
       setScore((s) => s + 1);
     }
     setShowAnswer(true);
   };
 
   const handleNext = () => {
-    setInput("");
+    setSelected("");
     setShowAnswer(false);
     setCurrent((c) => c + 1);
   };
@@ -55,17 +59,21 @@ const PossessivePronounsPractice: React.FC<Props> = ({ lang = "he", onBack }) =>
         <div className="mb-4" dir={lang === "he" ? "rtl" : "ltr"}>
           <span className="font-bold">{lang === "he" ? q.hebrewExample : q.englishExample}</span>
         </div>
-        <input
-          className="border rounded px-4 py-2 w-full text-lg mb-2"
-          type="text"
+        <RadioGroup
+          className="flex flex-col gap-3 mb-3"
+          value={selected}
+          onValueChange={setSelected}
           dir={lang === "he" ? "rtl" : "ltr"}
-          value={input}
-          onChange={e => setInput(e.target.value)}
-          placeholder={lang === "he" ? "הקלד תשובה בעברית" : "Type your answer in English"}
-          disabled={showAnswer}
-        />
+        >
+          {options.map((option) => (
+            <label key={option} className="flex items-center gap-3 cursor-pointer text-lg">
+              <RadioGroupItem value={option} id={option} disabled={showAnswer} />
+              <span>{option}</span>
+            </label>
+          ))}
+        </RadioGroup>
         {!showAnswer ? (
-          <Button className="w-full" onClick={handleCheck}>
+          <Button className="w-full" onClick={handleCheck} disabled={!selected}>
             בדוק / Check
           </Button>
         ) : (
@@ -73,7 +81,7 @@ const PossessivePronounsPractice: React.FC<Props> = ({ lang = "he", onBack }) =>
             <div className="text-lg" dir={lang === "he" ? "rtl" : "ltr"}>
               תשובה נכונה:{" "}
               <span className="font-bold text-green-700">
-                {lang === "he" ? q.answerHe : q.answerEn}
+                {correctAnswer}
               </span>
             </div>
             <Button className="w-full bg-teal-600 text-white" onClick={handleNext}>
