@@ -1,14 +1,21 @@
-import React, { useState } from "react";
-import { pastTenseQuestions } from "./pastTenseQuestions";
 
-export default function PastTenseVerbPractice() {
+import React, { useState } from "react";
+import type { PastTenseQuestion } from "./pastTenseQuestions";
+import { pastTenseQuestionsPart1 } from "./pastTenseQuestionsParts";
+
+type Props = {
+  questions?: PastTenseQuestion[];
+};
+export default function PastTenseVerbPractice({
+  questions = pastTenseQuestionsPart1,
+}: Props) {
   const [selections, setSelections] = useState<{ [i: number]: string | null }>({});
   const [feedbacks, setFeedbacks] = useState<{ [i: number]: "correct" | "incorrect" | null }>({});
   const [showVowels, setShowVowels] = useState(false);
 
   function checkVerb(qNumber: number, option: string) {
     setSelections((prev) => ({ ...prev, [qNumber]: option }));
-    const q = pastTenseQuestions.find((qq) => qq.number === qNumber);
+    const q = questions.find((qq) => qq.number === qNumber);
     setFeedbacks((prev) => ({
       ...prev,
       [qNumber]: option === q?.answer ? "correct" : "incorrect",
@@ -41,7 +48,7 @@ export default function PastTenseVerbPractice() {
           הפעל ניקוד בתשובות
         </label>
       </div>
-      {pastTenseQuestions.map((q) => (
+      {questions.map((q) => (
         <div key={q.number} className="w-full max-w-md flex flex-col items-center mb-2">
           <p className="text-lg mb-2 flex flex-wrap items-center justify-center" dir="rtl">
             {q.sentence}
@@ -80,7 +87,7 @@ export default function PastTenseVerbPractice() {
       ))}
       <div className="flex flex-col items-center gap-2 mt-6 w-full">
         <div className="font-bold text-lg text-gray-700" dir="rtl">
-          סטטיסטיקה: {correctAnswers} נכונות / {incorrectAnswers} שגויות / {pastTenseQuestions.length} סה"כ
+          סטטיסטיקה: {correctAnswers} נכונות / {incorrectAnswers} שגויות / {questions.length} סה"כ
         </div>
       </div>
     </div>
