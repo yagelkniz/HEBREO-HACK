@@ -1,6 +1,6 @@
-
 import React, { useState } from "react";
 import { PawPrint, Smile, Frown } from "lucide-react";
+import TranslatableText from "./TranslatableText";
 
 type Q = {
   question: string;
@@ -10,6 +10,56 @@ type Q = {
 };
 
 const readingText = `🐾 דני אוהב חיות – במיוחד את הכלב ג'וני, שמאמין שבני אדם נוצרו כדי לזרוק לו כדורים ולפנק אותו עם חטיפים. כל בוקר דני וג'וני יוצאים לטיול בפארק, פוגשים כלבים אחרים (וגם ברווז שנעלב כשלא מזמינים אותו למשחק). יום אחד ג'וני רץ אחרי חתול, והחתול דווקא רץ אחרי דני! בסוף כולם הסתבכו בתוך שיח, וכל מי שעבר בפארק קיבל הופעה בחינם. מאז דני מחליט לצאת רק עם חטיפי פיוס – גם לכלבים, גם לחתולים, וגם לברווז!`;
+
+// אובייקט תרגום - אפשר להרחיב!
+const translationMap = {
+  דני: "Danny",
+  אוהב: "loves",
+  חיות: "animals",
+  במיוחד: "especially",
+  הכלב: "the dog",
+  ג'וני: "Johnny",
+  מאמין: "believes",
+  בני: "people",
+  אדם: "man/human",
+  נוצרו: "were created",
+  לזרוק: "to throw",
+  כדורים: "balls",
+  לפנק: "to pamper",
+  חטיפים: "treats",
+  בוקר: "morning",
+  יוצאים: "go out",
+  טיול: "walk",
+  פארק: "park",
+  פוגשים: "meet",
+  כלבים: "dogs",
+  אחרים: "others",
+  ברווז: "duck",
+  שנעלב: "was insulted",
+  משחק: "game",
+  יום: "day",
+  אחד: "one",
+  רץ: "ran",
+  אחרי: "after",
+  חתול: "cat",
+  דווקא: "on the contrary",
+  בסוף: "in the end",
+  כולם: "everyone",
+  הסתבכו: "got entangled",
+  שיח: "bush",
+  עבר: "passed by",
+  קיבל: "got/received",
+  הופעה: "show/performance",
+  בחינם: "for free",
+  מאז: "since then",
+  מחליט: "decides",
+  חטיפי: "treats (plural base)",
+  פיוס: "reconciliation",
+  גם: "also",
+  לכלבים: "for dogs",
+  לחתולים: "for cats",
+  לברווז: "for the duck",
+};
 
 const questions: Q[] = [
   {
@@ -135,7 +185,7 @@ export default function TextComprehensionAnimalsEasy() {
         <PawPrint className="inline-block text-green-500" /> הבנת הנקרא: חיות (קל)
       </h2>
       <div className="rounded-xl border px-6 py-4 bg-yellow-50 text-lg leading-8 text-black mb-1 shadow-sm" dir="rtl">
-        {readingText}
+        <TranslatableText text={readingText} translations={translationMap} />
       </div>
       <div className="flex flex-col gap-3 w-full">
         {questions.map((q, i) => (
