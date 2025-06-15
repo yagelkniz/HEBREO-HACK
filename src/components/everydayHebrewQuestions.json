@@ -1,7 +1,9 @@
 
 [
+  // --- Restaurant section ---
   {
     "id": 1,
+    "category": "restaurant",
     "question": "אפשר ___ תפריט בבקשה?",
     "options": ["לקבל", "לאכול", "לשתות", "לבשל"],
     "correctAnswer": "לקבל",
@@ -9,6 +11,7 @@
   },
   {
     "id": 2,
+    "category": "restaurant",
     "question": "מה כולל ___ העסקי?",
     "options": ["המנה", "המזלג", "הכיסא", "המקרר"],
     "correctAnswer": "המנה",
@@ -16,6 +19,7 @@
   },
   {
     "id": 3,
+    "category": "restaurant",
     "question": "אני ___ מקום לשניים, לשעה שמונה.",
     "options": ["הזמנתי", "אוכל", "שותה", "רוצה"],
     "correctAnswer": "הזמנתי",
@@ -23,6 +27,7 @@
   },
   {
     "id": 4,
+    "category": "restaurant",
     "question": "אפשר ___ את המנה הזאת ללא בצל?",
     "options": ["לקבל", "לבשל", "להכין", "לאכול"],
     "correctAnswer": "לקבל",
@@ -30,6 +35,7 @@
   },
   {
     "id": 5,
+    "category": "restaurant",
     "question": "אני לא אוכל בשר. יש לכם משהו ___?",
     "options": ["צמחוני", "טעים", "קר", "יקר"],
     "correctAnswer": "צמחוני",
@@ -37,6 +43,7 @@
   },
   {
     "id": 6,
+    "category": "restaurant",
     "question": "האם אפשר ___ את החשבון בבקשה?",
     "options": ["לקבל", "לנקות", "לבשל", "לשבת"],
     "correctAnswer": "לקבל",
@@ -44,6 +51,7 @@
   },
   {
     "id": 7,
+    "category": "restaurant",
     "question": "מה ההבדל בין ___ הראשונה לעיקרית?",
     "options": ["המנה", "הצלחת", "הכוס", "המזלג"],
     "correctAnswer": "המנה",
@@ -51,6 +59,7 @@
   },
   {
     "id": 8,
+    "category": "restaurant",
     "question": "יש לכם מקום ___ לשבת בחוץ?",
     "options": ["פנוי", "קר", "חם", "נקי"],
     "correctAnswer": "פנוי",
@@ -58,6 +67,7 @@
   },
   {
     "id": 9,
+    "category": "restaurant",
     "question": "מה זמן ההמתנה ל___?",
     "options": ["המנה", "השולחן", "המטבח", "התפריט"],
     "correctAnswer": "המנה",
@@ -65,6 +75,7 @@
   },
   {
     "id": 10,
+    "category": "restaurant",
     "question": "האם הקינוחים שלכם ___ במקום?",
     "options": ["נעשים", "נשתים", "נלבשים", "נכתבים"],
     "correctAnswer": "נעשים",
@@ -72,6 +83,7 @@
   },
   {
     "id": 11,
+    "category": "restaurant",
     "question": "אני ___ על האלרגיה שלי לבוטנים.",
     "options": ["רוצה להודיע", "אוכל", "שותה", "קורא"],
     "correctAnswer": "רוצה להודיע",
@@ -79,6 +91,7 @@
   },
   {
     "id": 12,
+    "category": "restaurant",
     "question": "אני מחכה כבר חצי שעה ל___.",
     "options": ["המלצר", "הספר", "הכסף", "החלון"],
     "correctAnswer": "המלצר",
@@ -86,6 +99,7 @@
   },
   {
     "id": 13,
+    "category": "restaurant",
     "question": "האם אתם ___ גם ארוחות בוקר?",
     "options": ["מגישים", "מנקים", "מבשלים", "מוכרים"],
     "correctAnswer": "מגישים",
@@ -93,6 +107,7 @@
   },
   {
     "id": 14,
+    "category": "restaurant",
     "question": "אפשר ___ את הרוטב בצד?",
     "options": ["לקבל", "להוריד", "לקרוא", "לקנות"],
     "correctAnswer": "לקבל",
@@ -100,6 +115,7 @@
   },
   {
     "id": 15,
+    "category": "restaurant",
     "question": "יש לכם תפריט ___?",
     "options": ["לילדים", "לחתולים", "למכוניות", "לספרים"],
     "correctAnswer": "לילדים",
@@ -107,6 +123,7 @@
   },
   {
     "id": 16,
+    "category": "restaurant",
     "question": "אני רוצה ___ את ההזמנה שלי.",
     "options": ["לבטל", "לקנות", "להכין", "לחתוך"],
     "correctAnswer": "לבטל",
@@ -114,6 +131,7 @@
   },
   {
     "id": 17,
+    "category": "restaurant",
     "question": "המנה שלי הגיעה ___.",
     "options": ["קרה", "יפה", "שמחה", "חדשה"],
     "correctAnswer": "קרה",
@@ -121,6 +139,7 @@
   },
   {
     "id": 18,
+    "category": "restaurant",
     "question": "אתם מקבלים גם ___ או רק מזומן?",
     "options": ["כרטיס אשראי", "אוכל", "ריח", "תמונה"],
     "correctAnswer": "כרטיס אשראי",
@@ -128,6 +147,7 @@
   },
   {
     "id": 19,
+    "category": "restaurant",
     "question": "האם אפשר ___ את המנה הביתה?",
     "options": ["לארוז", "לבשל", "לכתוב", "לשתות"],
     "correctAnswer": "לארוז",
@@ -135,6 +155,7 @@
   },
   {
     "id": 20,
+    "category": "restaurant",
     "question": "אני ___ לחגוג יום הולדת היום.",
     "options": ["באתי", "שוכב", "טס", "עולה"],
     "correctAnswer": "באתי",
@@ -142,6 +163,7 @@
   },
   {
     "id": 21,
+    "category": "restaurant",
     "question": "האם יש ___ טבעוני בתפריט?",
     "options": ["משהו", "כיסא", "שולחן", "מים"],
     "correctAnswer": "משהו",
@@ -149,6 +171,7 @@
   },
   {
     "id": 22,
+    "category": "restaurant",
     "question": "___ לקחת אותי לשולחן שלי?",
     "options": ["אפשר", "איפה", "תודה", "מה"],
     "correctAnswer": "אפשר",
@@ -156,6 +179,7 @@
   },
   {
     "id": 23,
+    "category": "restaurant",
     "question": "אפשר לקבל עוד ___ של מים?",
     "options": ["כוס", "צלחת", "שולחן", "סכין"],
     "correctAnswer": "כוס",
@@ -163,6 +187,7 @@
   },
   {
     "id": 24,
+    "category": "restaurant",
     "question": "האם ___ הארוחה כוללת שתייה?",
     "options": ["המחיר", "השולחן", "המלצר", "המזלג"],
     "correctAnswer": "המחיר",
@@ -170,9 +195,92 @@
   },
   {
     "id": 25,
+    "category": "restaurant",
     "question": "לא קיבלתי את מה ש___.",
     "options": ["הזמנתי", "שיחקתי", "כתבתי", "ציירתי"],
     "correctAnswer": "הזמנתי",
     "translation": "I didn't get what I ordered."
+  },
+
+  // --- Supermarket section (החלק שהיה קיים קודם) ---
+  {
+    "id": 26,
+    "category": "supermarket",
+    "question": "יש לכם ___ טריים היום?",
+    "options": ["פירות", "מכנסים", "ספרים", "בקבוקי מים"],
+    "correctAnswer": "פירות",
+    "translation": "Do you have fresh fruits today?"
+  },
+  {
+    "id": 27,
+    "category": "supermarket",
+    "question": "איפה אני יכול למצוא ___?",
+    "options": ["לחם", "עוגה", "עיתון", "פלאפון"],
+    "correctAnswer": "לחם",
+    "translation": "Where can I find bread?"
+  },
+  {
+    "id": 28,
+    "category": "supermarket",
+    "question": "האם אפשר לשלם ב___?",
+    "options": ["כרטיס אשראי", "עט", "כורסה", "גז"],
+    "correctAnswer": "כרטיס אשראי",
+    "translation": "Can I pay by credit card?"
+  },
+  {
+    "id": 29,
+    "category": "supermarket",
+    "question": "יש מבצע על ___ השבוע?",
+    "options": ["חלב", "מחברת", "עט", "נעליים"],
+    "correctAnswer": "חלב",
+    "translation": "Is there a sale on milk this week?"
+  },
+  {
+    "id": 30,
+    "category": "supermarket",
+    "question": "אני צריך ___ לקניות.",
+    "options": ["עגלה", "כיסא", "חלון", "לוח"],
+    "correctAnswer": "עגלה",
+    "translation": "I need a cart for shopping."
+  },
+  {
+    "id": 31,
+    "category": "supermarket",
+    "question": "המדפים של ___ ריקים.",
+    "options": ["הקמח", "הדבש", "החולצה", "העגלה"],
+    "correctAnswer": "הקמח",
+    "translation": "The flour shelves are empty."
+  },
+  {
+    "id": 32,
+    "category": "supermarket",
+    "question": "אפשר לקבל ___ קטן?",
+    "options": ["שקית", "שולחן", "מחבת", "דלת"],
+    "correctAnswer": "שקית",
+    "translation": "Can I have a small bag?"
+  },
+  {
+    "id": 33,
+    "category": "supermarket",
+    "question": "האם אתם מוכרים גם ___?",
+    "options": ["ביצים", "ספרים", "נעליים", "פלסטיק"],
+    "correctAnswer": "ביצים",
+    "translation": "Do you sell eggs as well?"
+  },
+  {
+    "id": 34,
+    "category": "supermarket",
+    "question": "יש לכם ___ ללא גלוטן?",
+    "options": ["לחם", "צ'יפס", "אבטיח", "שוקולד"],
+    "correctAnswer": "לחם",
+    "translation": "Do you have gluten-free bread?"
+  },
+  {
+    "id": 35,
+    "category": "supermarket",
+    "question": "אני מחפש ___ מוזלים.",
+    "options": ["ירקות", "ספרים", "טלפונים", "מגבות"],
+    "correctAnswer": "ירקות",
+    "translation": "I'm looking for discounted vegetables."
   }
 ]
