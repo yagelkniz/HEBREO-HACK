@@ -43,6 +43,7 @@ const practiceOptions = [
 ];
 
 const Index = () => {
+  const [showWelcome, setShowWelcome] = useState(true);
   const [selectedPractice, setSelectedPractice] = useState<null | "verb" | "nounAdj">(null);
   const [selectedTense, setSelectedTense] = useState<null | "past" | "present" | "future">(null);
   const [selectedTextComp, setSelectedTextComp] = useState<null | "food" | "animals-easy">(null);
@@ -51,6 +52,35 @@ const Index = () => {
     if (selectedTextComp) setSelectedTextComp(null);
     else if (selectedTense) setSelectedTense(null);
     else setSelectedPractice(null);
+  }
+
+  // מסך פתיחה – קודם מוצג, ורק אחרי לחיצה יוסתר
+  if (showWelcome) {
+    return (
+      <div className="min-h-screen flex flex-col items-center justify-center bg-background p-4">
+        <div className="rounded-2xl shadow-lg bg-white dark:bg-gray-900/80 px-6 py-10 max-w-md w-full flex flex-col items-center gap-7 border-2 border-blue-100">
+          <h1 className="text-3xl md:text-4xl font-bold text-blue-800 mb-0" dir="rtl">
+            הגעתם לאפליקציה עברית עם עילי
+          </h1>
+          <div className="text-xl text-slate-700 font-semibold" dir="rtl">
+            מתרגלים, לומדים ונהנים.<br />
+            והכל בחינם!
+          </div>
+          <div className="w-full h-px bg-gradient-to-r from-blue-200 via-purple-200 to-yellow-200 my-2" />
+          <div className="text-lg text-gray-700 text-center" dir="ltr">
+            Welcome to <span className="font-bold text-blue-800">'Hebrew with Eli'</span> –<br />
+            learn, practice and enjoy!<br />
+            And it's all <span className="font-bold">free</span>!
+          </div>
+          <Button
+            className="mt-4 w-full bg-blue-600 hover:bg-blue-700 text-white text-lg font-bold rounded-xl py-3"
+            onClick={() => setShowWelcome(false)}
+          >
+            לתפריט הראשי
+          </Button>
+        </div>
+      </div>
+    );
   }
 
   if (selectedTextComp) {
