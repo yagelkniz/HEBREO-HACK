@@ -81,7 +81,8 @@ const Index = () => {
   const nav = useNavigate();
   const [showPronounsTable, setShowPronounsTable] = useState(false);
   const [showEverydayHebrew, setShowEverydayHebrew] = useState(false);
-  const [everydayHebrewCategory, setEverydayHebrewCategory] = useState<null | "restaurant" | "supermarket">(null);
+  // change here: add "transportation" to the type
+  const [everydayHebrewCategory, setEverydayHebrewCategory] = useState<null | "restaurant" | "supermarket" | "transportation">(null);
 
   // אם לא מחובר - להפנות ל־/auth
   useEffect(() => {
@@ -102,46 +103,48 @@ const Index = () => {
     else setSelectedPractice(null);
   }
 
-  // מסך פתיחה – קודם מוצג, ורק אחרי לחיצה יוסתר
+  // Welcome screen
   if (showWelcome) {
     return (
       <div className="min-h-screen flex flex-col items-center justify-center bg-background p-4">
         <div className="rounded-2xl shadow-lg bg-white dark:bg-gray-900/80 px-6 py-10 max-w-md w-full flex flex-col items-center gap-7 border-2 border-blue-100">
-          <h1 className="text-3xl md:text-4xl font-bold text-blue-800 mb-0" dir="rtl">
-            הגעתם לאפליקציה עברית עם עילי
+          <h1 className="text-3xl md:text-4xl font-bold text-blue-800 mb-0" dir="ltr">
+            Welcome to "Hebrew with Eli"
           </h1>
-          <div className="text-xl text-slate-700 font-semibold" dir="rtl">
-            מתרגלים, לומדים ונהנים.<br />
-            והכל בחינם!
+          <div className="text-xl text-slate-700 font-semibold" dir="ltr">
+            Practice, learn and enjoy.<br />
+            And it's all free!
           </div>
           <div className="w-full h-px bg-gradient-to-r from-blue-200 via-purple-200 to-yellow-200 my-2" />
-          <div className="text-lg text-gray-700 text-center" dir="ltr">
-            Welcome to <span className="font-bold text-blue-800">'Hebrew with Eli'</span> –<br />
-            learn, practice and enjoy!<br />
-            And it's all <span className="font-bold">free</span>!
+          <div className="text-lg text-gray-700 text-center" dir="rtl">
+            ברוכים הבאים לאפליקציה <span className="font-bold text-blue-800">'עברית עם עילי'</span> –<br />
+            מתרגלים, לומדים ונהנים!<br />
+            והכל <span className="font-bold">בחינם</span>!
           </div>
           <Button
             className="mt-4 w-full bg-blue-600 hover:bg-blue-700 text-white text-lg font-bold rounded-xl py-3"
             onClick={() => setShowWelcome(false)}
           >
-            לתפריט הראשי
+            Go to main menu
           </Button>
         </div>
       </div>
     );
   }
 
+  // Questionnaire
   if (showQuestionnaire) {
     return (
       <InterviewQuestionnaire onBack={() => setShowQuestionnaire(false)} />
     );
   }
 
+  // Pronoun tables, etc
   if (showPronounsTable) {
     return (
       <div className="w-full">
         <div className="flex justify-end mb-4">
-          <Button variant="outline" onClick={() => setShowPronounsTable(false)}>⬅ חזרה</Button>
+          <Button variant="outline" onClick={() => setShowPronounsTable(false)}>⬅ Back</Button>
         </div>
         <PronounsTable />
       </div>
@@ -152,7 +155,7 @@ const Index = () => {
     return (
       <div className="w-full">
         <div className="flex justify-end mb-4">
-          <Button variant="outline" onClick={() => setShowPossessivePronouns(false)}>⬅ חזרה</Button>
+          <Button variant="outline" onClick={() => setShowPossessivePronouns(false)}>⬅ Back</Button>
         </div>
         <PossessivePronounsTable />
       </div>
@@ -164,7 +167,7 @@ const Index = () => {
       <div className="w-full">
         <div className="flex justify-end mb-4">
           <Button variant="outline" onClick={() => setShowLinkingWords(false)}>
-            ⬅ חזרה
+            ⬅ Back
           </Button>
         </div>
         <LinkingWordsTable />
@@ -172,6 +175,7 @@ const Index = () => {
     );
   }
 
+  // Everyday Hebrew – category select
   if (showEverydayHebrew && everydayHebrewCategory === null) {
     return (
       <EverydayHebrewCategorySelect
@@ -181,12 +185,13 @@ const Index = () => {
     );
   }
 
+  // Everyday Hebrew – practice view
   if (showEverydayHebrew && everydayHebrewCategory) {
     return (
       <div className="w-full max-w-3xl mx-auto">
         <div className="flex justify-end mb-4">
           <Button variant="outline" onClick={handleBack}>
-            ⬅ חזרה
+            ⬅ Back
           </Button>
         </div>
         <EverydayHebrewPractice
@@ -197,11 +202,12 @@ const Index = () => {
     );
   }
 
+  // Text comprehension practice screens
   if (selectedTextComp) {
     return (
       <div className="w-full">
         <div className="flex justify-end mb-4">
-          <Button variant="outline" onClick={handleBack}>⬅ חזרה</Button>
+          <Button variant="outline" onClick={handleBack}>⬅ Back</Button>
         </div>
         {selectedTextComp === "food" && <TextComprehensionFood />}
         {selectedTextComp === "animals-easy" && <TextComprehensionAnimalsEasy />}
@@ -210,17 +216,17 @@ const Index = () => {
         )}
         {selectedTextComp === "social-media" && <TextComprehensionSocialMedia />}
         {selectedTextComp === "food-levels" && (
-          <Suspense fallback={<div>טוען...</div>}>
+          <Suspense fallback={<div>Loading…</div>}>
             <LazyTextComprehensionFoodLevels />
           </Suspense>
         )}
         {selectedTextComp === "countries-levels" && (
-          <Suspense fallback={<div>טוען...</div>}>
+          <Suspense fallback={<div>Loading…</div>}>
             <LazyTextComprehensionCountriesLevels />
           </Suspense>
         )}
         {selectedTextComp === "movies-series-levels" && (
-          <Suspense fallback={<div>טוען...</div>}>
+          <Suspense fallback={<div>Loading…</div>}>
             <LazyTextComprehensionMoviesAndSeriesLevels />
           </Suspense>
         )}
@@ -229,18 +235,114 @@ const Index = () => {
     );
   }
 
-  // תפריט ראשי – עבר לרכיב חיצוני לניהול/ניווט
+  // Main menu – now in English
   if (!selectedPractice) {
     return (
-      <IndexMainMenu
-        setShowLinkingWords={setShowLinkingWords}
-        setShowPronounsTable={setShowPronounsTable}
-        setShowPossessivePronouns={setShowPossessivePronouns}
-        setShowQuestionnaire={setShowQuestionnaire}
-        setSelectedPractice={setSelectedPractice}
-        setSelectedTextComp={setSelectedTextComp}
-        setShowEverydayHebrew={setShowEverydayHebrew}
-      />
+      <div className="flex flex-col gap-8 items-center w-full max-w-md mx-auto">
+        <h1 className="text-3xl md:text-4xl font-bold text-primary mb-2" dir="ltr">
+          What do you want to practice?
+        </h1>
+        <div className="grid gap-6 w-full">
+          <button
+            className="w-full flex items-center justify-center gap-4 py-6 font-bold text-2xl rounded-xl border-2 shadow hover-scale focus:outline-none bg-fuchsia-100 text-fuchsia-900 border-fuchsia-300"
+            onClick={() => setShowLinkingWords(true)}
+          >
+            <span className="text-3xl">🔗</span>
+            <span dir="ltr">Linking words table (categories & examples)</span>
+          </button>
+          <button
+            className="w-full flex items-center justify-center gap-4 py-6 font-bold text-2xl rounded-xl border-2 shadow hover-scale focus:outline-none bg-indigo-100 text-indigo-900 border-indigo-300"
+            onClick={() => setShowPronounsTable(true)}
+          >
+            <span className="text-3xl">👤</span>
+            <span dir="ltr">Pronouns table (Hebrew–English)</span>
+          </button>
+          <button
+            className="w-full flex items-center justify-center gap-4 py-6 font-bold text-2xl rounded-xl border-2 shadow hover-scale focus:outline-none bg-teal-100 text-teal-900 border-teal-300"
+            onClick={() => setShowPossessivePronouns(true)}
+          >
+            <span className="text-3xl">🔗</span>
+            <span dir="ltr">Possessive pronouns table (Hebrew–English)</span>
+          </button>
+          <button
+            className="w-full flex items-center justify-center gap-4 py-6 font-bold text-2xl rounded-xl border-2 shadow hover-scale focus:outline-none bg-orange-100 text-orange-900 border-orange-300"
+            onClick={() => setShowEverydayHebrew(true)}
+          >
+            <span className="text-3xl">🗣️</span>
+            <span dir="ltr">Everyday Hebrew – Fill-in-the-blank Practice</span>
+          </button>
+          <button
+            className="w-full flex items-center justify-center gap-4 py-6 font-bold text-2xl rounded-xl border-2 shadow hover-scale focus:outline-none bg-gradient-to-r from-blue-100 via-green-100 to-yellow-100 text-blue-900 border-blue-200"
+            onClick={() => setSelectedPractice("verb")}
+          >
+            <span className="text-3xl">🕰️</span>
+            <span dir="ltr">Verbs – Past / Present / Future</span>
+          </button>
+          <button
+            className="w-full flex items-center justify-center gap-4 py-6 font-bold text-2xl rounded-xl border-2 shadow hover-scale focus:outline-none bg-pink-100 text-pink-900 border-pink-400"
+            onClick={() => setSelectedPractice("nounAdj")}
+          >
+            <span className="text-3xl">📝</span>
+            <span dir="ltr">Nouns + Adjectives</span>
+          </button>
+          <button
+            className="w-full flex items-center justify-center gap-4 py-6 font-bold text-2xl rounded-xl border-2 shadow hover-scale focus:outline-none bg-purple-100 text-purple-900 border-purple-300"
+            onClick={() => setShowQuestionnaire(true)}
+          >
+            <span className="text-3xl">💬</span>
+            <span dir="ltr">Introductory Questionnaire</span>
+          </button>
+          <button
+            className="w-full flex items-center justify-center gap-4 py-6 font-bold text-2xl rounded-xl border-2 shadow hover-scale focus:outline-none bg-yellow-100 text-yellow-900 border-yellow-300"
+            onClick={() => setSelectedTextComp("food-levels")}
+          >
+            <span className="text-3xl">🥗</span>
+            <span dir="ltr">Reading comprehension – Food (Three levels)</span>
+          </button>
+          <button
+            className="w-full flex items-center justify-center gap-4 py-6 font-bold text-2xl rounded-xl border-2 shadow hover-scale focus:outline-none bg-orange-200 text-orange-900 border-orange-300"
+            onClick={() => setSelectedTextComp("food-order-medium")}
+          >
+            <span className="text-3xl">🍽️</span>
+            <span dir="ltr">Reading comprehension – Ordering food (Medium)</span>
+          </button>
+          <button
+            className="w-full flex items-center justify-center gap-4 py-6 font-bold text-2xl rounded-xl border-2 shadow hover-scale focus:outline-none bg-green-100 text-green-900 border-green-200"
+            onClick={() => setSelectedTextComp("animals-easy")}
+          >
+            <span className="text-3xl">🐾</span>
+            <span dir="ltr">Reading comprehension – Animals (Easy)</span>
+          </button>
+          <button
+            className="w-full flex items-center justify-center gap-4 py-6 font-bold text-2xl rounded-xl border-2 shadow hover-scale focus:outline-none bg-blue-100 text-blue-900 border-blue-300"
+            onClick={() => setSelectedTextComp("social-media")}
+          >
+            <span className="text-3xl">📱</span>
+            <span dir="ltr">Reading comprehension – TV & Social Media</span>
+          </button>
+          <button
+            className="w-full flex items-center justify-center gap-4 py-6 font-bold text-2xl rounded-xl border-2 shadow hover-scale focus:outline-none bg-cyan-100 text-cyan-900 border-cyan-300"
+            onClick={() => setSelectedTextComp("countries-levels")}
+          >
+            <span className="text-3xl">🌏</span>
+            <span dir="ltr">Reading comprehension – Countries (Three levels)</span>
+          </button>
+          <button
+            className="w-full flex items-center justify-center gap-4 py-6 font-bold text-2xl rounded-xl border-2 shadow hover-scale focus:outline-none bg-blue-50 text-blue-900 border-blue-400"
+            onClick={() => setSelectedTextComp("movies-series-levels")}
+          >
+            <span className="text-3xl">📺</span>
+            <span dir="ltr">Reading comprehension – TV & Series (Three levels)</span>
+          </button>
+          <button
+            className="w-full flex items-center justify-center gap-4 py-6 font-bold text-2xl rounded-xl border-2 shadow hover-scale focus:outline-none bg-sky-100 text-sky-900 border-sky-400"
+            onClick={() => setSelectedTextComp("places-food-easy")}
+          >
+            <span className="text-3xl">🌊</span>
+            <span dir="ltr">Reading comprehension – Fun at the beach & food (Easy)</span>
+          </button>
+        </div>
+      </div>
     );
   }
 
