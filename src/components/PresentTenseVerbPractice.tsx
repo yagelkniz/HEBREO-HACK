@@ -1,4 +1,3 @@
-
 import React, { useState } from "react";
 
 type Question = {
@@ -98,6 +97,7 @@ const questions: Question[] = [
 export default function PresentTenseVerbPractice() {
   const [selections, setSelections] = useState<{ [i: number]: string | null }>({});
   const [feedbacks, setFeedbacks] = useState<{ [i: number]: "correct" | "incorrect" | null }>({});
+  const [showVowels, setShowVowels] = useState(false);
 
   function checkVerb(qIndex: number, option: string) {
     setSelections((prev) => ({ ...prev, [qIndex]: option }));
@@ -107,11 +107,34 @@ export default function PresentTenseVerbPractice() {
     }));
   }
 
+  // חישוב סטטיסטיקות פשוט
+  const totalAnswered = Object.keys(selections).length;
+  const correctAnswers = Object.values(feedbacks).filter((f) => f === "correct").length;
+  const incorrectAnswers = Object.values(feedbacks).filter((f) => f === "incorrect").length;
+
+  // פונקציית הוספת או הסרת ניקוד, במידה ורלוונטי
+  function displayWithVowels(text: string) {
+    if (!showVowels) return text;
+    // כאן אפשר להטמיע טבלת ניקוד פשוטה בעתיד; בינתיים, חזרה על הטקסט (ההדגמה).
+    return text.normalize("NFC");
+  }
+
   return (
     <div className="flex flex-col items-center justify-center p-8 gap-10 min-h-[65vh] bg-background rounded-2xl shadow-md border max-w-xl mx-auto rtl">
-      <h1 className="text-3xl font-bold text-primary mb-4" dir="rtl">
-        בחר/י את הפועל הנכון בזמן הווה {String.fromCodePoint(0x1f31f)}
-      </h1>
+      <div className="flex flex-col items-center w-full">
+        <h1 className="text-3xl font-bold text-primary mb-4" dir="rtl">
+          בחר/י את הפועל הנכון בזמן הווה {String.fromCodePoint(0x1f31f)}
+        </h1>
+        <label className="flex gap-2 mb-3 items-center text-base cursor-pointer" dir="rtl">
+          <input
+            type="checkbox"
+            checked={showVowels}
+            onChange={() => setShowVowels((v) => !v)}
+            className="accent-blue-500 w-4 h-4"
+          />
+          הפעל ניקוד בתשובות
+        </label>
+      </div>
       {questions.map((q, i) => (
         <div key={i} className={`w-full max-w-md flex flex-col items-center mb-2 rounded-xl shadow ${q.color}`}>
           <div className="flex items-center text-3xl mt-2">{q.emoji}</div>
@@ -121,7 +144,7 @@ export default function PresentTenseVerbPractice() {
             dir="rtl"
             style={{ letterSpacing: "0.05em" }}
           >
-            {q.infinitive}
+            {displayWithVowels(q.infinitive)}
           </div>
           <p className="text-lg mb-2 flex flex-wrap items-center justify-center" dir="rtl">
             {q.textBefore} <span className="mx-1 font-bold">{q.blank}</span> {q.textAfter}
@@ -141,7 +164,7 @@ export default function PresentTenseVerbPractice() {
                 aria-disabled={!!selections[i]}
                 style={{ border: selections[i] === opt ? "2px solid #a3a3a3" : "" }}
               >
-                {opt}
+                {displayWithVowels(opt)}
               </button>
             ))}
           </div>
@@ -157,6 +180,11 @@ export default function PresentTenseVerbPractice() {
           )}
         </div>
       ))}
+      <div className="flex flex-col items-center gap-2 mt-6 w-full">
+        <div className="font-bold text-lg text-gray-700" dir="rtl">
+          סטטיסטיקה: {correctAnswers} נכונות / {incorrectAnswers} שגויות / {questions.length} סה"כ
+        </div>
+      </div>
     </div>
   );
 }
