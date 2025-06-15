@@ -1,7 +1,7 @@
-
 import React from "react";
 import { Button } from "@/components/ui/button";
 import { ChevronRight, ListCheck } from "lucide-react";
+import type { SetStateAction, Dispatch } from "react";
 
 interface IndexMainMenuProps {
   setShowLinkingWords: (b: boolean) => void;
@@ -9,7 +9,7 @@ interface IndexMainMenuProps {
   setShowPossessivePronouns: (b: boolean) => void;
   setShowQuestionnaire: (b: boolean) => void;
   setSelectedPractice: (val: null | "verb" | "nounAdj") => void;
-  setSelectedTextComp: (val: string | null) => void; // <-- מתוקן כאן
+  setSelectedTextComp: Dispatch<SetStateAction<null | "food" | "animals-easy" | "food-order-medium" | "social-media" | "food-levels" | "countries-levels" | "movies-series-levels" | "places-food-easy">>;
   setShowEverydayHebrew: (b: boolean) => void;
 }
 
