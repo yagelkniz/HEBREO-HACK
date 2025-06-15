@@ -1,10 +1,10 @@
 
-import WordGenderPractice from "@/components/WordGenderPractice";
+import PastTenseVerbPractice from "@/components/PastTenseVerbPractice";
 
 const Index = () => {
   return (
     <div className="min-h-screen flex items-center justify-center bg-background">
-      <WordGenderPractice />
+      <PastTenseVerbPractice />
     </div>
   );
 };
