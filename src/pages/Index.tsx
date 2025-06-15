@@ -6,6 +6,7 @@ import NounAdjectivePractice from "@/components/NounAdjectivePractice";
 import TextComprehensionFood from "@/components/TextComprehensionFood";
 import TextComprehensionAnimalsEasy from "@/components/TextComprehensionAnimalsEasy";
 import TextComprehensionFoodOrderMedium from "@/components/TextComprehensionFoodOrderMedium";
+import TextComprehensionSocialMedia from "@/components/TextComprehensionSocialMedia";
 
 const tenseOptions = [
   {
@@ -48,7 +49,7 @@ const Index = () => {
   const [selectedPractice, setSelectedPractice] = useState<null | "verb" | "nounAdj">(null);
   const [selectedTense, setSelectedTense] = useState<null | "past" | "present" | "future">(null);
   const [selectedTextComp, setSelectedTextComp] = useState<
-    null | "food" | "animals-easy" | "food-order-medium"
+    null | "food" | "animals-easy" | "food-order-medium" | "social-media"
   >(null);
 
   function handleBack() {
@@ -97,6 +98,7 @@ const Index = () => {
         {selectedTextComp === "food-order-medium" && (
           <TextComprehensionFoodOrderMedium />
         )}
+        {selectedTextComp === "social-media" && <TextComprehensionSocialMedia />}
       </div>
     );
   }
@@ -134,6 +136,14 @@ const Index = () => {
             >
               <span className="text-3xl">🐾</span>
               <span dir="rtl">הבנת הנקרא - חיות (קל)</span>
+            </button>
+            {/* כפתור חדש לתרגול הבנת הנקרא - טלוויזיה ורשתות חברתיות */}
+            <button
+              className="w-full flex items-center justify-center gap-4 py-6 font-bold text-2xl rounded-xl border-2 shadow transition hover:scale-105 focus:outline-none bg-blue-100 text-blue-900 border-blue-300"
+              onClick={() => setSelectedTextComp("social-media")}
+            >
+              <span className="text-3xl">📱</span>
+              <span dir="rtl">הבנת הנקרא - טלוויזיה ורשתות חברתיות</span>
             </button>
           </div>
         </div>
