@@ -1,4 +1,3 @@
-
 import React, { useState, Suspense } from "react";
 import { Button } from "@/components/ui/button";
 import PastTenseVerbPractice from "@/components/PastTenseVerbPractice";
@@ -8,10 +7,14 @@ import TextComprehensionFood from "@/components/TextComprehensionFood";
 import TextComprehensionAnimalsEasy from "@/components/TextComprehensionAnimalsEasy";
 import TextComprehensionFoodOrderMedium from "@/components/TextComprehensionFoodOrderMedium";
 import TextComprehensionSocialMedia from "@/components/TextComprehensionSocialMedia";
+import TextComprehensionCountriesLevels from "@/components/TextComprehensionCountriesLevels";
 
 // Add lazy import for food levels
 const LazyTextComprehensionFoodLevels = React.lazy(() =>
   import("@/components/TextComprehensionFoodLevels")
+);
+const LazyTextComprehensionCountriesLevels = React.lazy(() =>
+  import("@/components/TextComprehensionCountriesLevels")
 );
 
 const tenseOptions = [
@@ -55,7 +58,7 @@ const Index = () => {
   const [selectedPractice, setSelectedPractice] = useState<null | "verb" | "nounAdj">(null);
   const [selectedTense, setSelectedTense] = useState<null | "past" | "present" | "future">(null);
   const [selectedTextComp, setSelectedTextComp] = useState<
-    null | "food" | "animals-easy" | "food-order-medium" | "social-media" | "food-levels"
+    null | "food" | "animals-easy" | "food-order-medium" | "social-media" | "food-levels" | "countries-levels"
   >(null);
 
   function handleBack() {
@@ -106,9 +109,13 @@ const Index = () => {
         )}
         {selectedTextComp === "social-media" && <TextComprehensionSocialMedia />}
         {selectedTextComp === "food-levels" && (
-          // דינמי – שלוש רמות אוכל
           <Suspense fallback={<div>טוען...</div>}>
             <LazyTextComprehensionFoodLevels />
+          </Suspense>
+        )}
+        {selectedTextComp === "countries-levels" && (
+          <Suspense fallback={<div>טוען...</div>}>
+            <LazyTextComprehensionCountriesLevels />
           </Suspense>
         )}
       </div>
@@ -164,6 +171,14 @@ const Index = () => {
             >
               <span className="text-3xl">📱</span>
               <span dir="rtl">הבנת הנקרא - טלוויזיה ורשתות חברתיות</span>
+            </button>
+            {/* כפתור חדש: מדינות (שלוש רמות) */}
+            <button
+              className="w-full flex items-center justify-center gap-4 py-6 font-bold text-2xl rounded-xl border-2 shadow transition hover:scale-105 focus:outline-none bg-cyan-100 text-cyan-900 border-cyan-300"
+              onClick={() => setSelectedTextComp("countries-levels")}
+            >
+              <span className="text-3xl">🌏</span>
+              <span dir="rtl">הבנת הנקרא - מדינות (שלוש רמות)</span>
             </button>
           </div>
         </div>
@@ -225,4 +240,3 @@ const Index = () => {
 };
 
 export default Index;
-
