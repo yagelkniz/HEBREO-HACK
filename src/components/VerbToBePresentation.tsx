@@ -139,7 +139,7 @@ export default function VerbToBePresentation({ onBack }: VerbToBePresentationPro
             <Card>
               <CardHeader>
                 <CardTitle className="text-center" dir="rtl">
-                  נטיית הפועל "להיות" בזמן {currentTense === "past" ? "עבר" : currentTense === "present" ? "ה��וה" : "עתיד"}
+                  נטיית הפועל "להיות" בזמן {currentTense === "past" ? "עבר" : currentTense === "present" ? "הווה" : "עתיד"}
                   <br />
                   <span className="text-sm text-gray-600">
                     {currentTense === "past" ? "Past Tense" : currentTense === "present" ? "Present Tense" : "Future Tense"}
@@ -297,7 +297,7 @@ export default function VerbToBePresentation({ onBack }: VerbToBePresentationPro
                     {showAnswers[question.id] && (
                       <div className="mt-3">
                         <div className={`p-3 rounded-md ${
-                          isCorreectAnswer(question.id) ? "bg-green-100 text-green-800" : "bg-red-100 text-red-800"
+                          isCorrectAnswer(question.id) ? "bg-green-100 text-green-800" : "bg-red-100 text-red-800"
                         }`}>
                           {isCorrectAnswer(question.id) ? "✅ נכון!" : "❌ לא נכון"}
                           <div className="mt-2 font-medium" dir="rtl">

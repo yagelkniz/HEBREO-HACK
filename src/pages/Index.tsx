@@ -25,6 +25,7 @@ import TextComprehensionFoodLevels from "@/components/TextComprehensionFoodLevel
 import TextComprehensionCountriesLevels from "@/components/TextComprehensionCountriesLevels";
 import TextComprehensionMoviesAndSeriesLevels from "@/components/TextComprehensionMoviesAndSeriesLevels";
 import TextComprehensionPlacesFoodEasy from "@/components/TextComprehensionPlacesFoodEasy";
+import VerbToBePresentation from "@/components/VerbToBePresentation";
 
 export default function Index() {
   const [lang, setLang] = useState<"he" | "en">("he");
@@ -42,6 +43,7 @@ export default function Index() {
   const [selectedPractice, setSelectedPractice] = useState<null | "verb" | "nounAdj">(null);
   const [verbTense, setVerbTense] = useState<"present" | "past" | "future" | null>(null);
   const [selectedTextComp, setSelectedTextComp] = useState<null | "food" | "animals-easy" | "food-order-medium" | "social-media" | "food-levels" | "countries-levels" | "movies-series-levels" | "places-food-easy">(null);
+  const [showVerbToBePresentation, setShowVerbToBePresentation] = useState(false);
 
   const resetToMainMenu = () => {
     setShowLinkingWords(false);
@@ -58,9 +60,14 @@ export default function Index() {
     setSelectedPractice(null);
     setVerbTense(null);
     setSelectedTextComp(null);
+    setShowVerbToBePresentation(false);
   };
 
   const t = (he: string, en: string) => (lang === "he" ? he : en);
+
+  if (showVerbToBePresentation) {
+    return <VerbToBePresentation onBack={() => setShowVerbToBePresentation(false)} />;
+  }
 
   if (showLinkingWordsPractice) {
     return <LinkingWordsPractice lang={lang} onBack={() => setShowLinkingWordsPractice(false)} />;
@@ -126,7 +133,6 @@ export default function Index() {
           setShowPronounsMenu(false);
           setShowPronounsTable(true);
         }}
-        onSelect={() => setShowPronounsPractice(true)}
       />
     );
   }
@@ -164,7 +170,6 @@ export default function Index() {
           setShowPossessivePronounsMenu(false);
           setShowPossessivePronouns(true);
         }}
-        onSelect={() => setShowPossessivePronounsPractice(true)}
       />
     );
   }
@@ -293,6 +298,7 @@ export default function Index() {
         setSelectedPractice={setSelectedPractice}
         setSelectedTextComp={setSelectedTextComp}
         setShowEverydayHebrew={setShowEverydayHebrew}
+        setShowVerbToBePresentation={setShowVerbToBePresentation}
       />
     </div>
   );
