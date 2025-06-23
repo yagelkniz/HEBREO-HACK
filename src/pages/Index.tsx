@@ -1,3 +1,4 @@
+
 import { useState } from "react";
 import { Button } from "@/components/ui/button";
 import IndexMainMenu from "./IndexMainMenu";
@@ -133,7 +134,6 @@ export default function Index() {
           setShowPronounsMenu(false);
           setShowPronounsTable(true);
         }}
-        onSelect={() => setShowPronounsPractice(true)}
       />
     );
   }
@@ -260,35 +260,35 @@ export default function Index() {
   }
 
   if (selectedTextComp === "food") {
-    return <TextComprehensionFood onBack={() => setSelectedTextComp(null)} />;
+    return <TextComprehensionFood />;
   }
 
   if (selectedTextComp === "animals-easy") {
-    return <TextComprehensionAnimalsEasy onBack={() => setSelectedTextComp(null)} />;
+    return <TextComprehensionAnimalsEasy />;
   }
 
   if (selectedTextComp === "food-order-medium") {
-    return <TextComprehensionFoodOrderMedium onBack={() => setSelectedTextComp(null)} />;
+    return <TextComprehensionFoodOrderMedium />;
   }
 
   if (selectedTextComp === "social-media") {
-    return <TextComprehensionSocialMedia onBack={() => setSelectedTextComp(null)} />;
+    return <TextComprehensionSocialMedia />;
   }
 
   if (selectedTextComp === "food-levels") {
-    return <TextComprehensionFoodLevels onBack={() => setSelectedTextComp(null)} />;
+    return <TextComprehensionFoodLevels />;
   }
 
   if (selectedTextComp === "countries-levels") {
-    return <TextComprehensionCountriesLevels onBack={() => setSelectedTextComp(null)} />;
+    return <TextComprehensionCountriesLevels />;
   }
 
   if (selectedTextComp === "movies-series-levels") {
-    return <TextComprehensionMoviesAndSeriesLevels onBack={() => setSelectedTextComp(null)} />;
+    return <TextComprehensionMoviesAndSeriesLevels />;
   }
 
   if (selectedTextComp === "places-food-easy") {
-    return <TextComprehensionPlacesFoodEasy onBack={() => setSelectedTextComp(null)} />;
+    return <TextComprehensionPlacesFoodEasy />;
   }
 
   return (
