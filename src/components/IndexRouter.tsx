@@ -1,4 +1,3 @@
-
 import { Button } from "@/components/ui/button";
 import LinkingWordsTable from "@/components/LinkingWordsTable";
 import PronounsTable from "@/components/PronounsTable";
