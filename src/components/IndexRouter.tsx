@@ -1,3 +1,4 @@
+
 import { Button } from "@/components/ui/button";
 import LinkingWordsTable from "@/components/LinkingWordsTable";
 import PronounsTable from "@/components/PronounsTable";
@@ -25,6 +26,7 @@ import TextComprehensionPlacesFoodEasy from "@/components/TextComprehensionPlace
 import VerbToBePresentation from "@/components/VerbToBePresentation";
 import HebrewHouseholdItemsPractice from "@/components/HebrewHouseholdItemsPractice";
 import VerbTenseSelector from "@/components/VerbTenseSelector";
+import DaysAndPlacesVocabulary from "@/components/DaysAndPlacesVocabulary";
 import { useIndexState } from "@/hooks/useIndexState";
 
 interface IndexRouterProps {
@@ -63,10 +65,16 @@ export default function IndexRouter({ state }: IndexRouterProps) {
     selectedTextComp,
     showVerbToBePresentation,
     setShowVerbToBePresentation,
+    showDaysAndPlacesVocab,
+    setShowDaysAndPlacesVocab,
     resetToMainMenu,
   } = state;
 
   const t = (he: string, en: string) => (lang === "he" ? he : en);
+
+  if (showDaysAndPlacesVocab) {
+    return <DaysAndPlacesVocabulary onBack={() => setShowDaysAndPlacesVocab(false)} />;
+  }
 
   if (showVerbToBePresentation) {
     return <VerbToBePresentation onBack={() => setShowVerbToBePresentation(false)} />;

@@ -18,6 +18,7 @@ export const useIndexState = () => {
   const [verbTense, setVerbTense] = useState<"present" | "past" | "future" | null>(null);
   const [selectedTextComp, setSelectedTextComp] = useState<null | "food" | "animals-easy" | "food-order-medium" | "social-media" | "food-levels" | "countries-levels" | "movies-series-levels" | "places-food-easy">(null);
   const [showVerbToBePresentation, setShowVerbToBePresentation] = useState(false);
+  const [showDaysAndPlacesVocab, setShowDaysAndPlacesVocab] = useState(false);
 
   const resetToMainMenu = () => {
     setShowLinkingWords(false);
@@ -35,6 +36,7 @@ export const useIndexState = () => {
     setVerbTense(null);
     setSelectedTextComp(null);
     setShowVerbToBePresentation(false);
+    setShowDaysAndPlacesVocab(false);
   };
 
   return {
@@ -70,6 +72,8 @@ export const useIndexState = () => {
     setSelectedTextComp,
     showVerbToBePresentation,
     setShowVerbToBePresentation,
+    showDaysAndPlacesVocab,
+    setShowDaysAndPlacesVocab,
     resetToMainMenu,
   };
 };

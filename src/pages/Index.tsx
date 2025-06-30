@@ -20,7 +20,8 @@ export default function Index() {
     state.showQuestionnaire ||
     state.selectedPractice ||
     state.selectedTextComp ||
-    state.showVerbToBePresentation;
+    state.showVerbToBePresentation ||
+    state.showDaysAndPlacesVocab;
 
   if (shouldShowRouter) {
     return <IndexRouter state={state} />;
@@ -39,6 +40,7 @@ export default function Index() {
         setSelectedTextComp={state.setSelectedTextComp}
         setShowEverydayHebrew={state.setShowEverydayHebrew}
         setShowVerbToBePresentation={state.setShowVerbToBePresentation}
+        setShowDaysAndPlacesVocab={state.setShowDaysAndPlacesVocab}
       />
     </div>
   );
