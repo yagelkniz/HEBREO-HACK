@@ -16,6 +16,7 @@ interface IndexMainMenuProps {
   setShowEverydayHebrew: (b: boolean) => void;
   setShowVerbToBePresentation: (b: boolean) => void;
   setShowDaysAndPlacesVocab: (b: boolean) => void;
+  setShowQuestionWords: (b: boolean) => void;
 }
 
 export default function IndexMainMenu({
@@ -30,6 +31,7 @@ export default function IndexMainMenu({
   setShowEverydayHebrew,
   setShowVerbToBePresentation,
   setShowDaysAndPlacesVocab,
+  setShowQuestionWords,
 }: IndexMainMenuProps) {
   const t = menuText[lang];
 
@@ -66,6 +68,15 @@ export default function IndexMainMenu({
           <span className="text-3xl">📅</span>
           <span dir={lang === "he" ? "rtl" : "ltr"}>
             {lang === "he" ? "ימים ומקומות" : "Days and Places"}
+          </span>
+        </button>
+        <button
+          className="w-full flex items-center justify-center gap-4 py-6 font-bold text-2xl rounded-xl border-2 shadow hover-scale focus:outline-none bg-amber-100 text-amber-900 border-amber-300"
+          onClick={() => setShowQuestionWords(true)}
+        >
+          <span className="text-3xl">❓</span>
+          <span dir={lang === "he" ? "rtl" : "ltr"}>
+            {lang === "he" ? "מילות שאלה" : "Question Words"}
           </span>
         </button>
         <button

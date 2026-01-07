@@ -27,6 +27,7 @@ import VerbToBePresentation from "@/components/VerbToBePresentation";
 import HebrewHouseholdItemsPractice from "@/components/HebrewHouseholdItemsPractice";
 import VerbTenseSelector from "@/components/VerbTenseSelector";
 import DaysAndPlacesVocabulary from "@/components/DaysAndPlacesVocabulary";
+import QuestionWordsPractice from "@/components/QuestionWordsPractice";
 import { useIndexState } from "@/hooks/useIndexState";
 
 interface IndexRouterProps {
@@ -67,10 +68,16 @@ export default function IndexRouter({ state }: IndexRouterProps) {
     setShowVerbToBePresentation,
     showDaysAndPlacesVocab,
     setShowDaysAndPlacesVocab,
+    showQuestionWords,
+    setShowQuestionWords,
     resetToMainMenu,
   } = state;
 
   const t = (he: string, en: string) => (lang === "he" ? he : en);
+
+  if (showQuestionWords) {
+    return <QuestionWordsPractice onBack={() => setShowQuestionWords(false)} />;
+  }
 
   if (showDaysAndPlacesVocab) {
     return <DaysAndPlacesVocabulary onBack={() => setShowDaysAndPlacesVocab(false)} />;
