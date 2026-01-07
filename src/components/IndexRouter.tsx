@@ -222,13 +222,13 @@ export default function IndexRouter({ state }: IndexRouterProps) {
     }
 
     if (verbTense === "present") {
-      return <PresentTenseVerbPractice onBack={() => setVerbTense(null)} />;
+      return <PresentTenseVerbPractice />;
     }
     if (verbTense === "past") {
-      return <PastTenseVerbPractice onBack={() => setVerbTense(null)} />;
+      return <PastTenseVerbPractice />;
     }
     if (verbTense === "future") {
-      return <FutureTenseVerbPractice onBack={() => setVerbTense(null)} />;
+      return <FutureTenseVerbPractice />;
     }
   }
 
