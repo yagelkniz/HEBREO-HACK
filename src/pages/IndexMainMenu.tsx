@@ -22,6 +22,7 @@ interface IndexMainMenuProps {
   setShowLinkingWordsLevels: (b: boolean) => void;
   setShowVerbMemoryGame: (b: boolean) => void;
   setShowColorsAndFruits: (b: boolean) => void;
+  setShowHifilVerb: (b: boolean) => void;
 }
 
 interface MenuItemProps {
@@ -64,6 +65,7 @@ export default function IndexMainMenu({
   setShowLinkingWordsLevels,
   setShowVerbMemoryGame,
   setShowColorsAndFruits,
+  setShowHifilVerb,
 }: IndexMainMenuProps) {
   const t = menuText[lang];
 
@@ -212,6 +214,13 @@ export default function IndexMainMenu({
             label={t.nouns}
             onClick={() => setSelectedPractice("nounAdj")}
             colorClass="bg-pink-100 text-pink-900 border-pink-400"
+            lang={lang}
+          />
+          <MenuItem
+            emoji="👔"
+            label={lang === "he" ? "בניין הפעיל" : "Hif'il Pattern"}
+            onClick={() => setShowHifilVerb(true)}
+            colorClass="bg-amber-100 text-amber-900 border-amber-300"
             lang={lang}
           />
           <MenuItem

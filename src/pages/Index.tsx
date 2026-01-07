@@ -27,7 +27,8 @@ export default function Index() {
     state.showEmotions ||
     state.showLinkingWordsLevels ||
     state.showVerbMemoryGame ||
-    state.showColorsAndFruits;
+    state.showColorsAndFruits ||
+    state.showHifilVerb;
 
   if (shouldShowRouter) {
     return <IndexRouter state={state} />;
@@ -53,6 +54,7 @@ export default function Index() {
         setShowLinkingWordsLevels={state.setShowLinkingWordsLevels}
         setShowVerbMemoryGame={state.setShowVerbMemoryGame}
         setShowColorsAndFruits={state.setShowColorsAndFruits}
+        setShowHifilVerb={state.setShowHifilVerb}
       />
     </div>
   );
