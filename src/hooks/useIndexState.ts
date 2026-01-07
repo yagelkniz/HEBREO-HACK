@@ -21,6 +21,7 @@ export const useIndexState = () => {
   const [showDaysAndPlacesVocab, setShowDaysAndPlacesVocab] = useState(false);
   const [showQuestionWords, setShowQuestionWords] = useState(false);
   const [showOddOneOut, setShowOddOneOut] = useState(false);
+  const [showEmotions, setShowEmotions] = useState(false);
 
   const resetToMainMenu = () => {
     setShowLinkingWords(false);
@@ -41,6 +42,7 @@ export const useIndexState = () => {
     setShowDaysAndPlacesVocab(false);
     setShowQuestionWords(false);
     setShowOddOneOut(false);
+    setShowEmotions(false);
   };
 
   return {
@@ -82,6 +84,8 @@ export const useIndexState = () => {
     setShowQuestionWords,
     showOddOneOut,
     setShowOddOneOut,
+    showEmotions,
+    setShowEmotions,
     resetToMainMenu,
   };
 };
