@@ -29,6 +29,7 @@ import VerbTenseSelector from "@/components/VerbTenseSelector";
 import DaysAndPlacesVocabulary from "@/components/DaysAndPlacesVocabulary";
 import QuestionWordsPractice from "@/components/QuestionWordsPractice";
 import OddOneOutGame from "@/components/OddOneOutGame";
+import EmotionsPractice from "@/components/EmotionsPractice";
 import { useIndexState } from "@/hooks/useIndexState";
 
 interface IndexRouterProps {
@@ -73,10 +74,16 @@ export default function IndexRouter({ state }: IndexRouterProps) {
     setShowQuestionWords,
     showOddOneOut,
     setShowOddOneOut,
+    showEmotions,
+    setShowEmotions,
     resetToMainMenu,
   } = state;
 
   const t = (he: string, en: string) => (lang === "he" ? he : en);
+
+  if (showEmotions) {
+    return <EmotionsPractice onBack={() => setShowEmotions(false)} />;
+  }
 
   if (showOddOneOut) {
     return <OddOneOutGame onBack={() => setShowOddOneOut(false)} />;

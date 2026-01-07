@@ -23,7 +23,8 @@ export default function Index() {
     state.showVerbToBePresentation ||
     state.showDaysAndPlacesVocab ||
     state.showQuestionWords ||
-    state.showOddOneOut;
+    state.showOddOneOut ||
+    state.showEmotions;
 
   if (shouldShowRouter) {
     return <IndexRouter state={state} />;
@@ -45,6 +46,7 @@ export default function Index() {
         setShowDaysAndPlacesVocab={state.setShowDaysAndPlacesVocab}
         setShowQuestionWords={state.setShowQuestionWords}
         setShowOddOneOut={state.setShowOddOneOut}
+        setShowEmotions={state.setShowEmotions}
       />
     </div>
   );
