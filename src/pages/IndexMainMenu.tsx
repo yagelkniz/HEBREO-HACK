@@ -17,6 +17,7 @@ interface IndexMainMenuProps {
   setShowVerbToBePresentation: (b: boolean) => void;
   setShowDaysAndPlacesVocab: (b: boolean) => void;
   setShowQuestionWords: (b: boolean) => void;
+  setShowOddOneOut: (b: boolean) => void;
 }
 
 export default function IndexMainMenu({
@@ -32,6 +33,7 @@ export default function IndexMainMenu({
   setShowVerbToBePresentation,
   setShowDaysAndPlacesVocab,
   setShowQuestionWords,
+  setShowOddOneOut,
 }: IndexMainMenuProps) {
   const t = menuText[lang];
 
@@ -77,6 +79,15 @@ export default function IndexMainMenu({
           <span className="text-3xl">❓</span>
           <span dir={lang === "he" ? "rtl" : "ltr"}>
             {lang === "he" ? "מילות שאלה" : "Question Words"}
+          </span>
+        </button>
+        <button
+          className="w-full flex items-center justify-center gap-4 py-6 font-bold text-2xl rounded-xl border-2 shadow hover-scale focus:outline-none bg-rose-100 text-rose-900 border-rose-300"
+          onClick={() => setShowOddOneOut(true)}
+        >
+          <span className="text-3xl">🎯</span>
+          <span dir={lang === "he" ? "rtl" : "ltr"}>
+            {lang === "he" ? "מה יוצא דופן?" : "Odd One Out"}
           </span>
         </button>
         <button

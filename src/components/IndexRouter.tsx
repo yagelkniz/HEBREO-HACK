@@ -28,6 +28,7 @@ import HebrewHouseholdItemsPractice from "@/components/HebrewHouseholdItemsPract
 import VerbTenseSelector from "@/components/VerbTenseSelector";
 import DaysAndPlacesVocabulary from "@/components/DaysAndPlacesVocabulary";
 import QuestionWordsPractice from "@/components/QuestionWordsPractice";
+import OddOneOutGame from "@/components/OddOneOutGame";
 import { useIndexState } from "@/hooks/useIndexState";
 
 interface IndexRouterProps {
@@ -70,10 +71,16 @@ export default function IndexRouter({ state }: IndexRouterProps) {
     setShowDaysAndPlacesVocab,
     showQuestionWords,
     setShowQuestionWords,
+    showOddOneOut,
+    setShowOddOneOut,
     resetToMainMenu,
   } = state;
 
   const t = (he: string, en: string) => (lang === "he" ? he : en);
+
+  if (showOddOneOut) {
+    return <OddOneOutGame onBack={() => setShowOddOneOut(false)} />;
+  }
 
   if (showQuestionWords) {
     return <QuestionWordsPractice onBack={() => setShowQuestionWords(false)} />;

@@ -20,6 +20,7 @@ export const useIndexState = () => {
   const [showVerbToBePresentation, setShowVerbToBePresentation] = useState(false);
   const [showDaysAndPlacesVocab, setShowDaysAndPlacesVocab] = useState(false);
   const [showQuestionWords, setShowQuestionWords] = useState(false);
+  const [showOddOneOut, setShowOddOneOut] = useState(false);
 
   const resetToMainMenu = () => {
     setShowLinkingWords(false);
@@ -39,6 +40,7 @@ export const useIndexState = () => {
     setShowVerbToBePresentation(false);
     setShowDaysAndPlacesVocab(false);
     setShowQuestionWords(false);
+    setShowOddOneOut(false);
   };
 
   return {
@@ -78,6 +80,8 @@ export const useIndexState = () => {
     setShowDaysAndPlacesVocab,
     showQuestionWords,
     setShowQuestionWords,
+    showOddOneOut,
+    setShowOddOneOut,
     resetToMainMenu,
   };
 };
