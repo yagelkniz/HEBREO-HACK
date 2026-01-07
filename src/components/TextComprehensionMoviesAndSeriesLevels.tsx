@@ -12,7 +12,11 @@ const levels = [
 
 type LevelKey = typeof levels[number]["key"];
 
-export default function TextComprehensionMoviesAndSeriesLevels() {
+interface TextComprehensionMoviesAndSeriesLevelsProps {
+  onBack: () => void;
+}
+
+export default function TextComprehensionMoviesAndSeriesLevels({ onBack }: TextComprehensionMoviesAndSeriesLevelsProps) {
   const [selectedLevel, setSelectedLevel] = useState<LevelKey | null>(null);
   const [answers, setAnswers] = useState<{ [i: number]: string | null }>({});
   const [feedbacks, setFeedbacks] = useState<{ [i: number]: "correct" | "incorrect" | null }>({});
@@ -44,6 +48,12 @@ export default function TextComprehensionMoviesAndSeriesLevels() {
   if (!selectedLevel) {
     return (
       <div className="flex flex-col items-center py-10 px-4 gap-6 bg-blue-50 rounded-2xl shadow-lg border-2 border-blue-400 max-w-lg mx-auto mt-8">
+        <button
+          onClick={onBack}
+          className="self-start text-sm text-blue-800 underline underline-offset-2 mb-2"
+        >
+          ⬅ חזרה לתפריט הראשי
+        </button>
         <h2 className="text-2xl font-bold text-blue-800 flex items-center gap-2 mb-3" dir="rtl">
           <span><Tv className="inline text-blue-400" /></span> הבנת הנקרא: טלוויזיה וסדרות (שלוש רמות)
         </h2>
@@ -67,13 +77,21 @@ export default function TextComprehensionMoviesAndSeriesLevels() {
 
   return (
     <div className="flex flex-col items-center py-8 px-4 gap-7 bg-blue-50 rounded-2xl shadow-lg border-[3px] border-blue-400 max-w-2xl mx-auto mt-8">
-      <button
-        className="mb-2 self-start text-sm text-blue-800 underline underline-offset-2"
-        onClick={() => setSelectedLevel(null)}
-        aria-label="בחר רמת קושי אחרת"
-      >
-        ← לרמות
-      </button>
+      <div className="self-start flex gap-4">
+        <button
+          onClick={onBack}
+          className="text-sm text-blue-800 underline underline-offset-2"
+        >
+          ⬅ חזרה לתפריט הראשי
+        </button>
+        <button
+          className="text-sm text-blue-800 underline underline-offset-2"
+          onClick={() => setSelectedLevel(null)}
+          aria-label="בחר רמת קושי אחרת"
+        >
+          ← לרמות
+        </button>
+      </div>
       <h2 className="text-2xl font-bold text-blue-800 flex items-center gap-2 mb-2" dir="rtl">
         <span><Tv className="inline text-blue-400" /></span> תרגול ברמת {levels.find(l => l.key === selectedLevel)?.label}
       </h2>

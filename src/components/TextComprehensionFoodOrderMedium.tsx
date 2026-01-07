@@ -5,7 +5,11 @@ import { readingText, translationMap } from "./FoodOrderMediumReadingData";
 import { questions, Question } from "./FoodOrderMediumQuestions";
 import { UtensilsCrossed } from "lucide-react";
 
-export default function TextComprehensionFoodOrderMedium() {
+interface TextComprehensionFoodOrderMediumProps {
+  onBack: () => void;
+}
+
+export default function TextComprehensionFoodOrderMedium({ onBack }: TextComprehensionFoodOrderMediumProps) {
   const [answers, setAnswers] = useState<{ [i: number]: string | null }>({});
   const [feedbacks, setFeedbacks] = useState<{ [i: number]: "correct" | "incorrect" | null }>({});
   const [finished, setFinished] = useState(false);
@@ -25,6 +29,12 @@ export default function TextComprehensionFoodOrderMedium() {
 
   return (
     <div className="flex flex-col items-center justify-center p-7 gap-7 bg-orange-50 rounded-2xl shadow-lg border-[3px] border-orange-300 max-w-2xl mx-auto mt-8 rtl transition-all">
+      <button
+        onClick={onBack}
+        className="self-start text-sm text-blue-800 underline underline-offset-2 mb-2"
+      >
+        ⬅ חזרה לתפריט הראשי
+      </button>
       <h2 className="text-3xl font-bold mb-1 text-orange-800 flex items-center gap-2" dir="rtl">
         <UtensilsCrossed className="inline-block text-orange-400" />
         הבנת הנקרא: הזמנת אוכל (בינוני)

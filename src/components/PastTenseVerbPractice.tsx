@@ -15,7 +15,11 @@ const parts = [
   { label: "חלק 4", data: pastTenseQuestionsPart4 },
 ];
 
-export default function PastTenseVerbPractice() {
+interface PastTenseVerbPracticeProps {
+  onBack: () => void;
+}
+
+export default function PastTenseVerbPractice({ onBack }: PastTenseVerbPracticeProps) {
   const [currentPart, setCurrentPart] = useState(0); // מתחילים בחלק 1
   const questions = parts[currentPart].data;
 
@@ -49,6 +53,12 @@ export default function PastTenseVerbPractice() {
 
   return (
     <div className="flex flex-col items-center justify-center p-8 gap-8 min-h-[60vh] bg-background rounded-2xl shadow-md border max-w-xl mx-auto rtl">
+      <button
+        onClick={onBack}
+        className="self-start text-sm text-blue-800 underline underline-offset-2 mb-2"
+      >
+        ⬅ חזרה לתפריט הראשי
+      </button>
       <div className="flex flex-col items-center w-full">
         <h1 className="text-3xl font-bold text-primary mb-4" dir="rtl">
           בחר את הפועל הנכון בזמן עבר

@@ -58,7 +58,11 @@ const questions: Question[] = [
   },
 ];
 
-export default function TextComprehensionFood() {
+interface TextComprehensionFoodProps {
+  onBack: () => void;
+}
+
+export default function TextComprehensionFood({ onBack }: TextComprehensionFoodProps) {
   const [answers, setAnswers] = useState<{ [i: number]: string | null }>({});
   const [feedbacks, setFeedbacks] = useState<{ [i: number]: "correct" | "incorrect" | null }>({});
   const [finished, setFinished] = useState(false);
@@ -85,6 +89,12 @@ export default function TextComprehensionFood() {
 
   return (
     <div className="flex flex-col items-center justify-center p-8 gap-8 bg-yellow-50 rounded-2xl shadow-lg border-2 border-yellow-300 max-w-xl mx-auto mt-7 rtl animate-fade-in">
+      <button
+        onClick={onBack}
+        className="self-start text-sm text-blue-800 underline underline-offset-2 mb-2"
+      >
+        ⬅ חזרה לתפריט הראשי
+      </button>
       <h2 className="text-3xl font-bold mb-2 text-yellow-800 flex items-center gap-2" dir="rtl">
         🍝 הבנת הנקרא: אוכל
       </h2>

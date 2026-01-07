@@ -257,13 +257,13 @@ export default function IndexRouter({ state }: IndexRouterProps) {
     }
 
     if (verbTense === "present") {
-      return <PresentTenseVerbPractice />;
+      return <PresentTenseVerbPractice onBack={resetToMainMenu} />;
     }
     if (verbTense === "past") {
-      return <PastTenseVerbPractice />;
+      return <PastTenseVerbPractice onBack={resetToMainMenu} />;
     }
     if (verbTense === "future") {
-      return <FutureTenseVerbPractice />;
+      return <FutureTenseVerbPractice onBack={resetToMainMenu} />;
     }
   }
 
@@ -276,35 +276,35 @@ export default function IndexRouter({ state }: IndexRouterProps) {
   }
 
   if (selectedTextComp === "food") {
-    return <TextComprehensionFood />;
+    return <TextComprehensionFood onBack={resetToMainMenu} />;
   }
 
   if (selectedTextComp === "animals-easy") {
-    return <TextComprehensionAnimalsEasy />;
+    return <TextComprehensionAnimalsEasy onBack={resetToMainMenu} />;
   }
 
   if (selectedTextComp === "food-order-medium") {
-    return <TextComprehensionFoodOrderMedium />;
+    return <TextComprehensionFoodOrderMedium onBack={resetToMainMenu} />;
   }
 
   if (selectedTextComp === "social-media") {
-    return <TextComprehensionSocialMedia />;
+    return <TextComprehensionSocialMedia onBack={resetToMainMenu} />;
   }
 
   if (selectedTextComp === "food-levels") {
-    return <TextComprehensionFoodLevels />;
+    return <TextComprehensionFoodLevels onBack={resetToMainMenu} />;
   }
 
   if (selectedTextComp === "countries-levels") {
-    return <TextComprehensionCountriesLevels />;
+    return <TextComprehensionCountriesLevels onBack={resetToMainMenu} />;
   }
 
   if (selectedTextComp === "movies-series-levels") {
-    return <TextComprehensionMoviesAndSeriesLevels />;
+    return <TextComprehensionMoviesAndSeriesLevels onBack={resetToMainMenu} />;
   }
 
   if (selectedTextComp === "places-food-easy") {
-    return <TextComprehensionPlacesFoodEasy />;
+    return <TextComprehensionPlacesFoodEasy onBack={resetToMainMenu} />;
   }
 
   return null;

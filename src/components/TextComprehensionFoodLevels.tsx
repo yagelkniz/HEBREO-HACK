@@ -12,7 +12,11 @@ const levels = [
 
 type LevelKey = typeof levels[number]["key"];
 
-export default function TextComprehensionFoodLevels() {
+interface TextComprehensionFoodLevelsProps {
+  onBack: () => void;
+}
+
+export default function TextComprehensionFoodLevels({ onBack }: TextComprehensionFoodLevelsProps) {
   const [selectedLevel, setSelectedLevel] = useState<LevelKey | null>(null);
   const [answers, setAnswers] = useState<{ [i: number]: string | null }>({});
   const [feedbacks, setFeedbacks] = useState<{ [i: number]: "correct" | "incorrect" | null }>({});
@@ -50,6 +54,12 @@ export default function TextComprehensionFoodLevels() {
   if (!selectedLevel) {
     return (
       <div className="flex flex-col items-center py-10 px-4 gap-6 bg-yellow-50 rounded-2xl shadow-lg border-2 border-yellow-300 max-w-lg mx-auto mt-8">
+        <button
+          onClick={onBack}
+          className="self-start text-sm text-blue-800 underline underline-offset-2 mb-2"
+        >
+          ⬅ חזרה לתפריט הראשי
+        </button>
         <h2 className="text-2xl font-bold text-yellow-800 flex items-center gap-2 mb-3" dir="rtl">
           <BookOpen className="text-yellow-400" /> הבנת הנקרא: אוכל (שלוש רמות)
         </h2>
@@ -73,13 +83,21 @@ export default function TextComprehensionFoodLevels() {
 
   return (
     <div className="flex flex-col items-center py-8 px-4 gap-7 bg-yellow-50 rounded-2xl shadow-lg border-[3px] border-yellow-300 max-w-2xl mx-auto mt-8">
-      <button
-        className="mb-2 self-start text-sm text-blue-800 underline underline-offset-2"
-        onClick={() => setSelectedLevel(null)}
-        aria-label="בחר רמת קושי אחרת"
-      >
-        ← לרמות
-      </button>
+      <div className="self-start flex gap-4">
+        <button
+          onClick={onBack}
+          className="text-sm text-blue-800 underline underline-offset-2"
+        >
+          ⬅ חזרה לתפריט הראשי
+        </button>
+        <button
+          className="text-sm text-blue-800 underline underline-offset-2"
+          onClick={() => setSelectedLevel(null)}
+          aria-label="בחר רמת קושי אחרת"
+        >
+          ← לרמות
+        </button>
+      </div>
       <h2 className="text-2xl font-bold text-yellow-800 flex items-center gap-2 mb-2" dir="rtl">
         <BookOpen className="text-yellow-400" /> תרגול ברמת {levels.find(l => l.key === selectedLevel)?.label}
       </h2>

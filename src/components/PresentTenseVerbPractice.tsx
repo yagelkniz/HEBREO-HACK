@@ -15,7 +15,11 @@ const parts = [
   { label: "חלק 4", data: presentTenseQuestionsPart4 },
 ];
 
-export default function PresentTenseVerbPractice() {
+interface PresentTenseVerbPracticeProps {
+  onBack: () => void;
+}
+
+export default function PresentTenseVerbPractice({ onBack }: PresentTenseVerbPracticeProps) {
   const [currentPart, setCurrentPart] = useState(0); // begin with part 1
   const questions = parts[currentPart].data;
 
@@ -49,6 +53,12 @@ export default function PresentTenseVerbPractice() {
 
   return (
     <div className="flex flex-col items-center justify-center p-8 gap-10 min-h-[65vh] bg-background rounded-2xl shadow-md border max-w-xl mx-auto rtl">
+      <button
+        onClick={onBack}
+        className="self-start text-sm text-blue-800 underline underline-offset-2 mb-2"
+      >
+        ⬅ חזרה לתפריט הראשי
+      </button>
       <div className="flex flex-col items-center w-full">
         <h1 className="text-3xl font-bold text-primary mb-4" dir="rtl">
           בחר/י את הפועל הנכון בזמן הווה {String.fromCodePoint(0x1f31f)}

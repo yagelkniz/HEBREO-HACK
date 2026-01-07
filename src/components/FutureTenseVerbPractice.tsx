@@ -15,7 +15,11 @@ const parts = [
   { label: "חלק 4", data: futureTenseQuestionsPart4 },
 ];
 
-export default function FutureTenseVerbPractice() {
+interface FutureTenseVerbPracticeProps {
+  onBack: () => void;
+}
+
+export default function FutureTenseVerbPractice({ onBack }: FutureTenseVerbPracticeProps) {
   const [currentPart, setCurrentPart] = useState(0);
   const questions = parts[currentPart].data;
 
@@ -48,6 +52,12 @@ export default function FutureTenseVerbPractice() {
 
   return (
     <div className="flex flex-col items-center justify-center p-8 gap-10 min-h-[60vh] bg-background rounded-2xl shadow-md border max-w-xl mx-auto rtl">
+      <button
+        onClick={onBack}
+        className="self-start text-sm text-blue-800 underline underline-offset-2 mb-2"
+      >
+        ⬅ חזרה לתפריט הראשי
+      </button>
       <div className="flex flex-col items-center w-full">
         <h1 className="text-3xl font-bold text-yellow-700 mb-4" dir="rtl">
           בחר/י את הפועל הנכון בזמן עתיד {"\u23E9"}
