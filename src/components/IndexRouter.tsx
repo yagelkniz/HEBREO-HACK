@@ -26,7 +26,7 @@ import TextComprehensionPlacesFoodEasy from "@/components/TextComprehensionPlace
 import VerbToBePresentation from "@/components/VerbToBePresentation";
 import HebrewHouseholdItemsPractice from "@/components/HebrewHouseholdItemsPractice";
 import VerbTenseSelector from "@/components/VerbTenseSelector";
-import DaysAndPlacesVocabulary from "@/components/DaysAndPlacesVocabulary";
+import DaysAndPlacesPractice from "@/components/daysAndPlaces/DaysAndPlacesPractice";
 import QuestionWordsPractice from "@/components/QuestionWordsPractice";
 import OddOneOutGame from "@/components/OddOneOutGame";
 import EmotionsPractice from "@/components/EmotionsPractice";
@@ -154,7 +154,7 @@ export default function IndexRouter({ state }: IndexRouterProps) {
   }
 
   if (showDaysAndPlacesVocab) {
-    return <DaysAndPlacesVocabulary onBack={() => setShowDaysAndPlacesVocab(false)} />;
+    return <DaysAndPlacesPractice onBack={() => setShowDaysAndPlacesVocab(false)} lang={lang} />;
   }
 
   if (showVerbToBePresentation) {
