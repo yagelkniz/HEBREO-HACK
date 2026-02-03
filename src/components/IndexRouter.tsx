@@ -100,13 +100,13 @@ export default function IndexRouter({ state }: IndexRouterProps) {
 
   // Handle verb pattern selection with levels
   if (selectedVerbPattern) {
-    const { pattern } = selectedVerbPattern;
+    const { pattern, level } = selectedVerbPattern;
     
     if (pattern === "hifil") {
-      return <HifilVerbPractice onBack={() => setSelectedVerbPattern(null)} />;
+      return <HifilVerbPractice onBack={() => setSelectedVerbPattern(null)} initialLevel={level as "learn" | "easy" | "medium" | "hard"} lang={lang} />;
     }
     if (pattern === "piel") {
-      return <PielVerbPractice onBack={() => setSelectedVerbPattern(null)} />;
+      return <PielVerbPractice onBack={() => setSelectedVerbPattern(null)} initialLevel={level as "learn" | "easy" | "medium" | "hard"} lang={lang} />;
     }
     if (pattern === "paal") {
       // Redirect to the verb tense selector for Pa'al
