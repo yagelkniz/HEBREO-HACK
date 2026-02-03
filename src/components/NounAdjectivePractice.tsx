@@ -1,6 +1,7 @@
 
-import React, { useState } from "react";
+import React, { useState, useMemo } from "react";
 import { Button } from "@/components/ui/button";
+import { shuffleArray } from "@/lib/shuffleArray";
 
 type Q = {
   sentence: string;
@@ -9,7 +10,7 @@ type Q = {
   translation?: string;
 };
 
-const questions: Q[] = [
+const questionsRaw: Q[] = [
   // קל
   {
     sentence: "הילד ______ (גדול/קטן/כחול/ישן)",
@@ -197,6 +198,14 @@ export default function NounAdjectivePractice({ onBack }: { onBack?: () => void 
   const [answers, setAnswers] = useState<{ [i: number]: string | null }>({});
   const [feedbacks, setFeedbacks] = useState<{ [i: number]: "correct" | "incorrect" | null }>({});
 
+  // Shuffle options for each question
+  const questions = useMemo(() => {
+    return questionsRaw.map(q => ({
+      ...q,
+      options: shuffleArray([...q.options])
+    }));
+  }, []);
+
   const total = questions.length;
   const correct = Object.values(feedbacks).filter((f) => f === "correct").length;
   const incorrect = Object.values(feedbacks).filter((f) => f === "incorrect").length;
@@ -207,7 +216,7 @@ export default function NounAdjectivePractice({ onBack }: { onBack?: () => void 
   }
 
   return (
-    <div className="flex flex-col items-center justify-center p-8 gap-8 min-h-[60vh] bg-background rounded-2xl shadow-md border max-w-xl mx-auto rtl">
+    <div className="flex flex-col items-center justify-center p-8 gap-8 min-h-[60vh] bg-background rounded-2xl shadow-md border max-w-xl mx-auto" dir="rtl">
       <div className="flex justify-end w-full mb-2">
         {onBack && <Button variant="outline" onClick={onBack}>⬅ חזרה</Button>}
       </div>

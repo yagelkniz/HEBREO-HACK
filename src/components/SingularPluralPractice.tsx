@@ -1,5 +1,6 @@
-import React, { useState, useRef } from "react";
-import questions from "./singularPluralQuestions.json";
+import React, { useState, useRef, useMemo } from "react";
+import questionsData from "./singularPluralQuestions.json";
+import { shuffleArray } from "@/lib/shuffleArray";
 import { Button } from "@/components/ui/button";
 import { Progress } from "@/components/ui/progress";
 
@@ -61,13 +62,20 @@ export default function SingularPluralPractice({
   const [score, setScore] = useState(0);
   const [showSummary, setShowSummary] = useState(false); // מצב סיכום
 
+  const questions = questionsData as unknown as SingularPluralQuestion[];
+
   // בניית נתוני השאלה
-  const q: SingularPluralQuestion = (questions as unknown as SingularPluralQuestion[])[step];
+  const q: SingularPluralQuestion = questions[step];
 
   // חילוץ המילה לשאלה
   const match = q.he.question.match(/'([^']+)'/);
   const baseWord = match ? match[1] : "";
-  const heOptions = buildDistractors(baseWord, q.answer);
+  const baseDistractors = buildDistractors(baseWord, q.answer);
+  
+  // Shuffle options for current question
+  const heOptions = useMemo(() => {
+    return shuffleArray([...baseDistractors]);
+  }, [step, baseDistractors.join(',')]);
 
   // לאנגלית: קישור החכם המקורי
   const enRawOptions = q.en.options.map(opt => opt.replace(/.*\(([^)]+)\).*/, "$1"));
@@ -136,7 +144,7 @@ export default function SingularPluralPractice({
     if (correct) setScore((s) => s + 1);
   }
 
-  function next() {
+  function nextQuestion() {
     setSelected(null);
     setShowFeedback(false);
     setShowTranslation(false);
@@ -300,7 +308,7 @@ export default function SingularPluralPractice({
           {t(`שאלה ${step + 1} מתוך ${questions.length}`, `Question ${step + 1} of ${questions.length}`)}
         </span>
         {showFeedback && (
-          <Button variant="secondary" onClick={next} className="text-base md:text-lg">
+          <Button variant="secondary" onClick={nextQuestion} className="text-base md:text-lg">
             {t("המשך", "Next")}
           </Button>
         )}

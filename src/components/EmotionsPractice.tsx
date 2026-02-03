@@ -1,17 +1,18 @@
-import React, { useState } from "react";
+import React, { useState, useMemo } from "react";
 import { Button } from "@/components/ui/button";
 import { ArrowRight, Check, X, BookOpen, HelpCircle } from "lucide-react";
 import {
   emotionsVocabulary,
   easyStory,
-  easyQuestions,
+  easyQuestions as easyQuestionsRaw,
   mediumStory,
-  mediumQuestions,
+  mediumQuestions as mediumQuestionsRaw,
   hardStory,
-  hardQuestions,
+  hardQuestions as hardQuestionsRaw,
   type EmotionStory,
   type EmotionQuestion,
 } from "./emotionsData";
+import { shuffleArray } from "@/lib/shuffleArray";
 
 type Level = "easy" | "medium" | "hard";
 type Phase = "vocabulary" | "story" | "questions";
@@ -27,6 +28,7 @@ export default function EmotionsPractice({ onBack }: EmotionsPracticeProps) {
   const [showTranslation, setShowTranslation] = useState(false);
   const [answers, setAnswers] = useState<{ [id: number]: number }>({});
   const [feedback, setFeedback] = useState<{ [id: number]: "correct" | "incorrect" }>({});
+  const [shuffleKey, setShuffleKey] = useState(0);
 
   const getStory = (): EmotionStory => {
     switch (level) {
@@ -41,21 +43,32 @@ export default function EmotionsPractice({ onBack }: EmotionsPracticeProps) {
     }
   };
 
-  const getQuestions = (): EmotionQuestion[] => {
+  const getQuestionsRaw = (): EmotionQuestion[] => {
     switch (level) {
       case "easy":
-        return easyQuestions;
+        return easyQuestionsRaw;
       case "medium":
-        return mediumQuestions;
+        return mediumQuestionsRaw;
       case "hard":
-        return hardQuestions;
+        return hardQuestionsRaw;
       default:
         return [];
     }
   };
 
+  // Shuffle options within each question, tracking correct answer position
+  const questions = useMemo(() => {
+    return getQuestionsRaw().map(q => {
+      const correctOption = q.options[q.answerIndex];
+      const shuffledOptions = shuffleArray([...q.options]);
+      const newAnswerIndex = shuffledOptions.findIndex(
+        opt => opt.text === correctOption.text
+      );
+      return { ...q, options: shuffledOptions, answerIndex: newAnswerIndex };
+    });
+  }, [level, shuffleKey]);
+
   const story = getStory();
-  const questions = getQuestions();
 
   const handleAnswer = (questionId: number, answerIndex: number) => {
     setAnswers((prev) => ({ ...prev, [questionId]: answerIndex }));
@@ -76,6 +89,7 @@ export default function EmotionsPractice({ onBack }: EmotionsPracticeProps) {
     setAnswers({});
     setFeedback({});
     setShowTranslation(false);
+    setShuffleKey(k => k + 1);
   };
 
   const getLevelName = () => {
@@ -136,19 +150,19 @@ export default function EmotionsPractice({ onBack }: EmotionsPracticeProps) {
             className="w-full py-6 text-xl font-bold rounded-xl border-2 bg-green-100 text-green-900 border-green-300 hover:bg-green-200 transition-colors"
             onClick={() => setLevel("easy")}
           >
-            🟢 קל - סיפור פשוט ({easyQuestions.length} שאלות)
+            🟢 קל - סיפור פשוט ({easyQuestionsRaw.length} שאלות)
           </button>
           <button
             className="w-full py-6 text-xl font-bold rounded-xl border-2 bg-yellow-100 text-yellow-900 border-yellow-300 hover:bg-yellow-200 transition-colors"
             onClick={() => setLevel("medium")}
           >
-            🟡 בינוני - סיפור ארוך יותר ({mediumQuestions.length} שאלות)
+            🟡 בינוני - סיפור ארוך יותר ({mediumQuestionsRaw.length} שאלות)
           </button>
           <button
             className="w-full py-6 text-xl font-bold rounded-xl border-2 bg-red-100 text-red-900 border-red-300 hover:bg-red-200 transition-colors"
             onClick={() => setLevel("hard")}
           >
-            🔴 קשה - סיפור מורכב ({hardQuestions.length} שאלות)
+            🔴 קשה - סיפור מורכב ({hardQuestionsRaw.length} שאלות)
           </button>
         </div>
       </div>

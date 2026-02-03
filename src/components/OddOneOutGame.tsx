@@ -1,4 +1,4 @@
-import React, { useState } from "react";
+import React, { useState, useMemo } from "react";
 import { Button } from "@/components/ui/button";
 import { ArrowRight, Check, X, Lightbulb } from "lucide-react";
 import {
@@ -7,6 +7,7 @@ import {
   hardQuestions,
   type OddOneOutQuestion,
 } from "./oddOneOutData";
+import { shuffleArray } from "@/lib/shuffleArray";
 
 type Level = "easy" | "medium" | "hard";
 
@@ -22,8 +23,9 @@ export default function OddOneOutGame({ onBack }: OddOneOutGameProps) {
   const [showResult, setShowResult] = useState(false);
   const [score, setScore] = useState(0);
   const [showExplanation, setShowExplanation] = useState(false);
+  const [shuffleKey, setShuffleKey] = useState(0);
 
-  const getQuestions = (): OddOneOutQuestion[] => {
+  const getQuestionsRaw = (): OddOneOutQuestion[] => {
     switch (level) {
       case "easy":
         return easyQuestions;
@@ -36,7 +38,16 @@ export default function OddOneOutGame({ onBack }: OddOneOutGameProps) {
     }
   };
 
-  const questions = getQuestions();
+  // Shuffle words within each question, tracking correct answer position
+  const questions = useMemo(() => {
+    return getQuestionsRaw().map(q => {
+      const oddWord = q.words[q.oddIndex];
+      const shuffledWords = shuffleArray([...q.words]);
+      const newOddIndex = shuffledWords.findIndex(w => w.word === oddWord.word);
+      return { ...q, words: shuffledWords, oddIndex: newOddIndex };
+    });
+  }, [level, shuffleKey]);
+
   const currentQuestion = questions[currentIndex];
   const isFinished = currentIndex >= questions.length;
 
@@ -66,6 +77,7 @@ export default function OddOneOutGame({ onBack }: OddOneOutGameProps) {
     setShowResult(false);
     setScore(0);
     setShowExplanation(false);
+    setShuffleKey(k => k + 1);
   };
 
   // Level selection screen

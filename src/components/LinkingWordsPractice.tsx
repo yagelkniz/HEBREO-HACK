@@ -1,7 +1,8 @@
 
-import React, { useState } from "react";
-import questions from "./linkingWordsQuestions.json";
+import React, { useState, useMemo } from "react";
+import questionsRaw from "./linkingWordsQuestions.json";
 import { Button } from "@/components/ui/button";
+import { shuffleArray } from "@/lib/shuffleArray";
 
 interface LinkingWordsQuestion {
   question: string;
@@ -25,7 +26,15 @@ export default function LinkingWordsPractice({
   const [showFeedback, setShowFeedback] = useState(false);
   const [showTranslation, setShowTranslation] = useState(false);
 
-  const q: LinkingWordsQuestion = (questions as LinkingWordsQuestion[])[step];
+  // Shuffle options for each question
+  const questions = useMemo(() => {
+    return (questionsRaw as LinkingWordsQuestion[]).map(q => ({
+      ...q,
+      options: shuffleArray([...q.options])
+    }));
+  }, []);
+
+  const q = questions[step];
 
   // Add safety check
   if (!q) {
@@ -46,33 +55,33 @@ export default function LinkingWordsPractice({
 
   const t = (h: string, e: string) => (lang === "he" ? h : e);
 
-  function getCorrectOptionIdx() {
-    return q.options.findIndex(opt => opt === q.answer);
-  }
+  const correctOptionIdx = useMemo(() => {
+    return q ? q.options.findIndex(opt => opt === q.answer) : -1;
+  }, [q]);
 
   return (
-    <div className="flex flex-col items-center max-w-lg mx-auto bg-white dark:bg-gray-900 rounded-2xl shadow p-8 gap-6 min-h-[60vh]">
-      <div className="self-end">
+    <div className="flex flex-col items-center max-w-lg mx-auto bg-white dark:bg-gray-900 rounded-2xl shadow p-8 gap-6 min-h-[60vh]" dir="rtl">
+      <div className="self-start">
         <Button variant="ghost" onClick={onBack}>
           ⬅ {t("חזרה", "Back")}
         </Button>
       </div>
-      <h2 className="text-2xl md:text-3xl font-bold mt-2 mb-2" dir={lang === "he" ? "rtl" : "ltr"}>
+      <h2 className="text-2xl md:text-3xl font-bold mt-2 mb-2 text-right">
         {t("תרגול מילות קישור", "Linking Words Practice")}
       </h2>
       <div className="text-sm bg-blue-100 text-blue-900 px-3 py-1 rounded-full mb-2">
         {t(`קטגוריה: ${q.category}`, `Category: ${q.category}`)}
       </div>
-      <div className="mb-2" dir={lang === "he" ? "rtl" : "ltr"}>
+      <div className="mb-2 text-right w-full">
         {showTranslation ? (
-          <span>{q.translation}</span>
+          <span dir="ltr">{q.translation}</span>
         ) : (
           <span>{q.question}</span>
         )}
         <Button
           variant="link"
           size="sm"
-          className="ml-2"
+          className="mr-2"
           onClick={() => setShowTranslation((b) => !b)}
         >
           {showTranslation
@@ -95,17 +104,17 @@ export default function LinkingWordsPractice({
       </div>
       {showFeedback && (
         <div
-          className={`rounded-xl p-4 w-full text-lg font-bold ${
-            selected === getCorrectOptionIdx()
+          className={`rounded-xl p-4 w-full text-lg font-bold text-right ${
+            selected === correctOptionIdx
               ? "bg-green-100 text-green-900"
               : "bg-red-100 text-red-900"
           }`}
         >
-          {selected === getCorrectOptionIdx()
+          {selected === correctOptionIdx
             ? t("נכון! מעולה!", "Correct! Well done!")
             : t(
-                `לא נכון. התשובה: ${q.options[getCorrectOptionIdx()]}`,
-                `Incorrect. The answer: ${q.options[getCorrectOptionIdx()]}`
+                `לא נכון. התשובה: ${q.answer}`,
+                `Incorrect. The answer: ${q.answer}`
               )}
         </div>
       )}
