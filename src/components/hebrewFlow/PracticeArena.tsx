@@ -289,17 +289,27 @@ function FillInBlankExercise({
 }: FillInBlankExerciseProps) {
   const t = (en: string, he: string) => (lang === "he" ? he : en);
   const isCorrect = selectedAnswer === question.correctAnswer;
-  const shuffledOptions = useMemo(() => shuffleArray(question.options), [question.id]);
+  
+  // Shuffle options once when question changes - use question.id AND ensure re-shuffle on each question
+  const shuffledOptions = useMemo(() => {
+    const options = [...question.options];
+    // Fisher-Yates shuffle
+    for (let i = options.length - 1; i > 0; i--) {
+      const j = Math.floor(Math.random() * (i + 1));
+      [options[i], options[j]] = [options[j], options[i]];
+    }
+    return options;
+  }, [question.id, question.options]);
 
   return (
-    <div className="space-y-6">
-      <p className="text-2xl font-medium text-center leading-relaxed" dir="rtl">
+    <div className="space-y-6" dir="rtl">
+      <p className="text-2xl font-medium text-center leading-relaxed text-right">
         {showNikud ? question.sentenceWithNikud : question.sentence}
       </p>
       
       {showHint && (
         <div className="p-3 rounded-lg bg-amber-50 border border-amber-200 text-center">
-          <p className="text-sm text-amber-800">
+          <p className="text-sm text-amber-800 text-right">
             💡 {lang === "he" ? question.hintHe : question.hint}
           </p>
         </div>
@@ -320,13 +330,12 @@ function FillInBlankExercise({
               )}
               onClick={() => !showResult && onAnswer(option.text)}
               disabled={showResult}
-              dir="rtl"
             >
               {showNikud ? option.textWithNikud : option.text}
               {showResult && isSelected && (
                 isCorrect ? 
-                  <CheckCircle2 className="h-5 w-5 absolute right-2 text-green-600" /> :
-                  <XCircle className="h-5 w-5 absolute right-2" />
+                  <CheckCircle2 className="h-5 w-5 absolute left-2 text-green-600" /> :
+                  <XCircle className="h-5 w-5 absolute left-2" />
               )}
             </Button>
           );
@@ -335,14 +344,14 @@ function FillInBlankExercise({
 
       {showResult && (
         <div className={cn(
-          "p-4 rounded-lg",
+          "p-4 rounded-lg text-right",
           isCorrect ? "bg-green-50 border border-green-200" : "bg-red-50 border border-red-200"
         )}>
           <p className={cn("font-medium", isCorrect ? "text-green-800" : "text-red-800")}>
             {isCorrect ? t("Correct!", "נכון!") : t("Incorrect", "לא נכון")}
           </p>
           {!isCorrect && (
-            <p className="text-sm mt-1" dir="rtl">
+            <p className="text-sm mt-1">
               {t("Correct answer:", "התשובה הנכונה:")} {showNikud ? question.correctAnswerWithNikud : question.correctAnswer}
             </p>
           )}
@@ -372,15 +381,24 @@ function IdentifyBinyanExercise({
 }: IdentifyBinyanExerciseProps) {
   const t = (en: string, he: string) => (lang === "he" ? he : en);
   const isCorrect = selectedAnswer === question.correctBinyan;
-  const shuffledOptions = useMemo(() => shuffleArray(question.options), [question.id]);
+  
+  // Fisher-Yates shuffle for options
+  const shuffledOptions = useMemo(() => {
+    const options = [...question.options];
+    for (let i = options.length - 1; i > 0; i--) {
+      const j = Math.floor(Math.random() * (i + 1));
+      [options[i], options[j]] = [options[j], options[i]];
+    }
+    return options;
+  }, [question.id, question.options]);
 
   return (
-    <div className="space-y-6">
+    <div className="space-y-6" dir="rtl">
       <div className="text-center">
-        <p className="text-muted-foreground mb-2">
+        <p className="text-muted-foreground mb-2 text-right">
           {t("Which Binyan is this verb?", "לאיזה בניין שייך הפועל הזה?")}
         </p>
-        <p className="text-4xl font-bold" dir="rtl">
+        <p className="text-4xl font-bold">
           {showNikud ? question.wordWithNikud : question.word}
         </p>
         <p className="text-muted-foreground mt-2">({question.meaning})</p>
@@ -403,7 +421,7 @@ function IdentifyBinyanExercise({
               onClick={() => !showResult && onAnswer(option)}
               disabled={showResult}
             >
-              <span className="font-bold" dir="rtl">{binyan?.nameWithNikud}</span>
+              <span className="font-bold">{binyan?.nameWithNikud}</span>
               <span className="text-xs text-muted-foreground">{binyan?.name}</span>
             </Button>
           );
@@ -412,13 +430,13 @@ function IdentifyBinyanExercise({
 
       {showResult && (
         <div className={cn(
-          "p-4 rounded-lg",
+          "p-4 rounded-lg text-right",
           isCorrect ? "bg-green-50 border border-green-200" : "bg-red-50 border border-red-200"
         )}>
           <p className={cn("font-medium", isCorrect ? "text-green-800" : "text-red-800")}>
             {isCorrect ? t("Correct!", "נכון!") : t("Incorrect", "לא נכון")}
           </p>
-          <p className="text-sm mt-1" dir="rtl">
+          <p className="text-sm mt-1">
             {t("Root:", "שורש:")} {question.root}
           </p>
         </div>
@@ -459,7 +477,7 @@ function ErrorCorrectionExercise({
     selectedAnswer?.replace(/[\u0591-\u05C7]/g, "").trim() === question.correctSentence.replace(/[\u0591-\u05C7]/g, "").trim();
 
   return (
-    <div className="space-y-6">
+    <div className="space-y-6" dir="rtl">
       <div className="text-center">
         <Badge variant="destructive" className="mb-4">
           {t(`Error: ${question.errorType}`, `שגיאה: ${
@@ -468,10 +486,10 @@ function ErrorCorrectionExercise({
             question.errorType === "tense" ? "זמן" : "בניין"
           }`)}
         </Badge>
-        <p className="text-muted-foreground mb-2">
+        <p className="text-muted-foreground mb-2 text-right">
           {t("Find and fix the error in this sentence:", "מצא ותקן את השגיאה במשפט הזה:")}
         </p>
-        <p className="text-2xl font-medium p-4 rounded-lg bg-red-50 border border-red-200" dir="rtl">
+        <p className="text-2xl font-medium p-4 rounded-lg bg-red-50 border border-red-200 text-right">
           {showNikud ? question.incorrectSentenceWithNikud : question.incorrectSentence}
         </p>
       </div>
@@ -482,8 +500,7 @@ function ErrorCorrectionExercise({
             value={userInput}
             onChange={(e) => setUserInput(e.target.value)}
             placeholder={t("Type the corrected sentence here...", "הקלד את המשפט המתוקן כאן...")}
-            className="w-full p-4 text-lg rounded-lg border focus:ring-2 focus:ring-primary"
-            dir="rtl"
+            className="w-full p-4 text-lg rounded-lg border focus:ring-2 focus:ring-primary text-right"
             rows={2}
           />
           <Button onClick={handleSubmit} className="w-full" disabled={!userInput.trim()}>
@@ -492,14 +509,14 @@ function ErrorCorrectionExercise({
         </div>
       ) : (
         <div className={cn(
-          "p-4 rounded-lg",
+          "p-4 rounded-lg text-right",
           isCorrect ? "bg-green-50 border border-green-200" : "bg-red-50 border border-red-200"
         )}>
           <p className={cn("font-medium", isCorrect ? "text-green-800" : "text-red-800")}>
             {isCorrect ? t("Correct!", "נכון!") : t("Incorrect", "לא נכון")}
           </p>
           <div className="mt-2 space-y-1">
-            <p className="text-sm" dir="rtl">
+            <p className="text-sm">
               <span className="font-medium">{t("Correct:", "נכון:")}</span> {showNikud ? question.correctSentenceWithNikud : question.correctSentence}
             </p>
             <p className="text-sm text-muted-foreground">
@@ -532,15 +549,24 @@ function FindRootExercise({
 }: FindRootExerciseProps) {
   const t = (en: string, he: string) => (lang === "he" ? he : en);
   const isCorrect = selectedAnswer === question.correctRoot;
-  const shuffledOptions = useMemo(() => shuffleArray(question.rootOptions), [question.id]);
+  
+  // Fisher-Yates shuffle for options
+  const shuffledOptions = useMemo(() => {
+    const options = [...question.rootOptions];
+    for (let i = options.length - 1; i > 0; i--) {
+      const j = Math.floor(Math.random() * (i + 1));
+      [options[i], options[j]] = [options[j], options[i]];
+    }
+    return options;
+  }, [question.id, question.rootOptions]);
 
   return (
-    <div className="space-y-6">
+    <div className="space-y-6" dir="rtl">
       <div className="text-center">
-        <p className="text-muted-foreground mb-2">
+        <p className="text-muted-foreground mb-2 text-right">
           {t("Find the root (שורש) of this word:", "מצא את השורש של המילה הזו:")}
         </p>
-        <p className="text-4xl font-bold" dir="rtl">
+        <p className="text-4xl font-bold">
           {showNikud ? question.conjugatedWordWithNikud : question.conjugatedWord}
         </p>
         <p className="text-muted-foreground mt-2">
@@ -563,7 +589,6 @@ function FindRootExercise({
               )}
               onClick={() => !showResult && onAnswer(option)}
               disabled={showResult}
-              dir="rtl"
             >
               {option}
             </Button>
@@ -573,7 +598,7 @@ function FindRootExercise({
 
       {showResult && (
         <div className={cn(
-          "p-4 rounded-lg",
+          "p-4 rounded-lg text-right",
           isCorrect ? "bg-green-50 border border-green-200" : "bg-red-50 border border-red-200"
         )}>
           <p className={cn("font-medium", isCorrect ? "text-green-800" : "text-red-800")}>

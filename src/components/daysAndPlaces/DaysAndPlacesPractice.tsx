@@ -27,18 +27,29 @@ export default function DaysAndPlacesPractice({ onBack, lang = "he" }: DaysAndPl
 
   const t = (he: string, en: string) => (lang === "he" ? he : en);
 
-  // Get questions based on difficulty
+  // Get questions based on difficulty with proper Fisher-Yates shuffle
   const questions = useMemo(() => {
     let baseQuestions: FillQuestion[] = [];
     if (phase === "easy") baseQuestions = easyQuestions;
     else if (phase === "medium") baseQuestions = mediumQuestions;
     else if (phase === "hard") baseQuestions = hardQuestions;
 
-    // Shuffle questions and options
-    return shuffleArray(baseQuestions).map(q => ({
-      ...q,
-      options: shuffleArray([...q.options])
-    }));
+    // Fisher-Yates shuffle for questions
+    const shuffledQuestions = [...baseQuestions];
+    for (let i = shuffledQuestions.length - 1; i > 0; i--) {
+      const j = Math.floor(Math.random() * (i + 1));
+      [shuffledQuestions[i], shuffledQuestions[j]] = [shuffledQuestions[j], shuffledQuestions[i]];
+    }
+
+    // Fisher-Yates shuffle for each question's options
+    return shuffledQuestions.map(q => {
+      const shuffledOptions = [...q.options];
+      for (let i = shuffledOptions.length - 1; i > 0; i--) {
+        const j = Math.floor(Math.random() * (i + 1));
+        [shuffledOptions[i], shuffledOptions[j]] = [shuffledOptions[j], shuffledOptions[i]];
+      }
+      return { ...q, options: shuffledOptions };
+    });
   }, [phase]);
 
   const currentQuestion = questions[currentIndex];
@@ -91,17 +102,17 @@ export default function DaysAndPlacesPractice({ onBack, lang = "he" }: DaysAndPl
   // MENU PHASE
   if (phase === "menu") {
     return (
-      <div className="min-h-screen bg-gradient-to-br from-amber-50 to-orange-100 p-4">
+      <div className="min-h-screen bg-gradient-to-br from-amber-50 to-orange-100 p-4" dir="rtl">
         <div className="max-w-2xl mx-auto">
-          <Button variant="ghost" onClick={onBack} className="mb-4">
+          <Button variant="ghost" onClick={onBack} className="mb-4 flex-row-reverse">
             ⬅ {t("חזרה לתפריט", "Back to Menu")}
           </Button>
           
           <div className="text-center mb-8">
-            <h1 className="text-3xl font-bold text-amber-800 mb-2" dir="rtl">
+            <h1 className="text-3xl font-bold text-amber-800 mb-2 text-right">
               {t("ימים ומקומות", "Days and Places")}
             </h1>
-            <p className="text-amber-600" dir="rtl">
+            <p className="text-amber-600 text-right">
               {t("לימוד ותרגול אוצר מילים", "Learn and practice vocabulary")}
             </p>
           </div>
@@ -109,9 +120,9 @@ export default function DaysAndPlacesPractice({ onBack, lang = "he" }: DaysAndPl
           {/* Vocabulary Learning */}
           <Card className="mb-6 border-2 border-amber-200 bg-white/80">
             <CardContent className="p-6">
-              <div className="flex items-center gap-3 mb-4">
+              <div className="flex items-center gap-3 mb-4 flex-row-reverse">
                 <BookOpen className="w-8 h-8 text-amber-600" />
-                <h2 className="text-xl font-bold text-amber-800" dir="rtl">
+                <h2 className="text-xl font-bold text-amber-800 text-right">
                   {t("לימוד אוצר מילים", "Vocabulary Learning")}
                 </h2>
               </div>
@@ -123,7 +134,7 @@ export default function DaysAndPlacesPractice({ onBack, lang = "he" }: DaysAndPl
                     className="py-4 bg-amber-100 hover:bg-amber-200 text-amber-800 border border-amber-300"
                     variant="outline"
                   >
-                    <span dir="rtl">{cat.nameHe}</span>
+                    <span>{cat.nameHe}</span>
                   </Button>
                 ))}
               </div>
@@ -133,9 +144,9 @@ export default function DaysAndPlacesPractice({ onBack, lang = "he" }: DaysAndPl
           {/* Practice Levels */}
           <Card className="border-2 border-orange-200 bg-white/80">
             <CardContent className="p-6">
-              <div className="flex items-center gap-3 mb-4">
+              <div className="flex items-center gap-3 mb-4 flex-row-reverse">
                 <Award className="w-8 h-8 text-orange-600" />
-                <h2 className="text-xl font-bold text-orange-800" dir="rtl">
+                <h2 className="text-xl font-bold text-orange-800 text-right">
                   {t("תרגול השלמה", "Fill-in Practice")}
                 </h2>
               </div>
@@ -170,20 +181,20 @@ export default function DaysAndPlacesPractice({ onBack, lang = "he" }: DaysAndPl
   if (phase === "vocab") {
     const currentCat = vocabularyData[vocabCategoryIndex];
     return (
-      <div className="min-h-screen bg-gradient-to-br from-amber-50 to-orange-100 p-4">
+      <div className="min-h-screen bg-gradient-to-br from-amber-50 to-orange-100 p-4" dir="rtl">
         <div className="max-w-4xl mx-auto">
           <div className="flex items-center gap-4 mb-6">
             <Button variant="ghost" onClick={() => setPhase("menu")}>
               ⬅ {t("חזרה", "Back")}
             </Button>
-            <h1 className="text-2xl font-bold text-amber-800" dir="rtl">{currentCat.nameHe}</h1>
+            <h1 className="text-2xl font-bold text-amber-800">{currentCat.nameHe}</h1>
             <Button
               variant="outline"
               size="sm"
               onClick={() => setShowNikud(!showNikud)}
               className="mr-auto"
             >
-              {showNikud ? <Eye className="w-4 h-4 mr-1" /> : <EyeOff className="w-4 h-4 mr-1" />}
+              {showNikud ? <Eye className="w-4 h-4 ml-1" /> : <EyeOff className="w-4 h-4 ml-1" />}
               {t("ניקוד", "Nikud")}
             </Button>
           </div>
@@ -215,7 +226,7 @@ export default function DaysAndPlacesPractice({ onBack, lang = "he" }: DaysAndPl
                     >
                       <Volume2 className="h-5 w-5 text-amber-600" />
                     </Button>
-                    <h3 className="text-xl font-bold text-right" dir="rtl">
+                    <h3 className="text-xl font-bold text-right">
                       {showNikud ? word.hebrewWithNikud : word.hebrew}
                     </h3>
                   </div>
@@ -246,19 +257,19 @@ export default function DaysAndPlacesPractice({ onBack, lang = "he" }: DaysAndPl
     const percentage = Math.round((correctCount / questions.length) * 100);
     
     return (
-      <div className="min-h-screen bg-gradient-to-br from-amber-50 to-orange-100 p-4 flex items-center justify-center">
+      <div className="min-h-screen bg-gradient-to-br from-amber-50 to-orange-100 p-4 flex items-center justify-center" dir="rtl">
         <Card className="max-w-md w-full border-2 border-amber-300 bg-white/95">
           <CardContent className="p-8 text-center">
             <div className="text-6xl mb-4">
               {stars === 3 ? "🏆" : stars === 2 ? "🥈" : stars === 1 ? "🥉" : "💪"}
             </div>
-            <h2 className="text-2xl font-bold text-amber-800 mb-2" dir="rtl">
+            <h2 className="text-2xl font-bold text-amber-800 mb-2">
               {t("כל הכבוד!", "Great job!")}
             </h2>
             <div className="text-5xl mb-4">
               {"⭐".repeat(stars)}{"☆".repeat(3 - stars)}
             </div>
-            <p className="text-xl mb-4" dir="rtl">
+            <p className="text-xl mb-4">
               {correctCount} / {questions.length} {t("תשובות נכונות", "correct answers")}
             </p>
             <p className="text-lg text-amber-600 mb-6">
@@ -266,7 +277,7 @@ export default function DaysAndPlacesPractice({ onBack, lang = "he" }: DaysAndPl
             </p>
             <div className="flex flex-col gap-3">
               <Button onClick={resetPractice} className="bg-amber-600 hover:bg-amber-700">
-                <RotateCcw className="w-4 h-4 mr-2" />
+                <RotateCcw className="w-4 h-4 ml-2" />
                 {t("נסה שוב", "Try Again")}
               </Button>
               <Button variant="outline" onClick={onBack}>
@@ -281,7 +292,7 @@ export default function DaysAndPlacesPractice({ onBack, lang = "he" }: DaysAndPl
 
   // PRACTICE PHASE (easy/medium/hard)
   return (
-    <div className="min-h-screen bg-gradient-to-br from-amber-50 to-orange-100 p-4">
+    <div className="min-h-screen bg-gradient-to-br from-amber-50 to-orange-100 p-4" dir="rtl">
       <div className="max-w-2xl mx-auto">
         <div className="flex items-center justify-between mb-4">
           <Button variant="ghost" onClick={() => setPhase("menu")}>
@@ -294,7 +305,7 @@ export default function DaysAndPlacesPractice({ onBack, lang = "he" }: DaysAndPl
               onClick={() => setShowTranslation(!showTranslation)}
             >
               {showTranslation ? <Eye className="w-4 h-4" /> : <EyeOff className="w-4 h-4" />}
-              <span className="ml-1">EN</span>
+              <span className="mr-1">EN</span>
             </Button>
             <span className="text-sm font-medium text-amber-700">
               {currentIndex + 1} / {questions.length}
@@ -325,7 +336,7 @@ export default function DaysAndPlacesPractice({ onBack, lang = "he" }: DaysAndPl
               </Button>
             </div>
 
-            <div className="text-xl font-medium text-center mb-2 leading-relaxed" dir="rtl">
+            <div className="text-xl font-medium text-center mb-2 leading-relaxed text-right">
               {currentQuestion.sentence.split("___").map((part, i, arr) => (
                 <React.Fragment key={i}>
                   {part}
@@ -343,7 +354,7 @@ export default function DaysAndPlacesPractice({ onBack, lang = "he" }: DaysAndPl
             </div>
 
             {showTranslation && (
-              <p className="text-sm text-gray-500 text-center mt-2 italic">
+              <p className="text-sm text-gray-500 text-center mt-2 italic" dir="ltr">
                 {currentQuestion.translation}
               </p>
             )}
@@ -369,7 +380,6 @@ export default function DaysAndPlacesPractice({ onBack, lang = "he" }: DaysAndPl
                         : "bg-gray-200 text-gray-500"
                     : "bg-white hover:bg-amber-100 text-amber-800 border-2 border-amber-300"
                 }`}
-                dir="rtl"
               >
                 {option}
               </Button>

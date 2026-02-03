@@ -118,17 +118,17 @@ export default function HifilVerbPractice({ onBack, initialLevel = "learn", lang
   // Render conjugation table
   if (phase === "table") {
     return (
-      <div className="min-h-screen bg-gradient-to-br from-blue-50 to-indigo-100 p-4">
+      <div className="min-h-screen bg-gradient-to-br from-blue-50 to-indigo-100 p-4" dir="rtl">
         <div className="max-w-4xl mx-auto">
           <Button variant="ghost" onClick={onBack} className="mb-4">
             ⬅ חזרה לתפריט הראשי
           </Button>
 
           <div className="bg-white rounded-2xl shadow-lg p-6">
-            <h1 className="text-2xl font-bold text-center mb-2" dir="rtl">
+            <h1 className="text-2xl font-bold text-center mb-2 text-right">
               בניין הפעיל - הפועל "להלביש"
             </h1>
-            <p className="text-center text-gray-600 mb-4" dir="rtl">
+            <p className="text-center text-gray-600 mb-4" dir="ltr">
               Hif'il Pattern - The verb "to dress (someone)"
             </p>
 
@@ -142,10 +142,10 @@ export default function HifilVerbPractice({ onBack, initialLevel = "learn", lang
             </div>
 
             <div className="overflow-x-auto mb-6">
-              <table className="w-full border-collapse text-center" dir="rtl">
+              <table className="w-full border-collapse text-center">
                 <thead>
                   <tr className="bg-indigo-100">
-                    <th className="border border-indigo-200 p-2">גוף</th>
+                    <th className="border border-indigo-200 p-2 text-right">גוף</th>
                     <th className="border border-indigo-200 p-2 bg-amber-100">עבר</th>
                     <th className="border border-indigo-200 p-2 bg-green-100">הווה</th>
                     <th className="border border-indigo-200 p-2 bg-purple-100">עתיד</th>
@@ -154,9 +154,9 @@ export default function HifilVerbPractice({ onBack, initialLevel = "learn", lang
                 <tbody>
                   {conjugationTable.map((row, idx) => (
                     <tr key={idx} className="hover:bg-gray-50">
-                      <td className="border border-gray-200 p-2 font-semibold">
+                      <td className="border border-gray-200 p-2 font-semibold text-right">
                         {row.pronoun}
-                        <span className="text-xs text-gray-500 block">({row.pronounEn})</span>
+                        <span className="text-xs text-gray-500 block" dir="ltr">({row.pronounEn})</span>
                       </td>
                       <td className="border border-gray-200 p-2 bg-amber-50 text-lg">
                         {displayText(row.past)}
@@ -191,11 +191,11 @@ export default function HifilVerbPractice({ onBack, initialLevel = "learn", lang
     const percentage = Math.round((totalCorrect / totalQuestions) * 100);
 
     return (
-      <div className="min-h-screen bg-gradient-to-br from-blue-50 to-indigo-100 flex items-center justify-center p-4">
+      <div className="min-h-screen bg-gradient-to-br from-blue-50 to-indigo-100 flex items-center justify-center p-4" dir="rtl">
         <div className="bg-white rounded-2xl shadow-lg p-8 max-w-md w-full text-center">
           <h2 className="text-2xl font-bold mb-6">🎉 סיימת את התרגול!</h2>
           
-          <div className="space-y-4 mb-6" dir="rtl">
+          <div className="space-y-4 mb-6">
             {results.map((r, idx) => (
               <div key={idx} className="flex justify-between items-center p-3 bg-gray-50 rounded-lg">
                 <span className="font-semibold">{getTenseLabel(r.tense)}</span>
@@ -226,7 +226,7 @@ export default function HifilVerbPractice({ onBack, initialLevel = "learn", lang
 
   // Render practice questions
   return (
-    <div className="min-h-screen bg-gradient-to-br from-blue-50 to-indigo-100 p-4">
+    <div className="min-h-screen bg-gradient-to-br from-blue-50 to-indigo-100 p-4" dir="rtl">
       <div className="max-w-2xl mx-auto">
         <Button variant="ghost" onClick={onBack} className="mb-4">
           ⬅ חזרה לתפריט הראשי
@@ -256,10 +256,10 @@ export default function HifilVerbPractice({ onBack, initialLevel = "learn", lang
           </div>
 
           <div className="text-center mb-6">
-            <p className="text-2xl font-semibold mb-2" dir="rtl">
+            <p className="text-2xl font-semibold mb-2 text-right">
               {displayText(currentQuestion.sentence)}
             </p>
-            <p className="text-gray-600">{currentQuestion.sentenceEn}</p>
+            <p className="text-gray-600" dir="ltr">{currentQuestion.sentenceEn}</p>
           </div>
 
           <div className="grid grid-cols-2 gap-3 mb-6">
