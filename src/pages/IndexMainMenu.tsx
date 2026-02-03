@@ -23,6 +23,7 @@ interface IndexMainMenuProps {
   setShowVerbMemoryGame: (b: boolean) => void;
   setShowColorsAndFruits: (b: boolean) => void;
   setShowVerbPatternsMenu: (b: boolean) => void;
+  setShowListeningPractice: (b: boolean) => void;
 }
 
 interface MenuItemProps {
@@ -66,6 +67,7 @@ export default function IndexMainMenu({
   setShowVerbMemoryGame,
   setShowColorsAndFruits,
   setShowVerbPatternsMenu,
+  setShowListeningPractice,
 }: IndexMainMenuProps) {
   const t = menuText[lang];
 
@@ -233,12 +235,19 @@ export default function IndexMainMenu({
         </div>
       </div>
 
-      {/* הבנת הנקרא */}
+      {/* הבנת הנקרא והנשמע */}
       <div className="w-full">
         <h2 className="text-lg font-semibold text-muted-foreground mb-3" dir={lang === "he" ? "rtl" : "ltr"}>
-          {lang === "he" ? "📖 הבנת הנקרא" : "📖 Reading Comprehension"}
+          {lang === "he" ? "📖 הבנת הנקרא והנשמע" : "📖 Reading & Listening"}
         </h2>
         <div className="grid grid-cols-2 md:grid-cols-4 gap-3">
+          <MenuItem
+            emoji="🎧"
+            label={lang === "he" ? "הבנת הנשמע" : "Listening"}
+            onClick={() => setShowListeningPractice(true)}
+            colorClass="bg-purple-100 text-purple-900 border-purple-300"
+            lang={lang}
+          />
           <MenuItem
             emoji="🥗"
             label={t.foodComp}

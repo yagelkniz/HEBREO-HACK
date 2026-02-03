@@ -1,123 +1,247 @@
-
 [
   {
+    "type": "fillBlank",
     "question": "רותי אוהבת לטייל. ___ מטיילת כל שבת בבוקר בפארק.",
     "options": ["היא", "אני", "אתה"],
     "answer": "היא",
     "translation": "Ruti loves hiking. She hikes every Saturday morning in the park."
   },
   {
+    "type": "fillBlank",
     "question": "שלום, שמי אלון. ___ גר בירושלים.",
     "options": ["אני", "אתה", "הוא"],
     "answer": "אני",
     "translation": "Hello, my name is Alon. I live in Jerusalem."
   },
   {
+    "type": "fillBlank",
     "question": "יוסי, ___ רוצה לבוא איתי לקולנוע?",
     "options": ["אתה", "הוא", "אני"],
     "answer": "אתה",
     "translation": "Yossi, do you want to come with me to the cinema?"
   },
   {
+    "type": "fillBlank",
     "question": "הילדים בכיתה ג'. ___ לומדים לקרוא ולכתוב.",
     "options": ["הם", "אנחנו", "אתם"],
     "answer": "הם",
     "translation": "The children are in 3rd grade. They are learning to read and write."
   },
   {
+    "type": "fillBlank",
     "question": "רותי ודנה, ___ גרות ליד הים?",
     "options": ["אתן", "הן", "אנחנו"],
     "answer": "אתן",
     "translation": "Ruti and Dana, do you (f. pl.) live near the sea?"
   },
   {
+    "type": "trueFalse",
+    "question": "בבקשה בדקו: 'הילד הלכה לבית הספר' - נכון או לא נכון?",
+    "options": ["לא נכון", "נכון"],
+    "answer": "לא נכון",
+    "translation": "Check: 'The boy went (fem.) to school' - correct or incorrect? (Incorrect - 'הילד' is masculine, should be 'הלך')"
+  },
+  {
+    "type": "fillBlank",
     "question": "שירה מספרת על עצמה: ___ אוהבת לבשל עם סבתא שלי.",
     "options": ["אני", "היא", "את"],
     "answer": "אני",
     "translation": "Shira tells about herself: I love cooking with my grandma."
   },
   {
+    "type": "fillBlank",
     "question": "יוני ודורון, ___ הולכים לשוק בערב?",
     "options": ["אתם", "אנחנו", "הם"],
     "answer": "אתם",
     "translation": "Yoni and Doron, are you going to the market in the evening?"
   },
   {
+    "type": "trueFalse",
+    "question": "'אנחנו רואה טלוויזיה' - המשפט נכון?",
+    "options": ["לא נכון", "נכון"],
+    "answer": "לא נכון",
+    "translation": "'We sees (sing.) television' - Incorrect. Should be 'אנחנו רואים' (plural verb)."
+  },
+  {
+    "type": "fillBlank",
     "question": "דני גר לבד בתל אביב. ___ שותה קפה כל בוקר.",
     "options": ["הוא", "אתה", "אני"],
     "answer": "הוא",
     "translation": "Dani lives alone in Tel Aviv. He drinks coffee every morning."
   },
   {
+    "type": "fillBlank",
     "question": "שירה וטל מדברות בטלפון. ___ לא נפגשו הרבה זמן.",
     "options": ["הן", "אתן", "אנחנו"],
     "answer": "הן",
     "translation": "Shira and Tal are talking on the phone. They (f.) haven't met in a while."
   },
   {
+    "type": "fillBlank",
     "question": "מיכל ואני לומדות עברית. ___ עושות שיעורים כל יום.",
     "options": ["אנחנו", "הן", "אתן"],
     "answer": "אנחנו",
     "translation": "Michal and I are learning Hebrew. We do homework every day."
   },
   {
+    "type": "trueFalse",
+    "question": "'הם אוכלות ארוחת בוקר' - האם זה נכון?",
+    "options": ["לא נכון", "נכון"],
+    "answer": "לא נכון",
+    "translation": "'They (m.) eating (f.) breakfast' - Incorrect. 'הם' requires masculine verb 'אוכלים'."
+  },
+  {
+    "type": "fillBlank",
     "question": "דני, ___ עובד מחר בבוקר?",
     "options": ["אתה", "הוא", "אני"],
     "answer": "אתה",
     "translation": "Dani, are you working tomorrow morning?"
   },
   {
+    "type": "fillBlank",
     "question": "היי, אני לירון. ___ גרה במקסיקו סיטי.",
     "options": ["אני", "היא", "את"],
     "answer": "אני",
     "translation": "Hi, I'm Liron. I live in Mexico City."
   },
   {
+    "type": "fillBlank",
     "question": "הבנות משחקות כדורגל. ___ ממש טובות בזה.",
     "options": ["הן", "אתן", "אנחנו"],
     "answer": "הן",
     "translation": "The girls are playing soccer. They are really good at it."
   },
   {
+    "type": "trueFalse",
+    "question": "'היא הולך לחנות' - משפט זה נכון?",
+    "options": ["לא נכון", "נכון"],
+    "answer": "לא נכון",
+    "translation": "'She goes (m.) to the store' - Incorrect. 'היא' requires feminine verb 'הולכת'."
+  },
+  {
+    "type": "fillBlank",
     "question": "אמא שלי ואני אופות עוגות. ___ מאוד נהנות ביחד.",
     "options": ["אנחנו", "הן", "אתן"],
     "answer": "אנחנו",
     "translation": "My mom and I bake cakes. We really enjoy it together."
   },
   {
+    "type": "fillBlank",
     "question": "התלמיד שואל את המורה: ___ יכולה לעזור לי?",
     "options": ["את", "היא", "אני"],
     "answer": "את",
     "translation": "The student asks the teacher: Can you help me?"
   },
   {
+    "type": "fillBlank",
     "question": "דוד מספר על אשתו: ___ מאוד אוהבת פרחים.",
     "options": ["היא", "את", "אני"],
     "answer": "היא",
     "translation": "David talks about his wife: She really loves flowers."
   },
   {
+    "type": "trueFalse",
+    "question": "'אתן קוראים ספר' - האם המשפט נכון?",
+    "options": ["לא נכון", "נכון"],
+    "answer": "לא נכון",
+    "translation": "'You (f.pl.) reading (m.pl.) a book' - Incorrect. Should be 'אתן קוראות'."
+  },
+  {
+    "type": "fillBlank",
     "question": "שלום! שמי נועה. ___ באתי ללמוד עברית.",
     "options": ["אני", "היא", "את"],
     "answer": "אני",
     "translation": "Hello! My name is Noa. I came to learn Hebrew."
   },
   {
+    "type": "fillBlank",
     "question": "טל ודני אוהבים לרקוד. ___ רוקדים בכל יום שישי.",
     "options": ["הם", "אנחנו", "אתם"],
     "answer": "הם",
     "translation": "Tal and Dani love to dance. They dance every Friday."
   },
   {
+    "type": "fillBlank",
     "question": "מיכל ויואב, ___ כבר אכלתם ארוחת ערב?",
     "options": ["אתם", "הם", "אנחנו"],
     "answer": "אתם",
     "translation": "Michal and Yoav, have you eaten dinner yet?"
   },
   {
+    "type": "trueFalse",
+    "question": "'אני רוצות ללכת הביתה' - משפט זה נכון?",
+    "options": ["לא נכון", "נכון"],
+    "answer": "לא נכון",
+    "translation": "'I want (f.pl.) to go home' - Incorrect. 'אני' requires singular verb 'רוצה'."
+  },
+  {
+    "type": "fillBlank",
     "question": "שירה, ___ רוצה לשתות משהו?",
     "options": ["את", "היא", "אני"],
     "answer": "את",
     "translation": "Shira, do you want to drink something?"
+  },
+  {
+    "type": "fillBlank",
+    "question": "הסטודנטים לומדים למבחן. ___ מתכוננים כבר שבוע.",
+    "options": ["הם", "אנחנו", "אתם"],
+    "answer": "הם",
+    "translation": "The students are studying for the exam. They have been preparing for a week."
+  },
+  {
+    "type": "trueFalse",
+    "question": "'הוא קוראת ספר' - האם זה נכון?",
+    "options": ["לא נכון", "נכון"],
+    "answer": "לא נכון",
+    "translation": "'He reading (f.) a book' - Incorrect. 'הוא' requires masculine verb 'קורא'."
+  },
+  {
+    "type": "fillBlank",
+    "question": "רחל ולאה, ___ יודעות את התשובה?",
+    "options": ["אתן", "הן", "אנחנו"],
+    "answer": "אתן",
+    "translation": "Rachel and Leah, do you know the answer?"
+  },
+  {
+    "type": "fillBlank",
+    "question": "אבא שלי עובד בבנק. ___ קם מוקדם כל יום.",
+    "options": ["הוא", "אתה", "אני"],
+    "answer": "הוא",
+    "translation": "My dad works at a bank. He wakes up early every day."
+  },
+  {
+    "type": "trueFalse",
+    "question": "'אנחנו הולכים לים' - משפט זה נכון?",
+    "options": ["נכון", "לא נכון"],
+    "answer": "נכון",
+    "translation": "'We are going to the beach' - Correct! Plural pronoun with plural verb."
+  },
+  {
+    "type": "fillBlank",
+    "question": "יעל ושרה, למה ___ לא באות למסיבה?",
+    "options": ["אתן", "הן", "את"],
+    "answer": "אתן",
+    "translation": "Yael and Sarah, why aren't you coming to the party?"
+  },
+  {
+    "type": "fillBlank",
+    "question": "החתול ישן על הספה. ___ ישן הרבה שעות.",
+    "options": ["הוא", "היא", "אני"],
+    "answer": "הוא",
+    "translation": "The cat is sleeping on the couch. It sleeps many hours."
+  },
+  {
+    "type": "trueFalse",
+    "question": "'הן הולכים לקניות' - האם זה נכון?",
+    "options": ["לא נכון", "נכון"],
+    "answer": "לא נכון",
+    "translation": "'They (f.) going (m.) shopping' - Incorrect. Should be 'הן הולכות'."
+  },
+  {
+    "type": "fillBlank",
+    "question": "אורי ואני רצים בפארק. ___ רצים כל בוקר.",
+    "options": ["אנחנו", "הם", "אתם"],
+    "answer": "אנחנו",
+    "translation": "Uri and I run in the park. We run every morning."
   }
 ]

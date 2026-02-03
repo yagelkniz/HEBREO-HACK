@@ -30,7 +30,8 @@ export default function Index() {
     state.showColorsAndFruits ||
     state.showHifilVerb ||
     state.showPielVerb ||
-    state.selectedVerbPattern;
+    state.selectedVerbPattern ||
+    state.showListeningPractice;
 
   // Show Verb Patterns Menu
   if (state.showVerbPatternsMenu && !state.selectedVerbPattern) {
@@ -70,6 +71,7 @@ export default function Index() {
         setShowVerbMemoryGame={state.setShowVerbMemoryGame}
         setShowColorsAndFruits={state.setShowColorsAndFruits}
         setShowVerbPatternsMenu={state.setShowVerbPatternsMenu}
+        setShowListeningPractice={state.setShowListeningPractice}
       />
     </div>
   );
