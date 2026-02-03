@@ -8,6 +8,8 @@ import { ArrowRight, Check, X, RotateCcw, BookOpen, HelpCircle, ChevronDown, Che
 
 interface PielVerbPracticeProps {
   onBack: () => void;
+  initialLevel?: "learn" | "easy" | "medium" | "hard";
+  lang?: "he" | "en";
 }
 
 type Phase = "menu" | "table" | "quiz";
@@ -17,11 +19,24 @@ const removeNikud = (text: string): string => {
   return text.replace(/[\u0591-\u05C7]/g, "");
 };
 
-export default function PielVerbPractice({ onBack }: PielVerbPracticeProps) {
-  const [phase, setPhase] = useState<Phase>("menu");
-  const [difficulty, setDifficulty] = useState<Difficulty>("easy");
+export default function PielVerbPractice({ onBack, initialLevel = "learn", lang = "he" }: PielVerbPracticeProps) {
+  // Determine initial phase based on level
+  const getInitialPhase = (): Phase => {
+    if (initialLevel === "learn") return "menu";
+    return "quiz"; // For easy/medium/hard, start with quiz
+  };
+  
+  const getInitialDifficulty = (): Difficulty => {
+    if (initialLevel === "easy") return "easy";
+    if (initialLevel === "medium") return "medium";
+    if (initialLevel === "hard") return "hard";
+    return "easy";
+  };
+  
+  const [phase, setPhase] = useState<Phase>(getInitialPhase());
+  const [difficulty, setDifficulty] = useState<Difficulty>(getInitialDifficulty());
   const [showNikud, setShowNikud] = useState(true);
-  const [showEnglish, setShowEnglish] = useState(false);
+  const [showEnglish, setShowEnglish] = useState(lang === "en");
   const [selectedVerb, setSelectedVerb] = useState<PielVerb | null>(null);
   const [expandedCategories, setExpandedCategories] = useState<string[]>(verbCategories.map(c => c.title));
   

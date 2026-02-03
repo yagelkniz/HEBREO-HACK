@@ -5,13 +5,21 @@ import { conjugationTable, hifilQuestions, HifilQuestion } from "./HifilVerbData
 
 interface HifilVerbPracticeProps {
   onBack: () => void;
+  initialLevel?: "learn" | "easy" | "medium" | "hard";
+  lang?: "he" | "en";
 }
 
 type Phase = "table" | "past" | "present" | "future" | "results";
 type TenseType = "past" | "present" | "future";
 
-export default function HifilVerbPractice({ onBack }: HifilVerbPracticeProps) {
-  const [phase, setPhase] = useState<Phase>("table");
+export default function HifilVerbPractice({ onBack, initialLevel = "learn", lang = "he" }: HifilVerbPracticeProps) {
+  // Determine initial phase based on level
+  const getInitialPhase = (): Phase => {
+    if (initialLevel === "learn") return "table";
+    return "past"; // For easy/medium/hard, start with practice
+  };
+  
+  const [phase, setPhase] = useState<Phase>(getInitialPhase());
   const [showNikud, setShowNikud] = useState(true);
   const [currentQuestionIndex, setCurrentQuestionIndex] = useState(0);
   const [selectedAnswer, setSelectedAnswer] = useState<string | null>(null);
