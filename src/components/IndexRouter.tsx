@@ -91,10 +91,35 @@ export default function IndexRouter({ state }: IndexRouterProps) {
     setShowHifilVerb,
     showPielVerb,
     setShowPielVerb,
+    selectedVerbPattern,
+    setSelectedVerbPattern,
     resetToMainMenu,
   } = state;
 
   const t = (he: string, en: string) => (lang === "he" ? he : en);
+
+  // Handle verb pattern selection with levels
+  if (selectedVerbPattern) {
+    const { pattern } = selectedVerbPattern;
+    
+    if (pattern === "hifil") {
+      return <HifilVerbPractice onBack={() => setSelectedVerbPattern(null)} />;
+    }
+    if (pattern === "piel") {
+      return <PielVerbPractice onBack={() => setSelectedVerbPattern(null)} />;
+    }
+    if (pattern === "paal") {
+      // Redirect to the verb tense selector for Pa'al
+      return <VerbTenseSelector lang={lang} onBack={() => setSelectedVerbPattern(null)} onSelectTense={(tense) => {
+        setSelectedVerbPattern(null);
+        setVerbTense(tense);
+        setSelectedPractice("verb");
+      }} />;
+    }
+    // For unavailable patterns, go back
+    setSelectedVerbPattern(null);
+    return null;
+  }
 
   if (showHifilVerb) {
     return <HifilVerbPractice onBack={resetToMainMenu} />;
@@ -250,13 +275,13 @@ export default function IndexRouter({ state }: IndexRouterProps) {
       return (
         <EverydayHebrewCategorySelect 
           onBack={resetToMainMenu}
-          onSelect={(category) => setEverydayHebrewCategory(category)}
+          onSelect={(category: string) => setEverydayHebrewCategory(category)}
         />
       );
     }
     return (
       <EverydayHebrewPractice 
-        category={everydayHebrewCategory}
+        category={everydayHebrewCategory as "restaurant" | "supermarket" | "transportation"}
         onBack={() => setEverydayHebrewCategory(null)}
       />
     );

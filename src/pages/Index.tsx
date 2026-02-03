@@ -1,6 +1,6 @@
-
 import IndexMainMenu from "./IndexMainMenu";
 import IndexRouter from "@/components/IndexRouter";
+import VerbPatternsMenu from "@/components/VerbPatternsMenu";
 import { useIndexState } from "@/hooks/useIndexState";
 
 export default function Index() {
@@ -29,7 +29,21 @@ export default function Index() {
     state.showVerbMemoryGame ||
     state.showColorsAndFruits ||
     state.showHifilVerb ||
-    state.showPielVerb;
+    state.showPielVerb ||
+    state.selectedVerbPattern;
+
+  // Show Verb Patterns Menu
+  if (state.showVerbPatternsMenu && !state.selectedVerbPattern) {
+    return (
+      <VerbPatternsMenu
+        lang={state.lang}
+        onBack={state.resetToMainMenu}
+        onSelectPattern={(pattern, level) => {
+          state.setSelectedVerbPattern({ pattern, level });
+        }}
+      />
+    );
+  }
 
   if (shouldShowRouter) {
     return <IndexRouter state={state} />;
@@ -55,8 +69,7 @@ export default function Index() {
         setShowLinkingWordsLevels={state.setShowLinkingWordsLevels}
         setShowVerbMemoryGame={state.setShowVerbMemoryGame}
         setShowColorsAndFruits={state.setShowColorsAndFruits}
-        setShowHifilVerb={state.setShowHifilVerb}
-        setShowPielVerb={state.setShowPielVerb}
+        setShowVerbPatternsMenu={state.setShowVerbPatternsMenu}
       />
     </div>
   );

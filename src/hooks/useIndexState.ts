@@ -1,7 +1,6 @@
-
 import { useState } from "react";
 
-export const useIndexState = () => {
+export function useIndexState() {
   const [lang, setLang] = useState<"he" | "en">("he");
   const [showLinkingWords, setShowLinkingWords] = useState(false);
   const [showLinkingWordsPractice, setShowLinkingWordsPractice] = useState(false);
@@ -12,10 +11,10 @@ export const useIndexState = () => {
   const [showPossessivePronounsMenu, setShowPossessivePronounsMenu] = useState(false);
   const [showPossessivePronounsPractice, setShowPossessivePronounsPractice] = useState(false);
   const [showEverydayHebrew, setShowEverydayHebrew] = useState(false);
-  const [everydayHebrewCategory, setEverydayHebrewCategory] = useState<"restaurant" | "supermarket" | "transportation" | null>(null);
+  const [everydayHebrewCategory, setEverydayHebrewCategory] = useState<string | null>(null);
   const [showQuestionnaire, setShowQuestionnaire] = useState(false);
   const [selectedPractice, setSelectedPractice] = useState<null | "verb" | "nounAdj" | "household">(null);
-  const [verbTense, setVerbTense] = useState<"present" | "past" | "future" | null>(null);
+  const [verbTense, setVerbTense] = useState<null | "present" | "past" | "future">(null);
   const [selectedTextComp, setSelectedTextComp] = useState<null | "food" | "animals-easy" | "food-order-medium" | "social-media" | "food-levels" | "countries-levels" | "movies-series-levels" | "places-food-easy">(null);
   const [showVerbToBePresentation, setShowVerbToBePresentation] = useState(false);
   const [showDaysAndPlacesVocab, setShowDaysAndPlacesVocab] = useState(false);
@@ -27,6 +26,8 @@ export const useIndexState = () => {
   const [showColorsAndFruits, setShowColorsAndFruits] = useState(false);
   const [showHifilVerb, setShowHifilVerb] = useState(false);
   const [showPielVerb, setShowPielVerb] = useState(false);
+  const [showVerbPatternsMenu, setShowVerbPatternsMenu] = useState(false);
+  const [selectedVerbPattern, setSelectedVerbPattern] = useState<{ pattern: string; level: string } | null>(null);
 
   const resetToMainMenu = () => {
     setShowLinkingWords(false);
@@ -53,6 +54,8 @@ export const useIndexState = () => {
     setShowColorsAndFruits(false);
     setShowHifilVerb(false);
     setShowPielVerb(false);
+    setShowVerbPatternsMenu(false);
+    setSelectedVerbPattern(null);
   };
 
   return {
@@ -106,6 +109,10 @@ export const useIndexState = () => {
     setShowHifilVerb,
     showPielVerb,
     setShowPielVerb,
+    showVerbPatternsMenu,
+    setShowVerbPatternsMenu,
+    selectedVerbPattern,
+    setSelectedVerbPattern,
     resetToMainMenu,
   };
-};
+}

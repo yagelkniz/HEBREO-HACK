@@ -22,8 +22,7 @@ interface IndexMainMenuProps {
   setShowLinkingWordsLevels: (b: boolean) => void;
   setShowVerbMemoryGame: (b: boolean) => void;
   setShowColorsAndFruits: (b: boolean) => void;
-  setShowHifilVerb: (b: boolean) => void;
-  setShowPielVerb: (b: boolean) => void;
+  setShowVerbPatternsMenu: (b: boolean) => void;
 }
 
 interface MenuItemProps {
@@ -66,8 +65,7 @@ export default function IndexMainMenu({
   setShowLinkingWordsLevels,
   setShowVerbMemoryGame,
   setShowColorsAndFruits,
-  setShowHifilVerb,
-  setShowPielVerb,
+  setShowVerbPatternsMenu,
 }: IndexMainMenuProps) {
   const t = menuText[lang];
 
@@ -219,17 +217,10 @@ export default function IndexMainMenu({
             lang={lang}
           />
           <MenuItem
-            emoji="👔"
-            label={lang === "he" ? "בניין הפעיל" : "Hif'il Pattern"}
-            onClick={() => setShowHifilVerb(true)}
-            colorClass="bg-amber-100 text-amber-900 border-amber-300"
-            lang={lang}
-          />
-          <MenuItem
-            emoji="🗣️"
-            label={lang === "he" ? "בניין פיעל" : "Pi'el Pattern"}
-            onClick={() => setShowPielVerb(true)}
-            colorClass="bg-purple-100 text-purple-900 border-purple-300"
+            emoji="🔠"
+            label={lang === "he" ? "בניינים בעברית" : "Verb Patterns"}
+            onClick={() => setShowVerbPatternsMenu(true)}
+            colorClass="bg-gradient-to-br from-amber-100 to-purple-100 text-amber-900 border-amber-300"
             lang={lang}
           />
           <MenuItem
