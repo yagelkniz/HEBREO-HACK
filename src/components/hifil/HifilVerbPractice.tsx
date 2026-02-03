@@ -33,9 +33,13 @@ export default function HifilVerbPractice({ onBack, initialLevel = "learn", lang
 
   const displayText = (text: string) => (showNikud ? text : removeNikud(text));
 
-  // Shuffle options for each question using Fisher-Yates algorithm
+  // Shuffle questions and options using Fisher-Yates algorithm
   const shuffledQuestions = useMemo(() => {
-    return hifilQuestions.map(q => {
+    // First shuffle all questions
+    const shuffled = [...hifilQuestions].sort(() => Math.random() - 0.5);
+    
+    // Then shuffle options within each question
+    return shuffled.map(q => {
       const shuffledOptions = [...q.options];
       for (let i = shuffledOptions.length - 1; i > 0; i--) {
         const j = Math.floor(Math.random() * (i + 1));
