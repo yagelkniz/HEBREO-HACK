@@ -1,4 +1,4 @@
-import { useState } from "react";
+import { useState, useMemo } from "react";
 import { Button } from "@/components/ui/button";
 import { Checkbox } from "@/components/ui/checkbox";
 import { conjugationTable, hifilQuestions, HifilQuestion } from "./HifilVerbData";
@@ -25,8 +25,20 @@ export default function HifilVerbPractice({ onBack }: HifilVerbPracticeProps) {
 
   const displayText = (text: string) => (showNikud ? text : removeNikud(text));
 
+  // Shuffle options for each question using Fisher-Yates algorithm
+  const shuffledQuestions = useMemo(() => {
+    return hifilQuestions.map(q => {
+      const shuffledOptions = [...q.options];
+      for (let i = shuffledOptions.length - 1; i > 0; i--) {
+        const j = Math.floor(Math.random() * (i + 1));
+        [shuffledOptions[i], shuffledOptions[j]] = [shuffledOptions[j], shuffledOptions[i]];
+      }
+      return { ...q, options: shuffledOptions };
+    });
+  }, [phase]); // Re-shuffle when phase changes (new tense)
+
   const getQuestionsByTense = (tense: TenseType): HifilQuestion[] => {
-    return hifilQuestions.filter((q) => q.tense === tense);
+    return shuffledQuestions.filter((q) => q.tense === tense);
   };
 
   const currentQuestions = phase !== "table" && phase !== "results" ? getQuestionsByTense(phase) : [];

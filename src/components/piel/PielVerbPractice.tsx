@@ -40,8 +40,25 @@ export default function PielVerbPractice({ onBack }: PielVerbPracticeProps) {
     if (selectedTense !== "all") {
       filtered = filtered.filter(q => q.tense === selectedTense);
     }
+    // Shuffle questions
     const shuffled = filtered.sort(() => Math.random() - 0.5);
-    return shuffled.slice(0, questionsPerDifficulty[difficulty]);
+    
+    // Shuffle options for each question
+    return shuffled.slice(0, questionsPerDifficulty[difficulty]).map(q => {
+      const optionIndices = q.options.map((_, idx) => idx);
+      // Fisher-Yates shuffle
+      for (let i = optionIndices.length - 1; i > 0; i--) {
+        const j = Math.floor(Math.random() * (i + 1));
+        [optionIndices[i], optionIndices[j]] = [optionIndices[j], optionIndices[i]];
+      }
+      
+      return {
+        ...q,
+        options: optionIndices.map(i => q.options[i]),
+        optionsNikud: optionIndices.map(i => q.optionsNikud[i]),
+        correctAnswer: optionIndices.indexOf(q.correctAnswer)
+      };
+    });
   }, [difficulty, selectedTense]);
 
   const currentQuestion = quizQuestions[currentQuestionIndex];
