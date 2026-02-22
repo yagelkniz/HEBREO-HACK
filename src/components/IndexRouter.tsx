@@ -35,6 +35,7 @@ import VerbMemoryGame from "@/components/VerbMemoryGame";
 import ColorsAndFruitsPractice from "@/components/ColorsAndFruitsPractice";
 import HifilVerbPractice from "@/components/hifil/HifilVerbPractice";
 import PielVerbPractice from "@/components/piel/PielVerbPractice";
+import BinyanRecognitionPractice from "@/components/binyanRecognition/BinyanRecognitionPractice";
 import ListeningPractice from "@/components/ListeningPractice";
 import { useIndexState } from "@/hooks/useIndexState";
 
@@ -105,6 +106,9 @@ export default function IndexRouter({ state }: IndexRouterProps) {
   if (selectedVerbPattern) {
     const { pattern, level } = selectedVerbPattern;
     
+    if (pattern === "binyan-recognition") {
+      return <BinyanRecognitionPractice onBack={() => setSelectedVerbPattern(null)} />;
+    }
     if (pattern === "hifil") {
       return <HifilVerbPractice onBack={() => setSelectedVerbPattern(null)} initialLevel={level as "learn" | "easy" | "medium" | "hard"} lang={lang} />;
     }

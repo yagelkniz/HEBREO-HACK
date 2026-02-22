@@ -85,6 +85,18 @@ export default function VerbPatternsMenu({ lang, onBack, onSelectPattern }: Verb
 
   const patterns = [
     {
+      id: "binyan-recognition",
+      nameHe: "זיהוי בניינים",
+      nameEn: "Binyan Recognition",
+      descHe: "תרגול זיהוי בניינים שונים - פיעל, הפעיל ועוד",
+      descEn: "Practice identifying different verb patterns",
+      exampleHe: "להסביר (הפעיל) vs לדבר (פיעל)",
+      exampleEn: "to explain (Hif'il) vs to speak (Pi'el)",
+      emoji: "🔍",
+      colorClass: "bg-gradient-to-br from-amber-50 to-purple-50 border-amber-300",
+      available: true,
+    },
+    {
       id: "paal",
       nameHe: "בניין פָּעַל",
       nameEn: "Pa'al Pattern",
@@ -223,19 +235,41 @@ export default function VerbPatternsMenu({ lang, onBack, onSelectPattern }: Verb
                   </Badge>
                 </div>
               )}
-              <PatternCard
-                nameHe={pattern.nameHe}
-                nameEn={pattern.nameEn}
-                descHe={pattern.descHe}
-                descEn={pattern.descEn}
-                exampleHe={pattern.exampleHe}
-                exampleEn={pattern.exampleEn}
-                emoji={pattern.emoji}
-                colorClass={pattern.colorClass}
-                levels={levels}
-                lang={lang}
-                onSelectLevel={(level) => onSelectPattern(pattern.id, level)}
-              />
+              {pattern.id === "binyan-recognition" ? (
+                <Card className={`${pattern.colorClass} border-2 shadow-lg hover:shadow-xl transition-shadow cursor-pointer`} onClick={() => onSelectPattern(pattern.id, "start")}>
+                  <CardHeader className="pb-2">
+                    <CardTitle className="flex items-center gap-2 text-xl" dir={lang === "he" ? "rtl" : "ltr"}>
+                      <span className="text-2xl">{pattern.emoji}</span>
+                      <span>{t(pattern.nameHe, pattern.nameEn)}</span>
+                    </CardTitle>
+                    <p className="text-sm text-muted-foreground" dir={lang === "he" ? "rtl" : "ltr"}>
+                      {t(pattern.descHe, pattern.descEn)}
+                    </p>
+                    <Badge variant="secondary" className="w-fit mt-1">
+                      {t(pattern.exampleHe, pattern.exampleEn)}
+                    </Badge>
+                  </CardHeader>
+                  <CardContent className="pt-2">
+                    <Button variant="default" size="sm" className="flex items-center gap-1">
+                      🚀 {t("התחל תרגול", "Start Practice")}
+                    </Button>
+                  </CardContent>
+                </Card>
+              ) : (
+                <PatternCard
+                  nameHe={pattern.nameHe}
+                  nameEn={pattern.nameEn}
+                  descHe={pattern.descHe}
+                  descEn={pattern.descEn}
+                  exampleHe={pattern.exampleHe}
+                  exampleEn={pattern.exampleEn}
+                  emoji={pattern.emoji}
+                  colorClass={pattern.colorClass}
+                  levels={levels}
+                  lang={lang}
+                  onSelectLevel={(level) => onSelectPattern(pattern.id, level)}
+                />
+              )}
             </div>
           ))}
         </div>
