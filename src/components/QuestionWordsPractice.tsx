@@ -1,5 +1,6 @@
 import React, { useState, useMemo } from "react";
 import { Button } from "@/components/ui/button";
+import { Eye, EyeOff } from "lucide-react";
 import { ArrowRight, Check, X } from "lucide-react";
 import {
   questionWordsVocabulary,
@@ -22,6 +23,7 @@ export default function QuestionWordsPractice({ onBack }: QuestionWordsPracticeP
   const [answers, setAnswers] = useState<{ [id: number]: string }>({});
   const [feedback, setFeedback] = useState<{ [id: number]: "correct" | "incorrect" }>({});
   const [showVocab, setShowVocab] = useState(false);
+  const [showTranslation, setShowTranslation] = useState(false);
   const [shuffleKey, setShuffleKey] = useState(0);
 
   const getQuestionsRaw = (): QuestionWordQuestion[] => {
@@ -121,6 +123,15 @@ export default function QuestionWordsPractice({ onBack }: QuestionWordsPracticeP
           >
             בלי ניקוד
           </Button>
+          <span className="mx-2 text-muted-foreground">|</span>
+          <Button
+            variant={showTranslation ? "default" : "outline"}
+            size="sm"
+            onClick={() => setShowTranslation(!showTranslation)}
+          >
+            {showTranslation ? <Eye className="w-4 h-4 ml-1" /> : <EyeOff className="w-4 h-4 ml-1" />}
+            EN
+          </Button>
         </div>
 
         <h2 className="text-xl font-semibold text-center mb-4">בחר רמה</h2>
@@ -170,7 +181,7 @@ export default function QuestionWordsPractice({ onBack }: QuestionWordsPracticeP
       </div>
 
       <div className="flex items-center justify-between mb-6">
-        <div className="flex items-center gap-4">
+        <div className="flex items-center gap-4 flex-wrap">
           <span className="text-sm font-medium">ניקוד:</span>
           <Button
             variant={showNikud ? "default" : "outline"}
@@ -185,6 +196,15 @@ export default function QuestionWordsPractice({ onBack }: QuestionWordsPracticeP
             onClick={() => setShowNikud(false)}
           >
             בלי ניקוד
+          </Button>
+          <span className="mx-1 text-muted-foreground">|</span>
+          <Button
+            variant={showTranslation ? "default" : "outline"}
+            size="sm"
+            onClick={() => setShowTranslation(!showTranslation)}
+          >
+            {showTranslation ? <Eye className="w-4 h-4 ml-1" /> : <EyeOff className="w-4 h-4 ml-1" />}
+            EN
           </Button>
         </div>
         <div className="text-lg font-semibold">
@@ -207,9 +227,11 @@ export default function QuestionWordsPractice({ onBack }: QuestionWordsPracticeP
             <div className="text-xl font-semibold mb-2">
               {showNikud ? q.sentenceWithNikud : q.sentence}
             </div>
-            <div className="text-sm text-muted-foreground mb-4">
-              {q.translation}
-            </div>
+            {showTranslation && (
+              <div className="text-sm text-muted-foreground mb-4">
+                {q.translation}
+              </div>
+            )}
             <div className="flex flex-wrap gap-2">
               {q.options.map((option) => (
                 <Button
