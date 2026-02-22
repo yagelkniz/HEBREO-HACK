@@ -24,6 +24,7 @@ import {
   TreeDeciduous,
   Building2,
   MessageSquare,
+  Dices,
 } from "lucide-react";
 import { cn } from "@/lib/utils";
 
@@ -89,6 +90,13 @@ const navigationGroups: NavGroup[] = [
       { title: "Find the Root", titleHe: "מצא את השורש", url: "/hebrew-flow/practice/roots", icon: Brain },
       { title: "Conjugation Quiz", titleHe: "חידון הטיות", url: "/hebrew-flow/practice/conjugation", icon: GraduationCap },
       { title: "Sentence Builder", titleHe: "בונה משפטים", url: "/hebrew-flow/practice/sentences", icon: Puzzle },
+    ],
+  },
+  {
+    label: "Speaking",
+    labelHe: "דיבור",
+    items: [
+      { title: "Conversation Roulette", titleHe: "רולטת שיחה", url: "/hebrew-flow/conversation-roulette", icon: Dices },
     ],
   },
 ];

@@ -16,6 +16,7 @@ import PracticeArena from "./components/hebrewFlow/PracticeArena";
 import SentenceBuilder from "./components/hebrewFlow/SentenceBuilder";
 import RootsConcept from "./components/hebrewFlow/RootsConcept";
 import SyntaxModules from "./components/hebrewFlow/SyntaxModules";
+import ConversationRoulette from "./components/hebrewFlow/ConversationRoulette";
 
 const queryClient = new QueryClient();
 
@@ -41,6 +42,7 @@ const App = () => (
             <Route path="practice/roots" element={<PracticeArena />} />
             <Route path="practice/conjugation" element={<PracticeArena />} />
             <Route path="practice/sentences" element={<SentenceBuilder />} />
+            <Route path="conversation-roulette" element={<ConversationRoulette />} />
           </Route>
           
           {/* ADD ALL CUSTOM ROUTES ABOVE THE CATCH-ALL "*" ROUTE */}
