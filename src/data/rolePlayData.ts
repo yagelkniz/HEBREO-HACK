@@ -10,6 +10,22 @@ export interface RolePlayStep {
   options: RolePlayOption[];
 }
 
+export interface GlossaryItem {
+  termHe: string;
+  termEn: string;
+  meaningEn: string;
+  exampleHe: string;
+  exampleEn: string;
+}
+
+export interface GlossaryScreen {
+  titleHe: string;
+  titleEn: string;
+  items: GlossaryItem[];
+  ctaHe: string;
+  ctaEn: string;
+}
+
 export interface RolePlayScenario {
   scenarioId: string;
   title: string;
@@ -18,6 +34,7 @@ export interface RolePlayScenario {
   goalEn: string;
   characterTone: string;
   characterToneEn: string;
+  glossaryScreen: GlossaryScreen;
   steps: RolePlayStep[];
 }
 
@@ -30,6 +47,22 @@ export const rolePlayScenarios: RolePlayScenario[] = [
     goalEn: "Make plans without sounding robotic",
     characterTone: "קליל וישראלי",
     characterToneEn: "Casual & Israeli",
+    glossaryScreen: {
+      titleHe: "מקרא לפני התרגול",
+      titleEn: "Glossary Before Practice",
+      items: [
+        { termHe: "מה נסגר?", termEn: "Ma nisgar?", meaningEn: "What's going on? / What's the plan?", exampleHe: "יאללה, מה נסגר הערב?", exampleEn: "So, what's the plan tonight?" },
+        { termHe: "יאללה", termEn: "Yalla", meaningEn: "Let's go / Come on", exampleHe: "יאללה, יוצאים!", exampleEn: "Come on, let's go!" },
+        { termHe: "בא לך", termEn: "Ba lekha", meaningEn: "Do you feel like / Do you want", exampleHe: "בא לך קפה?", exampleEn: "Do you feel like coffee?" },
+        { termHe: "אני על זה", termEn: "Ani al ze", meaningEn: "I'm on it / I'm in", exampleHe: "יאללה, אני על זה.", exampleEn: "Yalla, I'm in." },
+        { termHe: "יש מצב", termEn: "Yesh matzav", meaningEn: "Maybe / There's a chance", exampleHe: "יש מצב שאגיע.", exampleEn: "I might come." },
+        { termHe: "אין מצב", termEn: "Ein matzav", meaningEn: "No way / Definitely not", exampleHe: "אין מצב שאני בא.", exampleEn: "No way I'm coming." },
+        { termHe: "זורם", termEn: "Zorem", meaningEn: "Going with the flow / easygoing", exampleHe: "נראה איך אני זורם.", exampleEn: "Let's see how it goes." },
+        { termHe: "סתם", termEn: "Stam", meaningEn: "Just / Nothing special", exampleHe: "סתם, מתלבט.", exampleEn: "Nothing, just thinking about it." },
+      ],
+      ctaHe: "יאללה מתחילים",
+      ctaEn: "Start",
+    },
     steps: [
       {
         id: "f1",
@@ -61,6 +94,22 @@ export const rolePlayScenarios: RolePlayScenario[] = [
     goalEn: "Sound confident and natural with a waiter",
     characterTone: "ישיר אבל נחמד",
     characterToneEn: "Direct but friendly",
+    glossaryScreen: {
+      titleHe: "מקרא לפני התרגול",
+      titleEn: "Glossary Before Practice",
+      items: [
+        { termHe: "מה בשבילך?", termEn: "Ma bishvilkha?", meaningEn: "What would you like? (waiter to customer)", exampleHe: "מלצר: מה בשבילך?", exampleEn: "Waiter: What'll it be?" },
+        { termHe: "אפשר…?", termEn: "Efshar…?", meaningEn: "Can I have…? (polite ordering)", exampleHe: "אפשר שניצל וצ'יפס?", exampleEn: "Can I have schnitzel and fries?" },
+        { termHe: "תביא לי", termEn: "Tavi li", meaningEn: "Bring me (direct, casual)", exampleHe: "תביא לי סלט.", exampleEn: "Bring me a salad." },
+        { termHe: "משהו לשתות?", termEn: "Mashehu lishtot?", meaningEn: "Something to drink?", exampleHe: "מלצר: משהו לשתות?", exampleEn: "Waiter: Something to drink?" },
+        { termHe: "יאללה", termEn: "Yalla", meaningEn: "Let's go / Sure / OK", exampleHe: "יאללה, בירה קטנה.", exampleEn: "Sure, a small beer." },
+        { termHe: "ברצוני", termEn: "Birtzoni", meaningEn: "I wish to (very formal, avoid)", exampleHe: "ברצוני במזון.", exampleEn: "I wish to have sustenance. (robotic)" },
+        { termHe: "מעוניין", termEn: "Me'unyan", meaningEn: "Interested in (formal)", exampleHe: "אני מעוניין להזמין.", exampleEn: "I'm interested in ordering. (too formal)" },
+        { termHe: "תודה רבה לך", termEn: "Toda raba lekha", meaningEn: "Thank you very much", exampleHe: "כן, תודה רבה לך.", exampleEn: "Yes, thank you very much." },
+      ],
+      ctaHe: "יאללה מתחילים",
+      ctaEn: "Start",
+    },
     steps: [
       {
         id: "r1",
@@ -92,6 +141,22 @@ export const rolePlayScenarios: RolePlayScenario[] = [
     goalEn: "Sound professional but not stiff",
     characterTone: "מכבד אך יומיומי",
     characterToneEn: "Respectful yet casual",
+    glossaryScreen: {
+      titleHe: "מקרא לפני התרגול",
+      titleEn: "Glossary Before Practice",
+      items: [
+        { termHe: "לעדכן", termEn: "Le'adken", meaningEn: "To update / inform", exampleHe: "אני רוצה לעדכן אותך.", exampleEn: "I want to update you." },
+        { termHe: "כנראה", termEn: "Kanir'e", meaningEn: "Probably / likely", exampleHe: "אני כנראה אאחר.", exampleEn: "I'll probably be late." },
+        { termHe: "יש מצב", termEn: "Yesh matzav", meaningEn: "There's a chance / maybe (casual)", exampleHe: "יש מצב שאאחר קצת.", exampleEn: "I might be a bit late." },
+        { termHe: "סורי", termEn: "Sorry", meaningEn: "Sorry (informal, borrowed)", exampleHe: "סורי על האיחור.", exampleEn: "Sorry for being late." },
+        { termHe: "תור", termEn: "Tor", meaningEn: "Appointment / turn", exampleHe: "יש לי תור לרופא.", exampleEn: "I have a doctor's appointment." },
+        { termHe: "פשוט", termEn: "Pashut", meaningEn: "Simply / just", exampleHe: "פשוט יש לי תור.", exampleEn: "I just have an appointment." },
+        { termHe: "אין באפשרותי", termEn: "Ein be'efsharuti", meaningEn: "I'm unable to (very formal, avoid)", exampleHe: "אין באפשרותי לפרט.", exampleEn: "I'm unable to elaborate. (too formal)" },
+        { termHe: "הכול בסדר?", termEn: "Hakol beseder?", meaningEn: "Is everything OK?", exampleHe: "הבוס: הכול בסדר?", exampleEn: "Boss: Everything OK?" },
+      ],
+      ctaHe: "יאללה מתחילים",
+      ctaEn: "Start",
+    },
     steps: [
       {
         id: "b1",
