@@ -3,9 +3,9 @@ import { Button } from "@/components/ui/button";
 import { Card, CardContent, CardHeader, CardTitle } from "@/components/ui/card";
 import { Badge } from "@/components/ui/badge";
 import { Progress } from "@/components/ui/progress";
-import { Trophy, RotateCcw, ArrowLeft, MessageCircle, User } from "lucide-react";
+import { Trophy, RotateCcw, ArrowLeft, MessageCircle, User, BookOpen } from "lucide-react";
 import { cn } from "@/lib/utils";
-import { rolePlayScenarios, RolePlayScenario, RolePlayOption } from "@/data/rolePlayData";
+import { rolePlayScenarios, RolePlayScenario, RolePlayOption, GlossaryScreen } from "@/data/rolePlayData";
 
 interface Props {
   onBack: () => void;
@@ -134,6 +134,7 @@ function ScenarioPlay({
   onFinish: (score: number) => void;
   onBack: () => void;
 }) {
+  const [showGlossary, setShowGlossary] = useState(true);
   const [stepIndex, setStepIndex] = useState(0);
   const [selected, setSelected] = useState<RolePlayOption | null>(null);
   const [totalNaturalness, setTotalNaturalness] = useState(0);
@@ -170,6 +171,19 @@ function ScenarioPlay({
     if (n >= 50) return t("סביר 🤔", "Decent 🤔");
     return t("לא טבעי ❌", "Unnatural ❌");
   };
+
+  if (showGlossary) {
+    return (
+      <GlossaryView
+        glossary={scenario.glossaryScreen}
+        scenarioTitle={lang === "he" ? scenario.title : scenario.titleEn}
+        lang={lang}
+        t={t}
+        onStart={() => setShowGlossary(false)}
+        onBack={onBack}
+      />
+    );
+  }
 
   if (isComplete) {
     const avgScore = Math.round(totalNaturalness / scenario.steps.length);
@@ -327,6 +341,70 @@ function ScenarioPlay({
             )}
           </CardContent>
         </Card>
+      </div>
+    </div>
+  );
+}
+
+/* ─── Glossary View ─── */
+function GlossaryView({
+  glossary, scenarioTitle, lang, t, onStart, onBack,
+}: {
+  glossary: GlossaryScreen;
+  scenarioTitle: string;
+  lang: string;
+  t: (he: string, en: string) => string;
+  onStart: () => void;
+  onBack: () => void;
+}) {
+  return (
+    <div dir="rtl" className="min-h-screen bg-gradient-to-br from-blue-50 to-indigo-100 p-4">
+      <div className="max-w-2xl mx-auto space-y-6">
+        <div className="flex items-center justify-between">
+          <Button variant="ghost" onClick={onBack}>
+            ⬅ {t("חזרה", "Back")}
+          </Button>
+          <Badge variant="outline">{scenarioTitle}</Badge>
+        </div>
+
+        <Card>
+          <CardHeader className="text-center pb-3">
+            <div className="w-14 h-14 mx-auto rounded-full bg-primary/20 flex items-center justify-center mb-3">
+              <BookOpen className="h-7 w-7 text-primary" />
+            </div>
+            <CardTitle className="text-xl">
+              {lang === "he" ? glossary.titleHe : glossary.titleEn}
+            </CardTitle>
+            <p className="text-sm text-muted-foreground mt-1">
+              {t("כדאי לקרוא לפני שמתחילים 👇", "Read before you start 👇")}
+            </p>
+          </CardHeader>
+          <CardContent className="space-y-3 max-h-[60vh] overflow-y-auto">
+            {glossary.items.map((item, i) => (
+              <div
+                key={i}
+                className="p-3 rounded-lg border bg-card hover:bg-muted/50 transition-colors"
+              >
+                <div className="flex items-baseline gap-2 justify-between">
+                  <span className="font-bold text-base text-primary">{item.termHe}</span>
+                  <span className="text-xs text-muted-foreground">{item.termEn}</span>
+                </div>
+                <p className="text-sm text-muted-foreground mt-1" dir="ltr">
+                  {item.meaningEn}
+                </p>
+                <div className="mt-2 text-sm bg-muted/50 rounded p-2">
+                  <p className="font-medium">{item.exampleHe}</p>
+                  <p className="text-muted-foreground text-xs mt-0.5" dir="ltr">{item.exampleEn}</p>
+                </div>
+              </div>
+            ))}
+          </CardContent>
+        </Card>
+
+        <Button className="w-full text-lg py-6 font-bold" onClick={onStart}>
+          {lang === "he" ? glossary.ctaHe : glossary.ctaEn}
+          <ArrowLeft className="h-5 w-5 mr-2" />
+        </Button>
       </div>
     </div>
   );
