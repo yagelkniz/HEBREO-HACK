@@ -40,6 +40,7 @@ import ListeningPractice from "@/components/ListeningPractice";
 import ConversationRouletteStandalone from "@/components/ConversationRouletteStandalone";
 import SentenceOrderPractice from "@/components/SentenceOrderPractice";
 import PrepositionSuffixPractice from "@/components/PrepositionSuffixPractice";
+import HebrewSlangPractice from "@/components/HebrewSlangPractice";
 import { useIndexState } from "@/hooks/useIndexState";
 
 interface IndexRouterProps {
@@ -106,6 +107,8 @@ export default function IndexRouter({ state }: IndexRouterProps) {
     setShowSentenceOrder,
     showPrepositionSuffix,
     setShowPrepositionSuffix,
+    showHebrewSlang,
+    setShowHebrewSlang,
     resetToMainMenu,
   } = state;
 
@@ -155,6 +158,10 @@ export default function IndexRouter({ state }: IndexRouterProps) {
 
   if (showPrepositionSuffix) {
     return <PrepositionSuffixPractice onBack={() => setShowPrepositionSuffix(false)} lang={lang} />;
+  }
+
+  if (showHebrewSlang) {
+    return <HebrewSlangPractice onBack={() => setShowHebrewSlang(false)} lang={lang} />;
   }
 
   if (showPielVerb) {

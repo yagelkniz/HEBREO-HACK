@@ -27,6 +27,7 @@ interface IndexMainMenuProps {
   setShowConversationRoulette: (b: boolean) => void;
   setShowSentenceOrder: (b: boolean) => void;
   setShowPrepositionSuffix: (b: boolean) => void;
+  setShowHebrewSlang: (b: boolean) => void;
 }
 
 interface MenuItemProps {
@@ -74,6 +75,7 @@ export default function IndexMainMenu({
   setShowConversationRoulette,
   setShowSentenceOrder,
   setShowPrepositionSuffix,
+  setShowHebrewSlang,
 }: IndexMainMenuProps) {
   const t = menuText[lang];
 
@@ -250,6 +252,13 @@ export default function IndexMainMenu({
             label={lang === "he" ? "סדר את המשפט" : "Sentence Order"}
             onClick={() => setShowSentenceOrder(true)}
             colorClass="bg-gradient-to-br from-emerald-100 to-cyan-100 text-emerald-900 border-emerald-300"
+            lang={lang}
+          />
+          <MenuItem
+            emoji="🗣️"
+            label={lang === "he" ? "סלנג ישראלי" : "Israeli Slang"}
+            onClick={() => setShowHebrewSlang(true)}
+            colorClass="bg-gradient-to-br from-yellow-100 to-orange-100 text-orange-900 border-orange-300"
             lang={lang}
           />
           <MenuItem
