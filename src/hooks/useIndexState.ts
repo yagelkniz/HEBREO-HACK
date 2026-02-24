@@ -32,6 +32,7 @@ export function useIndexState() {
   const [showListeningPractice, setShowListeningPractice] = useState(false);
   const [showConversationRoulette, setShowConversationRoulette] = useState(false);
   const [showSentenceOrder, setShowSentenceOrder] = useState(false);
+  const [showPrepositionSuffix, setShowPrepositionSuffix] = useState(false);
 
   const resetToMainMenu = () => {
     setShowLinkingWords(false);
@@ -63,6 +64,7 @@ export function useIndexState() {
     setShowListeningPractice(false);
     setShowConversationRoulette(false);
     setShowSentenceOrder(false);
+    setShowPrepositionSuffix(false);
   };
 
   return {
@@ -126,6 +128,8 @@ export function useIndexState() {
     setShowConversationRoulette,
     showSentenceOrder,
     setShowSentenceOrder,
+    showPrepositionSuffix,
+    setShowPrepositionSuffix,
     resetToMainMenu,
   };
 }

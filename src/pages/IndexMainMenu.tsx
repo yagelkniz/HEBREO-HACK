@@ -26,6 +26,7 @@ interface IndexMainMenuProps {
   setShowListeningPractice: (b: boolean) => void;
   setShowConversationRoulette: (b: boolean) => void;
   setShowSentenceOrder: (b: boolean) => void;
+  setShowPrepositionSuffix: (b: boolean) => void;
 }
 
 interface MenuItemProps {
@@ -72,6 +73,7 @@ export default function IndexMainMenu({
   setShowListeningPractice,
   setShowConversationRoulette,
   setShowSentenceOrder,
+  setShowPrepositionSuffix,
 }: IndexMainMenuProps) {
   const t = menuText[lang];
 
@@ -139,6 +141,13 @@ export default function IndexMainMenu({
             label={t.linkingWords}
             onClick={() => setShowLinkingWords(true)}
             colorClass="bg-fuchsia-100 text-fuchsia-900 border-fuchsia-300"
+            lang={lang}
+          />
+          <MenuItem
+            emoji="🔤"
+            label={lang === "he" ? "מילות יחס + כינויים" : "Preposition Suffixes"}
+            onClick={() => setShowPrepositionSuffix(true)}
+            colorClass="bg-gradient-to-br from-sky-100 to-violet-100 text-sky-900 border-sky-300"
             lang={lang}
           />
         </div>

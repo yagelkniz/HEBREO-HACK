@@ -33,7 +33,8 @@ export default function Index() {
     state.selectedVerbPattern ||
     state.showListeningPractice ||
     state.showConversationRoulette ||
-    state.showSentenceOrder;
+    state.showSentenceOrder ||
+    state.showPrepositionSuffix;
 
   // Show Verb Patterns Menu
   if (state.showVerbPatternsMenu && !state.selectedVerbPattern) {
@@ -76,6 +77,7 @@ export default function Index() {
         setShowListeningPractice={state.setShowListeningPractice}
         setShowConversationRoulette={state.setShowConversationRoulette}
         setShowSentenceOrder={state.setShowSentenceOrder}
+        setShowPrepositionSuffix={state.setShowPrepositionSuffix}
       />
     </div>
   );

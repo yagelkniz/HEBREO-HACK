@@ -39,6 +39,7 @@ import BinyanRecognitionPractice from "@/components/binyanRecognition/BinyanReco
 import ListeningPractice from "@/components/ListeningPractice";
 import ConversationRouletteStandalone from "@/components/ConversationRouletteStandalone";
 import SentenceOrderPractice from "@/components/SentenceOrderPractice";
+import PrepositionSuffixPractice from "@/components/PrepositionSuffixPractice";
 import { useIndexState } from "@/hooks/useIndexState";
 
 interface IndexRouterProps {
@@ -103,6 +104,8 @@ export default function IndexRouter({ state }: IndexRouterProps) {
     setShowConversationRoulette,
     showSentenceOrder,
     setShowSentenceOrder,
+    showPrepositionSuffix,
+    setShowPrepositionSuffix,
     resetToMainMenu,
   } = state;
 
@@ -148,6 +151,10 @@ export default function IndexRouter({ state }: IndexRouterProps) {
 
   if (showSentenceOrder) {
     return <SentenceOrderPractice onBack={() => setShowSentenceOrder(false)} lang={lang} />;
+  }
+
+  if (showPrepositionSuffix) {
+    return <PrepositionSuffixPractice onBack={() => setShowPrepositionSuffix(false)} lang={lang} />;
   }
 
   if (showPielVerb) {
