@@ -30,6 +30,7 @@ export function useIndexState() {
   const [selectedVerbPattern, setSelectedVerbPattern] = useState<{ pattern: string; level: string } | null>(null);
   const [showListeningPractice, setShowListeningPractice] = useState(false);
   const [showConversationRoulette, setShowConversationRoulette] = useState(false);
+  const [showSentenceOrder, setShowSentenceOrder] = useState(false);
 
   const resetToMainMenu = () => {
     setShowLinkingWords(false);
@@ -60,6 +61,7 @@ export function useIndexState() {
     setSelectedVerbPattern(null);
     setShowListeningPractice(false);
     setShowConversationRoulette(false);
+    setShowSentenceOrder(false);
   };
 
   return {
@@ -121,6 +123,8 @@ export function useIndexState() {
     setShowListeningPractice,
     showConversationRoulette,
     setShowConversationRoulette,
+    showSentenceOrder,
+    setShowSentenceOrder,
     resetToMainMenu,
   };
 }
