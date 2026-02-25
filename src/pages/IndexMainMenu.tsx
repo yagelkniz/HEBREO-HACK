@@ -29,6 +29,7 @@ interface IndexMainMenuProps {
   setShowPrepositionSuffix: (b: boolean) => void;
   setShowHebrewSlang: (b: boolean) => void;
   setShowRolePlay: (b: boolean) => void;
+  setShowConnectorCorrection: (b: boolean) => void;
 }
 
 interface MenuItemProps {
@@ -78,6 +79,7 @@ export default function IndexMainMenu({
   setShowPrepositionSuffix,
   setShowHebrewSlang,
   setShowRolePlay,
+  setShowConnectorCorrection,
 }: IndexMainMenuProps) {
   const t = menuText[lang];
 
@@ -268,6 +270,13 @@ export default function IndexMainMenu({
             label={lang === "he" ? "סימולציית שיחה" : "Role-Play"}
             onClick={() => setShowRolePlay(true)}
             colorClass="bg-gradient-to-br from-rose-100 to-purple-100 text-rose-900 border-rose-300"
+            lang={lang}
+          />
+          <MenuItem
+            emoji="🔗"
+            label={lang === "he" ? "תיקון מילות קישור" : "Connector Fix"}
+            onClick={() => setShowConnectorCorrection(true)}
+            colorClass="bg-gradient-to-br from-teal-100 to-cyan-100 text-teal-900 border-teal-300"
             lang={lang}
           />
           <MenuItem

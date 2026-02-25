@@ -42,6 +42,7 @@ import SentenceOrderPractice from "@/components/SentenceOrderPractice";
 import PrepositionSuffixPractice from "@/components/PrepositionSuffixPractice";
 import HebrewSlangPractice from "@/components/HebrewSlangPractice";
 import RolePlayPractice from "@/components/RolePlayPractice";
+import ConnectorCorrectionPractice from "@/components/ConnectorCorrectionPractice";
 import { useIndexState } from "@/hooks/useIndexState";
 
 interface IndexRouterProps {
@@ -112,6 +113,8 @@ export default function IndexRouter({ state }: IndexRouterProps) {
     setShowHebrewSlang,
     showRolePlay,
     setShowRolePlay,
+    showConnectorCorrection,
+    setShowConnectorCorrection,
     resetToMainMenu,
   } = state;
 
@@ -169,6 +172,10 @@ export default function IndexRouter({ state }: IndexRouterProps) {
 
   if (showRolePlay) {
     return <RolePlayPractice onBack={() => setShowRolePlay(false)} lang={lang} />;
+  }
+
+  if (showConnectorCorrection) {
+    return <ConnectorCorrectionPractice onBack={() => setShowConnectorCorrection(false)} lang={lang} />;
   }
 
   if (showPielVerb) {
