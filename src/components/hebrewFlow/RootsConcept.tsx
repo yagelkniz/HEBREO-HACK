@@ -8,6 +8,7 @@ import { Label } from "@/components/ui/label";
 import { Tabs, TabsContent, TabsList, TabsTrigger } from "@/components/ui/tabs";
 import { TreeDeciduous, Volume2, Lightbulb, ArrowRight, BookOpen } from "lucide-react";
 import { cn } from "@/lib/utils";
+import { speakHebrew } from "@/lib/speakHebrew";
 import { commonRoots } from "@/data/hebrewFlow/binyanim";
 
 interface LayoutContext {
@@ -19,12 +20,7 @@ export default function RootsConcept() {
   const { lang, t } = useOutletContext<LayoutContext>() || { lang: "en", t: (en: string) => en };
   const [showNikud, setShowNikud] = useState(true);
 
-  const speakHebrew = (text: string) => {
-    const utterance = new SpeechSynthesisUtterance(text);
-    utterance.lang = "he-IL";
-    utterance.rate = 0.8;
-    window.speechSynthesis.speak(utterance);
-  };
+  const speak = (text: string) => speakHebrew(text, 0.8);
 
   return (
     <div className="max-w-4xl mx-auto space-y-6">
@@ -140,7 +136,7 @@ export default function RootsConcept() {
                             variant="ghost"
                             size="icon"
                             className="h-8 w-8"
-                            onClick={() => speakHebrew(form.infinitive)}
+                            onClick={() => speak(form.infinitive)}
                           >
                             <Volume2 className="h-4 w-4" />
                           </Button>

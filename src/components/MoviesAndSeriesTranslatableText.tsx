@@ -3,12 +3,9 @@ import React from "react";
 import { Tooltip, TooltipTrigger, TooltipContent } from "@/components/ui/tooltip";
 import { Volume2 } from "lucide-react";
 
-// פונקציית text-to-speech
-function speakWord(word: string) {
-  const utterance = new window.SpeechSynthesisUtterance(word);
-  utterance.lang = "he-IL";
-  window.speechSynthesis.speak(utterance);
-}
+import { speakHebrew } from "@/lib/speakHebrew";
+
+const speakWord = (word: string) => speakHebrew(word);
 
 // מזהה מחרוזות כמו "מילה (פירוש באנגלית)" או סתם מילה רגילה
 const wordRegex = /([א-תa-zA-Z"׳"\-’'.]+?)\s*\(([^)]+)\)|([^\s]+)/g;

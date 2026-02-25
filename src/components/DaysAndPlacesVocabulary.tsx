@@ -3,6 +3,7 @@ import React, { useState } from "react";
 import { Button } from "@/components/ui/button";
 import { Card, CardContent, CardHeader, CardTitle } from "@/components/ui/card";
 import { Volume2 } from "lucide-react";
+import { speakHebrew } from "@/lib/speakHebrew";
 
 interface VocabularyWord {
   hebrew: string;
@@ -62,15 +63,7 @@ export default function DaysAndPlacesVocabulary({ onBack }: DaysAndPlacesVocabul
     }
   ];
 
-  const handlePronunciation = (text: string) => {
-    // Simple TTS using Web Speech API if available
-    if ('speechSynthesis' in window) {
-      const utterance = new SpeechSynthesisUtterance(text);
-      utterance.lang = 'he-IL';
-      utterance.rate = 0.8;
-      speechSynthesis.speak(utterance);
-    }
-  };
+  const handlePronunciation = (text: string) => speakHebrew(text, 0.8);
 
   if (currentCategory) {
     const category = vocabularyData.find(cat => cat.name === currentCategory);

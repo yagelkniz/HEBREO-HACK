@@ -1,7 +1,7 @@
-
 import React from "react";
 import { Tooltip, TooltipTrigger, TooltipContent } from "@/components/ui/tooltip";
-
+import { Volume2 } from "lucide-react";
+import { speakHebrew } from "@/lib/speakHebrew";
 type TranslationsMap = {
   [hebrewWord: string]: string;
 };
@@ -30,11 +30,13 @@ export default function TranslatableText({ text, translations }: Props) {
             <Tooltip key={idx}>
               <TooltipTrigger asChild>
                 <span
-                  className="relative cursor-pointer font-semibold text-blue-900 px-1 transition hover:bg-blue-100 hover:underline rounded"
+                  className="relative cursor-pointer font-semibold text-blue-900 px-1 transition hover:bg-blue-100 hover:underline rounded inline-flex items-center gap-0.5"
                   tabIndex={0}
                   aria-label={`תרגום: ${translate}`}
+                  onClick={() => speakHebrew(cleanWord)}
                 >
                   {rawWord}
+                  <Volume2 className="inline w-3.5 h-3.5 opacity-50 hover:opacity-100 text-blue-400" />
                 </span>
               </TooltipTrigger>
               <TooltipContent
