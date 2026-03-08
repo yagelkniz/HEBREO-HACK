@@ -192,11 +192,11 @@ function LevelPlay({
 
             {score >= 80 ? (
               <div className="p-3 rounded-lg bg-green-50 border border-green-200 text-green-700 font-medium">
-                🔓 {t("הרמה הבאה נפתחה!", "Next level unlocked!")}
+                🎉 {t("כל הכבוד!", "Great job!")}
               </div>
             ) : (
               <div className="p-3 rounded-lg bg-amber-50 border border-amber-200 text-amber-700 font-medium">
-                🔒 {t("צריך 80% כדי לפתוח את הרמה הבאה. נסה שוב!", "Need 80% to unlock next level. Try again!")}
+                💪 {t("נסה שוב לשפר את הציון!", "Try again to improve your score!")}
               </div>
             )}
 

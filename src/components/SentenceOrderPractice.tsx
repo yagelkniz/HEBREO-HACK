@@ -208,11 +208,6 @@ function LevelPractice({
               {score} / {items.length} {t("נכון", "correct")}
             </p>
             <Progress value={percentage} className="h-3" />
-            {percentage < 80 && (
-              <p className="text-sm text-destructive">
-                {t("נדרש 80% כדי לפתוח את השלב הבא", "Need 80% to unlock the next level")}
-              </p>
-            )}
             <div className="flex gap-3 justify-center pt-2">
               <Button variant="outline" onClick={() => {
                 setCurrentIndex(0);
