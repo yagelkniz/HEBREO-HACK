@@ -98,7 +98,7 @@ function LevelSelect({
               >
                 <div className="flex items-center justify-between">
                   <div className="flex items-center gap-2">
-                    {!unlocked && <Lock className="h-5 w-5 text-muted-foreground" />}
+                    
                     {score !== undefined && (
                       <Badge variant={score >= 80 ? "default" : "secondary"}>
                         {score}%
