@@ -276,6 +276,7 @@ export default function IndexRouter({ state }: IndexRouterProps) {
   if (showPronounsMenu) {
     return (
       <PronounsMenu
+        lang={lang}
         onBack={() => {
           setShowPronounsMenu(false);
           setShowPronounsTable(true);
