@@ -143,6 +143,8 @@ export function useIndexState() {
     setShowRolePlay,
     showConnectorCorrection,
     setShowConnectorCorrection,
+    showPronounSuffixReflexive,
+    setShowPronounSuffixReflexive,
     resetToMainMenu,
   };
 }
