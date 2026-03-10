@@ -35,6 +35,7 @@ export function useIndexState() {
   const [showHebrewSlang, setShowHebrewSlang] = useState(false);
   const [showRolePlay, setShowRolePlay] = useState(false);
   const [showConnectorCorrection, setShowConnectorCorrection] = useState(false);
+  const [showPronounSuffixReflexive, setShowPronounSuffixReflexive] = useState(false);
 
   const resetToMainMenu = () => {
     setShowLinkingWords(false);
