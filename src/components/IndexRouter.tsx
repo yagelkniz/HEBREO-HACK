@@ -181,6 +181,10 @@ export default function IndexRouter({ state }: IndexRouterProps) {
     return <ConnectorCorrectionPractice onBack={() => setShowConnectorCorrection(false)} lang={lang} />;
   }
 
+  if (showPronounSuffixReflexive) {
+    return <PronounSuffixReflexivePractice onBack={() => setShowPronounSuffixReflexive(false)} lang={lang} />;
+  }
+
   if (showPielVerb) {
     return <PielVerbPractice onBack={resetToMainMenu} />;
   }
