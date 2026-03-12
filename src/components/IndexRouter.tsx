@@ -119,6 +119,8 @@ export default function IndexRouter({ state }: IndexRouterProps) {
     setShowConnectorCorrection,
     showPronounSuffixReflexive,
     setShowPronounSuffixReflexive,
+    showBeginnerHebrew,
+    setShowBeginnerHebrew,
     resetToMainMenu,
   } = state;
 
