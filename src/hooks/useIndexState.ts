@@ -73,6 +73,7 @@ export function useIndexState() {
     setShowRolePlay(false);
     setShowConnectorCorrection(false);
     setShowPronounSuffixReflexive(false);
+    setShowBeginnerHebrew(false);
   };
 
   return {
