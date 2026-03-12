@@ -112,6 +112,13 @@ export default function IndexMainMenu({
         </h2>
         <div className="grid grid-cols-2 md:grid-cols-4 gap-3">
           <MenuItem
+            emoji="🌱"
+            label={lang === "he" ? "עברית למתחילים" : "Beginner Hebrew"}
+            onClick={() => setShowBeginnerHebrew(true)}
+            colorClass="bg-lime-100 text-lime-900 border-lime-300"
+            lang={lang}
+          />
+          <MenuItem
             emoji="📚"
             label={lang === "he" ? 'הפועל "להיות"' : 'Verb "To Be"'}
             onClick={() => setShowVerbToBePresentation(true)}

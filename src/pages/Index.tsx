@@ -86,6 +86,7 @@ export default function Index() {
         setShowRolePlay={state.setShowRolePlay}
         setShowConnectorCorrection={state.setShowConnectorCorrection}
         setShowPronounSuffixReflexive={state.setShowPronounSuffixReflexive}
+        setShowBeginnerHebrew={state.setShowBeginnerHebrew}
       />
     </div>
   );
