@@ -5,42 +5,48 @@ import { Badge } from "@/components/ui/badge";
 import { Dices, MessageCircle, ArrowRight } from "lucide-react";
 import { cn } from "@/lib/utils";
 
+interface Keyword {
+  he: string;
+  en: string;
+}
+
 interface ConversationItem {
   question: string;
-  keywords: string[];
+  keywords: Keyword[];
+  linkingWords: Keyword[];
 }
 
 const conversationData: ConversationItem[] = [
-  { question: "אם היית קם בבוקר ומגלה שאתה דובר עברית מושלמת, מה הדבר הראשון שהיית עושה?", keywords: ["שטף", "ביטחון", "הזדמנות"] },
-  { question: "איזה כוח-על היה הופך את העבודה או הלימודים שלך להרבה יותר קלים?", keywords: ["יתרון", "להתמודד", "יכולת"] },
-  { question: "אם היית חייב לחיות בתוך סרט או סדרה לחודש אחד, איזה עולם היית בוחר?", keywords: ["מציאות מדומה", "עלילה", "שחקן ראשי"] },
-  { question: "אם היית יכול לחזור בזמן רק כדי לראות הופעה חיה של להקה או אמן, לאן היית נוסע?", keywords: ["מסע בזמן", "תקופה", "נוסטלגיה"] },
-  { question: "איזה חוק חברתי היית מבטל אם הייתה לך האפשרות?", keywords: ["נורמה", "מוסכמה", "לשנות"] },
-  { question: "אם יכולת לשלוח הודעת טקסט אחת קצרה לעצמך של לפני עשר שנים, מה היית כותב?", keywords: ["תובנה", "אזהרה", "עבר"] },
-  { question: "נניח שאתה מקים חברה מחר בבוקר. איזה מוצר או שירות היא הייתה מוכרת?", keywords: ["יזמות", "צורך", "פתרון"] },
-  { question: "אם היית יכול לדעת את האמת המוחלטת לגבי תעלומה אחת בעולם, מה היית שואל?", keywords: ["תעלומה", "סוד", "סקרנות"] },
-  { question: "אם היית חייב לאכול רק מאכל אחד כל החיים והוא לא היה פוגע בבריאותך, מה היית בוחר?", keywords: ["תזונה", "הרגל", "להתפשר"] },
-  { question: "הציעו לך עכשיו חופשה ללא הגבלת זמן, אבל בלי אינטרנט בכלל. אתה לוקח אותה?", keywords: ["ניתוק", "שלווה", "טכנולוגיה"] },
-  { question: "מה הכישרון הכי 'חסר תועלת' שלך שאתה ממש גאה בו?", keywords: ["כישרון", "שימושי", "גאווה"] },
-  { question: "אם היו כותבים ספר על החיים שלך, מה היה שם הפרק של השנה הנוכחית?", keywords: ["כותרת", "תקופה", "התפתחות"] },
-  { question: "מה הדבר הכי ספונטני שעשית אי פעם ואיך זה נגמר?", keywords: ["ספונטניות", "החלטה רגעית", "השלכות"] },
-  { question: "איזו טעות שעשית בעבר הפכה בסוף לדבר הכי טוב שקרה לך?", keywords: ["תפנית", "טעות", "להפיק לקחים"] },
-  { question: "על איזה נושא אתה יכול לדבר חצי שעה בלי להתכונן מראש בכלל?", keywords: ["מומחיות", "תשוקה", "להרצות"] },
-  { question: "מהי העצה הכי גרועה שאי פעם קיבלת?", keywords: ["עצה", "ניסיון", "להקשיב"] },
-  { question: "מה הדבר הכי אמיץ שעשית, שלא דרש שום כוח פיזי?", keywords: ["אומץ", "פגיעות", "החלטה"] },
-  { question: "מתי בפעם האחרונה שינית את דעתך לגבי משהו מהותי שממש האמנת בו?", keywords: ["גמישות מחשבתית", "השקפה", "לשכנע"] },
-  { question: "איזה הרגל קטן ביומיום שלך משנה לך את כל מצב הרוח?", keywords: ["שגרה", "מצב רוח", "השפעה"] },
-  { question: "אם היית צריך ללמד אותי משהו חדש לגמרי ב-5 דקות, מה היית מלמד אותי?", keywords: ["להעביר ידע", "מיומנות", "להדריך"] },
-  { question: "מה הדבר שכולם אוהבים ואתה פשוט לא מבין את ההתלהבות ממנו?", keywords: ["אובר-רייטד", "טרנד", "להתחבר"] },
-  { question: "איזה ריח ישר זורק אותך לזיכרון ילדות ספציפי?", keywords: ["חוש הריח", "טריגר", "זיכרון"] },
-  { question: "אם היית צריך לתאר את האישיות שלך דרך סוג של אוכל, מה היית?", keywords: ["מטפורה", "מרקם", "טעם"] },
-  { question: "מה החוויה הכי מוזרה או מצחיקה שהייתה לך בגלל הבדלי תרבויות?", keywords: ["פער תרבותי", "אי הבנה", "זר"] },
-  { question: "איזה שיר תמיד גורם לך להרגיש נוסטלגיה, ולאיזו תקופה הוא מחזיר אותך?", keywords: ["פסקול", "געגוע", "תקופה"] },
-  { question: "מה הדבר שאתה הכי אוהב לבזבז עליו כסף בלי להרגיש אשמה?", keywords: ["פינוק", "תקציב", "רגשות אשם"] },
-  { question: "אם היית חייב לעבור למדינה אחרת מחר, לפי מה היית בוחר לאן לטוס?", keywords: ["הגירה", "יעד", "קריטריון"] },
-  { question: "אם היית יכול לבחור חיה אחת, אפילו פראית, שתלווה אותך לכל מקום כמו כלב, איזו חיה זו הייתה?", keywords: ["חיית מחמד", "נאמנות", "אקזוטי"] },
-  { question: "מה הדבר שחשבת שהוא ממש מסובך כשהיית קטן, והיום אתה מבין שהוא פשוט?", keywords: ["תפיסה", "בגרות", "תמימות"] },
-  { question: "אם היית יכול להקשיב לשיחות של אנשים אחרים ברחוב בלי שהם ידעו, היית עושה את זה?", keywords: ["סקרנות", "פרטיות", "גבולות"] },
+  { question: "אם היית קם בבוקר ומגלה שאתה דובר עברית מושלמת, מה הדבר הראשון שהיית עושה?", keywords: [{ he: "שטף", en: "fluency" }, { he: "ביטחון", en: "confidence" }, { he: "הזדמנות", en: "opportunity" }], linkingWords: [{ he: "אם", en: "if" }, { he: "כדי ש", en: "so that" }, { he: "קודם כל", en: "first of all" }] },
+  { question: "איזה כוח-על היה הופך את העבודה או הלימודים שלך להרבה יותר קלים?", keywords: [{ he: "יתרון", en: "advantage" }, { he: "להתמודד", en: "to cope" }, { he: "יכולת", en: "ability" }], linkingWords: [{ he: "כי", en: "because" }, { he: "בזכות", en: "thanks to" }, { he: "למשל", en: "for example" }] },
+  { question: "אם היית חייב לחיות בתוך סרט או סדרה לחודש אחד, איזה עולם היית בוחר?", keywords: [{ he: "מציאות מדומה", en: "virtual reality" }, { he: "עלילה", en: "plot" }, { he: "שחקן ראשי", en: "main actor" }], linkingWords: [{ he: "מצד אחד", en: "on one hand" }, { he: "מצד שני", en: "on the other hand" }, { he: "בגלל ש", en: "because" }] },
+  { question: "אם היית יכול לחזור בזמן רק כדי לראות הופעה חיה של להקה או אמן, לאן היית נוסע?", keywords: [{ he: "מסע בזמן", en: "time travel" }, { he: "תקופה", en: "era" }, { he: "נוסטלגיה", en: "nostalgia" }], linkingWords: [{ he: "כדי", en: "in order to" }, { he: "דווקא", en: "specifically" }, { he: "אף על פי ש", en: "even though" }] },
+  { question: "איזה חוק חברתי היית מבטל אם הייתה לך האפשרות?", keywords: [{ he: "נורמה", en: "norm" }, { he: "מוסכמה", en: "convention" }, { he: "לשנות", en: "to change" }], linkingWords: [{ he: "לכן", en: "therefore" }, { he: "למרות ש", en: "despite" }, { he: "בתנאי ש", en: "on condition that" }] },
+  { question: "אם יכולת לשלוח הודעת טקסט אחת קצרה לעצמך של לפני עשר שנים, מה היית כותב?", keywords: [{ he: "תובנה", en: "insight" }, { he: "אזהרה", en: "warning" }, { he: "עבר", en: "past" }], linkingWords: [{ he: "כדי ש", en: "so that" }, { he: "במקום", en: "instead of" }, { he: "לפני ש", en: "before" }] },
+  { question: "נניח שאתה מקים חברה מחר בבוקר. איזה מוצר או שירות היא הייתה מוכרת?", keywords: [{ he: "יזמות", en: "entrepreneurship" }, { he: "צורך", en: "need" }, { he: "פתרון", en: "solution" }], linkingWords: [{ he: "ראשית", en: "firstly" }, { he: "בשביל", en: "for / in order to" }, { he: "כלומר", en: "meaning / that is" }] },
+  { question: "אם היית יכול לדעת את האמת המוחלטת לגבי תעלומה אחת בעולם, מה היית שואל?", keywords: [{ he: "תעלומה", en: "mystery" }, { he: "סוד", en: "secret" }, { he: "סקרנות", en: "curiosity" }], linkingWords: [{ he: "האם", en: "is it? / do?" }, { he: "אולי", en: "maybe" }, { he: "משום ש", en: "because" }] },
+  { question: "אם היית חייב לאכול רק מאכל אחד כל החיים והוא לא היה פוגע בבריאותך, מה היית בוחר?", keywords: [{ he: "תזונה", en: "nutrition" }, { he: "הרגל", en: "habit" }, { he: "להתפשר", en: "to compromise" }], linkingWords: [{ he: "גם אם", en: "even if" }, { he: "בלי ש", en: "without" }, { he: "כל עוד", en: "as long as" }] },
+  { question: "הציעו לך עכשיו חופשה ללא הגבלת זמן, אבל בלי אינטרנט בכלל. אתה לוקח אותה?", keywords: [{ he: "ניתוק", en: "disconnection" }, { he: "שלווה", en: "tranquility" }, { he: "טכנולוגיה", en: "technology" }], linkingWords: [{ he: "אבל", en: "but" }, { he: "למרות", en: "despite" }, { he: "אם כי", en: "although" }] },
+  { question: "מה הכישרון הכי 'חסר תועלת' שלך שאתה ממש גאה בו?", keywords: [{ he: "כישרון", en: "talent" }, { he: "שימושי", en: "useful" }, { he: "גאווה", en: "pride" }], linkingWords: [{ he: "אף על פי ש", en: "even though" }, { he: "בכל זאת", en: "nevertheless" }, { he: "כמו", en: "like / as" }] },
+  { question: "אם היו כותבים ספר על החיים שלך, מה היה שם הפרק של השנה הנוכחית?", keywords: [{ he: "כותרת", en: "title" }, { he: "תקופה", en: "period" }, { he: "התפתחות", en: "development" }], linkingWords: [{ he: "כי", en: "because" }, { he: "עד כה", en: "so far" }, { he: "אחרי ש", en: "after" }] },
+  { question: "מה הדבר הכי ספונטני שעשית אי פעם ואיך זה נגמר?", keywords: [{ he: "ספונטניות", en: "spontaneity" }, { he: "החלטה רגעית", en: "snap decision" }, { he: "השלכות", en: "consequences" }], linkingWords: [{ he: "ואז", en: "and then" }, { he: "בסופו של דבר", en: "in the end" }, { he: "בלי ש", en: "without" }] },
+  { question: "איזו טעות שעשית בעבר הפכה בסוף לדבר הכי טוב שקרה לך?", keywords: [{ he: "תפנית", en: "turning point" }, { he: "טעות", en: "mistake" }, { he: "להפיק לקחים", en: "to learn lessons" }], linkingWords: [{ he: "דווקא", en: "actually / specifically" }, { he: "בזכות", en: "thanks to" }, { he: "למרות ש", en: "despite" }] },
+  { question: "על איזה נושא אתה יכול לדבר חצי שעה בלי להתכונן מראש בכלל?", keywords: [{ he: "מומחיות", en: "expertise" }, { he: "תשוקה", en: "passion" }, { he: "להרצות", en: "to lecture" }], linkingWords: [{ he: "בלי", en: "without" }, { he: "כי", en: "because" }, { he: "בנוגע ל", en: "regarding" }] },
+  { question: "מהי העצה הכי גרועה שאי פעם קיבלת?", keywords: [{ he: "עצה", en: "advice" }, { he: "ניסיון", en: "experience" }, { he: "להקשיב", en: "to listen" }], linkingWords: [{ he: "למרות ש", en: "although" }, { he: "במקום", en: "instead of" }, { he: "כאשר", en: "when" }] },
+  { question: "מה הדבר הכי אמיץ שעשית, שלא דרש שום כוח פיזי?", keywords: [{ he: "אומץ", en: "courage" }, { he: "פגיעות", en: "vulnerability" }, { he: "החלטה", en: "decision" }], linkingWords: [{ he: "אף על פי ש", en: "even though" }, { he: "בזמן ש", en: "while" }, { he: "כדי", en: "in order to" }] },
+  { question: "מתי בפעם האחרונה שינית את דעתך לגבי משהו מהותי שממש האמנת בו?", keywords: [{ he: "גמישות מחשבתית", en: "open-mindedness" }, { he: "השקפה", en: "worldview" }, { he: "לשכנע", en: "to convince" }], linkingWords: [{ he: "עד ש", en: "until" }, { he: "בגלל", en: "because of" }, { he: "לעומת", en: "compared to" }] },
+  { question: "איזה הרגל קטן ביומיום שלך משנה לך את כל מצב הרוח?", keywords: [{ he: "שגרה", en: "routine" }, { he: "מצב רוח", en: "mood" }, { he: "השפעה", en: "influence" }], linkingWords: [{ he: "בכל פעם ש", en: "every time that" }, { he: "בזכות", en: "thanks to" }, { he: "כמו כן", en: "likewise" }] },
+  { question: "אם היית צריך ללמד אותי משהו חדש לגמרי ב-5 דקות, מה היית מלמד אותי?", keywords: [{ he: "להעביר ידע", en: "to transfer knowledge" }, { he: "מיומנות", en: "skill" }, { he: "להדריך", en: "to guide" }], linkingWords: [{ he: "קודם כל", en: "first of all" }, { he: "אחר כך", en: "afterwards" }, { he: "כלומר", en: "meaning" }] },
+  { question: "מה הדבר שכולם אוהבים ואתה פשוט לא מבין את ההתלהבות ממנו?", keywords: [{ he: "אובר-רייטד", en: "overrated" }, { he: "טרנד", en: "trend" }, { he: "להתחבר", en: "to relate" }], linkingWords: [{ he: "לעומת זאת", en: "on the other hand" }, { he: "בניגוד ל", en: "in contrast to" }, { he: "אולם", en: "however" }] },
+  { question: "איזה ריח ישר זורק אותך לזיכרון ילדות ספציפי?", keywords: [{ he: "חוש הריח", en: "sense of smell" }, { he: "טריגר", en: "trigger" }, { he: "זיכרון", en: "memory" }], linkingWords: [{ he: "כאשר", en: "when" }, { he: "מיד", en: "immediately" }, { he: "כאילו", en: "as if" }] },
+  { question: "אם היית צריך לתאר את האישיות שלך דרך סוג של אוכל, מה היית?", keywords: [{ he: "מטפורה", en: "metaphor" }, { he: "מרקם", en: "texture" }, { he: "טעם", en: "taste" }], linkingWords: [{ he: "כמו", en: "like" }, { he: "כי", en: "because" }, { he: "מבחינת", en: "in terms of" }] },
+  { question: "מה החוויה הכי מוזרה או מצחיקה שהייתה לך בגלל הבדלי תרבויות?", keywords: [{ he: "פער תרבותי", en: "cultural gap" }, { he: "אי הבנה", en: "misunderstanding" }, { he: "זר", en: "foreign" }], linkingWords: [{ he: "בגלל", en: "because of" }, { he: "בעוד ש", en: "while / whereas" }, { he: "מתברר ש", en: "it turns out that" }] },
+  { question: "איזה שיר תמיד גורם לך להרגיש נוסטלגיה, ולאיזו תקופה הוא מחזיר אותך?", keywords: [{ he: "פסקול", en: "soundtrack" }, { he: "געגוע", en: "longing" }, { he: "תקופה", en: "period" }], linkingWords: [{ he: "בכל פעם ש", en: "every time that" }, { he: "כאילו", en: "as if" }, { he: "בזמן ש", en: "while" }] },
+  { question: "מה הדבר שאתה הכי אוהב לבזבז עליו כסף בלי להרגיש אשמה?", keywords: [{ he: "פינוק", en: "treat" }, { he: "תקציב", en: "budget" }, { he: "רגשות אשם", en: "guilt" }], linkingWords: [{ he: "בלי ש", en: "without" }, { he: "אפילו אם", en: "even if" }, { he: "כי", en: "because" }] },
+  { question: "אם היית חייב לעבור למדינה אחרת מחר, לפי מה היית בוחר לאן לטוס?", keywords: [{ he: "הגירה", en: "immigration" }, { he: "יעד", en: "destination" }, { he: "קריטריון", en: "criterion" }], linkingWords: [{ he: "בהתאם ל", en: "according to" }, { he: "בתנאי ש", en: "on condition that" }, { he: "קודם כל", en: "first of all" }] },
+  { question: "אם היית יכול לבחור חיה אחת, אפילו פראית, שתלווה אותך לכל מקום כמו כלב, איזו חיה זו הייתה?", keywords: [{ he: "חיית מחמד", en: "pet" }, { he: "נאמנות", en: "loyalty" }, { he: "אקזוטי", en: "exotic" }], linkingWords: [{ he: "אפילו", en: "even" }, { he: "כמו", en: "like" }, { he: "משום ש", en: "because" }] },
+  { question: "מה הדבר שחשבת שהוא ממש מסובך כשהיית קטן, והיום אתה מבין שהוא פשוט?", keywords: [{ he: "תפיסה", en: "perception" }, { he: "בגרות", en: "maturity" }, { he: "תמימות", en: "innocence" }], linkingWords: [{ he: "כש", en: "when" }, { he: "לעומת", en: "compared to" }, { he: "בעצם", en: "actually" }] },
+  { question: "אם היית יכול להקשיב לשיחות של אנשים אחרים ברחוב בלי שהם ידעו, היית עושה את זה?", keywords: [{ he: "סקרנות", en: "curiosity" }, { he: "פרטיות", en: "privacy" }, { he: "גבולות", en: "boundaries" }], linkingWords: [{ he: "גם אם", en: "even if" }, { he: "אבל", en: "but" }, { he: "מבלי ש", en: "without" }] },
 ];
 
 type AnimState = "idle" | "shuffling" | "revealed";
