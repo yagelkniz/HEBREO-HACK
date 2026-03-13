@@ -149,8 +149,18 @@ export default function ConversationRouletteStandalone({ onBack, lang }: Props) 
                       {t("Keywords:", "מילות מפתח:")}
                     </span>
                     {currentItem.keywords.map((kw) => (
-                      <Badge key={kw} variant="secondary" className="text-sm px-3 py-1 font-medium">
-                        {kw}
+                      <Badge key={kw.he} variant="secondary" className="text-sm px-3 py-1 font-medium">
+                        {kw.he} <span className="text-muted-foreground text-xs mr-1">({kw.en})</span>
+                      </Badge>
+                    ))}
+                  </div>
+                  <div className="flex flex-wrap gap-2 justify-end pt-2 border-t border-border/50">
+                    <span className="text-xs text-muted-foreground font-medium ml-2 self-center">
+                      {t("Linking Words:", "מילות קישור:")}
+                    </span>
+                    {currentItem.linkingWords.map((lw) => (
+                      <Badge key={lw.he} variant="outline" className="text-sm px-3 py-1 font-medium border-primary/40 text-primary">
+                        {lw.he} <span className="text-muted-foreground text-xs mr-1">({lw.en})</span>
                       </Badge>
                     ))}
                   </div>
