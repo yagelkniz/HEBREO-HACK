@@ -6,7 +6,6 @@ import { useIndexState } from "@/hooks/useIndexState";
 export default function Index() {
   const state = useIndexState();
 
-  // Check if we should show a specific route/component
   const shouldShowRouter = 
     state.showLinkingWords ||
     state.showLinkingWordsPractice ||
@@ -38,9 +37,18 @@ export default function Index() {
     state.showHebrewSlang ||
     state.showRolePlay ||
     state.showConnectorCorrection ||
-    state.showBeginnerHebrew;
+    state.showBeginnerHebrew ||
+    // New exercises
+    state.showNumbers ||
+    state.showMonths ||
+    state.showAdjectives ||
+    state.showCityVocab ||
+    state.showShopping ||
+    state.showFamily ||
+    state.showQuickQuiz ||
+    state.showGenderFlip ||
+    state.showSongLyrics;
 
-  // Show Verb Patterns Menu
   if (state.showVerbPatternsMenu && !state.selectedVerbPattern) {
     return (
       <VerbPatternsMenu
@@ -87,6 +95,15 @@ export default function Index() {
         setShowConnectorCorrection={state.setShowConnectorCorrection}
         setShowPronounSuffixReflexive={state.setShowPronounSuffixReflexive}
         setShowBeginnerHebrew={state.setShowBeginnerHebrew}
+        setShowNumbers={state.setShowNumbers}
+        setShowMonths={state.setShowMonths}
+        setShowAdjectives={state.setShowAdjectives}
+        setShowCityVocab={state.setShowCityVocab}
+        setShowShopping={state.setShowShopping}
+        setShowFamily={state.setShowFamily}
+        setShowQuickQuiz={state.setShowQuickQuiz}
+        setShowGenderFlip={state.setShowGenderFlip}
+        setShowSongLyrics={state.setShowSongLyrics}
       />
     </div>
   );

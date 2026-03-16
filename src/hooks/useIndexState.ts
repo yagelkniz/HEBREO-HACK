@@ -15,7 +15,7 @@ export function useIndexState() {
   const [showQuestionnaire, setShowQuestionnaire] = useState(false);
   const [selectedPractice, setSelectedPractice] = useState<null | "verb" | "nounAdj" | "household">(null);
   const [verbTense, setVerbTense] = useState<null | "present" | "past" | "future">(null);
-  const [selectedTextComp, setSelectedTextComp] = useState<null | "food" | "animals-easy" | "food-order-medium" | "social-media" | "food-levels" | "countries-levels" | "movies-series-levels" | "places-food-easy">(null);
+  const [selectedTextComp, setSelectedTextComp] = useState<null | "food" | "animals-easy" | "food-order-medium" | "social-media" | "food-levels" | "countries-levels" | "movies-series-levels" | "places-food-easy" | "hospital" | "airport" | "news">(null);
   const [showVerbToBePresentation, setShowVerbToBePresentation] = useState(false);
   const [showDaysAndPlacesVocab, setShowDaysAndPlacesVocab] = useState(false);
   const [showQuestionWords, setShowQuestionWords] = useState(false);
@@ -37,6 +37,16 @@ export function useIndexState() {
   const [showConnectorCorrection, setShowConnectorCorrection] = useState(false);
   const [showPronounSuffixReflexive, setShowPronounSuffixReflexive] = useState(false);
   const [showBeginnerHebrew, setShowBeginnerHebrew] = useState(false);
+  // New exercises
+  const [showNumbers, setShowNumbers] = useState(false);
+  const [showMonths, setShowMonths] = useState(false);
+  const [showAdjectives, setShowAdjectives] = useState(false);
+  const [showCityVocab, setShowCityVocab] = useState(false);
+  const [showShopping, setShowShopping] = useState(false);
+  const [showFamily, setShowFamily] = useState(false);
+  const [showQuickQuiz, setShowQuickQuiz] = useState(false);
+  const [showGenderFlip, setShowGenderFlip] = useState(false);
+  const [showSongLyrics, setShowSongLyrics] = useState(false);
 
   const resetToMainMenu = () => {
     setShowLinkingWords(false);
@@ -74,81 +84,65 @@ export function useIndexState() {
     setShowConnectorCorrection(false);
     setShowPronounSuffixReflexive(false);
     setShowBeginnerHebrew(false);
+    // New exercises
+    setShowNumbers(false);
+    setShowMonths(false);
+    setShowAdjectives(false);
+    setShowCityVocab(false);
+    setShowShopping(false);
+    setShowFamily(false);
+    setShowQuickQuiz(false);
+    setShowGenderFlip(false);
+    setShowSongLyrics(false);
   };
 
   return {
-    lang,
-    setLang,
-    showLinkingWords,
-    setShowLinkingWords,
-    showLinkingWordsPractice,
-    setShowLinkingWordsPractice,
-    showPronounsTable,
-    setShowPronounsTable,
-    showPronounsMenu,
-    setShowPronounsMenu,
-    showPronounsPractice,
-    setShowPronounsPractice,
-    showPossessivePronouns,
-    setShowPossessivePronouns,
-    showPossessivePronounsMenu,
-    setShowPossessivePronounsMenu,
-    showPossessivePronounsPractice,
-    setShowPossessivePronounsPractice,
-    showEverydayHebrew,
-    setShowEverydayHebrew,
-    everydayHebrewCategory,
-    setEverydayHebrewCategory,
-    showQuestionnaire,
-    setShowQuestionnaire,
-    selectedPractice,
-    setSelectedPractice,
-    verbTense,
-    setVerbTense,
-    selectedTextComp,
-    setSelectedTextComp,
-    showVerbToBePresentation,
-    setShowVerbToBePresentation,
-    showDaysAndPlacesVocab,
-    setShowDaysAndPlacesVocab,
-    showQuestionWords,
-    setShowQuestionWords,
-    showOddOneOut,
-    setShowOddOneOut,
-    showEmotions,
-    setShowEmotions,
-    showLinkingWordsLevels,
-    setShowLinkingWordsLevels,
-    showVerbMemoryGame,
-    setShowVerbMemoryGame,
-    showColorsAndFruits,
-    setShowColorsAndFruits,
-    showHifilVerb,
-    setShowHifilVerb,
-    showPielVerb,
-    setShowPielVerb,
-    showVerbPatternsMenu,
-    setShowVerbPatternsMenu,
-    selectedVerbPattern,
-    setSelectedVerbPattern,
-    showListeningPractice,
-    setShowListeningPractice,
-    showConversationRoulette,
-    setShowConversationRoulette,
-    showSentenceOrder,
-    setShowSentenceOrder,
-    showPrepositionSuffix,
-    setShowPrepositionSuffix,
-    showHebrewSlang,
-    setShowHebrewSlang,
-    showRolePlay,
-    setShowRolePlay,
-    showConnectorCorrection,
-    setShowConnectorCorrection,
-    showPronounSuffixReflexive,
-    setShowPronounSuffixReflexive,
-    showBeginnerHebrew,
-    setShowBeginnerHebrew,
+    lang, setLang,
+    showLinkingWords, setShowLinkingWords,
+    showLinkingWordsPractice, setShowLinkingWordsPractice,
+    showPronounsTable, setShowPronounsTable,
+    showPronounsMenu, setShowPronounsMenu,
+    showPronounsPractice, setShowPronounsPractice,
+    showPossessivePronouns, setShowPossessivePronouns,
+    showPossessivePronounsMenu, setShowPossessivePronounsMenu,
+    showPossessivePronounsPractice, setShowPossessivePronounsPractice,
+    showEverydayHebrew, setShowEverydayHebrew,
+    everydayHebrewCategory, setEverydayHebrewCategory,
+    showQuestionnaire, setShowQuestionnaire,
+    selectedPractice, setSelectedPractice,
+    verbTense, setVerbTense,
+    selectedTextComp, setSelectedTextComp,
+    showVerbToBePresentation, setShowVerbToBePresentation,
+    showDaysAndPlacesVocab, setShowDaysAndPlacesVocab,
+    showQuestionWords, setShowQuestionWords,
+    showOddOneOut, setShowOddOneOut,
+    showEmotions, setShowEmotions,
+    showLinkingWordsLevels, setShowLinkingWordsLevels,
+    showVerbMemoryGame, setShowVerbMemoryGame,
+    showColorsAndFruits, setShowColorsAndFruits,
+    showHifilVerb, setShowHifilVerb,
+    showPielVerb, setShowPielVerb,
+    showVerbPatternsMenu, setShowVerbPatternsMenu,
+    selectedVerbPattern, setSelectedVerbPattern,
+    showListeningPractice, setShowListeningPractice,
+    showConversationRoulette, setShowConversationRoulette,
+    showSentenceOrder, setShowSentenceOrder,
+    showPrepositionSuffix, setShowPrepositionSuffix,
+    showHebrewSlang, setShowHebrewSlang,
+    showRolePlay, setShowRolePlay,
+    showConnectorCorrection, setShowConnectorCorrection,
+    showPronounSuffixReflexive, setShowPronounSuffixReflexive,
+    showBeginnerHebrew, setShowBeginnerHebrew,
+    // New exercises
+    showNumbers, setShowNumbers,
+    showMonths, setShowMonths,
+    showAdjectives, setShowAdjectives,
+    showCityVocab, setShowCityVocab,
+    showShopping, setShowShopping,
+    showFamily, setShowFamily,
+    showQuickQuiz, setShowQuickQuiz,
+    showGenderFlip, setShowGenderFlip,
+    showSongLyrics, setShowSongLyrics,
     resetToMainMenu,
   };
 }
