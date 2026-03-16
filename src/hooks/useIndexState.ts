@@ -95,6 +95,7 @@ export function useIndexState() {
     setShowQuickQuiz(false);
     setShowGenderFlip(false);
     setShowSongLyrics(false);
+    setShowAlphabetCourse(false);
   };
 
   return {
