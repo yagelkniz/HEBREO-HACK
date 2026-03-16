@@ -47,7 +47,8 @@ export default function Index() {
     state.showFamily ||
     state.showQuickQuiz ||
     state.showGenderFlip ||
-    state.showSongLyrics;
+    state.showSongLyrics ||
+    state.showAlphabetCourse;
 
   if (state.showVerbPatternsMenu && !state.selectedVerbPattern) {
     return (
