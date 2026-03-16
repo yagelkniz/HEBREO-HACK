@@ -117,6 +117,9 @@ export default function IndexRouter({ state }: IndexRouterProps) {
 
   const t = (he: string, en: string) => (lang === "he" ? he : en);
 
+  // Alphabet course
+  if (showAlphabetCourse) return <AlphabetCourse onBack={() => setShowAlphabetCourse(false)} />;
+
   // New exercises
   if (showNumbers) return <NumbersPractice onBack={() => setShowNumbers(false)} lang={lang} />;
   if (showMonths) return <MonthsPractice onBack={() => setShowMonths(false)} lang={lang} />;

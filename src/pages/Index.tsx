@@ -105,6 +105,7 @@ export default function Index() {
         setShowQuickQuiz={state.setShowQuickQuiz}
         setShowGenderFlip={state.setShowGenderFlip}
         setShowSongLyrics={state.setShowSongLyrics}
+        setShowAlphabetCourse={state.setShowAlphabetCourse}
       />
     </div>
   );

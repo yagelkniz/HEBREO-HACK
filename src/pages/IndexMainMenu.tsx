@@ -72,6 +72,19 @@ export default function IndexMainMenu(props: IndexMainMenuProps) {
 
   return (
     <div className="flex flex-col gap-6 items-center w-full max-w-4xl mx-auto px-4">
+      {/* Alphabet Course — Top Banner */}
+      <div className="w-full relative">
+        <button
+          onClick={() => props.setShowAlphabetCourse(true)}
+          className="w-full text-right p-6 rounded-2xl border-2 border-emerald-300 bg-gradient-to-l from-emerald-50 to-amber-50 shadow-lg hover:shadow-xl hover:scale-[1.01] transition-all"
+        >
+          <span className="absolute top-3 left-3 bg-amber-400 text-white text-xs font-bold px-2 py-1 rounded-full">חדש! ✨</span>
+          <div className="text-2xl font-bold text-emerald-800 mb-1">📖 קריאה מאפס — לימוד האלף-בית</div>
+          <div className="text-sm text-muted-foreground">למד לקרוא עברית מהאות הראשונה — מושלם למתחילים מוחלטים</div>
+          <div className="mt-3 inline-block bg-emerald-600 text-white px-4 py-2 rounded-lg text-sm font-bold">התחל את המסע ←</div>
+        </button>
+      </div>
+
       {/* Header */}
       <div className="flex items-center justify-between w-full">
         <h1 className="text-2xl md:text-3xl font-bold text-primary" dir={lang === "he" ? "rtl" : "ltr"}>
