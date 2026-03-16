@@ -41,6 +41,7 @@ interface IndexMainMenuProps {
   setShowQuickQuiz: (b: boolean) => void;
   setShowGenderFlip: (b: boolean) => void;
   setShowSongLyrics: (b: boolean) => void;
+  setShowAlphabetCourse: (b: boolean) => void;
 }
 
 interface MenuItemProps {
