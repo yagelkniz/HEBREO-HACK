@@ -14,7 +14,7 @@ export const familyMembers: FamilyMember[] = [
   { hebrew: "דוד", english: "Uncle", gender: "male" },
   { hebrew: "דודה", english: "Aunt", gender: "female" },
   { hebrew: "בן דוד", english: "Cousin (male)", gender: "male" },
-  { hebrew: "בת דודה", english: "Cousin (female)", gender: "female" },
+  { hebrew: "בת דוד", english: "Cousin (female)", gender: "female" },
   { hebrew: "בן", english: "Son", gender: "male" },
   { hebrew: "בת", english: "Daughter", gender: "female" },
   { hebrew: "בעל", english: "Husband", gender: "male" },

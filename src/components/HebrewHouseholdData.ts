@@ -22,7 +22,7 @@ export const householdItems: HouseholdItem[] = [
   { hebrew: "מדף", transliteration: "madaf", english: "shelf", category: "home" },
 
   // In the Kitchen (במטבח)
-  { hebrew: "צלחת", transliteration: "tzalach", english: "plate", category: "kitchen" },
+  { hebrew: "צלחת", transliteration: "tzalachat", english: "plate", category: "kitchen" },
   { hebrew: "כוס", transliteration: "kos", english: "cup", category: "kitchen" },
   { hebrew: "מזלג", transliteration: "mazleg", english: "fork", category: "kitchen" },
   { hebrew: "סכין", transliteration: "sakin", english: "knife", category: "kitchen" },
@@ -30,7 +30,7 @@ export const householdItems: HouseholdItem[] = [
   { hebrew: "סיר", transliteration: "sir", english: "pot", category: "kitchen" },
   { hebrew: "מחבת", transliteration: "machvat", english: "pan", category: "kitchen" },
   { hebrew: "תנור אפייה", transliteration: "tanur afiyah", english: "baking oven", category: "kitchen" },
-  { hebrew: "מקפיא", transliteration: "makpi", english: "freezer", category: "kitchen" },
+  { hebrew: "מקפיא", transliteration: "makpia", english: "freezer", category: "kitchen" },
   { hebrew: "מיקרוגל", transliteration: "mikrogol", english: "microwave", category: "kitchen" },
 
   // Office & Tools (כלים)

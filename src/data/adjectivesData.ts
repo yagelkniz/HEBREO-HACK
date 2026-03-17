@@ -15,7 +15,7 @@ export const adjectives: AdjectiveItem[] = [
   { hebrew: "טוב", hebrewFemale: "טובה", english: "Good", example: "האוכל טוב", exampleEn: "The food is good" },
   { hebrew: "רע", hebrewFemale: "רעה", english: "Bad", example: "מזג האוויר רע", exampleEn: "The weather is bad" },
   { hebrew: "חם", hebrewFemale: "חמה", english: "Hot", example: "היום חם", exampleEn: "The day is hot" },
-  { hebrew: "קר", hebrewFemale: "קרה", english: "Cold", example: "המים קרים", exampleEn: "The water is cold" },
+  { hebrew: "קר", hebrewFemale: "קרה", english: "Cold", example: "החורף קר", exampleEn: "The winter is cold" },
   { hebrew: "מהיר", hebrewFemale: "מהירה", english: "Fast", example: "הרכבת מהירה", exampleEn: "The train is fast" },
   { hebrew: "איטי", hebrewFemale: "איטית", english: "Slow", example: "הצב איטי", exampleEn: "The turtle is slow" },
   { hebrew: "חזק", hebrewFemale: "חזקה", english: "Strong", example: "הגבר חזק", exampleEn: "The man is strong" },

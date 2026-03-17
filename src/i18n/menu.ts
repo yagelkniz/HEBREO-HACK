@@ -1,7 +1,7 @@
 
 const menuText = {
   he: {
-    mainTitle: "איזה תרגול תרצה לתרגל?",
+    mainTitle: "מה תרצו לתרגל?",
     singularPlural: "יחיד/רבים + זכר/נקבה",
     linkingWords: "טבלת מילות קישור (קטגוריות ודוגמאות)",
     pronouns: "טבלת שמות גוף (עברית-אנגלית)",
