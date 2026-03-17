@@ -80,7 +80,7 @@ export const fillInBlankQuestions: FillInBlankQuestion[] = [
       { text: "הלך", textWithNikud: "הָלַךְ" },
     ],
     hint: "אתמול indicates past tense, היא is feminine singular",
-    hintHe: "אתמול מציין עבר, היא זכר נקבה יחידה",
+    hintHe: "אתמול מציין עבר, היא נקבה יחידה",
     context: "past tense, feminine singular",
   },
   {

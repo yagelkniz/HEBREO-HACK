@@ -62,7 +62,7 @@ export const nikudMarks: NikudMark[] = [
   { name: "חיריק", nameWithNikud: "חִירִיק", symbol: "ִ", sound: "i", soundExample: 'כמו "ee" ב-see', letterExample: "בִ", examples: [{ word: "בִּירָה", transliteration: "Bi-ra" }, { word: "שִׁיר", transliteration: "Shir" }, { word: "כִּסֵּא", transliteration: "Ki-se" }] },
   { name: "חולם", nameWithNikud: "חוֹלָם", symbol: "ֹ", sound: "o", soundExample: 'כמו "o" ב-go', letterExample: "בֹ", examples: [{ word: "שָׁלוֹם", transliteration: "Sha-lom" }, { word: "טוֹב", transliteration: "Tov" }, { word: "קוֹל", transliteration: "Kol" }] },
   { name: "שורוק", nameWithNikud: "שׁוּרוּק", symbol: "וּ", sound: "u", soundExample: 'כמו "oo" ב-moon', letterExample: "בוּ", examples: [{ word: "שׁוּק", transliteration: "Shuk" }, { word: "חוּל", transliteration: "Chul" }, { word: "סוּס", transliteration: "Sus" }] },
-  { name: "קובוץ", nameWithNikud: "קֻבּוּץ", symbol: "ֻ", sound: "u", soundExample: 'כמו "oo" ב-food', letterExample: "בֻ", examples: [{ word: "שֻׁלְחָן", transliteration: "Shul-chan" }, { word: "קֻבּוּץ", transliteration: "Ki-butz" }, { word: "כֻּלָּם", transliteration: "Ku-lam" }] },
+  { name: "קובוץ", nameWithNikud: "קֻבּוּץ", symbol: "ֻ", sound: "u", soundExample: 'כמו "oo" ב-food', letterExample: "בֻ", examples: [{ word: "שֻׁלְחָן", transliteration: "Shul-chan" }, { word: "קֻבּוּץ", transliteration: "Ku-butz" }, { word: "כֻּלָּם", transliteration: "Ku-lam" }] },
   { name: "שווא", nameWithNikud: "שְׁוָא", symbol: "ְ", sound: "silent / e", soundExample: "שקט או צליל קצר מאוד", letterExample: "בְ", examples: [{ word: "בְּרֵאשִׁית", transliteration: "Be-re-shit" }, { word: "שְׁמוֹ", transliteration: "Shmo" }, { word: "דְּבַשׁ", transliteration: "Dvash" }] },
 ];
 
