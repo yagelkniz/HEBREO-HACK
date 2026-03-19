@@ -36,6 +36,11 @@ import ColorsAndFruitsPractice from "@/components/ColorsAndFruitsPractice";
 import HifilVerbPractice from "@/components/hifil/HifilVerbPractice";
 import PielVerbPractice from "@/components/piel/PielVerbPractice";
 import BinyanRecognitionPractice from "@/components/binyanRecognition/BinyanRecognitionPractice";
+import BinyanVerbPractice from "@/components/binyanim/BinyanVerbPractice";
+import { hitpaelConjugationTable, hitpaelQuestions, hitpaelExplanationHe, hitpaelExplanationEn } from "@/components/hitpael/HitpaelVerbData";
+import { nifalConjugationTable, nifalQuestions, nifalExplanationHe, nifalExplanationEn } from "@/components/nifal/NifalVerbData";
+import { hufalConjugationTable, hufalQuestions, hufalExplanationHe, hufalExplanationEn } from "@/components/hufal/HufalVerbData";
+import { pualConjugationTable, pualQuestions, pualExplanationHe, pualExplanationEn } from "@/components/pual/PualVerbData";
 import ListeningPractice from "@/components/ListeningPractice";
 import ConversationRouletteStandalone from "@/components/ConversationRouletteStandalone";
 import SentenceOrderPractice from "@/components/SentenceOrderPractice";
@@ -142,6 +147,10 @@ export default function IndexRouter({ state }: IndexRouterProps) {
     if (pattern === "binyan-recognition") return <BinyanRecognitionPractice onBack={() => setSelectedVerbPattern(null)} />;
     if (pattern === "hifil") return <HifilVerbPractice onBack={() => setSelectedVerbPattern(null)} initialLevel={level as "learn" | "easy" | "medium" | "hard"} lang={lang} />;
     if (pattern === "piel") return <PielVerbPractice onBack={() => setSelectedVerbPattern(null)} initialLevel={level as "learn" | "easy" | "medium" | "hard"} lang={lang} />;
+    if (pattern === "hitpael") return <BinyanVerbPractice onBack={() => setSelectedVerbPattern(null)} initialLevel={level as "learn" | "easy" | "medium" | "hard"} lang={lang} titleHe="בניין התפעל - הפועל &quot;להתלבש&quot;" titleEn="Hitpa'el Pattern - &quot;to get dressed&quot;" subtitleHe="פעולות רפלקסיביות והדדיות" subtitleEn="Reflexive and reciprocal actions" explanationHe={hitpaelExplanationHe} explanationEn={hitpaelExplanationEn} conjugationTable={hitpaelConjugationTable} questions={hitpaelQuestions} />;
+    if (pattern === "nifal") return <BinyanVerbPractice onBack={() => setSelectedVerbPattern(null)} initialLevel={level as "learn" | "easy" | "medium" | "hard"} lang={lang} titleHe="בניין נפעל - הפועל &quot;להיפתח&quot;" titleEn="Nif'al Pattern - &quot;to be opened&quot;" subtitleHe="פעולות סבילות ופעולות שקורות מאליהן" subtitleEn="Passive and spontaneous actions" explanationHe={nifalExplanationHe} explanationEn={nifalExplanationEn} conjugationTable={nifalConjugationTable} questions={nifalQuestions} />;
+    if (pattern === "hufal") return <BinyanVerbPractice onBack={() => setSelectedVerbPattern(null)} initialLevel={level as "learn" | "easy" | "medium" | "hard"} lang={lang} titleHe="בניין הופעל - הפועל &quot;הולבש&quot;" titleEn="Huf'al Pattern - &quot;was dressed&quot;" subtitleHe="סביל של הפעיל" subtitleEn="Passive of Hif'il" explanationHe={hufalExplanationHe} explanationEn={hufalExplanationEn} conjugationTable={hufalConjugationTable} questions={hufalQuestions} />;
+    if (pattern === "pual") return <BinyanVerbPractice onBack={() => setSelectedVerbPattern(null)} initialLevel={level as "learn" | "easy" | "medium" | "hard"} lang={lang} titleHe="בניין פועל - הפועל &quot;סופר&quot;" titleEn="Pu'al Pattern - &quot;was told&quot;" subtitleHe="סביל של פיעל" subtitleEn="Passive of Pi'el" explanationHe={pualExplanationHe} explanationEn={pualExplanationEn} conjugationTable={pualConjugationTable} questions={pualQuestions} />;
     if (pattern === "paal") {
       return <VerbTenseSelector lang={lang} onBack={() => setSelectedVerbPattern(null)} onSelectTense={(tense) => {
         setSelectedVerbPattern(null);

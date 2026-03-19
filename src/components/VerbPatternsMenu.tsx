@@ -142,7 +142,7 @@ export default function VerbPatternsMenu({ lang, onBack, onSelectPattern }: Verb
       exampleEn: "to get dressed, to wash oneself, to get organized",
       emoji: "🪞",
       colorClass: "bg-teal-50 border-teal-200",
-      available: false,
+      available: true,
     },
     {
       id: "nifal",
@@ -154,7 +154,7 @@ export default function VerbPatternsMenu({ lang, onBack, onSelectPattern }: Verb
       exampleEn: "was broken, was opened, was closed",
       emoji: "🔓",
       colorClass: "bg-rose-50 border-rose-200",
-      available: false,
+      available: true,
     },
     {
       id: "hufal",
@@ -166,7 +166,7 @@ export default function VerbPatternsMenu({ lang, onBack, onSelectPattern }: Verb
       exampleEn: "was dressed, was played, was invited",
       emoji: "📦",
       colorClass: "bg-gray-50 border-gray-200",
-      available: false,
+      available: true,
     },
     {
       id: "pual",
@@ -178,7 +178,7 @@ export default function VerbPatternsMenu({ lang, onBack, onSelectPattern }: Verb
       exampleEn: "was told, was cooked, was fixed",
       emoji: "📋",
       colorClass: "bg-indigo-50 border-indigo-200",
-      available: false,
+      available: true,
     },
   ];
 
