@@ -178,7 +178,7 @@ export default function VerbPatternsMenu({ lang, onBack, onSelectPattern }: Verb
       exampleEn: "was told, was cooked, was fixed",
       emoji: "📋",
       colorClass: "bg-indigo-50 border-indigo-200",
-      available: false,
+      available: true,
     },
   ];
 
