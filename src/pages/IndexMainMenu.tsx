@@ -42,6 +42,10 @@ interface IndexMainMenuProps {
   setShowGenderFlip: (b: boolean) => void;
   setShowSongLyrics: (b: boolean) => void;
   setShowAlphabetCourse: (b: boolean) => void;
+  setShowProfessions: (b: boolean) => void;
+  setShowFoodDrinks: (b: boolean) => void;
+  setShowWeather: (b: boolean) => void;
+  setShowBodyHealth: (b: boolean) => void;
 }
 
 interface MenuItemProps {
