@@ -133,6 +133,12 @@ export default function IndexRouter({ state }: IndexRouterProps) {
   // Alphabet course
   if (showAlphabetCourse) return <AlphabetCourse onBack={() => setShowAlphabetCourse(false)} />;
 
+  // Vocabulary topics
+  if (showProfessions) return <ProfessionsPractice onBack={() => setShowProfessions(false)} lang={lang} />;
+  if (showFoodDrinks) return <FoodDrinksPractice onBack={() => setShowFoodDrinks(false)} lang={lang} />;
+  if (showWeather) return <WeatherPractice onBack={() => setShowWeather(false)} lang={lang} />;
+  if (showBodyHealth) return <BodyHealthPractice onBack={() => setShowBodyHealth(false)} lang={lang} />;
+
   // New exercises
   if (showNumbers) return <NumbersPractice onBack={() => setShowNumbers(false)} lang={lang} />;
   if (showMonths) return <MonthsPractice onBack={() => setShowMonths(false)} lang={lang} />;
