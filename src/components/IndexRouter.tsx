@@ -64,6 +64,10 @@ import HospitalReadingPractice from "@/components/HospitalReadingPractice";
 import AirportReadingPractice from "@/components/AirportReadingPractice";
 import NewsReadingPractice from "@/components/NewsReadingPractice";
 import AlphabetCourse from "@/components/AlphabetCourse";
+import ProfessionsPractice from "@/components/ProfessionsPractice";
+import FoodDrinksPractice from "@/components/FoodDrinksPractice";
+import WeatherPractice from "@/components/WeatherPractice";
+import BodyHealthPractice from "@/components/BodyHealthPractice";
 import { useIndexState } from "@/hooks/useIndexState";
 
 interface IndexRouterProps {
@@ -117,6 +121,10 @@ export default function IndexRouter({ state }: IndexRouterProps) {
     showGenderFlip, setShowGenderFlip,
     showSongLyrics, setShowSongLyrics,
     showAlphabetCourse, setShowAlphabetCourse,
+    showProfessions, setShowProfessions,
+    showFoodDrinks, setShowFoodDrinks,
+    showWeather, setShowWeather,
+    showBodyHealth, setShowBodyHealth,
     resetToMainMenu,
   } = state;
 
