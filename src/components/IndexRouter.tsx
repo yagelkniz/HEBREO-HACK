@@ -64,6 +64,10 @@ import HospitalReadingPractice from "@/components/HospitalReadingPractice";
 import AirportReadingPractice from "@/components/AirportReadingPractice";
 import NewsReadingPractice from "@/components/NewsReadingPractice";
 import AlphabetCourse from "@/components/AlphabetCourse";
+import ProfessionsPractice from "@/components/ProfessionsPractice";
+import FoodDrinksPractice from "@/components/FoodDrinksPractice";
+import WeatherPractice from "@/components/WeatherPractice";
+import BodyHealthPractice from "@/components/BodyHealthPractice";
 import { useIndexState } from "@/hooks/useIndexState";
 
 interface IndexRouterProps {
@@ -117,6 +121,10 @@ export default function IndexRouter({ state }: IndexRouterProps) {
     showGenderFlip, setShowGenderFlip,
     showSongLyrics, setShowSongLyrics,
     showAlphabetCourse, setShowAlphabetCourse,
+    showProfessions, setShowProfessions,
+    showFoodDrinks, setShowFoodDrinks,
+    showWeather, setShowWeather,
+    showBodyHealth, setShowBodyHealth,
     resetToMainMenu,
   } = state;
 
@@ -124,6 +132,12 @@ export default function IndexRouter({ state }: IndexRouterProps) {
 
   // Alphabet course
   if (showAlphabetCourse) return <AlphabetCourse onBack={() => setShowAlphabetCourse(false)} />;
+
+  // Vocabulary topics
+  if (showProfessions) return <ProfessionsPractice onBack={() => setShowProfessions(false)} lang={lang} />;
+  if (showFoodDrinks) return <FoodDrinksPractice onBack={() => setShowFoodDrinks(false)} lang={lang} />;
+  if (showWeather) return <WeatherPractice onBack={() => setShowWeather(false)} lang={lang} />;
+  if (showBodyHealth) return <BodyHealthPractice onBack={() => setShowBodyHealth(false)} lang={lang} />;
 
   // New exercises
   if (showNumbers) return <NumbersPractice onBack={() => setShowNumbers(false)} lang={lang} />;

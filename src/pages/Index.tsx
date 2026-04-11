@@ -106,6 +106,10 @@ export default function Index() {
         setShowGenderFlip={state.setShowGenderFlip}
         setShowSongLyrics={state.setShowSongLyrics}
         setShowAlphabetCourse={state.setShowAlphabetCourse}
+        setShowProfessions={state.setShowProfessions}
+        setShowFoodDrinks={state.setShowFoodDrinks}
+        setShowWeather={state.setShowWeather}
+        setShowBodyHealth={state.setShowBodyHealth}
       />
     </div>
   );

@@ -48,6 +48,11 @@ export function useIndexState() {
   const [showGenderFlip, setShowGenderFlip] = useState(false);
   const [showSongLyrics, setShowSongLyrics] = useState(false);
   const [showAlphabetCourse, setShowAlphabetCourse] = useState(false);
+  // Vocabulary topics
+  const [showProfessions, setShowProfessions] = useState(false);
+  const [showFoodDrinks, setShowFoodDrinks] = useState(false);
+  const [showWeather, setShowWeather] = useState(false);
+  const [showBodyHealth, setShowBodyHealth] = useState(false);
 
   const resetToMainMenu = () => {
     setShowLinkingWords(false);
@@ -96,6 +101,10 @@ export function useIndexState() {
     setShowGenderFlip(false);
     setShowSongLyrics(false);
     setShowAlphabetCourse(false);
+    setShowProfessions(false);
+    setShowFoodDrinks(false);
+    setShowWeather(false);
+    setShowBodyHealth(false);
   };
 
   return {
@@ -146,6 +155,10 @@ export function useIndexState() {
     showGenderFlip, setShowGenderFlip,
     showSongLyrics, setShowSongLyrics,
     showAlphabetCourse, setShowAlphabetCourse,
+    showProfessions, setShowProfessions,
+    showFoodDrinks, setShowFoodDrinks,
+    showWeather, setShowWeather,
+    showBodyHealth, setShowBodyHealth,
     resetToMainMenu,
   };
 }
