@@ -54,7 +54,10 @@ export default function Index() {
     state.showProfessions ||
     state.showFoodDrinks ||
     state.showWeather ||
-    state.showBodyHealth;
+    state.showBodyHealth ||
+    state.showDialogueFlashcards ||
+    state.showOrdinalNumbers ||
+    state.showBinyanimInAction;
 
   if (state.showVerbPatternsMenu && !state.selectedVerbPattern) {
     return (
@@ -116,6 +119,9 @@ export default function Index() {
         setShowFoodDrinks={state.setShowFoodDrinks}
         setShowWeather={state.setShowWeather}
         setShowBodyHealth={state.setShowBodyHealth}
+        setShowDialogueFlashcards={state.setShowDialogueFlashcards}
+        setShowOrdinalNumbers={state.setShowOrdinalNumbers}
+        setShowBinyanimInAction={state.setShowBinyanimInAction}
       />
     </div>
   );
