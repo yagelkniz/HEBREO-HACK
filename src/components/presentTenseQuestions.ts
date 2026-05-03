@@ -1,4 +1,3 @@
-
 export type PresentTenseQuestion = {
   number: number;
   sentence: string;
@@ -7,153 +6,67 @@ export type PresentTenseQuestion = {
   translation: string;
 };
 
-// DATA: 100 שאלות, ממוספר, תרגום, מתואם להגדרות
+// 60 unique present-tense questions. Distractors are other present-tense
+// forms of the same verb (different gender/number) to train agreement.
 export const presentTenseQuestions: PresentTenseQuestion[] = [
-  {
-    number: 1,
-    sentence: "אני ___ סלט לארוחת בוקר.",
-    options: ["אוכל", "אכלתי", "יאכל"],
-    answer: "אוכל",
-    translation: "I ___ salad for breakfast. (eat)"
-  },
-  {
-    number: 2,
-    sentence: "אתה ___ קפה כל בוקר.",
-    options: ["שותה", "שתית", "תשתה"],
-    answer: "שותה",
-    translation: "You ___ coffee every morning. (drink)"
-  },
-  {
-    number: 3,
-    sentence: "היא ___ לבית הספר בשעה שמונה.",
-    options: ["הולכת", "הלכה", "תלך"],
-    answer: "הולכת",
-    translation: "She ___ to school at 8 o'clock. (walks)"
-  },
-  {
-    number: 4,
-    sentence: "אנחנו ___ יחד בסלון.",
-    options: ["יושבים", "ישבנו", "נשב"],
-    answer: "יושבים",
-    translation: "We ___ together in the living room. (sit)"
-  },
-  {
-    number: 5,
-    sentence: "הם ___ חדשות בטלוויזיה.",
-    options: ["רואים", "ראו", "יראו"],
-    answer: "רואים",
-    translation: "They ___ news on TV. (watch)"
-  },
-  {
-    number: 6,
-    sentence: "אתן ___ מוזיקה בזמן הלימודים.",
-    options: ["שומעות", "שמעתן", "תשמעו"],
-    answer: "שומעות",
-    translation: "You (f. pl.) ___ music while studying. (listen)"
-  },
-  {
-    number: 7,
-    sentence: "הוא ___ עם המורה על הפרויקט.",
-    options: ["מדבר", "דיבר", "ידבר"],
-    answer: "מדבר",
-    translation: "He ___ with the teacher about the project. (talks)"
-  },
-  {
-    number: 8,
-    sentence: "אני ___ תמיד את האמת.",
-    options: ["אומר", "אמרתי", "יאמר"],
-    answer: "אומר",
-    translation: "I always ___ the truth. (say)"
-  },
-  {
-    number: 9,
-    sentence: "היא ___ מוקדם כל יום.",
-    options: ["ישנה", "ישנה", "תישן"],
-    answer: "ישנה",
-    translation: "She ___ early every day. (sleeps)"
-  },
-  {
-    number: 10,
-    sentence: "הם ___ בשש בבוקר.",
-    options: ["קמים", "קמו", "יקומו"],
-    answer: "קמים",
-    translation: "They ___ at 6 a.m. (wake up)"
-  },
-  // ולבצע שכפול 1–10 עד 100 בדיוק לפי סדרך
-  // ניתן לבצע זאת ע"י חזרה בלולאה: כל בלוק של 10 שורות חוזר 10 פעמים, רק שמספר השאלה גדל כל פעם.
-  // כדי לשמור על קוד קצר, נחסוך הרחבה של 90 שורות דומות.
-  // אך לפרויקט בפועל יש להרחיב זאת ידנית, כאן אציג את ההתחלה והסוף לצרכי קיצור.
-  // כאן מתחילה השכפול, לדוג' במספור אך לא אמיתית (יש לייצר את הכל ידנית במערכת אמיתית)
-  // ...
-  // למשל שאלה 91–100
-  {
-    number: 91,
-    sentence: "אני ___ סלט לארוחת בוקר.",
-    options: ["אוכל", "אכלתי", "יאכל"],
-    answer: "אוכל",
-    translation: "I ___ salad for breakfast. (eat)"
-  },
-  {
-    number: 92,
-    sentence: "אתה ___ קפה כל בוקר.",
-    options: ["שותה", "שתית", "תשתה"],
-    answer: "שותה",
-    translation: "You ___ coffee every morning. (drink)"
-  },
-  {
-    number: 93,
-    sentence: "היא ___ לבית הספר בשעה שמונה.",
-    options: ["הולכת", "הלכה", "תלך"],
-    answer: "הולכת",
-    translation: "She ___ to school at 8 o'clock. (walks)"
-  },
-  {
-    number: 94,
-    sentence: "אנחנו ___ יחד בסלון.",
-    options: ["יושבים", "ישבנו", "נשב"],
-    answer: "יושבים",
-    translation: "We ___ together in the living room. (sit)"
-  },
-  {
-    number: 95,
-    sentence: "הם ___ חדשות בטלוויזיה.",
-    options: ["רואים", "ראו", "יראו"],
-    answer: "רואים",
-    translation: "They ___ news on TV. (watch)"
-  },
-  {
-    number: 96,
-    sentence: "אתן ___ מוזיקה בזמן הלימודים.",
-    options: ["שומעות", "שמעתן", "תשמעו"],
-    answer: "שומעות",
-    translation: "You (f. pl.) ___ music while studying. (listen)"
-  },
-  {
-    number: 97,
-    sentence: "הוא ___ עם המורה על הפרויקט.",
-    options: ["מדבר", "דיבר", "ידבר"],
-    answer: "מדבר",
-    translation: "He ___ with the teacher about the project. (talks)"
-  },
-  {
-    number: 98,
-    sentence: "אני ___ תמיד את האמת.",
-    options: ["אומר", "אמרתי", "יאמר"],
-    answer: "אומר",
-    translation: "I always ___ the truth. (say)"
-  },
-  {
-    number: 99,
-    sentence: "היא ___ מוקדם כל יום.",
-    options: ["ישנה", "ישנה", "תישן"],
-    answer: "ישנה",
-    translation: "She ___ early every day. (sleeps)"
-  },
-  {
-    number: 100,
-    sentence: "הם ___ בשש בבוקר.",
-    options: ["קמים", "קמו", "יקומו"],
-    answer: "קמים",
-    translation: "They ___ at 6 a.m. (wake up)"
-  },
+  { number: 1, sentence: "אני (זכר) ___ סלט לארוחת בוקר.", options: ["אוכל", "אוכלת", "אוכלים", "אוכלות"], answer: "אוכל", translation: "I (m.) eat salad for breakfast." },
+  { number: 2, sentence: "אתה ___ קפה כל בוקר.", options: ["שותה", "שותים", "שותות", "שותָה"], answer: "שותה", translation: "You (m.s.) drink coffee every morning." },
+  { number: 3, sentence: "היא ___ לבית הספר בשמונה.", options: ["הולכת", "הולך", "הולכים", "הולכות"], answer: "הולכת", translation: "She walks to school at eight." },
+  { number: 4, sentence: "אנחנו (זכר) ___ בסלון.", options: ["יושבים", "יושב", "יושבת", "יושבות"], answer: "יושבים", translation: "We (m.) sit in the living room." },
+  { number: 5, sentence: "הם ___ חדשות בטלוויזיה.", options: ["רואים", "רואה", "רואות", "רואָה"], answer: "רואים", translation: "They (m.) watch the news on TV." },
+  { number: 6, sentence: "אתן ___ מוזיקה בזמן הלימודים.", options: ["שומעות", "שומעים", "שומעת", "שומע"], answer: "שומעות", translation: "You (f.pl.) listen to music while studying." },
+  { number: 7, sentence: "הוא ___ עם המורה על הפרויקט.", options: ["מדבר", "מדברת", "מדברים", "מדברות"], answer: "מדבר", translation: "He talks with the teacher about the project." },
+  { number: 8, sentence: "אני (נקבה) תמיד ___ את האמת.", options: ["אומרת", "אומר", "אומרים", "אומרות"], answer: "אומרת", translation: "I (f.) always tell the truth." },
+  { number: 9, sentence: "היא ___ שמונה שעות בלילה.", options: ["ישנה", "ישן", "ישנים", "ישנות"], answer: "ישנה", translation: "She sleeps eight hours a night." },
+  { number: 10, sentence: "הם ___ מוקדם בבוקר.", options: ["קמים", "קם", "קמה", "קמות"], answer: "קמים", translation: "They (m.) wake up early in the morning." },
+  { number: 11, sentence: "הילד ___ ספר במיטה.", options: ["קורא", "קוראת", "קוראים", "קוראות"], answer: "קורא", translation: "The boy reads a book in bed." },
+  { number: 12, sentence: "המורה (אישה) ___ עברית.", options: ["מלמדת", "מלמד", "מלמדים", "מלמדות"], answer: "מלמדת", translation: "The teacher (f.) teaches Hebrew." },
+  { number: 13, sentence: "הילדים ___ בגינה.", options: ["משחקים", "משחק", "משחקת", "משחקות"], answer: "משחקים", translation: "The children play in the garden." },
+  { number: 14, sentence: "אני (זכר) ___ מכתב לחברה שלי.", options: ["כותב", "כותבת", "כותבים", "כותבות"], answer: "כותב", translation: "I (m.) write a letter to my friend." },
+  { number: 15, sentence: "הסטודנטיות ___ למבחן.", options: ["לומדות", "לומד", "לומדת", "לומדים"], answer: "לומדות", translation: "The students (f.) study for the exam." },
+  { number: 16, sentence: "אתם ___ במסעדה חדשה.", options: ["אוכלים", "אוכל", "אוכלת", "אוכלות"], answer: "אוכלים", translation: "You (m.pl.) eat at a new restaurant." },
+  { number: 17, sentence: "החתול ___ על הספה.", options: ["יושב", "יושבת", "יושבים", "יושבות"], answer: "יושב", translation: "The cat sits on the couch." },
+  { number: 18, sentence: "הכלבה ___ בחצר.", options: ["רצה", "רץ", "רצים", "רצות"], answer: "רצה", translation: "The dog (f.) runs in the yard." },
+  { number: 19, sentence: "אני (נקבה) ___ עוגה לשבת.", options: ["אופה", "אופים", "אופות", "אפיתי"], answer: "אופה", translation: "I (f.) bake a cake for Shabbat." },
+  { number: 20, sentence: "אנחנו (נקבה) ___ במכון כושר.", options: ["מתאמנות", "מתאמן", "מתאמנת", "מתאמנים"], answer: "מתאמנות", translation: "We (f.) work out at the gym." },
+  { number: 21, sentence: "הוא ___ אוטובוס לעבודה.", options: ["נוסע", "נוסעת", "נוסעים", "נוסעות"], answer: "נוסע", translation: "He takes a bus to work." },
+  { number: 22, sentence: "היא ___ בשפה אנגלית.", options: ["משתמשת", "משתמש", "משתמשים", "משתמשות"], answer: "משתמשת", translation: "She uses the English language." },
+  { number: 23, sentence: "התלמידים ___ שאלות בכיתה.", options: ["שואלים", "שואל", "שואלת", "שואלות"], answer: "שואלים", translation: "The students ask questions in class." },
+  { number: 24, sentence: "סבתא ___ לנו סיפור.", options: ["מספרת", "מספר", "מספרים", "מספרות"], answer: "מספרת", translation: "Grandma tells us a story." },
+  { number: 25, sentence: "אני (זכר) ___ את החדר שלי.", options: ["מסדר", "מסדרת", "מסדרים", "מסדרות"], answer: "מסדר", translation: "I (m.) tidy my room." },
+  { number: 26, sentence: "הילדה ___ למוזיקה ברדיו.", options: ["מקשיבה", "מקשיב", "מקשיבים", "מקשיבות"], answer: "מקשיבה", translation: "The girl listens to music on the radio." },
+  { number: 27, sentence: "אנחנו (זכר) ___ עברית כל יום.", options: ["מדברים", "מדבר", "מדברת", "מדברות"], answer: "מדברים", translation: "We (m.) speak Hebrew every day." },
+  { number: 28, sentence: "אתה ___ בריצה בפארק.", options: ["מתעמל", "מתעמלת", "מתעמלים", "מתעמלות"], answer: "מתעמל", translation: "You (m.s.) exercise running in the park." },
+  { number: 29, sentence: "האחיות ___ במטבח.", options: ["עוזרות", "עוזר", "עוזרת", "עוזרים"], answer: "עוזרות", translation: "The sisters help in the kitchen." },
+  { number: 30, sentence: "אבא ___ את המכונית.", options: ["שוטף", "שוטפת", "שוטפים", "שוטפות"], answer: "שוטף", translation: "Dad washes the car." },
+  { number: 31, sentence: "אני (נקבה) ___ פרחים בשוק.", options: ["קונה", "קונים", "קונות", "קנינו"], answer: "קונה", translation: "I (f.) buy flowers at the market." },
+  { number: 32, sentence: "הם ___ פיצה בערב.", options: ["מזמינים", "מזמין", "מזמינה", "מזמינות"], answer: "מזמינים", translation: "They order pizza in the evening." },
+  { number: 33, sentence: "הציפור ___ בשמיים.", options: ["עפה", "עף", "עפים", "עפות"], answer: "עפה", translation: "The bird flies in the sky." },
+  { number: 34, sentence: "הסבא שלי ___ עיתון בבוקר.", options: ["קורא", "קוראת", "קוראים", "קוראות"], answer: "קורא", translation: "My grandpa reads the newspaper in the morning." },
+  { number: 35, sentence: "אנחנו (נקבה) ___ סרט מצחיק.", options: ["צוחקות", "צוחק", "צוחקת", "צוחקים"], answer: "צוחקות", translation: "We (f.) laugh at a funny movie." },
+  { number: 36, sentence: "התלמידה ___ את התשובה.", options: ["יודעת", "יודע", "יודעים", "יודעות"], answer: "יודעת", translation: "The student (f.) knows the answer." },
+  { number: 37, sentence: "ההורים ___ לילדים סיפור לפני השינה.", options: ["קוראים", "קורא", "קוראת", "קוראות"], answer: "קוראים", translation: "The parents read the children a story before bed." },
+  { number: 38, sentence: "אתן ___ תמונות יפות.", options: ["מציירות", "מצייר", "מציירת", "מציירים"], answer: "מציירות", translation: "You (f.pl.) draw beautiful pictures." },
+  { number: 39, sentence: "הוא ___ את החברים בסוף השבוע.", options: ["פוגש", "פוגשת", "פוגשים", "פוגשות"], answer: "פוגש", translation: "He meets his friends on the weekend." },
+  { number: 40, sentence: "אני (זכר) ___ במכבסה.", options: ["עובד", "עובדת", "עובדים", "עובדות"], answer: "עובד", translation: "I (m.) work at the laundromat." },
+  { number: 41, sentence: "המלצרית ___ את התפריט.", options: ["מביאה", "מביא", "מביאים", "מביאות"], answer: "מביאה", translation: "The waitress brings the menu." },
+  { number: 42, sentence: "הם ___ בים בקיץ.", options: ["שוחים", "שוחה", "שוחות", "שחה"], answer: "שוחים", translation: "They swim in the sea in summer." },
+  { number: 43, sentence: "היא ___ בעיר חדשה.", options: ["גרה", "גר", "גרים", "גרות"], answer: "גרה", translation: "She lives in a new city." },
+  { number: 44, sentence: "אנחנו (זכר) ___ ארוחת ערב.", options: ["מבשלים", "מבשל", "מבשלת", "מבשלות"], answer: "מבשלים", translation: "We (m.) cook dinner." },
+  { number: 45, sentence: "הילד הקטן ___ הרבה.", options: ["בוכה", "בוכָה", "בוכים", "בוכות"], answer: "בוכה", translation: "The little boy cries a lot." },
+  { number: 46, sentence: "אתה ___ באנגלית עם תיירים.", options: ["עונה", "עונים", "עונות", "ענינו"], answer: "עונה", translation: "You (m.s.) answer in English with tourists." },
+  { number: 47, sentence: "הסטודנטים ___ בספרייה.", options: ["יושבים", "יושב", "יושבת", "יושבות"], answer: "יושבים", translation: "The students sit in the library." },
+  { number: 48, sentence: "אני (נקבה) ___ שיר ברדיו.", options: ["שומעת", "שומע", "שומעים", "שומעות"], answer: "שומעת", translation: "I (f.) hear a song on the radio." },
+  { number: 49, sentence: "אמא ___ פירות בשוק.", options: ["בוחרת", "בוחר", "בוחרים", "בוחרות"], answer: "בוחרת", translation: "Mom chooses fruits at the market." },
+  { number: 50, sentence: "החיילים ___ את הארץ.", options: ["שומרים", "שומר", "שומרת", "שומרות"], answer: "שומרים", translation: "The soldiers guard the country." },
+  { number: 51, sentence: "הוא ___ אופניים בפארק.", options: ["רוכב", "רוכבת", "רוכבים", "רוכבות"], answer: "רוכב", translation: "He rides a bike in the park." },
+  { number: 52, sentence: "התינוקת ___ על הרצפה.", options: ["זוחלת", "זוחל", "זוחלים", "זוחלות"], answer: "זוחלת", translation: "The baby (f.) crawls on the floor." },
+  { number: 53, sentence: "אנחנו (נקבה) ___ לקונצרט.", options: ["הולכות", "הולך", "הולכת", "הולכים"], answer: "הולכות", translation: "We (f.) go to a concert." },
+  { number: 54, sentence: "הכלבים ___ על הזרים.", options: ["נובחים", "נובח", "נובחת", "נובחות"], answer: "נובחים", translation: "The dogs bark at strangers." },
+  { number: 55, sentence: "אני (זכר) ___ לעזרה.", options: ["זקוק", "זקוקה", "זקוקים", "זקוקות"], answer: "זקוק", translation: "I (m.) need help." },
+  { number: 56, sentence: "המנהלת ___ ישיבה חשובה.", options: ["מנהלת", "מנהל", "מנהלים", "מנהלות"], answer: "מנהלת", translation: "The manager (f.) runs an important meeting." },
+  { number: 57, sentence: "הם ___ ספרים ישנים.", options: ["מוכרים", "מוכר", "מוכרת", "מוכרות"], answer: "מוכרים", translation: "They sell old books." },
+  { number: 58, sentence: "אתן ___ בשמלות חדשות.", options: ["לובשות", "לובש", "לובשת", "לובשים"], answer: "לובשות", translation: "You (f.pl.) wear new dresses." },
+  { number: 59, sentence: "השף ___ ארוחה טעימה.", options: ["מכין", "מכינה", "מכינים", "מכינות"], answer: "מכין", translation: "The chef prepares a tasty meal." },
+  { number: 60, sentence: "אני (נקבה) ___ עברית כבר שנה.", options: ["לומדת", "לומד", "לומדים", "לומדות"], answer: "לומדת", translation: "I (f.) have been studying Hebrew for a year." },
 ];
