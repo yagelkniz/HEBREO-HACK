@@ -1,4 +1,3 @@
-
 export type FutureTenseQuestion = {
   number: number;
   sentence: string;
@@ -7,135 +6,67 @@ export type FutureTenseQuestion = {
   translation: string;
 };
 
-// 100 שאלות מתבנית חוזרת כל 10 שאלות (ע"פ הנתונים מהודעתך)
-const baseQuestions = [
-  {
-    sentence: "אני ___ פיצה לארוחת ערב.",
-    options: ["אוכל", "אכלתי", "אוכל"],
-    answer: "אוכל",
-    translation: "I will ___ pizza for dinner. (eat)"
-  },
-  {
-    sentence: "אתה ___ מים אחרי האימון.",
-    options: ["תשתה", "שתית", "שותה"],
-    answer: "תשתה",
-    translation: "You will ___ water after the workout. (drink)"
-  },
-  {
-    sentence: "היא ___ לבית הספר מחר.",
-    options: ["תלך", "הולכת", "הלכה"],
-    answer: "תלך",
-    translation: "She will ___ to school tomorrow. (go)"
-  },
-  {
-    sentence: "אנחנו ___ יחד לקולנוע.",
-    options: ["נלך", "הלכנו", "הולכים"],
-    answer: "נלך",
-    translation: "We will ___ to the cinema together. (go)"
-  },
-  {
-    sentence: "הם ___ סרט בערב.",
-    options: ["יראו", "ראו", "רואים"],
-    answer: "יראו",
-    translation: "They will ___ a movie in the evening. (watch)"
-  },
-  {
-    sentence: "אתן ___ את כל השיעורים בזמן.",
-    options: ["תכינו", "הכנתן", "מכינות"],
-    answer: "תכינו",
-    translation: "You (f. pl.) will ___ all the homework on time. (prepare)"
-  },
-  {
-    sentence: "הוא ___ עם המורה על הפרויקט מחר.",
-    options: ["ידבר", "דיבר", "מדבר"],
-    answer: "ידבר",
-    translation: "He will ___ with the teacher about the project tomorrow. (talk)"
-  },
-  {
-    sentence: "אני ___ להם את האמת כשנפגש.",
-    options: ["אגיד", "אמרתי", "אומר"],
-    answer: "אגיד",
-    translation: "I will ___ them the truth when we meet. (say)"
-  },
-  {
-    sentence: "היא ___ מוקדם כי יש לה מבחן.",
-    options: ["תישן", "ישנה", "נרדמה"],
-    answer: "תישן",
-    translation: "She will ___ early because she has a test. (sleep)"
-  },
-  {
-    sentence: "הם ___ בשש כדי להגיע בזמן לבית הספר.",
-    options: ["יקומו", "קמו", "קמים"],
-    answer: "יקומו",
-    translation: "They will ___ at six to arrive at school on time. (wake up)"
-  },
-  {
-    sentence: "אני ___ ספר חדש בסוף השבוע.",
-    options: ["אקרא", "קראתי", "קורא"],
-    answer: "אקרא",
-    translation: "I will ___ a new book on the weekend. (read)"
-  },
-  {
-    sentence: "הוא ___ את המכונית מחר בבוקר.",
-    options: ["ירחץ", "רחץ", "רוחץ"],
-    answer: "ירחץ",
-    translation: "He will ___ the car tomorrow morning. (wash)"
-  },
-  {
-    sentence: "אנחנו ___ לים ביום שישי.",
-    options: ["ניסע", "נסענו", "נוסעים"],
-    answer: "ניסע",
-    translation: "We will ___ to the beach on Friday. (drive)"
-  },
-  {
-    sentence: "את ___ את החברה שלך במסיבה.",
-    options: ["תפגשי", "פגשת", "פוגשת"],
-    answer: "תפגשי",
-    translation: "You (f.) will ___ your friend at the party. (meet)"
-  },
-  {
-    sentence: "הן ___ את השיר ביחד.",
-    options: ["תשרנה", "שרו", "שרות"],
-    answer: "תשרנה",
-    translation: "They (f.) will ___ the song together. (sing)"
-  },
-  {
-    sentence: "אתם ___ את הבית לפני החג.",
-    options: ["תנקו", "ניקיתם", "מנקים"],
-    answer: "תנקו",
-    translation: "You (pl.) will ___ the house before the holiday. (clean)"
-  },
-  {
-    sentence: "אני ___ לך הודעה אחרי העבודה.",
-    options: ["אשלח", "שלחתי", "שולח"],
-    answer: "אשלח",
-    translation: "I will ___ you a message after work. (send)"
-  },
-  {
-    sentence: "היא ___ עוגה ליום ההולדת.",
-    options: ["תאפה", "אפתה", "אופה"],
-    answer: "תאפה",
-    translation: "She will ___ a cake for the birthday. (bake)"
-  },
-  {
-    sentence: "הם ___ כסף לחופשה.",
-    options: ["יחסכו", "חסכו", "חוסכים"],
-    answer: "יחסכו",
-    translation: "They will ___ money for vacation. (save)"
-  },
-  {
-    sentence: "אנחנו ___ את הדלת בשמונה.",
-    options: ["נפתח", "פתחנו", "פותחים"],
-    answer: "נפתח",
-    translation: "We will ___ the door at eight. (open)"
-  },
+// 60 unique future-tense questions. Distractors are other future-tense
+// persons (prefix conjugations) of the same root.
+export const futureTenseQuestions: FutureTenseQuestion[] = [
+  { number: 1, sentence: "אני ___ פיצה לארוחת ערב.", options: ["אוכל", "תאכל", "יאכל", "נאכל"], answer: "אוכל", translation: "I will eat pizza for dinner." },
+  { number: 2, sentence: "אתה ___ מים אחרי האימון.", options: ["תשתה", "אשתה", "ישתה", "נשתה"], answer: "תשתה", translation: "You (m.s.) will drink water after training." },
+  { number: 3, sentence: "היא ___ לבית הספר מחר.", options: ["תלך", "ילך", "אלך", "נלך"], answer: "תלך", translation: "She will go to school tomorrow." },
+  { number: 4, sentence: "אנחנו ___ לקולנוע יחד.", options: ["נלך", "אלך", "תלך", "ילכו"], answer: "נלך", translation: "We will go to the cinema together." },
+  { number: 5, sentence: "הם ___ סרט בערב.", options: ["יראו", "תראו", "נראה", "אראה"], answer: "יראו", translation: "They will watch a movie in the evening." },
+  { number: 6, sentence: "אתן ___ את שיעורי הבית בזמן.", options: ["תכינו", "נכין", "יכינו", "אכין"], answer: "תכינו", translation: "You (f.pl.) will prepare homework on time." },
+  { number: 7, sentence: "הוא ___ עם המורה מחר.", options: ["ידבר", "תדבר", "אדבר", "נדבר"], answer: "ידבר", translation: "He will talk with the teacher tomorrow." },
+  { number: 8, sentence: "אני ___ להם את האמת.", options: ["אגיד", "תגיד", "יגיד", "נגיד"], answer: "אגיד", translation: "I will tell them the truth." },
+  { number: 9, sentence: "היא ___ מוקדם הלילה.", options: ["תישן", "אישן", "יישן", "נישן"], answer: "תישן", translation: "She will sleep early tonight." },
+  { number: 10, sentence: "הם ___ בשש בבוקר.", options: ["יקומו", "תקומו", "נקום", "אקום"], answer: "יקומו", translation: "They will get up at six in the morning." },
+  { number: 11, sentence: "אני ___ ספר חדש בסוף השבוע.", options: ["אקרא", "תקרא", "יקרא", "נקרא"], answer: "אקרא", translation: "I will read a new book on the weekend." },
+  { number: 12, sentence: "הוא ___ את המכונית מחר.", options: ["ישטוף", "תשטוף", "אשטוף", "נשטוף"], answer: "ישטוף", translation: "He will wash the car tomorrow." },
+  { number: 13, sentence: "אנחנו ___ לים בשישי.", options: ["ניסע", "אסע", "תיסע", "ייסעו"], answer: "ניסע", translation: "We will travel to the sea on Friday." },
+  { number: 14, sentence: "את ___ את החברה שלך במסיבה.", options: ["תפגשי", "תפגוש", "אפגוש", "יפגוש"], answer: "תפגשי", translation: "You (f.s.) will meet your friend at the party." },
+  { number: 15, sentence: "הן ___ שיר ביחד.", options: ["ישירו", "תשירו", "נשיר", "אשיר"], answer: "ישירו", translation: "They (f.) will sing a song together." },
+  { number: 16, sentence: "אתם ___ את הבית לפני החג.", options: ["תנקו", "ננקה", "ינקו", "אנקה"], answer: "תנקו", translation: "You (m.pl.) will clean the house before the holiday." },
+  { number: 17, sentence: "אני ___ לך הודעה אחרי העבודה.", options: ["אשלח", "תשלח", "ישלח", "נשלח"], answer: "אשלח", translation: "I will send you a message after work." },
+  { number: 18, sentence: "היא ___ עוגה ליום ההולדת.", options: ["תאפה", "יאפה", "אאפה", "נאפה"], answer: "תאפה", translation: "She will bake a cake for the birthday." },
+  { number: 19, sentence: "הם ___ כסף לחופשה.", options: ["יחסכו", "תחסכו", "נחסוך", "אחסוך"], answer: "יחסכו", translation: "They will save money for the vacation." },
+  { number: 20, sentence: "אנחנו ___ את הדלת בשמונה.", options: ["נפתח", "אפתח", "תפתח", "יפתחו"], answer: "נפתח", translation: "We will open the door at eight." },
+  { number: 21, sentence: "אני ___ אופניים חדשים.", options: ["אקנה", "תקנה", "יקנה", "נקנה"], answer: "אקנה", translation: "I will buy a new bike." },
+  { number: 22, sentence: "אתה ___ את העבודה בשבוע הבא.", options: ["תסיים", "אסיים", "יסיים", "נסיים"], answer: "תסיים", translation: "You (m.s.) will finish the work next week." },
+  { number: 23, sentence: "הילדים ___ בפארק אחר הצהריים.", options: ["ישחקו", "תשחקו", "נשחק", "אשחק"], answer: "ישחקו", translation: "The children will play in the park in the afternoon." },
+  { number: 24, sentence: "אנחנו ___ עברית באוניברסיטה.", options: ["נלמד", "אלמד", "תלמד", "ילמדו"], answer: "נלמד", translation: "We will study Hebrew at university." },
+  { number: 25, sentence: "היא ___ לרופא בבוקר.", options: ["תיגש", "ייגש", "אגש", "ניגש"], answer: "תיגש", translation: "She will go to the doctor in the morning." },
+  { number: 26, sentence: "אני ___ אותך בתחנה.", options: ["אחכה", "תחכה", "יחכה", "נחכה"], answer: "אחכה", translation: "I will wait for you at the station." },
+  { number: 27, sentence: "אתן ___ למסיבה בשמלות חדשות.", options: ["תבואו", "נבוא", "יבואו", "אבוא"], answer: "תבואו", translation: "You (f.pl.) will come to the party in new dresses." },
+  { number: 28, sentence: "הוא ___ את המתנה מחר.", options: ["יקבל", "תקבל", "אקבל", "נקבל"], answer: "יקבל", translation: "He will receive the gift tomorrow." },
+  { number: 29, sentence: "אנחנו ___ ארוחת ערב בשמונה.", options: ["נאכל", "אוכל", "תאכל", "יאכלו"], answer: "נאכל", translation: "We will eat dinner at eight." },
+  { number: 30, sentence: "הם ___ באוטובוס לעבודה.", options: ["יסעו", "תסעו", "נסע", "אסע"], answer: "יסעו", translation: "They will travel by bus to work." },
+  { number: 31, sentence: "אני ___ עברית כל יום.", options: ["אדבר", "תדבר", "ידבר", "נדבר"], answer: "אדבר", translation: "I will speak Hebrew every day." },
+  { number: 32, sentence: "היא ___ את הילדים מהגן.", options: ["תיקח", "ייקח", "אקח", "ניקח"], answer: "תיקח", translation: "She will pick up the kids from kindergarten." },
+  { number: 33, sentence: "אתה ___ את הספר בשעה.", options: ["תסיים", "אסיים", "יסיים", "נסיים"], answer: "תסיים", translation: "You (m.s.) will finish the book in an hour." },
+  { number: 34, sentence: "הם ___ עוגה לשבת.", options: ["יאפו", "תאפו", "נאפה", "אאפה"], answer: "יאפו", translation: "They will bake a cake for Shabbat." },
+  { number: 35, sentence: "אנחנו ___ סרט חדש הערב.", options: ["נראה", "אראה", "תראה", "יראו"], answer: "נראה", translation: "We will watch a new movie this evening." },
+  { number: 36, sentence: "אני ___ את הבית עד הצהריים.", options: ["אנקה", "תנקה", "ינקה", "ננקה"], answer: "אנקה", translation: "I will clean the house by noon." },
+  { number: 37, sentence: "אתן ___ למסעדה הזו עוד פעם.", options: ["תחזרו", "נחזור", "יחזרו", "אחזור"], answer: "תחזרו", translation: "You (f.pl.) will return to that restaurant again." },
+  { number: 38, sentence: "המורה ___ לנו על הבחינה.", options: ["יספר", "תספר", "אספר", "נספר"], answer: "יספר", translation: "The teacher will tell us about the exam." },
+  { number: 39, sentence: "אני ___ אליך מחר בערב.", options: ["אתקשר", "תתקשר", "יתקשר", "נתקשר"], answer: "אתקשר", translation: "I will call you tomorrow evening." },
+  { number: 40, sentence: "הילדים ___ פרחים בגינה.", options: ["יזרעו", "תזרעו", "נזרע", "אזרע"], answer: "יזרעו", translation: "The kids will plant flowers in the garden." },
+  { number: 41, sentence: "אנחנו ___ דירה חדשה בקרוב.", options: ["נחפש", "אחפש", "תחפש", "יחפשו"], answer: "נחפש", translation: "We will look for a new apartment soon." },
+  { number: 42, sentence: "היא ___ עוגיות בערב.", options: ["תכין", "יכין", "אכין", "נכין"], answer: "תכין", translation: "She will make cookies in the evening." },
+  { number: 43, sentence: "אני ___ אותך אחרי הצהריים.", options: ["אבקר", "תבקר", "יבקר", "נבקר"], answer: "אבקר", translation: "I will visit you in the afternoon." },
+  { number: 44, sentence: "הם ___ את כל המבחן.", options: ["יענו", "תענו", "נענה", "אענה"], answer: "יענו", translation: "They will answer the whole exam." },
+  { number: 45, sentence: "אתה ___ את האורות לפני שתצא.", options: ["תכבה", "אכבה", "יכבה", "נכבה"], answer: "תכבה", translation: "You (m.s.) will turn off the lights before leaving." },
+  { number: 46, sentence: "אנחנו ___ את הסרט בקולנוע.", options: ["נראה", "אראה", "תראה", "יראו"], answer: "נראה", translation: "We will see the film at the cinema." },
+  { number: 47, sentence: "אני ___ אופניים מחר בבוקר.", options: ["ארכב", "תרכב", "ירכב", "נרכב"], answer: "ארכב", translation: "I will ride a bike tomorrow morning." },
+  { number: 48, sentence: "אתן ___ למסיבה ביחד.", options: ["תגיעו", "נגיע", "יגיעו", "אגיע"], answer: "תגיעו", translation: "You (f.pl.) will arrive at the party together." },
+  { number: 49, sentence: "החיילים ___ את העיר.", options: ["ישמרו", "תשמרו", "נשמור", "אשמור"], answer: "ישמרו", translation: "The soldiers will guard the city." },
+  { number: 50, sentence: "היא ___ אנגלית בבית הספר.", options: ["תלמד", "ילמד", "אלמד", "נלמד"], answer: "תלמד", translation: "She will study English at school." },
+  { number: 51, sentence: "אנחנו ___ את הסבתא בשבת.", options: ["נבקר", "אבקר", "תבקר", "יבקרו"], answer: "נבקר", translation: "We will visit grandma on Saturday." },
+  { number: 52, sentence: "הם ___ את הפרויקט בזמן.", options: ["יגמרו", "תגמרו", "נגמור", "אגמור"], answer: "יגמרו", translation: "They will finish the project on time." },
+  { number: 53, sentence: "אתה ___ את החדר לפני שאמא תחזור.", options: ["תסדר", "אסדר", "יסדר", "נסדר"], answer: "תסדר", translation: "You (m.s.) will tidy the room before mom returns." },
+  { number: 54, sentence: "אני ___ אותך מאוד.", options: ["אאהב", "תאהב", "יאהב", "נאהב"], answer: "אאהב", translation: "I will love you very much." },
+  { number: 55, sentence: "הילדה ___ ציור יפה.", options: ["תצייר", "יצייר", "אצייר", "נצייר"], answer: "תצייר", translation: "The girl will draw a beautiful picture." },
+  { number: 56, sentence: "אנחנו ___ עברית באולפן בקיץ.", options: ["נלמד", "אלמד", "תלמד", "ילמדו"], answer: "נלמד", translation: "We will study Hebrew in ulpan in summer." },
+  { number: 57, sentence: "אתן ___ במסעדה החדשה.", options: ["תאכלו", "נאכל", "יאכלו", "אוכל"], answer: "תאכלו", translation: "You (f.pl.) will eat at the new restaurant." },
+  { number: 58, sentence: "הוא ___ אותי בתחנה.", options: ["יחכה", "תחכה", "אחכה", "נחכה"], answer: "יחכה", translation: "He will wait for me at the station." },
+  { number: 59, sentence: "אני ___ עוגה ליום ההולדת שלך.", options: ["אכין", "תכין", "יכין", "נכין"], answer: "אכין", translation: "I will make a cake for your birthday." },
+  { number: 60, sentence: "הם ___ הביתה מאוחר.", options: ["יחזרו", "תחזרו", "נחזור", "אחזור"], answer: "יחזרו", translation: "They will return home late." },
 ];
-
-export const futureTenseQuestions: FutureTenseQuestion[] = [];
-for (let i = 0; i < 100; i++) {
-  const baseQ = baseQuestions[i % baseQuestions.length];
-  futureTenseQuestions.push({
-    number: i + 1,
-    ...baseQ,
-  });
-}
