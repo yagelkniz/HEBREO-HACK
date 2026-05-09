@@ -57,7 +57,8 @@ export default function Index() {
     state.showBodyHealth ||
     state.showDialogueFlashcards ||
     state.showOrdinalNumbers ||
-    state.showBinyanimInAction;
+    state.showBinyanimInAction ||
+    state.showLiveTenseTable;
 
   if (state.showVerbPatternsMenu && !state.selectedVerbPattern) {
     return (
@@ -122,6 +123,7 @@ export default function Index() {
         setShowDialogueFlashcards={state.setShowDialogueFlashcards}
         setShowOrdinalNumbers={state.setShowOrdinalNumbers}
         setShowBinyanimInAction={state.setShowBinyanimInAction}
+        setShowLiveTenseTable={state.setShowLiveTenseTable}
       />
     </div>
   );

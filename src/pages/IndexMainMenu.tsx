@@ -71,6 +71,7 @@ interface IndexMainMenuProps {
   setShowDialogueFlashcards: (b: boolean) => void;
   setShowOrdinalNumbers: (b: boolean) => void;
   setShowBinyanimInAction: (b: boolean) => void;
+  setShowLiveTenseTable: (b: boolean) => void;
 }
 
 type Category = "all" | "learn" | "vocab" | "games" | "reading";
@@ -109,6 +110,7 @@ export default function IndexMainMenu(props: IndexMainMenuProps) {
     setShowFamily, setShowQuickQuiz, setShowGenderFlip, setShowSongLyrics, setShowAlphabetCourse,
     setShowProfessions, setShowFoodDrinks, setShowWeather, setShowBodyHealth,
     setShowDialogueFlashcards, setShowOrdinalNumbers, setShowBinyanimInAction,
+    setShowLiveTenseTable,
   } = props;
 
   const t = menuText[lang];
@@ -140,6 +142,7 @@ export default function IndexMainMenu(props: IndexMainMenuProps) {
     { emoji: "❓", label: isHe ? "מילות שאלה" : "Question Words", category: ["learn"], level: "beginner", action: () => setShowQuestionWords(true) },
     { emoji: "📚", label: isHe ? "בניינים" : "Verb Patterns", category: ["learn"], level: "intermediate", action: () => setShowVerbPatternsMenu(true) },
     { emoji: "🔄", label: isHe ? "בניינים בפעולה" : "Binyanim in Action", category: ["learn"], level: "advanced", action: () => setShowBinyanimInAction(true) },
+    { emoji: "📋", label: isHe ? "טבלת זמנים חיה" : "Live Tense Table", category: ["learn"], level: "intermediate", action: () => setShowLiveTenseTable(true) },
     { emoji: "✏️", label: isHe ? "תרגול פעלים" : "Verb Practice", category: ["learn"], level: "intermediate", action: () => setSelectedPractice("verb") },
     { emoji: "📜", label: isHe ? "תרגול משפטים" : "Sentence Order", category: ["learn"], level: "intermediate", action: () => setShowSentenceOrder(true) },
     { emoji: "🧩", label: isHe ? "שמות עצם + תואר" : "Nouns + Adjectives", category: ["learn"], level: "intermediate", action: () => setSelectedPractice("nounAdj") },
