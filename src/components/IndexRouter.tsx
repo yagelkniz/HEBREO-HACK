@@ -71,6 +71,7 @@ import BodyHealthPractice from "@/components/BodyHealthPractice";
 import DialogueFlashcardsPractice from "@/components/DialogueFlashcardsPractice";
 import OrdinalNumbersPractice from "@/components/OrdinalNumbersPractice";
 import BinyanimInActionPractice from "@/components/BinyanimInActionPractice";
+import LiveTenseTable from "@/components/LiveTenseTable";
 import { useIndexState } from "@/hooks/useIndexState";
 
 interface IndexRouterProps {
@@ -131,6 +132,7 @@ export default function IndexRouter({ state }: IndexRouterProps) {
     showDialogueFlashcards, setShowDialogueFlashcards,
     showOrdinalNumbers, setShowOrdinalNumbers,
     showBinyanimInAction, setShowBinyanimInAction,
+    showLiveTenseTable, setShowLiveTenseTable,
     resetToMainMenu,
   } = state;
 
@@ -147,6 +149,7 @@ export default function IndexRouter({ state }: IndexRouterProps) {
   if (showDialogueFlashcards) return <DialogueFlashcardsPractice onBack={() => setShowDialogueFlashcards(false)} lang={lang} />;
   if (showOrdinalNumbers) return <OrdinalNumbersPractice onBack={() => setShowOrdinalNumbers(false)} lang={lang} />;
   if (showBinyanimInAction) return <BinyanimInActionPractice onBack={() => setShowBinyanimInAction(false)} lang={lang} />;
+  if (showLiveTenseTable) return <LiveTenseTable onBack={() => setShowLiveTenseTable(false)} lang={lang} />;
 
   // New exercises
   if (showNumbers) return <NumbersPractice onBack={() => setShowNumbers(false)} lang={lang} />;

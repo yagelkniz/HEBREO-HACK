@@ -57,7 +57,7 @@ export function useIndexState() {
   const [showDialogueFlashcards, setShowDialogueFlashcards] = useState(false);
   const [showOrdinalNumbers, setShowOrdinalNumbers] = useState(false);
   const [showBinyanimInAction, setShowBinyanimInAction] = useState(false);
-      const [showShortStories, setShowShortStories] = useState(false);
+      const [showLiveTenseTable, setShowLiveTenseTable] = useState(false);
 
   const resetToMainMenu = () => {
     setShowLinkingWords(false);
@@ -113,7 +113,7 @@ export function useIndexState() {
     setShowDialogueFlashcards(false);
     setShowOrdinalNumbers(false);
     setShowBinyanimInAction(false);
-            setShowShortStories(false);
+            setShowLiveTenseTable(false);
   };
 
   return {
@@ -171,7 +171,7 @@ export function useIndexState() {
     showDialogueFlashcards, setShowDialogueFlashcards,
     showOrdinalNumbers, setShowOrdinalNumbers,
     showBinyanimInAction, setShowBinyanimInAction,
-        showShortStories, setShowShortStories,
+        showLiveTenseTable, setShowLiveTenseTable,
     resetToMainMenu,
   };
 }
