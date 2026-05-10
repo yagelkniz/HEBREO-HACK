@@ -6,6 +6,7 @@ import { speakHebrew } from "@/lib/speakHebrew";
 import { Switch } from "@/components/ui/switch";
 import { Label } from "@/components/ui/label";
 import { Select, SelectContent, SelectItem, SelectTrigger, SelectValue } from "@/components/ui/select";
+import { Dialog, DialogContent, DialogHeader, DialogTitle, DialogTrigger } from "@/components/ui/dialog";
 
 interface LiveTenseTableProps {
   onBack: () => void;
