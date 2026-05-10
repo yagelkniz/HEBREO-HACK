@@ -228,6 +228,16 @@ export default function LiveTenseTable({ onBack, lang }: LiveTenseTableProps) {
   const [timerRunning, setTimerRunning] = useState(false);
   const intervalRef = useRef<number | null>(null);
 
+  // Session timer (time spent since component mounted)
+  const sessionStartRef = useRef<number>(Date.now());
+  const [sessionElapsed, setSessionElapsed] = useState(0);
+  useEffect(() => {
+    const id = window.setInterval(() => {
+      setSessionElapsed(Math.floor((Date.now() - sessionStartRef.current) / 1000));
+    }, 1000);
+    return () => window.clearInterval(id);
+  }, []);
+
   function playBeep() {
     try {
       const Ctx = (window as any).AudioContext || (window as any).webkitAudioContext;
@@ -414,6 +424,13 @@ export default function LiveTenseTable({ onBack, lang }: LiveTenseTableProps) {
                 </DialogTitle>
               </DialogHeader>
               <div className="space-y-4">
+                <div className="flex items-center gap-2 p-3 rounded-xl bg-blue-50 border border-blue-200">
+                  <span className="text-2xl">🕐</span>
+                  <div>
+                    <div className="text-xs text-gray-600">{t("זמן שהוקדש לשיעור", "Time spent in lesson")}</div>
+                    <div className="font-mono font-bold text-lg text-blue-800 tabular-nums">{fmtTime(sessionElapsed)}</div>
+                  </div>
+                </div>
                 <div>
                   <h3 className="font-bold text-amber-600 mb-2 flex items-center gap-1">
                     ⭐ {t("מילים שסומנו כקשות", "Marked as hard")}
