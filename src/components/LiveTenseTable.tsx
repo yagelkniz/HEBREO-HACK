@@ -189,6 +189,22 @@ export default function LiveTenseTable({ onBack, lang }: LiveTenseTableProps) {
     });
   }
 
+  // Notepad (per-verb, persisted)
+  const [notesOpen, setNotesOpen] = useState(false);
+  const [notes, setNotes] = useState<Record<string, string>>(() => {
+    try {
+      const raw = localStorage.getItem("liveTenseTable.notes");
+      return raw ? JSON.parse(raw) : {};
+    } catch { return {}; }
+  });
+  function updateNote(verbKey: string, text: string) {
+    setNotes((prev) => {
+      const next = { ...prev, [verbKey]: text };
+      try { localStorage.setItem("liveTenseTable.notes", JSON.stringify(next)); } catch {}
+      return next;
+    });
+  }
+
   // Timer
   const [timerDuration, setTimerDuration] = useState<number>(0); // seconds; 0 = off
   const [timeLeft, setTimeLeft] = useState<number>(0);
