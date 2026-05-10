@@ -102,7 +102,10 @@ const VERBS: VerbEntry[] = [
     meaning: { he: "לעשות", en: "to do / make" },
     past: { ani: "עשיתי", ata: "עשית", at: "עשית", hu: "עשה", hi: "עשתה", anachnu: "עשינו", atem: "עשיתם", hem: "עשו" },
     present: { mS: "עושה", fS: "עושה", mP: "עושים", fP: "עושות" },
-    future: { ani: "אעשה", ata: "תעשה", at: "תעשי", hu: "יעשה", hi: "תעשה", anachnu: "נעשה", atem: "תעשו", hem: "יעש
+    future: { ani: "אעשה", ata: "תעשה", at: "תעשי", hu: "יעשה", hi: "תעשה", anachnu: "נעשה", atem: "תעשו", hem: "יעשו" },
+  },
+];
+
 
 // All cell IDs in a stable order (used to pick which to hide in practice mode)
 const ALL_CELL_IDS = [
