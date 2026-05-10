@@ -150,6 +150,13 @@ const VERBS: VerbEntry[] = [
   },
 ];
 
+type Level = "all" | "beginner" | "intermediate" | "advanced";
+const VERB_LEVEL: Record<string, Exclude<Level, "all">> = {
+  "לאכול": "beginner", "ללמוד": "beginner", "לכתוב": "beginner", "לרוץ": "beginner",
+  "לדבר": "intermediate", "לשתות": "intermediate", "לישון": "intermediate", "לקרוא": "intermediate",
+  "ללכת": "advanced", "לבוא": "advanced", "לראות": "advanced", "לעשות": "advanced",
+};
+
 
 // All cell IDs in a stable order (used to pick which to hide in practice mode)
 const ALL_CELL_IDS = [
@@ -168,6 +175,15 @@ function pickHiddenSet(seed: number): Set<string> {
 
 export default function LiveTenseTable({ onBack, lang }: LiveTenseTableProps) {
   const [selected, setSelected] = useState(0);
+  const [levelFilter, setLevelFilter] = useState<Level>("all");
+  const filteredVerbs = useMemo(
+    () => VERBS.filter((v) => levelFilter === "all" || VERB_LEVEL[v.infinitive] === levelFilter),
+    [levelFilter]
+  );
+  // Clamp selected when filter shrinks list
+  useEffect(() => {
+    if (selected >= filteredVerbs.length) setSelected(0);
+  }, [filteredVerbs.length, selected]);
   const [practiceMode, setPracticeMode] = useState(false);
   const [sessionKey, setSessionKey] = useState(0);
   const [revealed, setRevealed] = useState<Set<string>>(new Set());
@@ -263,7 +279,7 @@ export default function LiveTenseTable({ onBack, lang }: LiveTenseTableProps) {
   }
 
   const isHe = lang === "he";
-  const verb = VERBS[selected];
+  const verb = filteredVerbs[selected] ?? filteredVerbs[0] ?? VERBS[0];
 
   const t = (he: string, en: string) => (isHe ? he : en);
 
@@ -365,8 +381,32 @@ export default function LiveTenseTable({ onBack, lang }: LiveTenseTableProps) {
              "Pick a verb and see all conjugations in past, present and future. Tap any word to hear it.")}
         </p>
 
+        {/* Difficulty filter */}
+        <div className="flex gap-2 flex-wrap mb-3 items-center">
+          <span className="text-sm text-gray-600 font-semibold">{t("רמה:", "Level:")}</span>
+          {([
+            { v: "all", he: "הכל", en: "All", emoji: "🌐" },
+            { v: "beginner", he: "מתחיל", en: "Beginner", emoji: "🟢" },
+            { v: "intermediate", he: "בינוני", en: "Intermediate", emoji: "🟡" },
+            { v: "advanced", he: "מתקדם", en: "Advanced", emoji: "🔴" },
+          ] as const).map((opt) => (
+            <button
+              key={opt.v}
+              onClick={() => { setLevelFilter(opt.v); setSelected(0); setRevealed(new Set()); }}
+              className={`px-3 py-1.5 rounded-full text-sm font-semibold border transition-all min-h-[36px] ${
+                levelFilter === opt.v
+                  ? "bg-blue-600 text-white border-blue-600 shadow-md"
+                  : "bg-white text-gray-700 border-gray-200 hover:border-blue-300"
+              }`}
+            >
+              {opt.emoji} {t(opt.he, opt.en)}
+            </button>
+          ))}
+          <span className="text-xs text-gray-400">({filteredVerbs.length} {t("פעלים", "verbs")})</span>
+        </div>
+
         <div className="flex gap-2 overflow-x-auto pb-2 mb-4">
-          {VERBS.map((v, i) => (
+          {filteredVerbs.map((v, i) => (
             <button key={v.infinitive} onClick={() => { setSelected(i); setRevealed(new Set()); }}
               className={`whitespace-nowrap px-4 py-2 rounded-full text-sm font-semibold border transition-all ${
                 selected === i
