@@ -129,6 +129,7 @@ export default function Index() {
         setShowOrdinalNumbers={state.setShowOrdinalNumbers}
         setShowBinyanimInAction={state.setShowBinyanimInAction}
         setShowLiveTenseTable={state.setShowLiveTenseTable}
+        setShowConjugationGenerator={state.setShowConjugationGenerator}
       />
     </div>
   );
