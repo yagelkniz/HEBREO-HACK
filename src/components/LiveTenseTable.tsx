@@ -382,6 +382,30 @@ export default function LiveTenseTable({ onBack, lang }: LiveTenseTableProps) {
               </span>
             )}
           </div>
+
+          {/* Timer */}
+          <div className="flex items-center gap-2 px-3 py-2 rounded-xl bg-blue-50 border border-blue-200">
+            <Timer size={16} className="text-blue-700" />
+            <Select
+              value={timerDuration === 0 ? "off" : String(timerDuration)}
+              onValueChange={(v) => startTimer(v === "off" ? 0 : Number(v))}
+            >
+              <SelectTrigger className="h-9 w-[110px] text-sm">
+                <SelectValue placeholder={t("טיימר", "Timer")} />
+              </SelectTrigger>
+              <SelectContent>
+                <SelectItem value="off">{t("כבוי", "Off")}</SelectItem>
+                <SelectItem value="30">30s</SelectItem>
+                <SelectItem value="60">1 min</SelectItem>
+                <SelectItem value="120">2 min</SelectItem>
+              </SelectContent>
+            </Select>
+            {timerDuration > 0 && (
+              <span className={`font-mono font-bold text-sm tabular-nums ${timeLeft <= 5 && timerRunning ? "text-red-600 animate-pulse" : "text-blue-800"}`}>
+                ⏱️ {fmtTime(timeLeft)}
+              </span>
+            )}
+          </div>
           {practiceMode && (
             <div className="flex gap-2 flex-wrap">
               <Button
