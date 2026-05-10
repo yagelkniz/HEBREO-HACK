@@ -472,6 +472,55 @@ export default function LiveTenseTable({ onBack, lang }: LiveTenseTableProps) {
                     </ul>
                   )}
                 </div>
+                <div>
+                  <h3 className="font-bold text-emerald-700 mb-2 flex items-center gap-1">
+                    📝 {t("הערות מורה", "Teacher Notes")}
+                    <span className="text-sm text-gray-500">
+                      ({Object.values(notes).filter((n) => n?.trim()).length})
+                    </span>
+                  </h3>
+                  {Object.entries(notes).filter(([, n]) => n?.trim()).length === 0 ? (
+                    <p className="text-sm text-gray-500 italic">
+                      {t("לא נכתבו הערות. פתחו פועל ולחצו על 📝 הערות מורה.", "No notes written. Open a verb and click 📝 Teacher Notes.")}
+                    </p>
+                  ) : (
+                    <ul className="space-y-2 max-h-[300px] overflow-y-auto">
+                      {Object.entries(notes)
+                        .filter(([, n]) => n?.trim())
+                        .map(([infinitive, note]) => (
+                          <li
+                            key={infinitive}
+                            className="p-2 rounded-lg bg-emerald-50 border border-emerald-200"
+                          >
+                            <div className="flex items-center justify-between gap-2 mb-1">
+                              <div className="font-bold text-purple-700" dir="rtl">
+                                {infinitive}
+                              </div>
+                              <button
+                                onClick={() => {
+                                  const next = { ...notes };
+                                  delete next[infinitive];
+                                  setNotes(next);
+                                  try { localStorage.setItem("liveTenseTable.notes", JSON.stringify(next)); } catch {}
+                                }}
+                                className="p-1 rounded hover:bg-rose-100 text-rose-600 text-sm"
+                                title={t("מחק הערה", "Delete note")}
+                              >
+                                ✕
+                              </button>
+                            </div>
+                            <div
+                              className="text-sm text-gray-800 whitespace-pre-wrap"
+                              dir="rtl"
+                              style={{ lineHeight: 1.6 }}
+                            >
+                              {note}
+                            </div>
+                          </li>
+                        ))}
+                    </ul>
+                  )}
+                </div>
                 {hardItems.length > 0 && (
                   <Button
                     variant="outline"
