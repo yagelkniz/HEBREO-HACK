@@ -127,6 +127,7 @@ export default function LiveTenseTable({ onBack, lang }: LiveTenseTableProps) {
   const [practiceMode, setPracticeMode] = useState(false);
   const [sessionKey, setSessionKey] = useState(0);
   const [revealed, setRevealed] = useState<Set<string>>(new Set());
+  const [highlighted, setHighlighted] = useState<Set<string>>(new Set());
   const isHe = lang === "he";
   const verb = VERBS[selected];
 
