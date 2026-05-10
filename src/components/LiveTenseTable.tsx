@@ -1,10 +1,11 @@
-import { useMemo, useState } from "react";
+import { useEffect, useMemo, useRef, useState } from "react";
 import { Button } from "@/components/ui/button";
 import { Table, TableHeader, TableBody, TableRow, TableHead, TableCell } from "@/components/ui/table";
-import { Volume2, Eye, EyeOff, RotateCcw, Star } from "lucide-react";
+import { Volume2, Eye, EyeOff, RotateCcw, Star, Timer } from "lucide-react";
 import { speakHebrew } from "@/lib/speakHebrew";
 import { Switch } from "@/components/ui/switch";
 import { Label } from "@/components/ui/label";
+import { Select, SelectContent, SelectItem, SelectTrigger, SelectValue } from "@/components/ui/select";
 
 interface LiveTenseTableProps {
   onBack: () => void;
@@ -187,6 +188,64 @@ export default function LiveTenseTable({ onBack, lang }: LiveTenseTableProps) {
       return next;
     });
   }
+
+  // Timer
+  const [timerDuration, setTimerDuration] = useState<number>(0); // seconds; 0 = off
+  const [timeLeft, setTimeLeft] = useState<number>(0);
+  const [timerRunning, setTimerRunning] = useState(false);
+  const intervalRef = useRef<number | null>(null);
+
+  function playBeep() {
+    try {
+      const Ctx = (window as any).AudioContext || (window as any).webkitAudioContext;
+      if (!Ctx) return;
+      const ctx = new Ctx();
+      const beep = (freq: number, start: number, dur: number) => {
+        const osc = ctx.createOscillator();
+        const gain = ctx.createGain();
+        osc.frequency.value = freq;
+        osc.type = "sine";
+        osc.connect(gain);
+        gain.connect(ctx.destination);
+        gain.gain.setValueAtTime(0.001, ctx.currentTime + start);
+        gain.gain.exponentialRampToValueAtTime(0.3, ctx.currentTime + start + 0.02);
+        gain.gain.exponentialRampToValueAtTime(0.001, ctx.currentTime + start + dur);
+        osc.start(ctx.currentTime + start);
+        osc.stop(ctx.currentTime + start + dur + 0.05);
+      };
+      beep(880, 0, 0.2);
+      beep(1175, 0.25, 0.35);
+      setTimeout(() => ctx.close(), 800);
+    } catch {}
+  }
+
+  function startTimer(seconds: number) {
+    if (intervalRef.current) window.clearInterval(intervalRef.current);
+    setTimerDuration(seconds);
+    setTimeLeft(seconds);
+    if (seconds === 0) { setTimerRunning(false); return; }
+    setTimerRunning(true);
+    intervalRef.current = window.setInterval(() => {
+      setTimeLeft((s) => {
+        if (s <= 1) {
+          if (intervalRef.current) window.clearInterval(intervalRef.current);
+          setTimerRunning(false);
+          playBeep();
+          return 0;
+        }
+        return s - 1;
+      });
+    }, 1000);
+  }
+
+  useEffect(() => () => { if (intervalRef.current) window.clearInterval(intervalRef.current); }, []);
+
+  function fmtTime(s: number) {
+    const m = Math.floor(s / 60);
+    const sec = s % 60;
+    return `${m}:${sec.toString().padStart(2, "0")}`;
+  }
+
   const isHe = lang === "he";
   const verb = VERBS[selected];
 
@@ -320,6 +379,30 @@ export default function LiveTenseTable({ onBack, lang }: LiveTenseTableProps) {
             {practiceMode && (
               <span className="text-xs text-gray-500">
                 {t("~40% מהתאים מוסתרים — לחצו ❓ לחשיפה", "~40% of cells hidden — tap ❓ to reveal")}
+              </span>
+            )}
+          </div>
+
+          {/* Timer */}
+          <div className="flex items-center gap-2 px-3 py-2 rounded-xl bg-blue-50 border border-blue-200">
+            <Timer size={16} className="text-blue-700" />
+            <Select
+              value={timerDuration === 0 ? "off" : String(timerDuration)}
+              onValueChange={(v) => startTimer(v === "off" ? 0 : Number(v))}
+            >
+              <SelectTrigger className="h-9 w-[110px] text-sm">
+                <SelectValue placeholder={t("טיימר", "Timer")} />
+              </SelectTrigger>
+              <SelectContent>
+                <SelectItem value="off">{t("כבוי", "Off")}</SelectItem>
+                <SelectItem value="30">30s</SelectItem>
+                <SelectItem value="60">1 min</SelectItem>
+                <SelectItem value="120">2 min</SelectItem>
+              </SelectContent>
+            </Select>
+            {timerDuration > 0 && (
+              <span className={`font-mono font-bold text-sm tabular-nums ${timeLeft <= 5 && timerRunning ? "text-red-600 animate-pulse" : "text-blue-800"}`}>
+                ⏱️ {fmtTime(timeLeft)}
               </span>
             )}
           </div>
