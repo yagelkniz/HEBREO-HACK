@@ -175,6 +175,15 @@ function pickHiddenSet(seed: number): Set<string> {
 
 export default function LiveTenseTable({ onBack, lang }: LiveTenseTableProps) {
   const [selected, setSelected] = useState(0);
+  const [levelFilter, setLevelFilter] = useState<Level>("all");
+  const filteredVerbs = useMemo(
+    () => VERBS.filter((v) => levelFilter === "all" || VERB_LEVEL[v.infinitive] === levelFilter),
+    [levelFilter]
+  );
+  // Clamp selected when filter shrinks list
+  useEffect(() => {
+    if (selected >= filteredVerbs.length) setSelected(0);
+  }, [filteredVerbs.length, selected]);
   const [practiceMode, setPracticeMode] = useState(false);
   const [sessionKey, setSessionKey] = useState(0);
   const [revealed, setRevealed] = useState<Set<string>>(new Set());
