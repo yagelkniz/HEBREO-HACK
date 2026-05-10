@@ -21,8 +21,8 @@ export interface HospitalQuestion {
 
 export const hospitalQuestions: HospitalQuestion[] = [
   { question: "מה כואב לדני?", questionEn: "What hurts Danny?", options: ["ראש", "בטן", "רגל", "יד"], answer: "ראש" },
-  { question: "לאן אמא לוקחת את דני?", questionEn: "Where does mom take Danny?", options: ["בית החולים", "בית הספר", "הגן", "הבית"], answer: "בית החולים" },
-  { question: "מה הטמפרטורה של דני?", questionEn: "What is Danny's temperature?", options: ["39 מעלות", "37 מעלות", "40 מעלות", "38 מעלות"], answer: "39 מעלות" },
+  { question: "לאן אמא לוקחת את דני?", questionEn: "Where does mom take Danny?", options: ["בית החולים", "בית הספר", "פארק", "חנות"], answer: "בית החולים" },
+  { question: "מה הטמפרטורה של דני?", questionEn: "What is Danny's temperature?", options: ["39", "37", "40", "36"], answer: "39" },
   { question: "מי בודק את דני?", questionEn: "Who examines Danny?", options: ["הרופא", "האחות", "אמא", "אבא"], answer: "הרופא" },
   { question: "מה הרופא אומר לדני לעשות?", questionEn: "What does the doctor tell Danny to do?", options: ["לנוח ולשתות מים", "לאכול הרבה", "ללכת לבית הספר", "לרוץ בחוץ"], answer: "לנוח ולשתות מים" },
   { question: "איפה אמא קונה תרופות?", questionEn: "Where does mom buy medicine?", options: ["בית מרקחת", "סופרמרקט", "בית חולים", "חנות"], answer: "בית מרקחת" },
