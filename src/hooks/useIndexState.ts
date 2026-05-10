@@ -58,6 +58,7 @@ export function useIndexState() {
   const [showOrdinalNumbers, setShowOrdinalNumbers] = useState(false);
   const [showBinyanimInAction, setShowBinyanimInAction] = useState(false);
       const [showLiveTenseTable, setShowLiveTenseTable] = useState(false);
+  const [showConjugationGenerator, setShowConjugationGenerator] = useState(false);
 
   const resetToMainMenu = () => {
     setShowLinkingWords(false);
@@ -114,6 +115,7 @@ export function useIndexState() {
     setShowOrdinalNumbers(false);
     setShowBinyanimInAction(false);
             setShowLiveTenseTable(false);
+    setShowConjugationGenerator(false);
   };
 
   return {
@@ -172,6 +174,7 @@ export function useIndexState() {
     showOrdinalNumbers, setShowOrdinalNumbers,
     showBinyanimInAction, setShowBinyanimInAction,
         showLiveTenseTable, setShowLiveTenseTable,
+    showConjugationGenerator, setShowConjugationGenerator,
     resetToMainMenu,
   };
 }

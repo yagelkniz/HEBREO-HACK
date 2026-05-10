@@ -1,6 +1,7 @@
 import IndexMainMenu from "./IndexMainMenu";
 import IndexRouter from "@/components/IndexRouter";
 import VerbPatternsMenu from "@/components/VerbPatternsMenu";
+import ConjugationGenerator from "@/components/ConjugationGenerator";
 import { useIndexState } from "@/hooks/useIndexState";
 
 export default function Index() {
@@ -59,6 +60,10 @@ export default function Index() {
     state.showOrdinalNumbers ||
     state.showBinyanimInAction ||
     state.showLiveTenseTable;
+
+  if (state.showConjugationGenerator) {
+    return <ConjugationGenerator lang={state.lang} onBack={state.resetToMainMenu} />;
+  }
 
   if (state.showVerbPatternsMenu && !state.selectedVerbPattern) {
     return (
@@ -124,6 +129,7 @@ export default function Index() {
         setShowOrdinalNumbers={state.setShowOrdinalNumbers}
         setShowBinyanimInAction={state.setShowBinyanimInAction}
         setShowLiveTenseTable={state.setShowLiveTenseTable}
+        setShowConjugationGenerator={state.setShowConjugationGenerator}
       />
     </div>
   );
