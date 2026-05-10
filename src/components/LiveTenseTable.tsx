@@ -1,7 +1,7 @@
 import { useMemo, useState } from "react";
 import { Button } from "@/components/ui/button";
 import { Table, TableHeader, TableBody, TableRow, TableHead, TableCell } from "@/components/ui/table";
-import { Volume2, Eye, EyeOff, RotateCcw } from "lucide-react";
+import { Volume2, Eye, EyeOff, RotateCcw, Star } from "lucide-react";
 import { speakHebrew } from "@/lib/speakHebrew";
 import { Switch } from "@/components/ui/switch";
 import { Label } from "@/components/ui/label";
@@ -171,6 +171,22 @@ export default function LiveTenseTable({ onBack, lang }: LiveTenseTableProps) {
   const [sessionKey, setSessionKey] = useState(0);
   const [revealed, setRevealed] = useState<Set<string>>(new Set());
   const [highlighted, setHighlighted] = useState<Set<string>>(new Set());
+  const [hardMarked, setHardMarked] = useState<Set<string>>(() => {
+    try {
+      const raw = localStorage.getItem("liveTenseTable.hardMarked");
+      return raw ? new Set(JSON.parse(raw)) : new Set();
+    } catch { return new Set(); }
+  });
+
+  function toggleHard(key: string) {
+    setHardMarked((prev) => {
+      const next = new Set(prev);
+      if (next.has(key)) next.delete(key);
+      else next.add(key);
+      try { localStorage.setItem("liveTenseTable.hardMarked", JSON.stringify([...next])); } catch {}
+      return next;
+    });
+  }
   const isHe = lang === "he";
   const verb = VERBS[selected];
 
@@ -224,9 +240,11 @@ export default function LiveTenseTable({ onBack, lang }: LiveTenseTableProps) {
         </TableCell>
       );
     }
+    const hardKey = `${verb.infinitive}|${id}`;
+    const isHard = hardMarked.has(hardKey);
     return (
       <TableCell
-        className={`text-base font-medium transition-colors cursor-pointer ${isHi ? "bg-yellow-200" : ""}`}
+        className={`text-base font-medium transition-colors cursor-pointer ${isHi ? "bg-yellow-200" : ""} ${isHard ? "ring-2 ring-inset ring-rose-300" : ""}`}
         dir="rtl"
         onClick={() => toggleHighlight(id)}
         title={translateSlot(verb, id) || t("לחצו לסימון בצהוב", "Click to highlight yellow")}
@@ -235,6 +253,14 @@ export default function LiveTenseTable({ onBack, lang }: LiveTenseTableProps) {
           {text}
         </button>
         <Speak text={text} />
+        <button
+          onClick={(e) => { e.stopPropagation(); toggleHard(hardKey); }}
+          className={`ml-1 inline-flex transition-all ${isHard ? "text-amber-500" : "text-gray-300 hover:text-amber-400"}`}
+          title={t("סמן כקשה לתלמיד", "Mark as hard for student")}
+          aria-label={t("סמן כקשה", "Mark as hard")}
+        >
+          <Star size={14} fill={isHard ? "currentColor" : "none"} />
+        </button>
         {hiddenSet.has(id) && revealed.has(id) && (
           <button
             onClick={(e) => { e.stopPropagation(); toggleReveal(id); }}
