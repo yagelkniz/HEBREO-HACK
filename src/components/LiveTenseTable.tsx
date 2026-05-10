@@ -1,10 +1,11 @@
-import { useMemo, useState } from "react";
+import { useEffect, useMemo, useRef, useState } from "react";
 import { Button } from "@/components/ui/button";
 import { Table, TableHeader, TableBody, TableRow, TableHead, TableCell } from "@/components/ui/table";
-import { Volume2, Eye, EyeOff, RotateCcw, Star } from "lucide-react";
+import { Volume2, Eye, EyeOff, RotateCcw, Star, Timer } from "lucide-react";
 import { speakHebrew } from "@/lib/speakHebrew";
 import { Switch } from "@/components/ui/switch";
 import { Label } from "@/components/ui/label";
+import { Select, SelectContent, SelectItem, SelectTrigger, SelectValue } from "@/components/ui/select";
 
 interface LiveTenseTableProps {
   onBack: () => void;
