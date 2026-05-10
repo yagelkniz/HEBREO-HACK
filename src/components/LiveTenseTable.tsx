@@ -1,7 +1,7 @@
 import { useMemo, useState } from "react";
 import { Button } from "@/components/ui/button";
 import { Table, TableHeader, TableBody, TableRow, TableHead, TableCell } from "@/components/ui/table";
-import { Volume2, Eye, EyeOff, RotateCcw } from "lucide-react";
+import { Volume2, Eye, EyeOff, RotateCcw, Star } from "lucide-react";
 import { speakHebrew } from "@/lib/speakHebrew";
 import { Switch } from "@/components/ui/switch";
 import { Label } from "@/components/ui/label";
