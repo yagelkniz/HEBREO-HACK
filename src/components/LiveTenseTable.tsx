@@ -1,8 +1,10 @@
-import { useState } from "react";
+import { useMemo, useState } from "react";
 import { Button } from "@/components/ui/button";
 import { Table, TableHeader, TableBody, TableRow, TableHead, TableCell } from "@/components/ui/table";
-import { Volume2 } from "lucide-react";
+import { Volume2, Eye, EyeOff, RotateCcw } from "lucide-react";
 import { speakHebrew } from "@/lib/speakHebrew";
+import { Switch } from "@/components/ui/switch";
+import { Label } from "@/components/ui/label";
 
 interface LiveTenseTableProps {
   onBack: () => void;
@@ -62,12 +64,46 @@ const VERBS: VerbEntry[] = [
   },
 ];
 
+// All cell IDs in a stable order (used to pick which to hide in practice mode)
+const ALL_CELL_IDS = [
+  "past.ani.m", "past.ani.f", "past.ata", "past.at", "past.hu", "past.hi", "past.anachnu.m", "past.anachnu.f", "past.atem", "past.hem",
+  "present.mS", "present.fS", "present.mP", "present.fP",
+  "future.ani.m", "future.ani.f", "future.ata", "future.at", "future.hu", "future.hi", "future.anachnu.m", "future.anachnu.f", "future.atem", "future.hem",
+];
+const HIDE_RATIO = 0.4;
+
+function pickHiddenSet(seed: number): Set<string> {
+  // Deterministic shuffle based on seed so reshuffling re-renders consistently
+  const shuffled = [...ALL_CELL_IDS].sort(() => Math.random() - 0.5);
+  const count = Math.round(shuffled.length * HIDE_RATIO);
+  return new Set(shuffled.slice(0, count));
+}
+
 export default function LiveTenseTable({ onBack, lang }: LiveTenseTableProps) {
   const [selected, setSelected] = useState(0);
+  const [practiceMode, setPracticeMode] = useState(false);
+  const [sessionKey, setSessionKey] = useState(0);
+  const [revealed, setRevealed] = useState<Set<string>>(new Set());
   const isHe = lang === "he";
   const verb = VERBS[selected];
 
   const t = (he: string, en: string) => (isHe ? he : en);
+
+  const hiddenSet = useMemo(() => (practiceMode ? pickHiddenSet(sessionKey) : new Set<string>()), [practiceMode, sessionKey, selected]);
+
+  function handleReshuffle() {
+    setSessionKey((k) => k + 1);
+    setRevealed(new Set());
+  }
+
+  function toggleReveal(id: string) {
+    setRevealed((prev) => {
+      const next = new Set(prev);
+      if (next.has(id)) next.delete(id);
+      else next.add(id);
+      return next;
+    });
+  }
 
   const Speak = ({ text }: { text: string }) => (
     <button onClick={(e) => { e.stopPropagation(); speakHebrew(text); }}
@@ -76,19 +112,44 @@ export default function LiveTenseTable({ onBack, lang }: LiveTenseTableProps) {
     </button>
   );
 
-  const Cell = ({ text }: { text: string }) => (
-    <TableCell className="text-base font-medium" dir="rtl">
-      <button onClick={() => speakHebrew(text)} className="hover:text-purple-600 transition-colors text-right">
-        {text}
-      </button>
-      <Speak text={text} />
-    </TableCell>
-  );
+  const Cell = ({ text, id }: { text: string; id: string }) => {
+    const isHidden = hiddenSet.has(id) && !revealed.has(id);
+    if (isHidden) {
+      return (
+        <TableCell className="text-base font-medium" dir="rtl">
+          <button
+            onClick={() => toggleReveal(id)}
+            className="px-3 py-1 rounded-lg bg-amber-100 hover:bg-amber-200 text-amber-800 font-bold border border-amber-300 transition-colors min-h-[36px] min-w-[60px]"
+            aria-label={t("חשוף תשובה", "Reveal answer")}
+          >
+            ❓
+          </button>
+        </TableCell>
+      );
+    }
+    return (
+      <TableCell className="text-base font-medium" dir="rtl">
+        <button onClick={() => speakHebrew(text)} className="hover:text-purple-600 transition-colors text-right">
+          {text}
+        </button>
+        <Speak text={text} />
+        {hiddenSet.has(id) && revealed.has(id) && (
+          <button
+            onClick={() => toggleReveal(id)}
+            className="ml-1 inline-flex opacity-50 hover:opacity-100"
+            title={t("הסתר שוב", "Hide again")}
+          >
+            <EyeOff size={12} />
+          </button>
+        )}
+      </TableCell>
+    );
+  };
 
   return (
     <div dir={isHe ? "rtl" : "ltr"} className="min-h-screen bg-gradient-to-br from-purple-50 via-white to-blue-50 p-4" style={{ fontFamily: "'Heebo', sans-serif" }}>
       <div className="max-w-4xl mx-auto">
-        <div className="flex items-center justify-between mb-4">
+        <div className="flex items-center justify-between mb-4 flex-wrap gap-2">
           <Button variant="ghost" onClick={onBack}>⬅ {t("חזרה לתפריט", "Back to Menu")}</Button>
           <h1 className="text-xl md:text-2xl font-bold text-purple-700 flex items-center gap-2">
             📋 {t("טבלת זמנים חיה", "Live Tense Table")}
@@ -103,7 +164,7 @@ export default function LiveTenseTable({ onBack, lang }: LiveTenseTableProps) {
 
         <div className="flex gap-2 overflow-x-auto pb-2 mb-4">
           {VERBS.map((v, i) => (
-            <button key={v.infinitive} onClick={() => setSelected(i)}
+            <button key={v.infinitive} onClick={() => { setSelected(i); setRevealed(new Set()); }}
               className={`whitespace-nowrap px-4 py-2 rounded-full text-sm font-semibold border transition-all ${
                 selected === i
                   ? "bg-purple-600 text-white border-purple-600 shadow-md"
@@ -112,6 +173,33 @@ export default function LiveTenseTable({ onBack, lang }: LiveTenseTableProps) {
               {v.infinitive} {selected === i && <span className="opacity-80">· {v.meaning.en}</span>}
             </button>
           ))}
+        </div>
+
+        {/* Practice mode controls */}
+        <div className="bg-white rounded-2xl border border-gray-100 shadow-sm p-3 mb-4 flex items-center justify-between flex-wrap gap-3">
+          <div className="flex items-center gap-3">
+            <div className={`flex items-center gap-2 px-3 py-2 rounded-xl ${practiceMode ? "bg-amber-50 border border-amber-200" : ""}`}>
+              <Switch
+                id="practice-mode"
+                checked={practiceMode}
+                onCheckedChange={(v) => { setPracticeMode(v); setRevealed(new Set()); setSessionKey((k) => k + 1); }}
+              />
+              <Label htmlFor="practice-mode" className="cursor-pointer font-semibold flex items-center gap-1">
+                {practiceMode ? <EyeOff size={16} /> : <Eye size={16} />}
+                {t("מצב תרגול 🔴 קשה", "Practice Mode 🔴 Hard")}
+              </Label>
+            </div>
+            {practiceMode && (
+              <span className="text-xs text-gray-500">
+                {t("~40% מהתאים מוסתרים — לחצו ❓ לחשיפה", "~40% of cells hidden — tap ❓ to reveal")}
+              </span>
+            )}
+          </div>
+          {practiceMode && (
+            <Button variant="outline" size="sm" onClick={handleReshuffle} className="min-h-[44px]">
+              <RotateCcw size={14} className="mr-1" /> {t("ערבב מחדש", "Reshuffle")}
+            </Button>
+          )}
         </div>
 
         <div className="bg-white rounded-2xl border border-gray-100 shadow-sm p-4 mb-4 flex items-center justify-between">
@@ -137,11 +225,11 @@ export default function LiveTenseTable({ onBack, lang }: LiveTenseTableProps) {
                 </TableRow>
               </TableHeader>
               <TableBody>
-                <TableRow><TableCell>{t("אני", "I")}</TableCell><Cell text={verb.past.ani} /><Cell text={verb.past.ani} /></TableRow>
-                <TableRow><TableCell>{t("אתה / את", "you")}</TableCell><Cell text={verb.past.ata} /><Cell text={verb.past.at} /></TableRow>
-                <TableRow><TableCell>{t("הוא / היא", "he / she")}</TableCell><Cell text={verb.past.hu} /><Cell text={verb.past.hi} /></TableRow>
-                <TableRow><TableCell>{t("אנחנו", "we")}</TableCell><Cell text={verb.past.anachnu} /><Cell text={verb.past.anachnu} /></TableRow>
-                <TableRow><TableCell>{t("אתם / הם", "you pl. / they")}</TableCell><Cell text={verb.past.atem} /><Cell text={verb.past.hem} /></TableRow>
+                <TableRow><TableCell>{t("אני", "I")}</TableCell><Cell text={verb.past.ani} id="past.ani.m" /><Cell text={verb.past.ani} id="past.ani.f" /></TableRow>
+                <TableRow><TableCell>{t("אתה / את", "you")}</TableCell><Cell text={verb.past.ata} id="past.ata" /><Cell text={verb.past.at} id="past.at" /></TableRow>
+                <TableRow><TableCell>{t("הוא / היא", "he / she")}</TableCell><Cell text={verb.past.hu} id="past.hu" /><Cell text={verb.past.hi} id="past.hi" /></TableRow>
+                <TableRow><TableCell>{t("אנחנו", "we")}</TableCell><Cell text={verb.past.anachnu} id="past.anachnu.m" /><Cell text={verb.past.anachnu} id="past.anachnu.f" /></TableRow>
+                <TableRow><TableCell>{t("אתם / אתן / הם / הן", "you pl. / they")}</TableCell><Cell text={verb.past.atem} id="past.atem" /><Cell text={verb.past.hem} id="past.hem" /></TableRow>
               </TableBody>
             </Table>
           </div>
@@ -160,8 +248,8 @@ export default function LiveTenseTable({ onBack, lang }: LiveTenseTableProps) {
                 </TableRow>
               </TableHeader>
               <TableBody>
-                <TableRow><TableCell>{t("יחיד", "Singular")}</TableCell><Cell text={verb.present.mS} /><Cell text={verb.present.fS} /></TableRow>
-                <TableRow><TableCell>{t("רבים", "Plural")}</TableCell><Cell text={verb.present.mP} /><Cell text={verb.present.fP} /></TableRow>
+                <TableRow><TableCell>{t("יחיד", "Singular")}</TableCell><Cell text={verb.present.mS} id="present.mS" /><Cell text={verb.present.fS} id="present.fS" /></TableRow>
+                <TableRow><TableCell>{t("רבים", "Plural")}</TableCell><Cell text={verb.present.mP} id="present.mP" /><Cell text={verb.present.fP} id="present.fP" /></TableRow>
               </TableBody>
             </Table>
           </div>
@@ -180,11 +268,11 @@ export default function LiveTenseTable({ onBack, lang }: LiveTenseTableProps) {
                 </TableRow>
               </TableHeader>
               <TableBody>
-                <TableRow><TableCell>{t("אני", "I")}</TableCell><Cell text={verb.future.ani} /><Cell text={verb.future.ani} /></TableRow>
-                <TableRow><TableCell>{t("אתה / את", "you")}</TableCell><Cell text={verb.future.ata} /><Cell text={verb.future.at} /></TableRow>
-                <TableRow><TableCell>{t("הוא / היא", "he / she")}</TableCell><Cell text={verb.future.hu} /><Cell text={verb.future.hi} /></TableRow>
-                <TableRow><TableCell>{t("אנחנו", "we")}</TableCell><Cell text={verb.future.anachnu} /><Cell text={verb.future.anachnu} /></TableRow>
-                <TableRow><TableCell>{t("אתם / הם", "you pl. / they")}</TableCell><Cell text={verb.future.atem} /><Cell text={verb.future.hem} /></TableRow>
+                <TableRow><TableCell>{t("אני", "I")}</TableCell><Cell text={verb.future.ani} id="future.ani.m" /><Cell text={verb.future.ani} id="future.ani.f" /></TableRow>
+                <TableRow><TableCell>{t("אתה / את", "you")}</TableCell><Cell text={verb.future.ata} id="future.ata" /><Cell text={verb.future.at} id="future.at" /></TableRow>
+                <TableRow><TableCell>{t("הוא / היא", "he / she")}</TableCell><Cell text={verb.future.hu} id="future.hu" /><Cell text={verb.future.hi} id="future.hi" /></TableRow>
+                <TableRow><TableCell>{t("אנחנו", "we")}</TableCell><Cell text={verb.future.anachnu} id="future.anachnu.m" /><Cell text={verb.future.anachnu} id="future.anachnu.f" /></TableRow>
+                <TableRow><TableCell>{t("אתם / אתן / הם / הן", "you pl. / they")}</TableCell><Cell text={verb.future.atem} id="future.atem" /><Cell text={verb.future.hem} id="future.hem" /></TableRow>
               </TableBody>
             </Table>
           </div>
