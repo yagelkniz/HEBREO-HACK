@@ -6,6 +6,7 @@ import { speakHebrew } from "@/lib/speakHebrew";
 import { Switch } from "@/components/ui/switch";
 import { Label } from "@/components/ui/label";
 import { Select, SelectContent, SelectItem, SelectTrigger, SelectValue } from "@/components/ui/select";
+import { Dialog, DialogContent, DialogHeader, DialogTitle, DialogTrigger } from "@/components/ui/dialog";
 
 interface LiveTenseTableProps {
   onBack: () => void;
@@ -365,6 +366,28 @@ export default function LiveTenseTable({ onBack, lang }: LiveTenseTableProps) {
     );
   };
 
+  function getFormText(infinitive: string, id: string): string {
+    const v = VERBS.find((x) => x.infinitive === infinitive);
+    if (!v) return "";
+    const [tense, slot] = id.split(".");
+    if (tense === "present") return (v.present as any)[slot] ?? "";
+    return (v as any)[tense]?.[slot] ?? "";
+  }
+  const hardItems = useMemo(() => {
+    return [...hardMarked].map((key) => {
+      const [infinitive, id] = key.split("|");
+      return {
+        key,
+        infinitive,
+        id,
+        text: getFormText(infinitive, id),
+        translation: VERBS.find((x) => x.infinitive === infinitive)
+          ? translateSlot(VERBS.find((x) => x.infinitive === infinitive)!, id)
+          : "",
+      };
+    }).filter((x) => x.text);
+  }, [hardMarked]);
+
   return (
     <div dir={isHe ? "rtl" : "ltr"} className="min-h-screen bg-gradient-to-br from-purple-50 via-white to-blue-50 p-4" style={{ fontFamily: "'Heebo', sans-serif" }}>
       <div className="max-w-4xl mx-auto">
@@ -373,7 +396,77 @@ export default function LiveTenseTable({ onBack, lang }: LiveTenseTableProps) {
           <h1 className="text-xl md:text-2xl font-bold text-purple-700 flex items-center gap-2">
             📋 {t("טבלת זמנים חיה", "Live Tense Table")}
           </h1>
-          <div className="w-24" />
+          <Dialog>
+            <DialogTrigger asChild>
+              <Button variant="outline" size="sm" className="min-h-[44px]">
+                🎓 {t("סיום שיעור", "End Lesson")}
+                {hardItems.length > 0 && (
+                  <span className="ml-1 inline-flex items-center justify-center min-w-[20px] h-5 px-1.5 rounded-full bg-amber-500 text-white text-xs font-bold">
+                    {hardItems.length}
+                  </span>
+                )}
+              </Button>
+            </DialogTrigger>
+            <DialogContent dir={isHe ? "rtl" : "ltr"} className="max-w-lg">
+              <DialogHeader>
+                <DialogTitle className="text-xl">
+                  🎓 {t("סיכום שיעור", "Lesson Summary")}
+                </DialogTitle>
+              </DialogHeader>
+              <div className="space-y-4">
+                <div>
+                  <h3 className="font-bold text-amber-600 mb-2 flex items-center gap-1">
+                    ⭐ {t("מילים שסומנו כקשות", "Marked as hard")}
+                    <span className="text-sm text-gray-500">({hardItems.length})</span>
+                  </h3>
+                  {hardItems.length === 0 ? (
+                    <p className="text-sm text-gray-500 italic">
+                      {t("לא סומנו מילים. לחצו ⭐ ליד מילה כדי לסמן.", "No words marked. Click the ⭐ next to a word to mark it.")}
+                    </p>
+                  ) : (
+                    <ul className="space-y-2 max-h-[300px] overflow-y-auto">
+                      {hardItems.map((it) => (
+                        <li
+                          key={it.key}
+                          className="flex items-center justify-between gap-2 p-2 rounded-lg bg-amber-50 border border-amber-200"
+                        >
+                          <div className="flex-1 min-w-0">
+                            <div className="font-bold text-purple-700" dir="rtl">{it.text}</div>
+                            <div className="text-xs text-gray-500">
+                              {it.infinitive} · {it.translation}
+                            </div>
+                          </div>
+                          <button
+                            onClick={() => speakHebrew(it.text)}
+                            className="p-2 rounded-lg hover:bg-amber-100 text-amber-700"
+                            aria-label="Listen"
+                          >
+                            <Volume2 size={16} />
+                          </button>
+                          <button
+                            onClick={() => toggleHard(it.key)}
+                            className="p-2 rounded-lg hover:bg-rose-100 text-rose-600 text-sm"
+                            title={t("הסר סימון", "Remove")}
+                          >
+                            ✕
+                          </button>
+                        </li>
+                      ))}
+                    </ul>
+                  )}
+                </div>
+                {hardItems.length > 0 && (
+                  <Button
+                    variant="outline"
+                    onClick={() => { setHardMarked(new Set()); try { localStorage.removeItem("liveTenseTable.hardMarked"); } catch {} }}
+                    className="w-full"
+                  >
+                    🗑️ {t("נקה את כל הסימונים", "Clear all marks")}
+                  </Button>
+                )}
+              </div>
+            </DialogContent>
+          </Dialog>
         </div>
 
         <p className="text-sm text-gray-600 mb-4 text-center">
