@@ -279,7 +279,7 @@ export default function LiveTenseTable({ onBack, lang }: LiveTenseTableProps) {
   }
 
   const isHe = lang === "he";
-  const verb = VERBS[selected];
+  const verb = filteredVerbs[selected] ?? filteredVerbs[0] ?? VERBS[0];
 
   const t = (he: string, en: string) => (isHe ? he : en);
 
