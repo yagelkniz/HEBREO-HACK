@@ -171,6 +171,22 @@ export default function LiveTenseTable({ onBack, lang }: LiveTenseTableProps) {
   const [sessionKey, setSessionKey] = useState(0);
   const [revealed, setRevealed] = useState<Set<string>>(new Set());
   const [highlighted, setHighlighted] = useState<Set<string>>(new Set());
+  const [hardMarked, setHardMarked] = useState<Set<string>>(() => {
+    try {
+      const raw = localStorage.getItem("liveTenseTable.hardMarked");
+      return raw ? new Set(JSON.parse(raw)) : new Set();
+    } catch { return new Set(); }
+  });
+
+  function toggleHard(key: string) {
+    setHardMarked((prev) => {
+      const next = new Set(prev);
+      if (next.has(key)) next.delete(key);
+      else next.add(key);
+      try { localStorage.setItem("liveTenseTable.hardMarked", JSON.stringify([...next])); } catch {}
+      return next;
+    });
+  }
   const isHe = lang === "he";
   const verb = VERBS[selected];
 
