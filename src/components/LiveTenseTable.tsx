@@ -14,7 +14,7 @@ interface LiveTenseTableProps {
 interface VerbEntry {
   infinitive: string;
   meaning: { he: string; en: string };
-  enBases: { past: string; present: string; future: string };
+  enBases?: { past: string; present: string; future: string };
   past: { ani: string; ata: string; at: string; hu: string; hi: string; anachnu: string; atem: string; hem: string };
   present: { mS: string; fS: string; mP: string; fP: string };
   future: { ani: string; ata: string; at: string; hu: string; hi: string; anachnu: string; atem: string; hem: string };
