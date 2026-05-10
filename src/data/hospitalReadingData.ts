@@ -29,6 +29,7 @@ export const hospitalQuestions: HospitalQuestion[] = [
   { question: "איפה אמא קונה תרופות?", questionEn: "Where does mom buy medicine?", options: ["בית מרקחת", "סופרמרקט", "בית חולים", "חנות"], answer: "בית מרקחת" },
   { question: "אחרי כמה זמן דני מרגיש טוב?", questionEn: "After how long does Danny feel better?", options: ["יומיים", "שבוע", "שעה", "חודש"], answer: "יומיים" },
   { question: "מי בודק את הטמפרטורה?", questionEn: "Who checks the temperature?", options: ["האחות", "הרופא", "אמא", "דני"], answer: "האחות" },
+  { question: "מה המשמעות של 'מרשם'?", questionEn: "What does 'מרשם' mean?", options: ["Prescription", "Receipt", "Form", "Note"], answer: "Prescription", highlightWord: "מרשם" },
 ];
 
 export const hospitalVocab = [
