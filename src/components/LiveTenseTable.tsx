@@ -331,7 +331,7 @@ export default function LiveTenseTable({ onBack, lang }: LiveTenseTableProps) {
                 onClick={() => setRevealed(new Set(ALL_CELL_IDS))}
                 className="min-h-[44px] bg-emerald-600 hover:bg-emerald-700 text-white"
               >
-                👁️ {t("גלה תשובה", "Reveal Answer")}
+                👁️ {t("גלה הכל", "Reveal All")}
               </Button>
               <Button variant="outline" size="sm" onClick={handleReshuffle} className="min-h-[44px]">
                 <RotateCcw size={14} className="mr-1" /> {t("ערבב מחדש", "Reshuffle")}
