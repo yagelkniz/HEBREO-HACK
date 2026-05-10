@@ -127,6 +127,7 @@ export default function LiveTenseTable({ onBack, lang }: LiveTenseTableProps) {
   const [practiceMode, setPracticeMode] = useState(false);
   const [sessionKey, setSessionKey] = useState(0);
   const [revealed, setRevealed] = useState<Set<string>>(new Set());
+  const [highlighted, setHighlighted] = useState<Set<string>>(new Set());
   const isHe = lang === "he";
   const verb = VERBS[selected];
 
@@ -155,8 +156,18 @@ export default function LiveTenseTable({ onBack, lang }: LiveTenseTableProps) {
     </button>
   );
 
+  function toggleHighlight(id: string) {
+    setHighlighted((prev) => {
+      const next = new Set(prev);
+      if (next.has(id)) next.delete(id);
+      else next.add(id);
+      return next;
+    });
+  }
+
   const Cell = ({ text, id }: { text: string; id: string }) => {
     const isHidden = hiddenSet.has(id) && !revealed.has(id);
+    const isHi = highlighted.has(id);
     if (isHidden) {
       return (
         <TableCell className="text-base font-medium" dir="rtl">
@@ -171,14 +182,19 @@ export default function LiveTenseTable({ onBack, lang }: LiveTenseTableProps) {
       );
     }
     return (
-      <TableCell className="text-base font-medium" dir="rtl">
-        <button onClick={() => speakHebrew(text)} className="hover:text-purple-600 transition-colors text-right">
+      <TableCell
+        className={`text-base font-medium transition-colors cursor-pointer ${isHi ? "bg-yellow-200" : ""}`}
+        dir="rtl"
+        onClick={() => toggleHighlight(id)}
+        title={t("לחצו לסימון בצהוב", "Click to highlight yellow")}
+      >
+        <button onClick={(e) => { e.stopPropagation(); speakHebrew(text); }} className="hover:text-purple-600 transition-colors text-right">
           {text}
         </button>
         <Speak text={text} />
         {hiddenSet.has(id) && revealed.has(id) && (
           <button
-            onClick={() => toggleReveal(id)}
+            onClick={(e) => { e.stopPropagation(); toggleReveal(id); }}
             className="ml-1 inline-flex opacity-50 hover:opacity-100"
             title={t("הסתר שוב", "Hide again")}
           >
