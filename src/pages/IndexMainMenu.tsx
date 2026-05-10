@@ -72,6 +72,7 @@ interface IndexMainMenuProps {
   setShowOrdinalNumbers: (b: boolean) => void;
   setShowBinyanimInAction: (b: boolean) => void;
   setShowLiveTenseTable: (b: boolean) => void;
+  setShowConjugationGenerator: (b: boolean) => void;
 }
 
 type Category = "all" | "learn" | "vocab" | "games" | "reading";
