@@ -229,7 +229,7 @@ export default function LiveTenseTable({ onBack, lang }: LiveTenseTableProps) {
         className={`text-base font-medium transition-colors cursor-pointer ${isHi ? "bg-yellow-200" : ""}`}
         dir="rtl"
         onClick={() => toggleHighlight(id)}
-        title={t("לחצו לסימון בצהוב", "Click to highlight yellow")}
+        title={translateSlot(verb, id) || t("לחצו לסימון בצהוב", "Click to highlight yellow")}
       >
         <button onClick={(e) => { e.stopPropagation(); speakHebrew(text); }} className="hover:text-purple-600 transition-colors text-right">
           {text}
