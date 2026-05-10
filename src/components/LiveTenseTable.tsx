@@ -7,6 +7,7 @@ import { Switch } from "@/components/ui/switch";
 import { Label } from "@/components/ui/label";
 import { Select, SelectContent, SelectItem, SelectTrigger, SelectValue } from "@/components/ui/select";
 import { Dialog, DialogContent, DialogHeader, DialogTitle, DialogTrigger } from "@/components/ui/dialog";
+import { toast } from "@/hooks/use-toast";
 
 interface LiveTenseTableProps {
   onBack: () => void;
@@ -521,15 +522,56 @@ export default function LiveTenseTable({ onBack, lang }: LiveTenseTableProps) {
                     </ul>
                   )}
                 </div>
-                {hardItems.length > 0 && (
+                <div className="flex gap-2 flex-wrap">
                   <Button
-                    variant="outline"
-                    onClick={() => { setHardMarked(new Set()); try { localStorage.removeItem("liveTenseTable.hardMarked"); } catch {} }}
-                    className="w-full"
+                    variant="default"
+                    onClick={async () => {
+                      const lines: string[] = [];
+                      lines.push(`🎓 ${t("סיכום שיעור", "Lesson Summary")}`);
+                      lines.push(`📅 ${new Date().toLocaleString(isHe ? "he-IL" : "en-US")}`);
+                      lines.push(`🕐 ${t("זמן שהוקדש", "Time spent")}: ${fmtTime(sessionElapsed)}`);
+                      lines.push("");
+                      lines.push(`⭐ ${t("מילים שסומנו כקשות", "Marked as hard")} (${hardItems.length}):`);
+                      if (hardItems.length === 0) {
+                        lines.push(`   ${t("— אין —", "— none —")}`);
+                      } else {
+                        hardItems.forEach((it) => {
+                          lines.push(`   • ${it.text} (${it.infinitive}) — ${it.translation}`);
+                        });
+                      }
+                      lines.push("");
+                      const noteEntries = Object.entries(notes).filter(([, n]) => n?.trim());
+                      lines.push(`📝 ${t("הערות מורה", "Teacher Notes")} (${noteEntries.length}):`);
+                      if (noteEntries.length === 0) {
+                        lines.push(`   ${t("— אין —", "— none —")}`);
+                      } else {
+                        noteEntries.forEach(([inf, note]) => {
+                          lines.push(`   ▸ ${inf}:`);
+                          note.split("\n").forEach((l) => lines.push(`     ${l}`));
+                        });
+                      }
+                      const text = lines.join("\n");
+                      try {
+                        await navigator.clipboard.writeText(text);
+                        toast({ title: t("הועתק! 📋", "Copied! 📋"), description: t("הסיכום הועתק ללוח", "Summary copied to clipboard") });
+                      } catch {
+                        toast({ title: t("שגיאה", "Error"), description: t("לא ניתן להעתיק", "Could not copy"), variant: "destructive" });
+                      }
+                    }}
+                    className="flex-1"
                   >
-                    🗑️ {t("נקה את כל הסימונים", "Clear all marks")}
+                    📋 {t("העתק סיכום", "Copy Summary")}
                   </Button>
-                )}
+                  {hardItems.length > 0 && (
+                    <Button
+                      variant="outline"
+                      onClick={() => { setHardMarked(new Set()); try { localStorage.removeItem("liveTenseTable.hardMarked"); } catch {} }}
+                      className="flex-1"
+                    >
+                      🗑️ {t("נקה סימונים", "Clear marks")}
+                    </Button>
+                  )}
+                </div>
               </div>
             </DialogContent>
           </Dialog>
