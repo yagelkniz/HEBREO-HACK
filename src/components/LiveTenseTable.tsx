@@ -228,6 +228,16 @@ export default function LiveTenseTable({ onBack, lang }: LiveTenseTableProps) {
   const [timerRunning, setTimerRunning] = useState(false);
   const intervalRef = useRef<number | null>(null);
 
+  // Session timer (time spent since component mounted)
+  const sessionStartRef = useRef<number>(Date.now());
+  const [sessionElapsed, setSessionElapsed] = useState(0);
+  useEffect(() => {
+    const id = window.setInterval(() => {
+      setSessionElapsed(Math.floor((Date.now() - sessionStartRef.current) / 1000));
+    }, 1000);
+    return () => window.clearInterval(id);
+  }, []);
+
   function playBeep() {
     try {
       const Ctx = (window as any).AudioContext || (window as any).webkitAudioContext;
