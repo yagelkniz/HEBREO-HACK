@@ -189,6 +189,22 @@ export default function LiveTenseTable({ onBack, lang }: LiveTenseTableProps) {
     });
   }
 
+  // Notepad (per-verb, persisted)
+  const [notesOpen, setNotesOpen] = useState(false);
+  const [notes, setNotes] = useState<Record<string, string>>(() => {
+    try {
+      const raw = localStorage.getItem("liveTenseTable.notes");
+      return raw ? JSON.parse(raw) : {};
+    } catch { return {}; }
+  });
+  function updateNote(verbKey: string, text: string) {
+    setNotes((prev) => {
+      const next = { ...prev, [verbKey]: text };
+      try { localStorage.setItem("liveTenseTable.notes", JSON.stringify(next)); } catch {}
+      return next;
+    });
+  }
+
   // Timer
   const [timerDuration, setTimerDuration] = useState<number>(0); // seconds; 0 = off
   const [timeLeft, setTimeLeft] = useState<number>(0);
@@ -456,6 +472,36 @@ export default function LiveTenseTable({ onBack, lang }: LiveTenseTableProps) {
               🔊 {t("קרא בקול", "Read Aloud")}
             </Button>
           </div>
+        </div>
+
+        {/* Notepad */}
+        <div className="bg-white rounded-2xl border border-gray-100 shadow-sm mb-4 overflow-hidden">
+          <button
+            onClick={() => setNotesOpen((v) => !v)}
+            className="w-full flex items-center justify-between p-3 hover:bg-amber-50 transition-colors"
+          >
+            <span className="font-semibold text-gray-700 flex items-center gap-2">
+              📝 {t("הערות מורה", "Teacher Notes")}
+              {notes[verb.infinitive]?.trim() && (
+                <span className="text-xs bg-amber-200 text-amber-800 rounded-full px-2 py-0.5">
+                  {t("יש הערות", "has notes")}
+                </span>
+              )}
+            </span>
+            <span className="text-gray-400">{notesOpen ? "▲" : "▼"}</span>
+          </button>
+          {notesOpen && (
+            <div className="p-3 border-t border-gray-100">
+              <textarea
+                dir="rtl"
+                value={notes[verb.infinitive] || ""}
+                onChange={(e) => updateNote(verb.infinitive, e.target.value)}
+                placeholder={t("הערות לפועל זה — נשמר אוטומטית במכשיר", "Notes for this verb — saved automatically on this device")}
+                className="w-full min-h-[100px] p-3 rounded-xl border border-gray-200 focus:border-amber-400 focus:ring-2 focus:ring-amber-100 outline-none resize-y text-base"
+                style={{ fontFamily: "'Heebo', sans-serif", lineHeight: 1.6 }}
+              />
+            </div>
+          )}
         </div>
 
         {/* Past */}
