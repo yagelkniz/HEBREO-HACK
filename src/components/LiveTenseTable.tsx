@@ -62,7 +62,50 @@ const VERBS: VerbEntry[] = [
     present: { mS: "שותה", fS: "שותה", mP: "שותים", fP: "שותות" },
     future: { ani: "אשתה", ata: "תשתה", at: "תשתי", hu: "ישתה", hi: "תשתה", anachnu: "נשתה", atem: "תשתו", hem: "ישתו" },
   },
+  {
+    infinitive: "לישון",
+    meaning: { he: "לישון", en: "to sleep" },
+    past: { ani: "ישנתי", ata: "ישנת", at: "ישנת", hu: "ישן", hi: "ישנה", anachnu: "ישנו", atem: "ישנתם", hem: "ישנו" },
+    present: { mS: "ישן", fS: "ישנה", mP: "ישנים", fP: "ישנות" },
+    future: { ani: "אישן", ata: "תישן", at: "תישני", hu: "יישן", hi: "תישן", anachnu: "נישן", atem: "תישנו", hem: "יישנו" },
+  },
+  {
+    infinitive: "לקרוא",
+    meaning: { he: "לקרוא", en: "to read" },
+    past: { ani: "קראתי", ata: "קראת", at: "קראת", hu: "קרא", hi: "קראה", anachnu: "קראנו", atem: "קראתם", hem: "קראו" },
+    present: { mS: "קורא", fS: "קוראת", mP: "קוראים", fP: "קוראות" },
+    future: { ani: "אקרא", ata: "תקרא", at: "תקראי", hu: "יקרא", hi: "תקרא", anachnu: "נקרא", atem: "תקראו", hem: "יקראו" },
+  },
+  {
+    infinitive: "ללכת",
+    meaning: { he: "ללכת", en: "to go / walk" },
+    past: { ani: "הלכתי", ata: "הלכת", at: "הלכת", hu: "הלך", hi: "הלכה", anachnu: "הלכנו", atem: "הלכתם", hem: "הלכו" },
+    present: { mS: "הולך", fS: "הולכת", mP: "הולכים", fP: "הולכות" },
+    future: { ani: "אלך", ata: "תלך", at: "תלכי", hu: "ילך", hi: "תלך", anachnu: "נלך", atem: "תלכו", hem: "ילכו" },
+  },
+  {
+    infinitive: "לבוא",
+    meaning: { he: "לבוא", en: "to come" },
+    past: { ani: "באתי", ata: "באת", at: "באת", hu: "בא", hi: "באה", anachnu: "באנו", atem: "באתם", hem: "באו" },
+    present: { mS: "בא", fS: "באה", mP: "באים", fP: "באות" },
+    future: { ani: "אבוא", ata: "תבוא", at: "תבואי", hu: "יבוא", hi: "תבוא", anachnu: "נבוא", atem: "תבואו", hem: "יבואו" },
+  },
+  {
+    infinitive: "לראות",
+    meaning: { he: "לראות", en: "to see" },
+    past: { ani: "ראיתי", ata: "ראית", at: "ראית", hu: "ראה", hi: "ראתה", anachnu: "ראינו", atem: "ראיתם", hem: "ראו" },
+    present: { mS: "רואה", fS: "רואה", mP: "רואים", fP: "רואות" },
+    future: { ani: "אראה", ata: "תראה", at: "תראי", hu: "יראה", hi: "תראה", anachnu: "נראה", atem: "תראו", hem: "יראו" },
+  },
+  {
+    infinitive: "לעשות",
+    meaning: { he: "לעשות", en: "to do / make" },
+    past: { ani: "עשיתי", ata: "עשית", at: "עשית", hu: "עשה", hi: "עשתה", anachnu: "עשינו", atem: "עשיתם", hem: "עשו" },
+    present: { mS: "עושה", fS: "עושה", mP: "עושים", fP: "עושות" },
+    future: { ani: "אעשה", ata: "תעשה", at: "תעשי", hu: "יעשה", hi: "תעשה", anachnu: "נעשה", atem: "תעשו", hem: "יעשו" },
+  },
 ];
+
 
 // All cell IDs in a stable order (used to pick which to hide in practice mode)
 const ALL_CELL_IDS = [
