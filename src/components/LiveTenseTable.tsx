@@ -304,14 +304,39 @@ export default function LiveTenseTable({ onBack, lang }: LiveTenseTableProps) {
           )}
         </div>
 
-        <div className="bg-white rounded-2xl border border-gray-100 shadow-sm p-4 mb-4 flex items-center justify-between">
+        <div className="bg-white rounded-2xl border border-gray-100 shadow-sm p-4 mb-4 flex items-center justify-between flex-wrap gap-2">
           <div>
             <div className="text-2xl font-bold text-purple-700" dir="rtl">{verb.infinitive}</div>
             <div className="text-sm text-gray-500">{verb.meaning.en}</div>
           </div>
-          <Button variant="outline" size="sm" onClick={() => speakHebrew(verb.infinitive)}>
-            <Volume2 size={16} className="mr-1" /> {t("השמע", "Listen")}
-          </Button>
+          <div className="flex gap-2 flex-wrap">
+            <Button variant="outline" size="sm" onClick={() => speakHebrew(verb.infinitive)} className="min-h-[44px]">
+              <Volume2 size={16} className="mr-1" /> {t("השמע", "Listen")}
+            </Button>
+            <Button
+              variant="default"
+              size="sm"
+              onClick={() => {
+                const p = verb.past, pr = verb.present, f = verb.future;
+                const fullText = [
+                  "עבר.",
+                  `אני ${p.ani}.`, `אתה ${p.ata}.`, `את ${p.at}.`,
+                  `הוא ${p.hu}.`, `היא ${p.hi}.`,
+                  `אנחנו ${p.anachnu}.`, `אתם ${p.atem}.`, `הם ${p.hem}.`,
+                  "הווה.",
+                  `${pr.mS}. ${pr.fS}. ${pr.mP}. ${pr.fP}.`,
+                  "עתיד.",
+                  `אני ${f.ani}.`, `אתה ${f.ata}.`, `את ${f.at}.`,
+                  `הוא ${f.hu}.`, `היא ${f.hi}.`,
+                  `אנחנו ${f.anachnu}.`, `אתם ${f.atem}.`, `הם ${f.hem}.`,
+                ].join(" ");
+                speakHebrew(fullText, 0.9);
+              }}
+              className="min-h-[44px] bg-purple-600 hover:bg-purple-700 text-white"
+            >
+              🔊 {t("קרא בקול", "Read Aloud")}
+            </Button>
+          </div>
         </div>
 
         {/* Past */}
