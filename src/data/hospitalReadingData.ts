@@ -17,6 +17,7 @@ export interface HospitalQuestion {
   questionEn: string;
   options: string[];
   answer: string;
+  highlightWord?: string;
 }
 
 export const hospitalQuestions: HospitalQuestion[] = [
