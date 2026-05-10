@@ -14,9 +14,52 @@ interface LiveTenseTableProps {
 interface VerbEntry {
   infinitive: string;
   meaning: { he: string; en: string };
+  enBases: { past: string; present: string; future: string };
   past: { ani: string; ata: string; at: string; hu: string; hi: string; anachnu: string; atem: string; hem: string };
   present: { mS: string; fS: string; mP: string; fP: string };
   future: { ani: string; ata: string; at: string; hu: string; hi: string; anachnu: string; atem: string; hem: string };
+}
+
+const EN_BASES: Record<string, { past: string; present: string; future: string }> = {
+  "לאכול": { past: "ate", present: "eat", future: "eat" },
+  "ללמוד": { past: "learned", present: "learn", future: "learn" },
+  "לכתוב": { past: "wrote", present: "write", future: "write" },
+  "לדבר":  { past: "spoke", present: "speak", future: "speak" },
+  "לרוץ":  { past: "ran", present: "run", future: "run" },
+  "לשתות": { past: "drank", present: "drink", future: "drink" },
+  "לישון": { past: "slept", present: "sleep", future: "sleep" },
+  "לקרוא": { past: "read", present: "read", future: "read" },
+  "ללכת":  { past: "went", present: "go", future: "go" },
+  "לבוא":  { past: "came", present: "come", future: "come" },
+  "לראות": { past: "saw", present: "see", future: "see" },
+  "לעשות": { past: "did", present: "do", future: "do" },
+};
+
+const SUBJECTS: Record<string, string> = {
+  ani: "I", ata: "you (m.)", at: "you (f.)", hu: "he", hi: "she",
+  anachnu: "we", atem: "you (pl.)", hem: "they",
+};
+
+const PRESENT_LABEL: Record<string, string> = {
+  mS: "(m. sg.)", fS: "(f. sg.)", mP: "(m. pl.)", fP: "(f. pl.)",
+};
+
+function translateSlot(verb: VerbEntry, id: string): string {
+  const bases = EN_BASES[verb.infinitive];
+  if (!bases) return "";
+  const [tense, slot] = id.split(".");
+  if (tense === "past") {
+    const subj = SUBJECTS[slot] ?? "";
+    return `${subj} ${bases.past}`;
+  }
+  if (tense === "future") {
+    const subj = SUBJECTS[slot] ?? "";
+    return `${subj} will ${bases.future}`;
+  }
+  if (tense === "present") {
+    return `${bases.present} ${PRESENT_LABEL[slot] ?? ""}`.trim();
+  }
+  return "";
 }
 
 const VERBS: VerbEntry[] = [
