@@ -188,6 +188,64 @@ export default function LiveTenseTable({ onBack, lang }: LiveTenseTableProps) {
       return next;
     });
   }
+
+  // Timer
+  const [timerDuration, setTimerDuration] = useState<number>(0); // seconds; 0 = off
+  const [timeLeft, setTimeLeft] = useState<number>(0);
+  const [timerRunning, setTimerRunning] = useState(false);
+  const intervalRef = useRef<number | null>(null);
+
+  function playBeep() {
+    try {
+      const Ctx = (window as any).AudioContext || (window as any).webkitAudioContext;
+      if (!Ctx) return;
+      const ctx = new Ctx();
+      const beep = (freq: number, start: number, dur: number) => {
+        const osc = ctx.createOscillator();
+        const gain = ctx.createGain();
+        osc.frequency.value = freq;
+        osc.type = "sine";
+        osc.connect(gain);
+        gain.connect(ctx.destination);
+        gain.gain.setValueAtTime(0.001, ctx.currentTime + start);
+        gain.gain.exponentialRampToValueAtTime(0.3, ctx.currentTime + start + 0.02);
+        gain.gain.exponentialRampToValueAtTime(0.001, ctx.currentTime + start + dur);
+        osc.start(ctx.currentTime + start);
+        osc.stop(ctx.currentTime + start + dur + 0.05);
+      };
+      beep(880, 0, 0.2);
+      beep(1175, 0.25, 0.35);
+      setTimeout(() => ctx.close(), 800);
+    } catch {}
+  }
+
+  function startTimer(seconds: number) {
+    if (intervalRef.current) window.clearInterval(intervalRef.current);
+    setTimerDuration(seconds);
+    setTimeLeft(seconds);
+    if (seconds === 0) { setTimerRunning(false); return; }
+    setTimerRunning(true);
+    intervalRef.current = window.setInterval(() => {
+      setTimeLeft((s) => {
+        if (s <= 1) {
+          if (intervalRef.current) window.clearInterval(intervalRef.current);
+          setTimerRunning(false);
+          playBeep();
+          return 0;
+        }
+        return s - 1;
+      });
+    }, 1000);
+  }
+
+  useEffect(() => () => { if (intervalRef.current) window.clearInterval(intervalRef.current); }, []);
+
+  function fmtTime(s: number) {
+    const m = Math.floor(s / 60);
+    const sec = s % 60;
+    return `${m}:${sec.toString().padStart(2, "0")}`;
+  }
+
   const isHe = lang === "he";
   const verb = VERBS[selected];
 
