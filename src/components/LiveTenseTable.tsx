@@ -298,9 +298,19 @@ export default function LiveTenseTable({ onBack, lang }: LiveTenseTableProps) {
             )}
           </div>
           {practiceMode && (
-            <Button variant="outline" size="sm" onClick={handleReshuffle} className="min-h-[44px]">
-              <RotateCcw size={14} className="mr-1" /> {t("ערבב מחדש", "Reshuffle")}
-            </Button>
+            <div className="flex gap-2 flex-wrap">
+              <Button
+                variant="default"
+                size="sm"
+                onClick={() => setRevealed(new Set(ALL_CELL_IDS))}
+                className="min-h-[44px] bg-emerald-600 hover:bg-emerald-700 text-white"
+              >
+                👁️ {t("גלה תשובה", "Reveal Answer")}
+              </Button>
+              <Button variant="outline" size="sm" onClick={handleReshuffle} className="min-h-[44px]">
+                <RotateCcw size={14} className="mr-1" /> {t("ערבב מחדש", "Reshuffle")}
+              </Button>
+            </div>
           )}
         </div>
 
