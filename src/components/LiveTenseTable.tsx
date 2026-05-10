@@ -150,6 +150,13 @@ const VERBS: VerbEntry[] = [
   },
 ];
 
+type Level = "all" | "beginner" | "intermediate" | "advanced";
+const VERB_LEVEL: Record<string, Exclude<Level, "all">> = {
+  "לאכול": "beginner", "ללמוד": "beginner", "לכתוב": "beginner", "לרוץ": "beginner",
+  "לדבר": "intermediate", "לשתות": "intermediate", "לישון": "intermediate", "לקרוא": "intermediate",
+  "ללכת": "advanced", "לבוא": "advanced", "לראות": "advanced", "לעשות": "advanced",
+};
+
 
 // All cell IDs in a stable order (used to pick which to hide in practice mode)
 const ALL_CELL_IDS = [
