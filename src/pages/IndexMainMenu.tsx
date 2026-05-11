@@ -1,6 +1,6 @@
 import React, { useState, useEffect, useMemo } from "react";
 import { Button } from "@/components/ui/button";
-import { Globe, Search, Flame, BookOpen, Gamepad2, BookMarked, GraduationCap, LayoutGrid } from "lucide-react";
+import { Globe, Search, Flame, ArrowRight, ArrowLeft } from "lucide-react";
 import type { SetStateAction, Dispatch } from "react";
 import menuText from "@/i18n/menu";
 
