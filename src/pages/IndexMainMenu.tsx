@@ -126,6 +126,14 @@ export default function IndexMainMenu(props: IndexMainMenuProps) {
   const isHe = lang === "he";
   const [searchQuery, setSearchQuery] = useState("");
   const [activeHub, setActiveHub] = useState<HubKey | null>(null);
+  const [streak, setStreak] = useState(0);
+  const [cardsVisible, setCardsVisible] = useState(false);
+
+  useEffect(() => {
+    setStreak(updateStreak());
+    const timer = setTimeout(() => setCardsVisible(true), 100);
+    return () => clearTimeout(timer);
+  }, []);
 
   const allItems: MenuItem[] = useMemo(() => [
     // Foundations
