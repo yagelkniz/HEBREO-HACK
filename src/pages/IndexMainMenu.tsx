@@ -75,12 +75,20 @@ interface IndexMainMenuProps {
   setShowConjugationGenerator: (b: boolean) => void;
 }
 
-type Category = "all" | "learn" | "vocab" | "games" | "reading";
+type HubKey = "foundations" | "grammar" | "pronouns" | "vocab" | "conversation" | "games" | "reading";
+
+interface Hub {
+  key: HubKey;
+  emoji: string;
+  label: string;
+  desc: string;
+  color: string;
+}
 
 interface MenuItem {
   emoji: string;
   label: string;
-  category: Category[];
+  hub: HubKey;
   level?: "beginner" | "intermediate" | "advanced";
   action: () => void;
 }
