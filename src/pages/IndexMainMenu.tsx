@@ -258,42 +258,74 @@ export default function IndexMainMenu(props: IndexMainMenuProps) {
               className={`w-full bg-gray-50 border border-gray-200 rounded-full py-2 text-sm focus:outline-none focus:ring-2 focus:ring-purple-300 ${isHe ? "pr-9 pl-4" : "pl-9 pr-4"}`} />
           </div>
         </div>
-        <div className="max-w-2xl mx-auto px-4 pb-2">
-          <div className="flex gap-1 overflow-x-auto">
-            {tabs.map(tab => (
-              <button key={tab.key} onClick={() => setActiveCategory(tab.key)}
-                className={`flex items-center gap-1 whitespace-nowrap px-3 py-1.5 rounded-full text-xs font-medium transition-all ${activeCategory === tab.key ? "bg-purple-600 text-white" : "bg-gray-100 text-gray-600 hover:bg-purple-100 hover:text-purple-700"}`}>
-                {tab.icon}{tab.label}
-              </button>
-            ))}
+        {activeHub && (
+          <div className="max-w-2xl mx-auto px-4 pb-2">
+            <button onClick={() => setActiveHub(null)}
+              className="flex items-center gap-1 text-xs font-medium text-purple-700 hover:text-purple-900 px-3 py-1.5 rounded-full bg-purple-50 hover:bg-purple-100 transition">
+              {isHe ? <ArrowRight size={14} /> : <ArrowLeft size={14} />}
+              {isHe ? "חזרה לקטגוריות" : "Back to categories"}
+            </button>
           </div>
-        </div>
+        )}
       </header>
       <div className="max-w-2xl mx-auto px-4 py-3">
-        <div className="grid grid-cols-3 gap-3 mb-4">
-          {([
-            { label: isHe ? "תרגילים" : "Total", value: allItems.length, color: "purple" },
-            { label: isHe ? "מתחילים" : "Beginner", value: allItems.filter(i => i.level === "beginner").length, color: "green" },
-            { label: isHe ? "רצף" : "Streak", value: streak, color: "orange" },
-          ] as const).map((stat, i) => (
-            <div key={i} style={{ opacity: cardsVisible ? 1 : 0, transform: cardsVisible ? "translateY(0)" : "translateY(10px)", transition: `opacity 0.4s ease ${i * 80}ms, transform 0.4s ease ${i * 80}ms` }}
-              className="bg-white rounded-2xl border border-gray-100 shadow-sm p-3 text-center">
-              <div className={`text-xl font-bold text-${stat.color}-600`}>{stat.value}</div>
-              <div className="text-xs text-gray-500 mt-0.5">{stat.label}</div>
+        {showHubGrid ? (
+          <>
+            <div className="grid grid-cols-3 gap-3 mb-4">
+              {([
+                { label: isHe ? "תרגילים" : "Total", value: allItems.length, color: "purple" },
+                { label: isHe ? "מתחילים" : "Beginner", value: allItems.filter(i => i.level === "beginner").length, color: "green" },
+                { label: isHe ? "רצף" : "Streak", value: streak, color: "orange" },
+              ] as const).map((stat, i) => (
+                <div key={i} style={{ opacity: cardsVisible ? 1 : 0, transform: cardsVisible ? "translateY(0)" : "translateY(10px)", transition: `opacity 0.4s ease ${i * 80}ms, transform 0.4s ease ${i * 80}ms` }}
+                  className="bg-white rounded-2xl border border-gray-100 shadow-sm p-3 text-center">
+                  <div className={`text-xl font-bold text-${stat.color}-600`}>{stat.value}</div>
+                  <div className="text-xs text-gray-500 mt-0.5">{stat.label}</div>
+                </div>
+              ))}
             </div>
-          ))}
-        </div>
-        {filteredItems.length === 0 ? (
-          <div className="text-center py-16 text-gray-400">
-            <Search size={32} className="mx-auto mb-2 opacity-40" />
-            <p>{isHe ? "לא נמצאו תרגילים" : "No exercises found"}</p>
-          </div>
+            <div className="grid grid-cols-1 sm:grid-cols-2 gap-3 pb-8">
+              {hubs.map((hub, i) => {
+                const count = allItems.filter(it => it.hub === hub.key).length;
+                return (
+                  <button key={hub.key} onClick={() => setActiveHub(hub.key)}
+                    style={{ opacity: cardsVisible ? 1 : 0, transform: cardsVisible ? "translateY(0)" : "translateY(20px)", transition: `opacity 0.4s ease ${i * 70}ms, transform 0.4s ease ${i * 70}ms` }}
+                    className={`group flex items-center gap-3 p-4 rounded-2xl bg-gradient-to-br ${hub.color} border shadow-sm hover:shadow-md active:scale-[0.98] transition-all text-${isHe ? "right" : "left"}`}>
+                    <span className="text-4xl group-hover:scale-110 transition-transform">{hub.emoji}</span>
+                    <div className="flex-1 min-w-0">
+                      <div className="font-bold text-gray-800 text-base">{hub.label}</div>
+                      <div className="text-xs text-gray-600 mt-0.5 truncate">{hub.desc}</div>
+                      <div className="text-[11px] text-gray-500 mt-1">{count} {isHe ? "תרגילים" : "exercises"}</div>
+                    </div>
+                  </button>
+                );
+              })}
+            </div>
+          </>
         ) : (
-          <div className="grid grid-cols-2 sm:grid-cols-3 gap-3 pb-8">
-            {filteredItems.map((item, i) => (
-              <MenuItemCard key={item.label + i} emoji={item.emoji} label={item.label} onClick={item.action} index={i} visible={cardsVisible} />
-            ))}
-          </div>
+          <>
+            {currentHub && (
+              <div className={`mb-4 p-4 rounded-2xl bg-gradient-to-br ${currentHub.color} border flex items-center gap-3`}>
+                <span className="text-4xl">{currentHub.emoji}</span>
+                <div>
+                  <div className="font-bold text-gray-800 text-lg">{currentHub.label}</div>
+                  <div className="text-xs text-gray-600">{currentHub.desc}</div>
+                </div>
+              </div>
+            )}
+            {filteredItems.length === 0 ? (
+              <div className="text-center py-16 text-gray-400">
+                <Search size={32} className="mx-auto mb-2 opacity-40" />
+                <p>{isHe ? "לא נמצאו תרגילים" : "No exercises found"}</p>
+              </div>
+            ) : (
+              <div className="grid grid-cols-2 sm:grid-cols-3 gap-3 pb-8">
+                {filteredItems.map((item, i) => (
+                  <MenuItemCard key={item.label + i} emoji={item.emoji} label={item.label} onClick={item.action} index={i} visible={cardsVisible} />
+                ))}
+              </div>
+            )}
+          </>
         )}
       </div>
     </div>
