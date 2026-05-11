@@ -125,94 +125,100 @@ export default function IndexMainMenu(props: IndexMainMenuProps) {
   const t = menuText[lang];
   const isHe = lang === "he";
   const [searchQuery, setSearchQuery] = useState("");
-  const [activeCategory, setActiveCategory] = useState<Category>("all");
-  const [streak, setStreak] = useState(0);
-  const [cardsVisible, setCardsVisible] = useState(false);
-
-  useEffect(() => {
-    setStreak(updateStreak());
-    const timer = setTimeout(() => setCardsVisible(true), 100);
-    return () => clearTimeout(timer);
-  }, []);
+  const [activeHub, setActiveHub] = useState<HubKey | null>(null);
 
   const allItems: MenuItem[] = useMemo(() => [
-    // Learn
-    { emoji: "🔤", label: isHe ? "אלפבית" : "Alphabet", category: ["learn"], level: "beginner", action: () => setShowAlphabetCourse(true) },
-    { emoji: "🌱", label: isHe ? "עברית למתחילים" : "Beginner Hebrew", category: ["learn"], level: "beginner", action: () => setShowBeginnerHebrew(true) },
-    { emoji: "🔗", label: isHe ? "מילות קישור" : "Linking Words", category: ["learn"], level: "beginner", action: () => setShowLinkingWords(true) },
-    { emoji: "📊", label: isHe ? "מילות קישור - רמות" : "Linking Words Levels", category: ["learn"], level: "intermediate", action: () => setShowLinkingWordsLevels(true) },
-    { emoji: "🧑‍🏫", label: isHe ? "שמות גוף" : "Pronouns", category: ["learn"], level: "beginner", action: () => setShowPronounsMenu(true) },
-    { emoji: "👤", label: isHe ? "מילות שייכות" : "Possessive Pronouns", category: ["learn"], level: "beginner", action: () => setShowPossessivePronouns(true) },
-    { emoji: "🪞", label: isHe ? "כינויי גוף רפלקסיביים" : "Reflexive Pronouns", category: ["learn"], level: "advanced", action: () => setShowPronounSuffixReflexive(true) },
-    { emoji: "🪡", label: isHe ? "סיומות מילות יחס" : "Preposition Suffixes", category: ["learn"], level: "advanced", action: () => setShowPrepositionSuffix(true) },
-    { emoji: "📝", label: isHe ? "שאלון היכרות" : "Questionnaire", category: ["learn"], level: "beginner", action: () => setShowQuestionnaire(true) },
-    { emoji: "💬", label: isHe ? "עברית יומיומית" : "Everyday Hebrew", category: ["learn"], level: "beginner", action: () => setShowEverydayHebrew(true) },
-    { emoji: "🧠", label: isHe ? "פועל להיות" : "Verb To Be", category: ["learn"], level: "beginner", action: () => setShowVerbToBePresentation(true) },
-    { emoji: "❓", label: isHe ? "מילות שאלה" : "Question Words", category: ["learn"], level: "beginner", action: () => setShowQuestionWords(true) },
-    { emoji: "📚", label: isHe ? "בניינים" : "Verb Patterns", category: ["learn"], level: "intermediate", action: () => setShowVerbPatternsMenu(true) },
-    { emoji: "🔄", label: isHe ? "בניינים בפעולה" : "Binyanim in Action", category: ["learn"], level: "advanced", action: () => setShowBinyanimInAction(true) },
-    { emoji: "📋", label: isHe ? "טבלת זמנים חיה" : "Live Tense Table", category: ["learn"], level: "intermediate", action: () => setShowLiveTenseTable(true) },
-    { emoji: "🧮", label: isHe ? "מחולל הטיות" : "Conjugation Generator", category: ["learn"], level: "intermediate", action: () => setShowConjugationGenerator(true) },
-    { emoji: "✏️", label: isHe ? "תרגול פעלים" : "Verb Practice", category: ["learn"], level: "intermediate", action: () => setSelectedPractice("verb") },
-    { emoji: "📜", label: isHe ? "תרגול משפטים" : "Sentence Order", category: ["learn"], level: "intermediate", action: () => setShowSentenceOrder(true) },
-    { emoji: "🧩", label: isHe ? "שמות עצם + תואר" : "Nouns + Adjectives", category: ["learn"], level: "intermediate", action: () => setSelectedPractice("nounAdj") },
-    { emoji: "🛠️", label: isHe ? "תיקון מילות קישור" : "Connector Correction", category: ["learn"], level: "advanced", action: () => setShowConnectorCorrection(true) },
-    { emoji: "🔁", label: isHe ? "החלפת מין" : "Gender Flip", category: ["learn"], level: "intermediate", action: () => setShowGenderFlip(true) },
+    // Foundations
+    { emoji: "🔤", label: isHe ? "אלפבית" : "Alphabet", hub: "foundations", level: "beginner", action: () => setShowAlphabetCourse(true) },
+    { emoji: "🌱", label: isHe ? "עברית למתחילים" : "Beginner Hebrew", hub: "foundations", level: "beginner", action: () => setShowBeginnerHebrew(true) },
+    { emoji: "📝", label: isHe ? "שאלון היכרות" : "Questionnaire", hub: "foundations", level: "beginner", action: () => setShowQuestionnaire(true) },
+    { emoji: "🧠", label: isHe ? "פועל להיות" : "Verb To Be", hub: "foundations", level: "beginner", action: () => setShowVerbToBePresentation(true) },
+    { emoji: "❓", label: isHe ? "מילות שאלה" : "Question Words", hub: "foundations", level: "beginner", action: () => setShowQuestionWords(true) },
+
+    // Grammar & Verbs
+    { emoji: "📚", label: isHe ? "בניינים" : "Verb Patterns", hub: "grammar", level: "intermediate", action: () => setShowVerbPatternsMenu(true) },
+    { emoji: "🔄", label: isHe ? "בניינים בפעולה" : "Binyanim in Action", hub: "grammar", level: "advanced", action: () => setShowBinyanimInAction(true) },
+    { emoji: "📋", label: isHe ? "טבלת זמנים חיה" : "Live Tense Table", hub: "grammar", level: "intermediate", action: () => setShowLiveTenseTable(true) },
+    { emoji: "🧮", label: isHe ? "מחולל הטיות" : "Conjugation Generator", hub: "grammar", level: "intermediate", action: () => setShowConjugationGenerator(true) },
+    { emoji: "✏️", label: isHe ? "תרגול פעלים" : "Verb Practice", hub: "grammar", level: "intermediate", action: () => setSelectedPractice("verb") },
+    { emoji: "📜", label: isHe ? "תרגול משפטים" : "Sentence Order", hub: "grammar", level: "intermediate", action: () => setShowSentenceOrder(true) },
+    { emoji: "🧩", label: isHe ? "שמות עצם + תואר" : "Nouns + Adjectives", hub: "grammar", level: "intermediate", action: () => setSelectedPractice("nounAdj") },
+    { emoji: "🛠️", label: isHe ? "תיקון מילות קישור" : "Connector Correction", hub: "grammar", level: "advanced", action: () => setShowConnectorCorrection(true) },
+    { emoji: "🔁", label: isHe ? "החלפת מין" : "Gender Flip", hub: "grammar", level: "intermediate", action: () => setShowGenderFlip(true) },
+
+    // Pronouns & Connectors
+    { emoji: "🧑‍🏫", label: isHe ? "שמות גוף" : "Pronouns", hub: "pronouns", level: "beginner", action: () => setShowPronounsMenu(true) },
+    { emoji: "👤", label: isHe ? "מילות שייכות" : "Possessive Pronouns", hub: "pronouns", level: "beginner", action: () => setShowPossessivePronouns(true) },
+    { emoji: "🪞", label: isHe ? "כינויי גוף רפלקסיביים" : "Reflexive Pronouns", hub: "pronouns", level: "advanced", action: () => setShowPronounSuffixReflexive(true) },
+    { emoji: "🪡", label: isHe ? "סיומות מילות יחס" : "Preposition Suffixes", hub: "pronouns", level: "advanced", action: () => setShowPrepositionSuffix(true) },
+    { emoji: "🔗", label: isHe ? "מילות קישור" : "Linking Words", hub: "pronouns", level: "beginner", action: () => setShowLinkingWords(true) },
+    { emoji: "📊", label: isHe ? "מילות קישור - רמות" : "Linking Words Levels", hub: "pronouns", level: "intermediate", action: () => setShowLinkingWordsLevels(true) },
 
     // Vocab
-    { emoji: "📅", label: isHe ? "ימים ומקומות" : "Days & Places", category: ["vocab"], level: "beginner", action: () => setShowDaysAndPlacesVocab(true) },
-    { emoji: "😊", label: isHe ? "רגשות" : "Emotions", category: ["vocab"], level: "beginner", action: () => setShowEmotions(true) },
-    { emoji: "💪", label: isHe ? "גוף ובריאות" : "Body & Health", category: ["vocab"], level: "beginner", action: () => setShowBodyHealth(true) },
-    { emoji: "🎨", label: isHe ? "צבעים ופירות" : "Colors & Fruits", category: ["vocab"], level: "beginner", action: () => setShowColorsAndFruits(true) },
-    { emoji: "🔢", label: isHe ? "מספרים" : "Numbers", category: ["vocab"], level: "beginner", action: () => setShowNumbers(true) },
-    { emoji: "🥇", label: isHe ? "מספרים סודרים" : "Ordinal Numbers", category: ["vocab"], level: "intermediate", action: () => setShowOrdinalNumbers(true) },
-    { emoji: "🗓️", label: isHe ? "חודשים" : "Months", category: ["vocab"], level: "beginner", action: () => setShowMonths(true) },
-    { emoji: "👨‍👩‍👧", label: isHe ? "משפחה" : "Family", category: ["vocab"], level: "beginner", action: () => setShowFamily(true) },
-    { emoji: "🍎", label: isHe ? "אוכל ושתייה" : "Food & Drinks", category: ["vocab"], level: "beginner", action: () => setShowFoodDrinks(true) },
-    { emoji: "👨‍⚕️", label: isHe ? "מקצועות" : "Professions", category: ["vocab"], level: "intermediate", action: () => setShowProfessions(true) },
-    { emoji: "☀️", label: isHe ? "מזג אוויר ועונות" : "Weather & Seasons", category: ["vocab"], level: "beginner", action: () => setShowWeather(true) },
-    { emoji: "🏙️", label: isHe ? "עיר" : "City", category: ["vocab"], level: "beginner", action: () => setShowCityVocab(true) },
-    { emoji: "🛒", label: isHe ? "קניות" : "Shopping", category: ["vocab"], level: "beginner", action: () => setShowShopping(true) },
-    { emoji: "✨", label: isHe ? "תארים" : "Adjectives", category: ["vocab"], level: "beginner", action: () => setShowAdjectives(true) },
-    { emoji: "🗣️", label: isHe ? "סלנג" : "Slang", category: ["vocab"], level: "advanced", action: () => setShowHebrewSlang(true) },
+    { emoji: "📅", label: isHe ? "ימים ומקומות" : "Days & Places", hub: "vocab", level: "beginner", action: () => setShowDaysAndPlacesVocab(true) },
+    { emoji: "😊", label: isHe ? "רגשות" : "Emotions", hub: "vocab", level: "beginner", action: () => setShowEmotions(true) },
+    { emoji: "💪", label: isHe ? "גוף ובריאות" : "Body & Health", hub: "vocab", level: "beginner", action: () => setShowBodyHealth(true) },
+    { emoji: "🎨", label: isHe ? "צבעים ופירות" : "Colors & Fruits", hub: "vocab", level: "beginner", action: () => setShowColorsAndFruits(true) },
+    { emoji: "🔢", label: isHe ? "מספרים" : "Numbers", hub: "vocab", level: "beginner", action: () => setShowNumbers(true) },
+    { emoji: "🥇", label: isHe ? "מספרים סודרים" : "Ordinal Numbers", hub: "vocab", level: "intermediate", action: () => setShowOrdinalNumbers(true) },
+    { emoji: "🗓️", label: isHe ? "חודשים" : "Months", hub: "vocab", level: "beginner", action: () => setShowMonths(true) },
+    { emoji: "👨‍👩‍👧", label: isHe ? "משפחה" : "Family", hub: "vocab", level: "beginner", action: () => setShowFamily(true) },
+    { emoji: "🍎", label: isHe ? "אוכל ושתייה" : "Food & Drinks", hub: "vocab", level: "beginner", action: () => setShowFoodDrinks(true) },
+    { emoji: "👨‍⚕️", label: isHe ? "מקצועות" : "Professions", hub: "vocab", level: "intermediate", action: () => setShowProfessions(true) },
+    { emoji: "☀️", label: isHe ? "מזג אוויר ועונות" : "Weather & Seasons", hub: "vocab", level: "beginner", action: () => setShowWeather(true) },
+    { emoji: "🏙️", label: isHe ? "עיר" : "City", hub: "vocab", level: "beginner", action: () => setShowCityVocab(true) },
+    { emoji: "🛒", label: isHe ? "קניות" : "Shopping", hub: "vocab", level: "beginner", action: () => setShowShopping(true) },
+    { emoji: "✨", label: isHe ? "תארים" : "Adjectives", hub: "vocab", level: "beginner", action: () => setShowAdjectives(true) },
+
+    // Conversation & Daily
+    { emoji: "💬", label: isHe ? "עברית יומיומית" : "Everyday Hebrew", hub: "conversation", level: "beginner", action: () => setShowEverydayHebrew(true) },
+    { emoji: "🎤", label: isHe ? "רולטת שיחה" : "Conversation Roulette", hub: "conversation", level: "advanced", action: () => setShowConversationRoulette(true) },
+    { emoji: "🎭", label: isHe ? "משחקי תפקידים" : "Role Play", hub: "conversation", level: "advanced", action: () => setShowRolePlay(true) },
+    { emoji: "🎧", label: isHe ? "האזנה" : "Listening", hub: "conversation", level: "intermediate", action: () => setShowListeningPractice(true) },
+    { emoji: "🗣️", label: isHe ? "סלנג" : "Slang", hub: "conversation", level: "advanced", action: () => setShowHebrewSlang(true) },
+    { emoji: "🎴", label: isHe ? "כרטיסי דיאלוג" : "Dialogue Flashcards", hub: "conversation", level: "intermediate", action: () => setShowDialogueFlashcards(true) },
+    { emoji: "🎵", label: isHe ? "מילות שירים" : "Song Lyrics", hub: "conversation", level: "advanced", action: () => setShowSongLyrics(true) },
 
     // Games
-    { emoji: "🎮", label: isHe ? "המוזר בחבורה" : "Odd One Out", category: ["games"], level: "beginner", action: () => setShowOddOneOut(true) },
-    { emoji: "🃏", label: isHe ? "משחק זיכרון פעלים" : "Verb Memory", category: ["games"], level: "intermediate", action: () => setShowVerbMemoryGame(true) },
-    { emoji: "💡", label: isHe ? "חידון מהיר" : "Quick Quiz", category: ["games"], level: "beginner", action: () => setShowQuickQuiz(true) },
-    { emoji: "🎴", label: isHe ? "כרטיסי דיאלוג" : "Dialogue Flashcards", category: ["games"], level: "intermediate", action: () => setShowDialogueFlashcards(true) },
-    { emoji: "🎤", label: isHe ? "רולטת שיחה" : "Conversation Roulette", category: ["games"], level: "advanced", action: () => setShowConversationRoulette(true) },
-    { emoji: "🎭", label: isHe ? "משחקי תפקידים" : "Role Play", category: ["games"], level: "advanced", action: () => setShowRolePlay(true) },
-    { emoji: "🎧", label: isHe ? "האזנה" : "Listening", category: ["games"], level: "intermediate", action: () => setShowListeningPractice(true) },
-    { emoji: "🎵", label: isHe ? "מילות שירים" : "Song Lyrics", category: ["games"], level: "advanced", action: () => setShowSongLyrics(true) },
+    { emoji: "🎮", label: isHe ? "המוזר בחבורה" : "Odd One Out", hub: "games", level: "beginner", action: () => setShowOddOneOut(true) },
+    { emoji: "🃏", label: isHe ? "משחק זיכרון פעלים" : "Verb Memory", hub: "games", level: "intermediate", action: () => setShowVerbMemoryGame(true) },
+    { emoji: "💡", label: isHe ? "חידון מהיר" : "Quick Quiz", hub: "games", level: "beginner", action: () => setShowQuickQuiz(true) },
 
     // Reading
-    { emoji: "🍔", label: isHe ? "אוכל - הבנת הנקרא" : "Food Reading", category: ["reading"], level: "beginner", action: () => setSelectedTextComp("food-levels") },
-    { emoji: "🍽️", label: isHe ? "הזמנת אוכל" : "Ordering Food", category: ["reading"], level: "intermediate", action: () => setSelectedTextComp("food-order-medium") },
-    { emoji: "🐶", label: isHe ? "חיות (קל)" : "Animals (Easy)", category: ["reading"], level: "beginner", action: () => setSelectedTextComp("animals-easy") },
-    { emoji: "📱", label: isHe ? "רשתות חברתיות" : "Social Media", category: ["reading"], level: "intermediate", action: () => setSelectedTextComp("social-media") },
-    { emoji: "🌍", label: isHe ? "מדינות" : "Countries", category: ["reading"], level: "intermediate", action: () => setSelectedTextComp("countries-levels") },
-    { emoji: "🎬", label: isHe ? "סדרות וסרטים" : "TV & Movies", category: ["reading"], level: "intermediate", action: () => setSelectedTextComp("movies-series-levels") },
-    { emoji: "🏖️", label: isHe ? "ים ובילוי" : "Beach & Fun", category: ["reading"], level: "beginner", action: () => setSelectedTextComp("places-food-easy") },
-    { emoji: "🏥", label: isHe ? "בית חולים" : "Hospital", category: ["reading"], level: "intermediate", action: () => setSelectedTextComp("hospital") },
-    { emoji: "✈️", label: isHe ? "שדה תעופה" : "Airport", category: ["reading"], level: "intermediate", action: () => setSelectedTextComp("airport") },
-    { emoji: "📰", label: isHe ? "חדשות" : "News", category: ["reading"], level: "advanced", action: () => setSelectedTextComp("news") },
+    { emoji: "🍔", label: isHe ? "אוכל - הבנת הנקרא" : "Food Reading", hub: "reading", level: "beginner", action: () => setSelectedTextComp("food-levels") },
+    { emoji: "🍽️", label: isHe ? "הזמנת אוכל" : "Ordering Food", hub: "reading", level: "intermediate", action: () => setSelectedTextComp("food-order-medium") },
+    { emoji: "🐶", label: isHe ? "חיות (קל)" : "Animals (Easy)", hub: "reading", level: "beginner", action: () => setSelectedTextComp("animals-easy") },
+    { emoji: "📱", label: isHe ? "רשתות חברתיות" : "Social Media", hub: "reading", level: "intermediate", action: () => setSelectedTextComp("social-media") },
+    { emoji: "🌍", label: isHe ? "מדינות" : "Countries", hub: "reading", level: "intermediate", action: () => setSelectedTextComp("countries-levels") },
+    { emoji: "🎬", label: isHe ? "סדרות וסרטים" : "TV & Movies", hub: "reading", level: "intermediate", action: () => setSelectedTextComp("movies-series-levels") },
+    { emoji: "🏖️", label: isHe ? "ים ובילוי" : "Beach & Fun", hub: "reading", level: "beginner", action: () => setSelectedTextComp("places-food-easy") },
+    { emoji: "🏥", label: isHe ? "בית חולים" : "Hospital", hub: "reading", level: "intermediate", action: () => setSelectedTextComp("hospital") },
+    { emoji: "✈️", label: isHe ? "שדה תעופה" : "Airport", hub: "reading", level: "intermediate", action: () => setSelectedTextComp("airport") },
+    { emoji: "📰", label: isHe ? "חדשות" : "News", hub: "reading", level: "advanced", action: () => setSelectedTextComp("news") },
   ], [isHe]);
 
-  const filteredItems = useMemo(() =>
-    allItems.filter(item => {
-      const matchCat = activeCategory === "all" || item.category.includes(activeCategory);
-      const matchSearch = searchQuery === "" || item.label.toLowerCase().includes(searchQuery.toLowerCase());
-      return matchCat && matchSearch;
-    }), [allItems, activeCategory, searchQuery]);
-
-  const tabs: { key: Category; label: string; icon: React.ReactNode }[] = [
-    { key: "all", label: isHe ? "הכל" : "All", icon: <LayoutGrid size={14} /> },
-    { key: "learn", label: isHe ? "לימוד" : "Learn", icon: <GraduationCap size={14} /> },
-    { key: "vocab", label: isHe ? "מילים" : "Vocab", icon: <BookMarked size={14} /> },
-    { key: "games", label: isHe ? "משחקים" : "Games", icon: <Gamepad2 size={14} /> },
-    { key: "reading", label: isHe ? "קריאה" : "Reading", icon: <BookOpen size={14} /> },
+  const hubs: Hub[] = [
+    { key: "foundations", emoji: "🌱", label: isHe ? "יסודות" : "Foundations", desc: isHe ? "אלפבית, מתחילים, פועל להיות" : "Alphabet, beginners, To Be", color: "from-green-100 to-emerald-50 border-green-200" },
+    { key: "grammar", emoji: "📚", label: isHe ? "דקדוק ופעלים" : "Grammar & Verbs", desc: isHe ? "בניינים, זמנים, משפטים" : "Binyanim, tenses, sentences", color: "from-blue-100 to-indigo-50 border-blue-200" },
+    { key: "pronouns", emoji: "🧑‍🏫", label: isHe ? "כינויים ומילות יחס" : "Pronouns & Connectors", desc: isHe ? "שייכות, רפלקסיבי, קישור" : "Possessive, reflexive, linking", color: "from-purple-100 to-fuchsia-50 border-purple-200" },
+    { key: "vocab", emoji: "📖", label: isHe ? "אוצר מילים" : "Vocabulary", desc: isHe ? "משפחה, אוכל, מספרים, צבעים" : "Family, food, numbers, colors", color: "from-amber-100 to-orange-50 border-amber-200" },
+    { key: "conversation", emoji: "💬", label: isHe ? "שיחה ויומיום" : "Conversation & Daily", desc: isHe ? "רולטה, תפקידים, האזנה, סלנג" : "Roulette, role-play, listening", color: "from-pink-100 to-rose-50 border-pink-200" },
+    { key: "games", emoji: "🎮", label: isHe ? "משחקים" : "Games", desc: isHe ? "זיכרון, חידונים, אתגרים" : "Memory, quizzes, challenges", color: "from-cyan-100 to-sky-50 border-cyan-200" },
+    { key: "reading", emoji: "📰", label: isHe ? "הבנת הנקרא" : "Reading", desc: isHe ? "טקסטים בנושאים שונים" : "Texts on various topics", color: "from-violet-100 to-purple-50 border-violet-200" },
   ];
+
+  const filteredItems = useMemo(() => {
+    const q = searchQuery.toLowerCase();
+    return allItems.filter(item => {
+      const matchSearch = q === "" || item.label.toLowerCase().includes(q);
+      const matchHub = !activeHub || item.hub === activeHub;
+      // When searching, show across all hubs
+      return q ? matchSearch : matchHub && matchSearch;
+    });
+  }, [allItems, activeHub, searchQuery]);
+
+  const showHubGrid = !activeHub && searchQuery === "";
+  const currentHub = hubs.find(h => h.key === activeHub);
 
   return (
     <div dir={isHe ? "rtl" : "ltr"} style={{ fontFamily: "'Heebo', sans-serif" }} className="min-h-screen w-full bg-gradient-to-br from-purple-50 via-white to-blue-50">
