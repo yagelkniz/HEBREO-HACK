@@ -134,6 +134,7 @@ export default function IndexRouter({ state }: IndexRouterProps) {
     showOrdinalNumbers, setShowOrdinalNumbers,
     showBinyanimInAction, setShowBinyanimInAction,
     showLiveTenseTable, setShowLiveTenseTable,
+    showModalVerbs, setShowModalVerbs,
     resetToMainMenu,
   } = state;
 
