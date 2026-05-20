@@ -149,6 +149,7 @@ export default function IndexMainMenu(props: IndexMainMenuProps) {
     { emoji: "🔄", label: isHe ? "בניינים בפעולה" : "Binyanim in Action", hub: "grammar", level: "advanced", action: () => setShowBinyanimInAction(true) },
     { emoji: "📋", label: isHe ? "טבלת זמנים חיה" : "Live Tense Table", hub: "grammar", level: "intermediate", action: () => setShowLiveTenseTable(true) },
     { emoji: "🧮", label: isHe ? "מחולל הטיות" : "Conjugation Generator", hub: "grammar", level: "intermediate", action: () => setShowConjugationGenerator(true) },
+    { emoji: "🎯", label: isHe ? "רוצה · צריך · יכול · אוהב" : "Want/Need/Can/Love", hub: "grammar", level: "beginner", action: () => setShowModalVerbs(true) },
     { emoji: "✏️", label: isHe ? "תרגול פעלים" : "Verb Practice", hub: "grammar", level: "intermediate", action: () => setSelectedPractice("verb") },
     { emoji: "📜", label: isHe ? "תרגול משפטים" : "Sentence Order", hub: "grammar", level: "intermediate", action: () => setShowSentenceOrder(true) },
     { emoji: "🧩", label: isHe ? "שמות עצם + תואר" : "Nouns + Adjectives", hub: "grammar", level: "intermediate", action: () => setSelectedPractice("nounAdj") },
