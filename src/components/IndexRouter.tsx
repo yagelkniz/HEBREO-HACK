@@ -152,6 +152,7 @@ export default function IndexRouter({ state }: IndexRouterProps) {
   if (showOrdinalNumbers) return <OrdinalNumbersPractice onBack={() => setShowOrdinalNumbers(false)} lang={lang} />;
   if (showBinyanimInAction) return <BinyanimInActionPractice onBack={() => setShowBinyanimInAction(false)} lang={lang} />;
   if (showLiveTenseTable) return <LiveTenseTable onBack={() => setShowLiveTenseTable(false)} lang={lang} />;
+  if (showModalVerbs) return <ModalVerbsPractice onBack={() => setShowModalVerbs(false)} lang={lang} />;
 
   // New exercises
   if (showNumbers) return <NumbersPractice onBack={() => setShowNumbers(false)} lang={lang} />;
