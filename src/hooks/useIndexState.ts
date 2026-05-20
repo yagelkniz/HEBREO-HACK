@@ -117,6 +117,7 @@ export function useIndexState() {
     setShowBinyanimInAction(false);
             setShowLiveTenseTable(false);
     setShowConjugationGenerator(false);
+    setShowModalVerbs(false);
   };
 
   return {
