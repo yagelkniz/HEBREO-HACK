@@ -59,7 +59,8 @@ export default function Index() {
     state.showDialogueFlashcards ||
     state.showOrdinalNumbers ||
     state.showBinyanimInAction ||
-    state.showLiveTenseTable;
+    state.showLiveTenseTable ||
+    state.showModalVerbs;
 
   if (state.showConjugationGenerator) {
     return <ConjugationGenerator lang={state.lang} onBack={state.resetToMainMenu} />;
@@ -130,6 +131,7 @@ export default function Index() {
         setShowBinyanimInAction={state.setShowBinyanimInAction}
         setShowLiveTenseTable={state.setShowLiveTenseTable}
         setShowConjugationGenerator={state.setShowConjugationGenerator}
+        setShowModalVerbs={state.setShowModalVerbs}
       />
     </div>
   );

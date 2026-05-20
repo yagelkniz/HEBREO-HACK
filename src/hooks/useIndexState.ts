@@ -59,6 +59,7 @@ export function useIndexState() {
   const [showBinyanimInAction, setShowBinyanimInAction] = useState(false);
       const [showLiveTenseTable, setShowLiveTenseTable] = useState(false);
   const [showConjugationGenerator, setShowConjugationGenerator] = useState(false);
+  const [showModalVerbs, setShowModalVerbs] = useState(false);
 
   const resetToMainMenu = () => {
     setShowLinkingWords(false);
@@ -116,6 +117,7 @@ export function useIndexState() {
     setShowBinyanimInAction(false);
             setShowLiveTenseTable(false);
     setShowConjugationGenerator(false);
+    setShowModalVerbs(false);
   };
 
   return {
@@ -175,6 +177,7 @@ export function useIndexState() {
     showBinyanimInAction, setShowBinyanimInAction,
         showLiveTenseTable, setShowLiveTenseTable,
     showConjugationGenerator, setShowConjugationGenerator,
+    showModalVerbs, setShowModalVerbs,
     resetToMainMenu,
   };
 }
