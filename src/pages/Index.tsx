@@ -131,6 +131,7 @@ export default function Index() {
         setShowBinyanimInAction={state.setShowBinyanimInAction}
         setShowLiveTenseTable={state.setShowLiveTenseTable}
         setShowConjugationGenerator={state.setShowConjugationGenerator}
+        setShowModalVerbs={state.setShowModalVerbs}
       />
     </div>
   );
