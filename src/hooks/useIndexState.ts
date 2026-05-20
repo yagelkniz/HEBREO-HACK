@@ -177,6 +177,7 @@ export function useIndexState() {
     showBinyanimInAction, setShowBinyanimInAction,
         showLiveTenseTable, setShowLiveTenseTable,
     showConjugationGenerator, setShowConjugationGenerator,
+    showModalVerbs, setShowModalVerbs,
     resetToMainMenu,
   };
 }
