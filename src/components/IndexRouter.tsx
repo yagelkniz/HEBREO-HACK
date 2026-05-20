@@ -72,6 +72,7 @@ import DialogueFlashcardsPractice from "@/components/DialogueFlashcardsPractice"
 import OrdinalNumbersPractice from "@/components/OrdinalNumbersPractice";
 import BinyanimInActionPractice from "@/components/BinyanimInActionPractice";
 import LiveTenseTable from "@/components/LiveTenseTable";
+import ModalVerbsPractice from "@/components/ModalVerbsPractice";
 import { useIndexState } from "@/hooks/useIndexState";
 
 interface IndexRouterProps {
