@@ -31,7 +31,7 @@ const verbs: Verb[] = [
     ],
   },
   {
-    inf: "להיות צריך", infEn: "to need", meaning: "Need", emoji: "✅",
+    inf: "צריך", infEn: "to need", meaning: "Need", emoji: "✅",
     forms: [
       { pronoun: "אני", verb: "צריך / צריכה", example: "אני צריך לעבוד.", exampleEn: "I need to work." },
       { pronoun: "אתה", verb: "צריך", example: "אתה צריך עזרה?", exampleEn: "Do you (m) need help?" },
