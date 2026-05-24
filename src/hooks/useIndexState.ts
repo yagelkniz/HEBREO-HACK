@@ -60,6 +60,7 @@ export function useIndexState() {
       const [showLiveTenseTable, setShowLiveTenseTable] = useState(false);
   const [showConjugationGenerator, setShowConjugationGenerator] = useState(false);
   const [showModalVerbs, setShowModalVerbs] = useState(false);
+  const [showNikud, setShowNikud] = useState(false);
 
   const resetToMainMenu = () => {
     setShowLinkingWords(false);
