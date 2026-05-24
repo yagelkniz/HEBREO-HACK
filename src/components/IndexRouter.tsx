@@ -136,6 +136,7 @@ export default function IndexRouter({ state }: IndexRouterProps) {
     showBinyanimInAction, setShowBinyanimInAction,
     showLiveTenseTable, setShowLiveTenseTable,
     showModalVerbs, setShowModalVerbs,
+    showNikud, setShowNikud,
     resetToMainMenu,
   } = state;
 
