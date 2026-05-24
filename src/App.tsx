@@ -2,10 +2,9 @@ import { Toaster } from "@/components/ui/toaster";
 import { Toaster as Sonner } from "@/components/ui/sonner";
 import { TooltipProvider } from "@/components/ui/tooltip";
 import { QueryClient, QueryClientProvider } from "@tanstack/react-query";
-import { BrowserRouter, Routes, Route } from "react-router-dom";
+import { HashRouter, Routes, Route } from "react-router-dom";
 import Index from "./pages/Index";
 import NotFound from "./pages/NotFound";
-
 
 // Hebrew Flow imports
 import HebrewFlowLayout from "./components/hebrewFlow/HebrewFlowLayout";
@@ -21,36 +20,36 @@ import ConversationRoulette from "./components/hebrewFlow/ConversationRoulette";
 const queryClient = new QueryClient();
 
 const App = () => (
-  <QueryClientProvider client={queryClient}>
-    <TooltipProvider>
-      <Toaster />
-      <Sonner />
-      <BrowserRouter>
-        <Routes>
-          
-          <Route path="/" element={<Index />} />
-          
-          {/* Hebrew Flow Routes */}
-          <Route path="/hebrew-flow" element={<HebrewFlowLayout />}>
-            <Route index element={<HebrewFlowDashboard />} />
-            <Route path="visualizer" element={<VerbVisualizer />} />
-            <Route path="binyanim" element={<BinyanOverview />} />
-            <Route path="roots" element={<RootsConcept />} />
-            <Route path="prepositions" element={<SyntaxModules />} />
-            <Route path="smichut" element={<SyntaxModules />} />
-            <Route path="definite-article" element={<SyntaxModules />} />
-            <Route path="practice/roots" element={<PracticeArena />} />
-            <Route path="practice/conjugation" element={<PracticeArena />} />
-            <Route path="practice/sentences" element={<SentenceBuilder />} />
-            <Route path="conversation-roulette" element={<ConversationRoulette />} />
-          </Route>
-          
-          {/* ADD ALL CUSTOM ROUTES ABOVE THE CATCH-ALL "*" ROUTE */}
-          <Route path="*" element={<NotFound />} />
-        </Routes>
-      </BrowserRouter>
-    </TooltipProvider>
-  </QueryClientProvider>
+<QueryClientProvider client={queryClient}>
+  <TooltipProvider>
+    <Toaster />
+    <Sonner />
+    <HashRouter>
+      <Routes>
+
+        <Route path="/" element={<Index />} />
+
+        {/* Hebrew Flow Routes */}
+        <Route path="/hebrew-flow" element={<HebrewFlowLayout />}>
+          <Route index element={<HebrewFlowDashboard />} />
+          <Route path="visualizer" element={<VerbVisualizer />} />
+          <Route path="binyanim" element={<BinyanOverview />} />
+          <Route path="roots" element={<RootsConcept />} />
+          <Route path="prepositions" element={<SyntaxModules />} />
+          <Route path="smichut" element={<SyntaxModules />} />
+          <Route path="definite-article" element={<SyntaxModules />} />
+          <Route path="practice/roots" element={<PracticeArena />} />
+          <Route path="practice/conjugation" element={<PracticeArena />} />
+          <Route path="practice/sentences" element={<SentenceBuilder />} />
+          <Route path="conversation-roulette" element={<ConversationRoulette />} />
+        </Route>
+
+        {/* ADD ALL CUSTOM ROUTES ABOVE THE CATCH-ALL "*" ROUTE */}
+        <Route path="*" element={<NotFound />} />
+      </Routes>
+    </HashRouter>
+  </TooltipProvider>
+</QueryClientProvider>
 );
 
 export default App;
