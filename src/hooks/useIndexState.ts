@@ -60,6 +60,7 @@ export function useIndexState() {
       const [showLiveTenseTable, setShowLiveTenseTable] = useState(false);
   const [showConjugationGenerator, setShowConjugationGenerator] = useState(false);
   const [showModalVerbs, setShowModalVerbs] = useState(false);
+  const [showNikud, setShowNikud] = useState(false);
 
   const resetToMainMenu = () => {
     setShowLinkingWords(false);
@@ -118,6 +119,7 @@ export function useIndexState() {
             setShowLiveTenseTable(false);
     setShowConjugationGenerator(false);
     setShowModalVerbs(false);
+    setShowNikud(false);
   };
 
   return {
@@ -178,6 +180,7 @@ export function useIndexState() {
         showLiveTenseTable, setShowLiveTenseTable,
     showConjugationGenerator, setShowConjugationGenerator,
     showModalVerbs, setShowModalVerbs,
+    showNikud, setShowNikud,
     resetToMainMenu,
   };
 }

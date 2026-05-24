@@ -73,6 +73,7 @@ import OrdinalNumbersPractice from "@/components/OrdinalNumbersPractice";
 import BinyanimInActionPractice from "@/components/BinyanimInActionPractice";
 import LiveTenseTable from "@/components/LiveTenseTable";
 import ModalVerbsPractice from "@/components/ModalVerbsPractice";
+import NikudPractice from "@/components/NikudPractice";
 import { useIndexState } from "@/hooks/useIndexState";
 
 interface IndexRouterProps {
@@ -135,6 +136,7 @@ export default function IndexRouter({ state }: IndexRouterProps) {
     showBinyanimInAction, setShowBinyanimInAction,
     showLiveTenseTable, setShowLiveTenseTable,
     showModalVerbs, setShowModalVerbs,
+    showNikud, setShowNikud,
     resetToMainMenu,
   } = state;
 
@@ -153,6 +155,7 @@ export default function IndexRouter({ state }: IndexRouterProps) {
   if (showBinyanimInAction) return <BinyanimInActionPractice onBack={() => setShowBinyanimInAction(false)} lang={lang} />;
   if (showLiveTenseTable) return <LiveTenseTable onBack={() => setShowLiveTenseTable(false)} lang={lang} />;
   if (showModalVerbs) return <ModalVerbsPractice onBack={() => setShowModalVerbs(false)} lang={lang} />;
+  if (showNikud) return <NikudPractice onBack={() => setShowNikud(false)} lang={lang} />;
 
   // New exercises
   if (showNumbers) return <NumbersPractice onBack={() => setShowNumbers(false)} lang={lang} />;
