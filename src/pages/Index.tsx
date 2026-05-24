@@ -133,6 +133,7 @@ export default function Index() {
         setShowLiveTenseTable={state.setShowLiveTenseTable}
         setShowConjugationGenerator={state.setShowConjugationGenerator}
         setShowModalVerbs={state.setShowModalVerbs}
+        setShowNikud={state.setShowNikud}
       />
     </div>
   );
