@@ -1,6 +1,5 @@
 import React, { useState, useMemo } from "react";
 import { Button } from "@/components/ui/button";
-import { speakHebrew } from "@/lib/speakHebrew";
 import { shuffleArray } from "@/lib/shuffleArray";
 
 interface NikudMark {
@@ -40,7 +39,7 @@ const NIKUD: NikudMark[] = [
     name: "צֵירֵי", nameEn: "Tzere",
     sound: "e", soundLabel: "EH",
     description: "צליל 'אֶה' ארוך, כמו ב-'בית'. שתי נקודות אופקיות מתחת לאות.",
-    exampleWord: "בֵּית", exampleTranslit: "Beit", exampleEn: "House",
+    exampleWord: "בֵּית", exampleTranslit: "Bait", exampleEn: "House",
     color: "bg-amber-100", textColor: "text-amber-700",
   },
   {
@@ -189,15 +188,12 @@ export default function NikudPractice({ onBack, lang }: Props) {
                     </div>
                   </div>
                   <div className={`inline-block px-3 py-1 rounded-full bg-white/70 ${n.textColor} font-bold text-sm mb-2`}>
-                    🔊 "{n.soundLabel}"
+                    "{n.soundLabel}"
                   </div>
                   <p className="text-xs text-slate-700 leading-relaxed mb-3">{n.description}</p>
-                  <div className="bg-white/60 rounded-xl p-3 flex items-center justify-between gap-2">
-                    <div>
-                      <div className={`text-2xl font-bold ${n.textColor}`} style={{ fontFamily: "'Frank Ruhl Libre', serif" }}>{n.exampleWord}</div>
-                      <div className="text-xs text-slate-600">{n.exampleTranslit} — {n.exampleEn}</div>
-                    </div>
-                    <Button size="sm" variant="outline" onClick={() => speakHebrew(n.exampleWord)}>🔊</Button>
+                  <div className="bg-white/60 rounded-xl p-3">
+                    <div className={`text-2xl font-bold ${n.textColor}`} style={{ fontFamily: "'Frank Ruhl Libre', serif" }}>{n.exampleWord}</div>
+                    <div className="text-xs text-slate-600">{n.exampleTranslit} — {n.exampleEn}</div>
                   </div>
                 </div>
               ))}
@@ -234,7 +230,6 @@ export default function NikudPractice({ onBack, lang }: Props) {
               <div className="text-[120px] leading-none font-bold text-violet-700 my-4" style={{ fontFamily: "'Frank Ruhl Libre', serif" }}>
                 {current.letterWithNikud}
               </div>
-              <Button variant="outline" size="sm" onClick={() => speakHebrew(current.letterWithNikud)}>🔊 {t("השמע", "Play")}</Button>
             </div>
             <div className="grid grid-cols-2 gap-3">
               {current.options.map(opt => {
