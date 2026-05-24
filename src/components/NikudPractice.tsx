@@ -22,72 +22,72 @@ const NIKUD: NikudMark[] = [
     symbol: "בָּ", isolatedSymbol: "ָ",
     name: "קָמָץ", nameEn: "Kamatz",
     sound: "a", soundLabel: "AH",
-    description: "צליל 'אָה' פתוח, כמו ב-'אבא'. סימן בצורת T קטן מתחת לאות.",
-    exampleWord: "אָבָא", exampleTranslit: "Aba", exampleEn: "Dad",
+    description: "Open 'AH' sound, like 'a' in 'father'. A small T-shaped mark below the letter.",
+    exampleWord: "", exampleTranslit: "", exampleEn: "",
     color: "bg-rose-100", textColor: "text-rose-700",
   },
   {
     symbol: "בַּ", isolatedSymbol: "ַ",
     name: "פַּתָּח", nameEn: "Patach",
     sound: "a", soundLabel: "AH",
-    description: "צליל 'אָה' פתוח, זהה לקמץ במבטא הישראלי. קו אופקי קצר מתחת לאות.",
-    exampleWord: "יַד", exampleTranslit: "Yad", exampleEn: "Hand",
+    description: "Open 'AH' sound, identical to Kamatz in modern Israeli pronunciation. A short horizontal line below the letter.",
+    exampleWord: "", exampleTranslit: "", exampleEn: "",
     color: "bg-orange-100", textColor: "text-orange-700",
   },
   {
     symbol: "בֵּ", isolatedSymbol: "ֵ",
     name: "צֵירֵי", nameEn: "Tzere",
     sound: "e", soundLabel: "EH",
-    description: "צליל 'אֶה' ארוך, כמו ב-'בית'. שתי נקודות אופקיות מתחת לאות.",
-    exampleWord: "בֵּית", exampleTranslit: "Bait", exampleEn: "House",
+    description: "Long 'EH' sound, like 'e' in 'bed'. Two horizontal dots below the letter.",
+    exampleWord: "", exampleTranslit: "", exampleEn: "",
     color: "bg-amber-100", textColor: "text-amber-700",
   },
   {
     symbol: "בֶּ", isolatedSymbol: "ֶ",
     name: "סֶגּוֹל", nameEn: "Segol",
     sound: "e", soundLabel: "EH",
-    description: "צליל 'אֶה' קצר, כמו ב-'ילד'. שלוש נקודות במשולש מתחת לאות.",
-    exampleWord: "יֶלֶד", exampleTranslit: "Yeled", exampleEn: "Boy",
+    description: "Short 'EH' sound, like 'e' in 'bet'. Three dots in a triangle below the letter.",
+    exampleWord: "", exampleTranslit: "", exampleEn: "",
     color: "bg-yellow-100", textColor: "text-yellow-700",
   },
   {
     symbol: "בִּ", isolatedSymbol: "ִ",
     name: "חִירִיק", nameEn: "Hirik",
     sound: "i", soundLabel: "EE",
-    description: "צליל 'אִי', כמו ב-'איש'. נקודה אחת מתחת לאות (לפעמים עם יוד אחריה).",
-    exampleWord: "אִישׁ", exampleTranslit: "Ish", exampleEn: "Man",
+    description: "'EE' sound, like 'ee' in 'see'. A single dot below the letter (sometimes followed by yod).",
+    exampleWord: "", exampleTranslit: "", exampleEn: "",
     color: "bg-lime-100", textColor: "text-lime-700",
   },
   {
     symbol: "בֹּ", isolatedSymbol: "ֹ",
     name: "חוֹלָם", nameEn: "Holam",
     sound: "o", soundLabel: "OH",
-    description: "צליל 'אוֹ', כמו ב-'דוד'. נקודה אחת מעל האות (או מעל ו').",
-    exampleWord: "דּוֹד", exampleTranslit: "Dod", exampleEn: "Uncle",
+    description: "'OH' sound, like 'o' in 'go'. A single dot above the letter (or above vav).",
+    exampleWord: "", exampleTranslit: "", exampleEn: "",
     color: "bg-emerald-100", textColor: "text-emerald-700",
   },
   {
     symbol: "בֻּ", isolatedSymbol: "ֻ",
     name: "קֻבּוּץ", nameEn: "Kubutz",
     sound: "u", soundLabel: "OO",
-    description: "צליל 'אוּ', כמו ב-'שולחן'. שלוש נקודות באלכסון מתחת לאות.",
-    exampleWord: "שֻׁלְחָן", exampleTranslit: "Shulkhan", exampleEn: "Table",
+    description: "'OO' sound, like 'oo' in 'food'. Three diagonal dots below the letter.",
+    exampleWord: "", exampleTranslit: "", exampleEn: "",
     color: "bg-teal-100", textColor: "text-teal-700",
   },
   {
     symbol: "בּוּ", isolatedSymbol: "וּ",
     name: "שׁוּרוּק", nameEn: "Shuruk",
     sound: "u", soundLabel: "OO",
-    description: "צליל 'אוּ', זהה לקובוץ. נקודה בתוך האות ו'.",
-    exampleWord: "שׁוּק", exampleTranslit: "Shuk", exampleEn: "Market",
+    description: "'OO' sound, identical to Kubutz. A dot inside the letter vav.",
+    exampleWord: "", exampleTranslit: "", exampleEn: "",
     color: "bg-cyan-100", textColor: "text-cyan-700",
   },
   {
     symbol: "בְּ", isolatedSymbol: "ְ",
     name: "שְׁוָא", nameEn: "Shva",
     sound: "silent", soundLabel: "Silent / 'e'",
-    description: "לרוב שקט (בלי תנועה), לפעמים נשמע כ-'אֶ' קצר. שתי נקודות אנכיות מתחת לאות.",
-    exampleWord: "סְפָרִים", exampleTranslit: "Sfarim", exampleEn: "Books",
+    description: "Usually silent (no vowel), sometimes a short 'eh'. Two vertical dots below the letter.",
+    exampleWord: "", exampleTranslit: "", exampleEn: "",
     color: "bg-sky-100", textColor: "text-sky-700",
   },
 ];
@@ -189,11 +189,8 @@ export default function NikudPractice({ onBack, lang }: Props) {
                   <div className={`inline-block px-3 py-1 rounded-full bg-white/70 ${n.textColor} font-bold text-sm mb-2`}>
                     "{n.soundLabel}"
                   </div>
-                  <p className="text-xs text-slate-700 leading-relaxed mb-3">{n.description}</p>
-                  <div className="bg-white/60 rounded-xl p-3">
-                    <div className={`text-2xl font-bold ${n.textColor}`} style={{ fontFamily: "'Frank Ruhl Libre', serif" }}>{n.exampleWord}</div>
-                    <div className="text-xs text-slate-600">{n.exampleTranslit} — {n.exampleEn}</div>
-                  </div>
+                  <p className="text-xs text-slate-700 leading-relaxed">{n.description}</p>
+
                 </div>
               ))}
             </div>
