@@ -121,7 +121,7 @@ export default function IndexMainMenu(props: IndexMainMenuProps) {
     setShowFamily, setShowQuickQuiz, setShowGenderFlip, setShowSongLyrics, setShowAlphabetCourse,
     setShowProfessions, setShowFoodDrinks, setShowWeather, setShowBodyHealth,
     setShowDialogueFlashcards, setShowOrdinalNumbers, setShowBinyanimInAction,
-    setShowLiveTenseTable, setShowConjugationGenerator, setShowModalVerbs,
+    setShowLiveTenseTable, setShowConjugationGenerator, setShowModalVerbs, setShowNikud,
   } = props;
 
   const t = menuText[lang];
