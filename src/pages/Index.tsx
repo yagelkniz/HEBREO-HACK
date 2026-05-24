@@ -60,7 +60,8 @@ export default function Index() {
     state.showOrdinalNumbers ||
     state.showBinyanimInAction ||
     state.showLiveTenseTable ||
-    state.showModalVerbs;
+    state.showModalVerbs ||
+    state.showNikud;
 
   if (state.showConjugationGenerator) {
     return <ConjugationGenerator lang={state.lang} onBack={state.resetToMainMenu} />;
