@@ -102,15 +102,14 @@ interface QuizQuestion {
 
 const QUIZ_BASE: QuizQuestion[] = [
   { letterWithNikud: "בָּ", correctSound: "AH", options: ["AH", "EH", "EE", "OO"], hebrewName: "קָמָץ" },
-  { letterWithNikud: "מֵ", correctSound: "EH", options: ["AH", "EH", "OH", "OO"], hebrewName: "צֵירֵי" },
-  { letterWithNikud: "לִ", correctSound: "EE", options: ["EE", "EH", "AH", "OO"], hebrewName: "חִירִיק" },
-  { letterWithNikud: "תֹּ", correctSound: "OH", options: ["OH", "OO", "AH", "EE"], hebrewName: "חוֹלָם" },
-  { letterWithNikud: "שׁוּ", correctSound: "OO", options: ["OO", "OH", "EE", "AH"], hebrewName: "שׁוּרוּק" },
-  { letterWithNikud: "סֶ", correctSound: "EH", options: ["EH", "AH", "EE", "OH"], hebrewName: "סֶגּוֹל" },
-  { letterWithNikud: "רַ", correctSound: "AH", options: ["AH", "EH", "OH", "OO"], hebrewName: "פַּתָּח" },
-  { letterWithNikud: "כֻּ", correctSound: "OO", options: ["OO", "OH", "AH", "EE"], hebrewName: "קֻבּוּץ" },
+  { letterWithNikud: "בֵּ", correctSound: "EH", options: ["AH", "EH", "OH", "OO"], hebrewName: "צֵירֵי" },
+  { letterWithNikud: "בִּ", correctSound: "EE", options: ["EE", "EH", "AH", "OO"], hebrewName: "חִירִיק" },
+  { letterWithNikud: "בֹּ", correctSound: "OH", options: ["OH", "OO", "AH", "EE"], hebrewName: "חוֹלָם" },
+  { letterWithNikud: "בּוּ", correctSound: "OO", options: ["OO", "OH", "EE", "AH"], hebrewName: "שׁוּרוּק" },
+  { letterWithNikud: "בֶּ", correctSound: "EH", options: ["EH", "AH", "EE", "OH"], hebrewName: "סֶגּוֹל" },
+  { letterWithNikud: "בַּ", correctSound: "AH", options: ["AH", "EH", "OH", "OO"], hebrewName: "פַּתָּח" },
+  { letterWithNikud: "בֻּ", correctSound: "OO", options: ["OO", "OH", "AH", "EE"], hebrewName: "קֻבּוּץ" },
   { letterWithNikud: "בְּ", correctSound: "Silent", options: ["Silent", "AH", "EE", "OO"], hebrewName: "שְׁוָא" },
-  { letterWithNikud: "דָּ", correctSound: "AH", options: ["AH", "OH", "EH", "OO"], hebrewName: "קָמָץ" },
 ];
 
 interface Props {
