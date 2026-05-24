@@ -1,6 +1,5 @@
 import React, { useState, useMemo } from "react";
 import { Button } from "@/components/ui/button";
-import { speakHebrew } from "@/lib/speakHebrew";
 import { shuffleArray } from "@/lib/shuffleArray";
 
 interface NikudMark {
