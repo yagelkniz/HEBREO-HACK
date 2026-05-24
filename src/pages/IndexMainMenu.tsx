@@ -140,6 +140,7 @@ export default function IndexMainMenu(props: IndexMainMenuProps) {
   const allItems: MenuItem[] = useMemo(() => [
     // Foundations
     { emoji: "🔤", label: isHe ? "אלפבית" : "Alphabet", hub: "foundations", level: "beginner", action: () => setShowAlphabetCourse(true) },
+    { emoji: "🔵", label: isHe ? "ניקוד" : "Nikud (Vowels)", hub: "foundations", level: "beginner", action: () => setShowNikud(true) },
     { emoji: "🌱", label: isHe ? "עברית למתחילים" : "Beginner Hebrew", hub: "foundations", level: "beginner", action: () => setShowBeginnerHebrew(true) },
     { emoji: "📝", label: isHe ? "שאלון היכרות" : "Questionnaire", hub: "foundations", level: "beginner", action: () => setShowQuestionnaire(true) },
     { emoji: "🧠", label: isHe ? "פועל להיות" : "Verb To Be", hub: "foundations", level: "beginner", action: () => setShowVerbToBePresentation(true) },
