@@ -189,11 +189,8 @@ export default function NikudPractice({ onBack, lang }: Props) {
                   <div className={`inline-block px-3 py-1 rounded-full bg-white/70 ${n.textColor} font-bold text-sm mb-2`}>
                     "{n.soundLabel}"
                   </div>
-                  <p className="text-xs text-slate-700 leading-relaxed mb-3">{n.description}</p>
-                  <div className="bg-white/60 rounded-xl p-3">
-                    <div className={`text-2xl font-bold ${n.textColor}`} style={{ fontFamily: "'Frank Ruhl Libre', serif" }}>{n.exampleWord}</div>
-                    <div className="text-xs text-slate-600">{n.exampleTranslit} — {n.exampleEn}</div>
-                  </div>
+                  <p className="text-xs text-slate-700 leading-relaxed">{n.description}</p>
+
                 </div>
               ))}
             </div>
