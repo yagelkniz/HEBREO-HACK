@@ -180,6 +180,7 @@ export function useIndexState() {
         showLiveTenseTable, setShowLiveTenseTable,
     showConjugationGenerator, setShowConjugationGenerator,
     showModalVerbs, setShowModalVerbs,
+    showNikud, setShowNikud,
     resetToMainMenu,
   };
 }
