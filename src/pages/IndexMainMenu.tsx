@@ -74,6 +74,7 @@ interface IndexMainMenuProps {
   setShowLiveTenseTable: (b: boolean) => void;
   setShowConjugationGenerator: (b: boolean) => void;
   setShowModalVerbs: (b: boolean) => void;
+  setShowNikud: (b: boolean) => void;
 }
 
 type HubKey = "foundations" | "grammar" | "pronouns" | "vocab" | "conversation" | "games" | "reading";
