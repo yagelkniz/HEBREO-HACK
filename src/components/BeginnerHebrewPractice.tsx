@@ -12,6 +12,7 @@ import {
   sentenceBuilderVerbs,
   sentenceBuilderObjects,
   practiceQuestions,
+  verbConjugations,
 } from "@/data/beginnerHebrewData";
 
 interface Props {
@@ -129,6 +130,58 @@ export default function BeginnerHebrewPractice({ onBack }: Props) {
                         )}
                       </div>
                     ))}
+                  </div>
+                </CardContent>
+              </Card>
+            ))}
+          </div>
+        </section>
+
+        {/* Conjugation Tables */}
+        <section className="space-y-6">
+          <h2 className="text-2xl font-bold text-foreground">
+            הטיות לפי גוף
+            {showEn && <span className="text-sm font-normal text-muted-foreground mr-2" dir="ltr"> — Conjugation by person</span>}
+          </h2>
+          <p className="text-sm text-muted-foreground">
+            הפועל משתנה לפי מי שמדבר: זכר / נקבה / רבים.
+            {showEn && <span className="block" dir="ltr">The verb changes by speaker: masculine / feminine / plural.</span>}
+          </p>
+          <div className="space-y-5">
+            {verbConjugations.map((vc, vi) => (
+              <Card key={vi} className="border-border shadow-sm">
+                <CardContent className="p-5 space-y-3">
+                  <div className="flex items-baseline gap-3 border-b border-border pb-3">
+                    <span className="text-2xl font-bold text-primary">{w(vc.word, vc.rows[0].formNikud)}</span>
+                    {showEn && <span className="text-sm text-muted-foreground" dir="ltr">({vc.wordEn})</span>}
+                  </div>
+                  <div className="overflow-x-auto">
+                    <table className="w-full text-right">
+                      <thead>
+                        <tr className="text-xs text-muted-foreground border-b border-border">
+                          <th className="py-2 px-2 font-medium">גוף</th>
+                          <th className="py-2 px-2 font-medium">צורה</th>
+                          <th className="py-2 px-2 font-medium">דוגמה</th>
+                        </tr>
+                      </thead>
+                      <tbody>
+                        {vc.rows.map((row, ri) => (
+                          <tr key={ri} className="border-b border-border/50 last:border-0">
+                            <td className="py-2 px-2 text-sm text-muted-foreground whitespace-nowrap">
+                              <div>{w(row.pronoun, row.pronounNikud)}</div>
+                              {showEn && <div className="text-[10px]" dir="ltr">{row.pronounEn}</div>}
+                            </td>
+                            <td className="py-2 px-2 text-base font-semibold text-foreground whitespace-nowrap">
+                              {w(row.form, row.formNikud)}
+                            </td>
+                            <td className="py-2 px-2 text-sm text-foreground">
+                              <div>{w(row.example, row.exampleNikud)}</div>
+                              {showEn && <div className="text-[10px] text-muted-foreground" dir="ltr">{row.exampleEn}</div>}
+                            </td>
+                          </tr>
+                        ))}
+                      </tbody>
+                    </table>
                   </div>
                 </CardContent>
               </Card>
