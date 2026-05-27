@@ -57,7 +57,7 @@ export default function AlphabetCourse({ onBack }: Props) {
   // Save progress on change
   useEffect(() => { saveProgress({ stage, index }); }, [stage, index]);
 
-  const stageLengths = [hebrewLetters.length, nikudMarks.length, syllableGroups.length, firstWords.length, shortSentences.length];
+  const stageLengths = [hebrewLetters.length, nikudMarks.length, syllableGroups.length, shortCombos.length, firstWords.length, shortSentences.length];
   const totalItems = stageLengths[stage] || 1;
   const progressPercent = ((index + 1) / totalItems) * 100;
 
