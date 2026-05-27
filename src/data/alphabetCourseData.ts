@@ -166,8 +166,6 @@ export const shortCombos: ShortCombo[] = [
 ];
 
 // ========== STAGE 4: First Words ==========
-
-// ========== STAGE 4: First Words ==========
 export interface FirstWord {
   word: string;
   wordWithNikud: string;
