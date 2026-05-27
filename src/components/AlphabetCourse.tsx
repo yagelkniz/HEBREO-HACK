@@ -138,8 +138,9 @@ export default function AlphabetCourse({ onBack }: Props) {
           {stage === 0 && <LetterCard letter={hebrewLetters[index]} speed={speed} />}
           {stage === 1 && <NikudCard nikud={nikudMarks[index]} speed={speed} />}
           {stage === 2 && <SyllableCard group={syllableGroups[index]} speed={speed} />}
-          {stage === 3 && <WordCard word={firstWords[index]} speed={speed} />}
-          {stage === 4 && <SentenceCard sentence={shortSentences[index]} speed={speed} highlightWord={highlightWord} onPlay={playSentence} />}
+          {stage === 3 && <ComboCard combo={shortCombos[index]} speed={speed} />}
+          {stage === 4 && <WordCard word={firstWords[index]} speed={speed} />}
+          {stage === 5 && <SentenceCard sentence={shortSentences[index]} speed={speed} highlightWord={highlightWord} onPlay={playSentence} />}
         </div>
       </div>
 
