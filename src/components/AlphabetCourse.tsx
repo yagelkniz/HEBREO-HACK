@@ -2,9 +2,9 @@ import React, { useState, useEffect, useCallback } from "react";
 import { Button } from "@/components/ui/button";
 import { Progress } from "@/components/ui/progress";
 import {
-  hebrewLetters, nikudMarks, syllableGroups, firstWords, shortSentences,
+  hebrewLetters, nikudMarks, syllableGroups, shortCombos, firstWords, shortSentences,
   encouragements, stageNames,
-  type HebrewLetter, type NikudMark, type SyllableGroup, type FirstWord, type ShortSentence,
+  type HebrewLetter, type NikudMark, type SyllableGroup, type ShortCombo, type FirstWord, type ShortSentence,
 } from "@/data/alphabetCourseData";
 
 // ─── localStorage helpers ───
