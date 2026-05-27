@@ -2,9 +2,9 @@ import React, { useState, useEffect, useCallback } from "react";
 import { Button } from "@/components/ui/button";
 import { Progress } from "@/components/ui/progress";
 import {
-  hebrewLetters, nikudMarks, syllableGroups, firstWords, shortSentences,
+  hebrewLetters, nikudMarks, syllableGroups, shortCombos, firstWords, shortSentences,
   encouragements, stageNames,
-  type HebrewLetter, type NikudMark, type SyllableGroup, type FirstWord, type ShortSentence,
+  type HebrewLetter, type NikudMark, type SyllableGroup, type ShortCombo, type FirstWord, type ShortSentence,
 } from "@/data/alphabetCourseData";
 
 // ─── localStorage helpers ───
@@ -57,7 +57,7 @@ export default function AlphabetCourse({ onBack }: Props) {
   // Save progress on change
   useEffect(() => { saveProgress({ stage, index }); }, [stage, index]);
 
-  const stageLengths = [hebrewLetters.length, nikudMarks.length, syllableGroups.length, firstWords.length, shortSentences.length];
+  const stageLengths = [hebrewLetters.length, nikudMarks.length, syllableGroups.length, shortCombos.length, firstWords.length, shortSentences.length];
   const totalItems = stageLengths[stage] || 1;
   const progressPercent = ((index + 1) / totalItems) * 100;
 
@@ -66,7 +66,7 @@ export default function AlphabetCourse({ onBack }: Props) {
       setIndex(i => i + 1);
       setEncouragement(Math.random() > 0.6 ? randomEncouragement() : "");
       setHighlightWord(-1);
-    } else if (stage < 4) {
+    } else if (stage < 5) {
       setStage(s => s + 1);
       setIndex(0);
       setEncouragement("כל הכבוד! סיימת שלב! 🎉");
@@ -98,7 +98,7 @@ export default function AlphabetCourse({ onBack }: Props) {
     setTimeout(() => setHighlightWord(-1), sentence.words.length * 800 + 500);
   };
 
-  const isLastItem = index >= totalItems - 1 && stage >= 4;
+  const isLastItem = index >= totalItems - 1 && stage >= 5;
 
   return (
     <div dir="rtl" className="min-h-screen bg-gradient-to-b from-amber-50 via-orange-50 to-sky-50 flex flex-col" style={{ fontFamily: "'Rubik', 'Heebo', sans-serif" }}>
@@ -108,7 +108,7 @@ export default function AlphabetCourse({ onBack }: Props) {
           ← חזרה
         </Button>
         <div className="flex-1 text-center">
-          <span className="text-sm text-muted-foreground">שלב {stage + 1} מתוך 5 — {stageNames[stage]}</span>
+          <span className="text-sm text-muted-foreground">שלב {stage + 1} מתוך 6 — {stageNames[stage]}</span>
           <span className="mx-2 text-muted-foreground">|</span>
           <span className="text-sm text-muted-foreground">{index + 1} מתוך {totalItems}</span>
         </div>
@@ -138,8 +138,9 @@ export default function AlphabetCourse({ onBack }: Props) {
           {stage === 0 && <LetterCard letter={hebrewLetters[index]} speed={speed} />}
           {stage === 1 && <NikudCard nikud={nikudMarks[index]} speed={speed} />}
           {stage === 2 && <SyllableCard group={syllableGroups[index]} speed={speed} />}
-          {stage === 3 && <WordCard word={firstWords[index]} speed={speed} />}
-          {stage === 4 && <SentenceCard sentence={shortSentences[index]} speed={speed} highlightWord={highlightWord} onPlay={playSentence} />}
+          {stage === 3 && <ComboCard combo={shortCombos[index]} speed={speed} />}
+          {stage === 4 && <WordCard word={firstWords[index]} speed={speed} />}
+          {stage === 5 && <SentenceCard sentence={shortSentences[index]} speed={speed} highlightWord={highlightWord} onPlay={playSentence} />}
         </div>
       </div>
 
@@ -255,6 +256,33 @@ function SyllableCard({ group, speed }: { group: SyllableGroup; speed: number })
       }} className="gap-2">
         🔊 שמע הכל ברצף
       </Button>
+    </div>
+  );
+}
+
+// ═══════════════════════════════════
+// STAGE 3.5: Short Combo Card
+// ═══════════════════════════════════
+function ComboCard({ combo, speed }: { combo: ShortCombo; speed: number }) {
+  return (
+    <div className="bg-white rounded-2xl shadow-lg border border-border p-8 text-center space-y-5 animate-in fade-in duration-300">
+      <div className="text-sm text-muted-foreground">צירוף קצר</div>
+      <div className="text-[110px] leading-none font-bold text-foreground" style={{ fontFamily: "'Frank Ruhl Libre', 'Noto Serif Hebrew', serif" }}>
+        {combo.combo}
+      </div>
+      <div className="text-2xl font-mono font-bold text-primary">{combo.transliteration}</div>
+      <div className="inline-block bg-amber-50 text-amber-800 text-sm font-medium px-3 py-1.5 rounded-full">{combo.note}</div>
+      {combo.meaning && (
+        <div className="text-base text-muted-foreground">משמעות: <span className="font-bold text-foreground">{combo.meaning}</span></div>
+      )}
+      <div className="flex gap-3 justify-center">
+        <Button variant="outline" size="lg" onClick={() => speak(combo.combo, speed)} className="gap-2">
+          🔊 שמע
+        </Button>
+        <Button variant="ghost" size="lg" onClick={() => speak(combo.combo, Math.max(0.5, speed - 0.2))} className="gap-2">
+          🐢 לאט
+        </Button>
+      </div>
     </div>
   );
 }
