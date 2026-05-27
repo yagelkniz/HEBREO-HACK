@@ -261,6 +261,33 @@ function SyllableCard({ group, speed }: { group: SyllableGroup; speed: number })
 }
 
 // ═══════════════════════════════════
+// STAGE 3.5: Short Combo Card
+// ═══════════════════════════════════
+function ComboCard({ combo, speed }: { combo: ShortCombo; speed: number }) {
+  return (
+    <div className="bg-white rounded-2xl shadow-lg border border-border p-8 text-center space-y-5 animate-in fade-in duration-300">
+      <div className="text-sm text-muted-foreground">צירוף קצר</div>
+      <div className="text-[110px] leading-none font-bold text-foreground" style={{ fontFamily: "'Frank Ruhl Libre', 'Noto Serif Hebrew', serif" }}>
+        {combo.combo}
+      </div>
+      <div className="text-2xl font-mono font-bold text-primary">{combo.transliteration}</div>
+      <div className="inline-block bg-amber-50 text-amber-800 text-sm font-medium px-3 py-1.5 rounded-full">{combo.note}</div>
+      {combo.meaning && (
+        <div className="text-base text-muted-foreground">משמעות: <span className="font-bold text-foreground">{combo.meaning}</span></div>
+      )}
+      <div className="flex gap-3 justify-center">
+        <Button variant="outline" size="lg" onClick={() => speak(combo.combo, speed)} className="gap-2">
+          🔊 שמע
+        </Button>
+        <Button variant="ghost" size="lg" onClick={() => speak(combo.combo, Math.max(0.5, speed - 0.2))} className="gap-2">
+          🐢 לאט
+        </Button>
+      </div>
+    </div>
+  );
+}
+
+// ═══════════════════════════════════
 // STAGE 4: Word Card
 // ═══════════════════════════════════
 function WordCard({ word, speed }: { word: FirstWord; speed: number }) {
