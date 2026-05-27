@@ -98,7 +98,7 @@ export default function AlphabetCourse({ onBack }: Props) {
     setTimeout(() => setHighlightWord(-1), sentence.words.length * 800 + 500);
   };
 
-  const isLastItem = index >= totalItems - 1 && stage >= 4;
+  const isLastItem = index >= totalItems - 1 && stage >= 5;
 
   return (
     <div dir="rtl" className="min-h-screen bg-gradient-to-b from-amber-50 via-orange-50 to-sky-50 flex flex-col" style={{ fontFamily: "'Rubik', 'Heebo', sans-serif" }}>
