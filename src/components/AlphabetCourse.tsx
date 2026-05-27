@@ -66,7 +66,7 @@ export default function AlphabetCourse({ onBack }: Props) {
       setIndex(i => i + 1);
       setEncouragement(Math.random() > 0.6 ? randomEncouragement() : "");
       setHighlightWord(-1);
-    } else if (stage < 4) {
+    } else if (stage < 5) {
       setStage(s => s + 1);
       setIndex(0);
       setEncouragement("כל הכבוד! סיימת שלב! 🎉");
