@@ -133,6 +133,40 @@ export const syllableGroups: SyllableGroup[] = [
   ]},
 ];
 
+// ========== STAGE 3.5: Short Combos (2-letter mini-words) ==========
+export interface ShortCombo {
+  combo: string;          // with nikud
+  transliteration: string;
+  note: string;           // e.g. "with dagesh", "no dagesh"
+  meaning?: string;       // optional tiny meaning if it's a real word
+}
+
+export const shortCombos: ShortCombo[] = [
+  // Pure 2-letter sound combos — focus on dagesh / no dagesh
+  { combo: "בָּא", transliteration: "Ba", note: "ב עם דגש = B", meaning: "comes" },
+  { combo: "בָא", transliteration: "Va", note: "ב בלי דגש = V" },
+  { combo: "פָּה", transliteration: "Pa", note: "פ עם דגש = P", meaning: "mouth / here" },
+  { combo: "פָה", transliteration: "Fa", note: "פ בלי דגש = F" },
+  { combo: "כָּה", transliteration: "Ka", note: "כ עם דגש = K" },
+  { combo: "כָה", transliteration: "Cha", note: "כ בלי דגש = Kh" },
+  { combo: "בִּי", transliteration: "Bi", note: "ב עם דגש + חיריק", meaning: "in me" },
+  { combo: "בִי", transliteration: "Vi", note: "ב בלי דגש + חיריק" },
+  { combo: "מָה", transliteration: "Ma", note: "מ + קמץ + ה", meaning: "what" },
+  { combo: "מִי", transliteration: "Mi", note: "מ + חיריק + י", meaning: "who" },
+  { combo: "לֹא", transliteration: "Lo", note: "ל + חולם + א", meaning: "no" },
+  { combo: "כֵּן", transliteration: "Ken", note: "כ עם דגש + צירי + ן", meaning: "yes" },
+  { combo: "זֶה", transliteration: "Ze", note: "ז + סגול + ה", meaning: "this" },
+  { combo: "שָׁם", transliteration: "Sham", note: "ש ימנית + קמץ + ם", meaning: "there" },
+  { combo: "פֹּה", transliteration: "Po", note: "פ עם דגש + חולם + ה", meaning: "here" },
+  { combo: "דָּג", transliteration: "Dag", note: "ד עם דגש + קמץ + ג", meaning: "fish" },
+  { combo: "סוּס", transliteration: "Sus", note: "ס + שורוק + ס", meaning: "horse" },
+  { combo: "אָב", transliteration: "Av", note: "א + קמץ + ב", meaning: "father" },
+  { combo: "אֵם", transliteration: "Em", note: "א + צירי + ם", meaning: "mother" },
+  { combo: "יָם", transliteration: "Yam", note: "י + קמץ + ם", meaning: "sea" },
+];
+
+// ========== STAGE 4: First Words ==========
+
 // ========== STAGE 4: First Words ==========
 export interface FirstWord {
   word: string;
