@@ -184,7 +184,7 @@ function LetterCard({ letter, speed }: { letter: HebrewLetter; speed: number }) 
       <div className="text-[120px] leading-none font-serif text-foreground" style={{ fontFamily: "'Frank Ruhl Libre', 'Noto Serif Hebrew', serif" }}>
         {letter.letter}
       </div>
-      <div className="text-xl font-semibold text-foreground">שם האות: <span className="text-primary">{letter.nameWithNikud}</span></div>
+      <div className="text-xl font-semibold text-foreground">שם האות: <span className="text-primary">{letter.nameWithNikud}</span> <span className="text-muted-foreground font-mono">({letter.nameTransliteration})</span></div>
       <div className="text-muted-foreground">צליל: <span className="font-mono font-bold">"{letter.sound}"</span> — {letter.soundExample}</div>
       <Button variant="outline" size="lg" onClick={() => speak(letter.nameWithNikud, speed)} className="gap-2">
         🔊 שמע את הצליל

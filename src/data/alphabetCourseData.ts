@@ -3,6 +3,7 @@ export interface HebrewLetter {
   letter: string;
   name: string;
   nameWithNikud: string;
+  nameTransliteration: string;
   sound: string;
   soundExample: string;
   exampleWord: string;
@@ -13,34 +14,34 @@ export interface HebrewLetter {
 }
 
 export const hebrewLetters: HebrewLetter[] = [
-  { letter: "א", name: "אלף", nameWithNikud: "אָלֶף", sound: "a / silent", soundExample: 'כמו "a" ב-apple', exampleWord: "אבא", exampleWordNikud: "אָבָּא", exampleTransliteration: "A-ba", exampleTranslation: "Dad" },
-  { letter: "ב", name: "בית", nameWithNikud: "בֵּית", sound: "b / v", soundExample: 'כמו "b" ב-boy', exampleWord: "בית", exampleWordNikud: "בַּיִת", exampleTransliteration: "Ba-yit", exampleTranslation: "House" },
-  { letter: "ג", name: "גימל", nameWithNikud: "גִּימֶל", sound: "g", soundExample: 'כמו "g" ב-go', exampleWord: "גמל", exampleWordNikud: "גָּמָל", exampleTransliteration: "Ga-mal", exampleTranslation: "Camel" },
-  { letter: "ד", name: "דלת", nameWithNikud: "דָּלֶת", sound: "d", soundExample: 'כמו "d" ב-dog', exampleWord: "דלת", exampleWordNikud: "דֶּלֶת", exampleTransliteration: "De-let", exampleTranslation: "Door" },
-  { letter: "ה", name: "הא", nameWithNikud: "הֵא", sound: "h", soundExample: 'כמו "h" ב-hello', exampleWord: "הר", exampleWordNikud: "הַר", exampleTransliteration: "Har", exampleTranslation: "Mountain" },
-  { letter: "ו", name: "וו", nameWithNikud: "וָו", sound: "v / o / u", soundExample: 'כמו "v" ב-very', exampleWord: "ורד", exampleWordNikud: "וֶרֶד", exampleTransliteration: "Ve-red", exampleTranslation: "Rose" },
-  { letter: "ז", name: "זין", nameWithNikud: "זַיִן", sound: "z", soundExample: 'כמו "z" ב-zoo', exampleWord: "זית", exampleWordNikud: "זַיִת", exampleTransliteration: "Za-yit", exampleTranslation: "Olive" },
-  { letter: "ח", name: "חית", nameWithNikud: "חֵית", sound: "ch", soundExample: 'כמו "ch" בגרמנית Bach', exampleWord: "חלב", exampleWordNikud: "חָלָב", exampleTransliteration: "Cha-lav", exampleTranslation: "Milk" },
-  { letter: "ט", name: "טית", nameWithNikud: "טֵית", sound: "t", soundExample: 'כמו "t" ב-top', exampleWord: "טוב", exampleWordNikud: "טוֹב", exampleTransliteration: "Tov", exampleTranslation: "Good" },
-  { letter: "י", name: "יוד", nameWithNikud: "יוּד", sound: "y", soundExample: 'כמו "y" ב-yes', exampleWord: "יד", exampleWordNikud: "יָד", exampleTransliteration: "Yad", exampleTranslation: "Hand" },
-  { letter: "כ", name: "כף", nameWithNikud: "כַּף", sound: "k / ch", soundExample: 'כמו "k" ב-kite', exampleWord: "כלב", exampleWordNikud: "כֶּלֶב", exampleTransliteration: "Ke-lev", exampleTranslation: "Dog" },
-  { letter: "ל", name: "למד", nameWithNikud: "לָמֶד", sound: "l", soundExample: 'כמו "l" ב-love', exampleWord: "לב", exampleWordNikud: "לֵב", exampleTransliteration: "Lev", exampleTranslation: "Heart" },
-  { letter: "מ", name: "מם", nameWithNikud: "מֵם", sound: "m", soundExample: 'כמו "m" ב-mom', exampleWord: "מים", exampleWordNikud: "מַיִם", exampleTransliteration: "Ma-yim", exampleTranslation: "Water" },
-  { letter: "נ", name: "נון", nameWithNikud: "נוּן", sound: "n", soundExample: 'כמו "n" ב-no', exampleWord: "נר", exampleWordNikud: "נֵר", exampleTransliteration: "Ner", exampleTranslation: "Candle" },
-  { letter: "ס", name: "סמך", nameWithNikud: "סָמֶךְ", sound: "s", soundExample: 'כמו "s" ב-sun', exampleWord: "ספר", exampleWordNikud: "סֵפֶר", exampleTransliteration: "Se-fer", exampleTranslation: "Book" },
-  { letter: "ע", name: "עין", nameWithNikud: "עַיִן", sound: "a / silent", soundExample: "צליל גרוני עמוק", exampleWord: "עץ", exampleWordNikud: "עֵץ", exampleTransliteration: "Etz", exampleTranslation: "Tree" },
-  { letter: "פ", name: "פא", nameWithNikud: "פֵּא", sound: "p / f", soundExample: 'כמו "p" ב-pen', exampleWord: "פה", exampleWordNikud: "פֶּה", exampleTransliteration: "Pe", exampleTranslation: "Mouth" },
-  { letter: "צ", name: "צדי", nameWithNikud: "צָדִי", sound: "ts", soundExample: 'כמו "ts" ב-cats', exampleWord: "צבע", exampleWordNikud: "צֶבַע", exampleTransliteration: "Tze-va", exampleTranslation: "Color" },
-  { letter: "ק", name: "קוף", nameWithNikud: "קוּף", sound: "k", soundExample: 'כמו "k" ב-king', exampleWord: "קול", exampleWordNikud: "קוֹל", exampleTransliteration: "Kol", exampleTranslation: "Voice" },
-  { letter: "ר", name: "ריש", nameWithNikud: "רֵישׁ", sound: "r", soundExample: 'כמו "r" בצרפתית', exampleWord: "רגל", exampleWordNikud: "רֶגֶל", exampleTransliteration: "Re-gel", exampleTranslation: "Leg" },
-  { letter: "ש", name: "שין", nameWithNikud: "שִׁין", sound: "sh / s", soundExample: 'כמו "sh" ב-shop', exampleWord: "שמש", exampleWordNikud: "שֶׁמֶשׁ", exampleTransliteration: "She-mesh", exampleTranslation: "Sun" },
-  { letter: "ת", name: "תו", nameWithNikud: "תָּו", sound: "t", soundExample: 'כמו "t" ב-tea', exampleWord: "תפוח", exampleWordNikud: "תַּפּוּחַ", exampleTransliteration: "Ta-pu-ach", exampleTranslation: "Apple" },
+  { letter: "א", name: "אלף", nameWithNikud: "אָלֶף", nameTransliteration: "Alef", sound: "a / silent", soundExample: 'כמו "a" ב-apple', exampleWord: "אבא", exampleWordNikud: "אָבָּא", exampleTransliteration: "A-ba", exampleTranslation: "Dad" },
+  { letter: "ב", name: "בית", nameWithNikud: "בֵּית", nameTransliteration: "Bet", sound: "b / v", soundExample: 'כמו "b" ב-boy', exampleWord: "בית", exampleWordNikud: "בַּיִת", exampleTransliteration: "Ba-yit", exampleTranslation: "House" },
+  { letter: "ג", name: "גימל", nameWithNikud: "גִּימֶל", nameTransliteration: "Gimel", sound: "g", soundExample: 'כמו "g" ב-go', exampleWord: "גמל", exampleWordNikud: "גָּמָל", exampleTransliteration: "Ga-mal", exampleTranslation: "Camel" },
+  { letter: "ד", name: "דלת", nameWithNikud: "דָּלֶת", nameTransliteration: "Dalet", sound: "d", soundExample: 'כמו "d" ב-dog', exampleWord: "דלת", exampleWordNikud: "דֶּלֶת", exampleTransliteration: "De-let", exampleTranslation: "Door" },
+  { letter: "ה", name: "הא", nameWithNikud: "הֵא", nameTransliteration: "Hey", sound: "h", soundExample: 'כמו "h" ב-hello', exampleWord: "הר", exampleWordNikud: "הַר", exampleTransliteration: "Har", exampleTranslation: "Mountain" },
+  { letter: "ו", name: "וו", nameWithNikud: "וָו", nameTransliteration: "Vav", sound: "v / o / u", soundExample: 'כמו "v" ב-very', exampleWord: "ורד", exampleWordNikud: "וֶרֶד", exampleTransliteration: "Ve-red", exampleTranslation: "Rose" },
+  { letter: "ז", name: "זין", nameWithNikud: "זַיִן", nameTransliteration: "Zayin", sound: "z", soundExample: 'כמו "z" ב-zoo', exampleWord: "זית", exampleWordNikud: "זַיִת", exampleTransliteration: "Za-yit", exampleTranslation: "Olive" },
+  { letter: "ח", name: "חית", nameWithNikud: "חֵית", nameTransliteration: "Chet", sound: "ch", soundExample: 'כמו "ch" בגרמנית Bach', exampleWord: "חלב", exampleWordNikud: "חָלָב", exampleTransliteration: "Cha-lav", exampleTranslation: "Milk" },
+  { letter: "ט", name: "טית", nameWithNikud: "טֵית", nameTransliteration: "Tet", sound: "t", soundExample: 'כמו "t" ב-top', exampleWord: "טוב", exampleWordNikud: "טוֹב", exampleTransliteration: "Tov", exampleTranslation: "Good" },
+  { letter: "י", name: "יוד", nameWithNikud: "יוּד", nameTransliteration: "Yod", sound: "y", soundExample: 'כמו "y" ב-yes', exampleWord: "יד", exampleWordNikud: "יָד", exampleTransliteration: "Yad", exampleTranslation: "Hand" },
+  { letter: "כ", name: "כף", nameWithNikud: "כַּף", nameTransliteration: "Kaf", sound: "k / ch", soundExample: 'כמו "k" ב-kite', exampleWord: "כלב", exampleWordNikud: "כֶּלֶב", exampleTransliteration: "Ke-lev", exampleTranslation: "Dog" },
+  { letter: "ל", name: "למד", nameWithNikud: "לָמֶד", nameTransliteration: "Lamed", sound: "l", soundExample: 'כמו "l" ב-love', exampleWord: "לב", exampleWordNikud: "לֵב", exampleTransliteration: "Lev", exampleTranslation: "Heart" },
+  { letter: "מ", name: "מם", nameWithNikud: "מֵם", nameTransliteration: "Mem", sound: "m", soundExample: 'כמו "m" ב-mom', exampleWord: "מים", exampleWordNikud: "מַיִם", exampleTransliteration: "Ma-yim", exampleTranslation: "Water" },
+  { letter: "נ", name: "נון", nameWithNikud: "נוּן", nameTransliteration: "Nun", sound: "n", soundExample: 'כמו "n" ב-no', exampleWord: "נר", exampleWordNikud: "נֵר", exampleTransliteration: "Ner", exampleTranslation: "Candle" },
+  { letter: "ס", name: "סמך", nameWithNikud: "סָמֶךְ", nameTransliteration: "Samech", sound: "s", soundExample: 'כמו "s" ב-sun', exampleWord: "ספר", exampleWordNikud: "סֵפֶר", exampleTransliteration: "Se-fer", exampleTranslation: "Book" },
+  { letter: "ע", name: "עין", nameWithNikud: "עַיִן", nameTransliteration: "Ayin", sound: "a / silent", soundExample: "צליל גרוני עמוק", exampleWord: "עץ", exampleWordNikud: "עֵץ", exampleTransliteration: "Etz", exampleTranslation: "Tree" },
+  { letter: "פ", name: "פא", nameWithNikud: "פֵּא", nameTransliteration: "Pey", sound: "p / f", soundExample: 'כמו "p" ב-pen', exampleWord: "פה", exampleWordNikud: "פֶּה", exampleTransliteration: "Pe", exampleTranslation: "Mouth" },
+  { letter: "צ", name: "צדי", nameWithNikud: "צָדִי", nameTransliteration: "Tzadi", sound: "ts", soundExample: 'כמו "ts" ב-cats', exampleWord: "צבע", exampleWordNikud: "צֶבַע", exampleTransliteration: "Tze-va", exampleTranslation: "Color" },
+  { letter: "ק", name: "קוף", nameWithNikud: "קוּף", nameTransliteration: "Kuf", sound: "k", soundExample: 'כמו "k" ב-king', exampleWord: "קול", exampleWordNikud: "קוֹל", exampleTransliteration: "Kol", exampleTranslation: "Voice" },
+  { letter: "ר", name: "ריש", nameWithNikud: "רֵישׁ", nameTransliteration: "Resh", sound: "r", soundExample: 'כמו "r" בצרפתית', exampleWord: "רגל", exampleWordNikud: "רֶגֶל", exampleTransliteration: "Re-gel", exampleTranslation: "Leg" },
+  { letter: "ש", name: "שין", nameWithNikud: "שִׁין", nameTransliteration: "Shin", sound: "sh / s", soundExample: 'כמו "sh" ב-shop', exampleWord: "שמש", exampleWordNikud: "שֶׁמֶשׁ", exampleTransliteration: "She-mesh", exampleTranslation: "Sun" },
+  { letter: "ת", name: "תו", nameWithNikud: "תָּו", nameTransliteration: "Tav", sound: "t", soundExample: 'כמו "t" ב-tea', exampleWord: "תפוח", exampleWordNikud: "תַּפּוּחַ", exampleTransliteration: "Ta-pu-ach", exampleTranslation: "Apple" },
   // Final letters
-  { letter: "ך", name: "כף סופית", nameWithNikud: "כַּף סוֹפִית", sound: "ch / k", soundExample: "כמו כ בסוף מילה", exampleWord: "מלך", exampleWordNikud: "מֶלֶךְ", exampleTransliteration: "Me-lech", exampleTranslation: "King", isFinal: true },
-  { letter: "ם", name: "מם סופית", nameWithNikud: "מֵם סוֹפִית", sound: "m", soundExample: "כמו מ בסוף מילה", exampleWord: "מים", exampleWordNikud: "מַיִם", exampleTransliteration: "Ma-yim", exampleTranslation: "Water", isFinal: true },
-  { letter: "ן", name: "נון סופית", nameWithNikud: "נוּן סוֹפִית", sound: "n", soundExample: "כמו נ בסוף מילה", exampleWord: "חלון", exampleWordNikud: "חַלּוֹן", exampleTransliteration: "Cha-lon", exampleTranslation: "Window", isFinal: true },
-  { letter: "ף", name: "פא סופית", nameWithNikud: "פֵּא סוֹפִית", sound: "f", soundExample: "כמו פ בסוף מילה", exampleWord: "כסף", exampleWordNikud: "כֶּסֶף", exampleTransliteration: "Ke-sef", exampleTranslation: "Money", isFinal: true },
-  { letter: "ץ", name: "צדי סופית", nameWithNikud: "צָדִי סוֹפִית", sound: "ts", soundExample: "כמו צ בסוף מילה", exampleWord: "עץ", exampleWordNikud: "עֵץ", exampleTransliteration: "Etz", exampleTranslation: "Tree", isFinal: true },
+  { letter: "ך", name: "כף סופית", nameWithNikud: "כַּף סוֹפִית", nameTransliteration: "Kaf Sofit", sound: "ch / k", soundExample: "כמו כ בסוף מילה", exampleWord: "מלך", exampleWordNikud: "מֶלֶךְ", exampleTransliteration: "Me-lech", exampleTranslation: "King", isFinal: true },
+  { letter: "ם", name: "מם סופית", nameWithNikud: "מֵם סוֹפִית", nameTransliteration: "Mem Sofit", sound: "m", soundExample: "כמו מ בסוף מילה", exampleWord: "מים", exampleWordNikud: "מַיִם", exampleTransliteration: "Ma-yim", exampleTranslation: "Water", isFinal: true },
+  { letter: "ן", name: "נון סופית", nameWithNikud: "נוּן סוֹפִית", nameTransliteration: "Nun Sofit", sound: "n", soundExample: "כמו נ בסוף מילה", exampleWord: "חלון", exampleWordNikud: "חַלּוֹן", exampleTransliteration: "Cha-lon", exampleTranslation: "Window", isFinal: true },
+  { letter: "ף", name: "פא סופית", nameWithNikud: "פֵּא סוֹפִית", nameTransliteration: "Pey Sofit", sound: "f", soundExample: "כמו פ בסוף מילה", exampleWord: "כסף", exampleWordNikud: "כֶּסֶף", exampleTransliteration: "Ke-sef", exampleTranslation: "Money", isFinal: true },
+  { letter: "ץ", name: "צדי סופית", nameWithNikud: "צָדִי סוֹפִית", nameTransliteration: "Tzadi Sofit", sound: "ts", soundExample: "כמו צ בסוף מילה", exampleWord: "עץ", exampleWordNikud: "עֵץ", exampleTransliteration: "Etz", exampleTranslation: "Tree", isFinal: true },
 ];
 
 // ========== STAGE 2: Nikud ==========
