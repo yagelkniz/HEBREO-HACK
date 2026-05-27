@@ -108,7 +108,7 @@ export default function AlphabetCourse({ onBack }: Props) {
           ← חזרה
         </Button>
         <div className="flex-1 text-center">
-          <span className="text-sm text-muted-foreground">שלב {stage + 1} מתוך 5 — {stageNames[stage]}</span>
+          <span className="text-sm text-muted-foreground">שלב {stage + 1} מתוך 6 — {stageNames[stage]}</span>
           <span className="mx-2 text-muted-foreground">|</span>
           <span className="text-sm text-muted-foreground">{index + 1} מתוך {totalItems}</span>
         </div>
