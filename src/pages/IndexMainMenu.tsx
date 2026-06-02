@@ -140,6 +140,8 @@ export default function IndexMainMenu(props: IndexMainMenuProps) {
   const allItems: MenuItem[] = useMemo(() => [
     // Live AI Simulation — featured first
     { emoji: "🎭", label: isHe ? "סימולציה חיה (AI)" : "Live Simulation (AI)", hub: "conversation", level: "intermediate", action: () => { window.location.hash = "#/live-simulation"; } },
+    // Map of Israel — interactive learning journey
+    { emoji: "🗺️", label: isHe ? "מפת ישראל" : "Map of Israel", hub: "reading", level: "beginner", action: () => { window.location.hash = "#/map-of-israel"; } },
     // Foundations
     { emoji: "🔤", label: isHe ? "אלפבית" : "Alphabet", hub: "foundations", level: "beginner", action: () => setShowAlphabetCourse(true) },
     { emoji: "🔵", label: isHe ? "ניקוד" : "Nikud (Vowels)", hub: "foundations", level: "beginner", action: () => setShowNikud(true) },
