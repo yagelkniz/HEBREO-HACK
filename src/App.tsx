@@ -6,6 +6,7 @@ import { HashRouter, Routes, Route } from "react-router-dom";
 import Index from "./pages/Index";
 import NotFound from "./pages/NotFound";
 import LiveSimulation from "./pages/LiveSimulation";
+import MapOfIsrael from "./pages/MapOfIsrael";
 
 // Hebrew Flow imports
 import HebrewFlowLayout from "./components/hebrewFlow/HebrewFlowLayout";
@@ -30,6 +31,7 @@ const App = () => (
 
         <Route path="/" element={<Index />} />
         <Route path="/live-simulation" element={<LiveSimulation />} />
+        <Route path="/map-of-israel" element={<MapOfIsrael />} />
 
         {/* Hebrew Flow Routes */}
         <Route path="/hebrew-flow" element={<HebrewFlowLayout />}>
