@@ -29,6 +29,7 @@ const App = () => (
       <Routes>
 
         <Route path="/" element={<Index />} />
+        <Route path="/live-simulation" element={<LiveSimulation />} />
 
         {/* Hebrew Flow Routes */}
         <Route path="/hebrew-flow" element={<HebrewFlowLayout />}>
