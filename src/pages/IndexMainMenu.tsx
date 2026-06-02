@@ -309,6 +309,21 @@ export default function IndexMainMenu(props: IndexMainMenuProps) {
                 <span className="text-2xl opacity-80 group-hover:opacity-100 transition-opacity">➡️</span>
               </div>
             </button>
+            {/* Featured: Jewish Holidays */}
+            <button
+              onClick={() => { window.location.hash = "#/jewish-holidays"; }}
+              style={{ opacity: cardsVisible ? 1 : 0, transform: cardsVisible ? "translateY(0)" : "translateY(20px)", transition: `opacity 0.4s ease 90ms, transform 0.4s ease 90ms` }}
+              className="group w-full mb-4 p-5 rounded-2xl bg-gradient-to-br from-amber-400 via-rose-400 to-blue-500 text-white shadow-md hover:shadow-lg active:scale-[0.98] transition-all text-right"
+            >
+              <div className="flex items-center gap-4">
+                <span className="text-5xl group-hover:scale-110 transition-transform duration-200 shrink-0">🗓️</span>
+                <div className="flex-1 min-w-0">
+                  <div className="font-bold text-lg leading-tight">חגי ישראל</div>
+                  <div className="text-sm text-white/90 mt-1">8 חגים, סיפורים, ברכות ותרגול אוצר מילים</div>
+                </div>
+                <span className="text-2xl opacity-80 group-hover:opacity-100 transition-opacity">➡️</span>
+              </div>
+            </button>
             <div className="grid grid-cols-3 gap-3 mb-4">
               {([
                 { label: isHe ? "תרגילים" : "Total", value: allItems.length, color: "purple" },
