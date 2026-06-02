@@ -4,8 +4,7 @@ import { Button } from "@/components/ui/button";
 import { Card } from "@/components/ui/card";
 import { Input } from "@/components/ui/input";
 import { Badge } from "@/components/ui/badge";
-import { ArrowRight, Send, RotateCcw, Volume2, Sparkles } from "lucide-react";
-import { speakHebrew, stopSpeech } from "@/lib/speakHebrew";
+import { ArrowRight, Send, RotateCcw, Sparkles } from "lucide-react";
 import { toast } from "sonner";
 
 interface Scenario {
@@ -89,15 +88,12 @@ export default function LiveSimulation() {
   }, [messages]);
 
   const startScenario = (s: Scenario) => {
-    stopSpeech();
     setScenario(s);
     setMessages([{ role: "assistant", content: s.opening }]);
-    setTimeout(() => speakHebrew(s.opening), 300);
   };
 
   const reset = () => {
     if (!scenario) return;
-    stopSpeech();
     setMessages([{ role: "assistant", content: scenario.opening }]);
     setInput("");
   };
@@ -109,7 +105,6 @@ export default function LiveSimulation() {
     setMessages(newMessages);
     setInput("");
     setLoading(true);
-    stopSpeech();
 
     try {
       const url = `${import.meta.env.VITE_SUPABASE_URL}/functions/v1/simulation-chat`;

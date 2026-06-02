@@ -85,12 +85,6 @@ export default function Index() {
 
   return (
     <div dir="rtl" className="min-h-screen bg-gradient-to-br from-blue-50 to-indigo-100 flex items-center justify-center p-4 relative">
-      <a
-        href="#/live-simulation"
-        className="fixed top-3 left-3 z-50 inline-flex items-center gap-2 px-4 py-2 rounded-full bg-gradient-to-r from-purple-600 to-pink-600 text-white font-bold shadow-lg hover:scale-105 transition-transform text-sm md:text-base"
-      >
-        🎭 סימולציה חיה
-      </a>
       <IndexMainMenu 
         lang={state.lang}
         setLang={state.setLang}
