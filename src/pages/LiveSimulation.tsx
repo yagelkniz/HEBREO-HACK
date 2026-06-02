@@ -160,7 +160,7 @@ export default function LiveSimulation() {
           }
         }
       }
-      if (assistantText) speakHebrew(assistantText);
+      
     } catch (e) {
       console.error(e);
       toast.error("שגיאה");
@@ -221,7 +221,7 @@ export default function LiveSimulation() {
     <div dir="rtl" className="min-h-screen bg-gradient-to-br from-purple-50 via-pink-50 to-orange-50 flex flex-col">
       <header className="sticky top-0 z-10 bg-white/90 backdrop-blur border-b p-3 md:p-4">
         <div className="max-w-3xl mx-auto flex items-center justify-between gap-2">
-          <Button variant="outline" size="sm" onClick={() => { stopSpeech(); setScenario(null); setMessages([]); }} className="gap-1">
+          <Button variant="outline" size="sm" onClick={() => { setScenario(null); setMessages([]); }} className="gap-1">
             <ArrowRight className="h-4 w-4" />
             תפריט
           </Button>
@@ -248,15 +248,6 @@ export default function LiveSimulation() {
                 style={{ lineHeight: 1.7, fontSize: "18px", whiteSpace: "pre-wrap" }}
               >
                 {m.content || <span className="opacity-50">...</span>}
-                {m.role === "assistant" && m.content && (
-                  <button
-                    onClick={() => speakHebrew(m.content)}
-                    className="ml-2 inline-flex items-center text-purple-600 hover:text-purple-800"
-                    aria-label="השמע"
-                  >
-                    <Volume2 className="h-4 w-4 inline" />
-                  </button>
-                )}
               </div>
             </div>
           ))}
