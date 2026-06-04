@@ -1,6 +1,11 @@
-import { useState, useMemo, useCallback } from "react";
-import { Search, Volume2, ArrowLeft, BookOpen } from "lucide-react";
+import { useState, useMemo, useCallback, useEffect } from "react";
+import { Search, Volume2, ArrowLeft, BookOpen, X } from "lucide-react";
 import { speakHebrew } from "@/lib/speakHebrew";
+import {
+  getConjugatedForm,
+  PRONOUNS,
+  type Tense,
+} from "@/data/pielHiphilConjugations";
 
 type Binyan = "piel" | "hiphil";
 
