@@ -106,6 +106,11 @@ export default function PielHiphilBrowser() {
     } catch { return 0; }
   });
 
+  // Conjugator modal state
+  const [activeVerb, setActiveVerb] = useState<VerbEntry | null>(null);
+  const [tense, setTense] = useState<Tense>("present");
+  const [pronounIdx, setPronounIdx] = useState<number>(0);
+
   const filtered = useMemo(() => {
     const q = search.trim().toLowerCase();
     return VERBS.filter((v) => {
@@ -129,12 +134,30 @@ export default function PielHiphilBrowser() {
 
   const handleCardClick = useCallback((verb: VerbEntry) => {
     speakHebrew(verb.hebrew, 0.85);
+    setActiveVerb(verb);
+    setTense("present");
+    setPronounIdx(0);
     setTotalSeen((prev) => {
       const next = prev + 1;
       try { localStorage.setItem("piel_hiphil_seen_count", String(next)); } catch {}
       return next;
     });
   }, []);
+
+  const closeModal = useCallback(() => setActiveVerb(null), []);
+
+  // Close on ESC
+  useEffect(() => {
+    if (!activeVerb) return;
+    const onKey = (e: KeyboardEvent) => { if (e.key === "Escape") closeModal(); };
+    window.addEventListener("keydown", onKey);
+    return () => window.removeEventListener("keydown", onKey);
+  }, [activeVerb, closeModal]);
+
+  const conjugated = useMemo(() => {
+    if (!activeVerb) return "";
+    return getConjugatedForm(activeVerb.hebrew, tense, pronounIdx);
+  }, [activeVerb, tense, pronounIdx]);
 
   const accentFor = (b: Binyan) => (b === "piel" ? pielAccent : hiphilAccent);
 
