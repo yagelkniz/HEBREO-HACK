@@ -1,6 +1,11 @@
-import { useState, useMemo, useCallback } from "react";
-import { Search, Volume2, ArrowLeft, BookOpen } from "lucide-react";
+import { useState, useMemo, useCallback, useEffect } from "react";
+import { Search, Volume2, ArrowLeft, BookOpen, X } from "lucide-react";
 import { speakHebrew } from "@/lib/speakHebrew";
+import {
+  getConjugatedForm,
+  PRONOUNS,
+  type Tense,
+} from "@/data/pielHiphilConjugations";
 
 type Binyan = "piel" | "hiphil";
 
@@ -101,6 +106,11 @@ export default function PielHiphilBrowser() {
     } catch { return 0; }
   });
 
+  // Conjugator modal state
+  const [activeVerb, setActiveVerb] = useState<VerbEntry | null>(null);
+  const [tense, setTense] = useState<Tense>("present");
+  const [pronounIdx, setPronounIdx] = useState<number>(0);
+
   const filtered = useMemo(() => {
     const q = search.trim().toLowerCase();
     return VERBS.filter((v) => {
@@ -124,12 +134,30 @@ export default function PielHiphilBrowser() {
 
   const handleCardClick = useCallback((verb: VerbEntry) => {
     speakHebrew(verb.hebrew, 0.85);
+    setActiveVerb(verb);
+    setTense("present");
+    setPronounIdx(0);
     setTotalSeen((prev) => {
       const next = prev + 1;
       try { localStorage.setItem("piel_hiphil_seen_count", String(next)); } catch {}
       return next;
     });
   }, []);
+
+  const closeModal = useCallback(() => setActiveVerb(null), []);
+
+  // Close on ESC
+  useEffect(() => {
+    if (!activeVerb) return;
+    const onKey = (e: KeyboardEvent) => { if (e.key === "Escape") closeModal(); };
+    window.addEventListener("keydown", onKey);
+    return () => window.removeEventListener("keydown", onKey);
+  }, [activeVerb, closeModal]);
+
+  const conjugated = useMemo(() => {
+    if (!activeVerb) return "";
+    return getConjugatedForm(activeVerb.hebrew, tense, pronounIdx);
+  }, [activeVerb, tense, pronounIdx]);
 
   const accentFor = (b: Binyan) => (b === "piel" ? pielAccent : hiphilAccent);
 
@@ -260,8 +288,134 @@ export default function PielHiphilBrowser() {
 
       {/* ===== Footer hint ===== */}
       <footer className="text-center py-6 text-xs text-gray-400">
-        לחץ על כרטיס כדי להשמיע את הפועל
+        לחץ על כרטיס כדי לפתוח את מחולל ההטיות
       </footer>
+
+      {/* ===== Conjugator Modal ===== */}
+      {activeVerb && (
+        <div
+          className="fixed inset-0 z-[100] flex items-end sm:items-center justify-center bg-black/40 backdrop-blur-sm animate-in fade-in duration-200 p-0 sm:p-4"
+          onClick={closeModal}
+        >
+          <div
+            dir="rtl"
+            className="relative w-full sm:max-w-lg bg-white rounded-t-3xl sm:rounded-3xl shadow-2xl overflow-hidden max-h-[92vh] flex flex-col animate-in slide-in-from-bottom-4 duration-300"
+            onClick={(e) => e.stopPropagation()}
+            style={{ fontFamily: "'Heebo', sans-serif" }}
+          >
+            {/* Header */}
+            <div
+              className={`px-5 pt-5 pb-4 ${
+                activeVerb.binyan === "piel"
+                  ? "bg-gradient-to-br from-teal-50 via-cyan-50 to-white"
+                  : "bg-gradient-to-br from-indigo-50 via-violet-50 to-white"
+              }`}
+            >
+              <div className="flex items-start justify-between gap-3">
+                <div className="flex-1 min-w-0">
+                  <span
+                    className={`inline-block text-[10px] font-semibold px-2 py-0.5 rounded-md border ${accentFor(activeVerb.binyan).badge}`}
+                  >
+                    {binyanLabel(activeVerb.binyan)}
+                  </span>
+                  <h2 className="text-3xl font-bold text-gray-800 mt-2 leading-tight">
+                    {activeVerb.hebrew}
+                  </h2>
+                  <p className="text-sm text-gray-500 mt-0.5">
+                    שורש: <span className="font-mono">{activeVerb.root}</span> · {activeVerb.english}
+                  </p>
+                </div>
+                <button
+                  onClick={closeModal}
+                  className="shrink-0 w-9 h-9 flex items-center justify-center rounded-full bg-white/70 hover:bg-white text-gray-500 hover:text-gray-800 transition-colors shadow-sm"
+                  aria-label="סגור"
+                >
+                  <X className="w-4 h-4" />
+                </button>
+              </div>
+            </div>
+
+            {/* Result display */}
+            <div className="px-5 py-6 bg-white border-b border-gray-100">
+              <div className="text-center">
+                <p className="text-xs uppercase tracking-wider text-gray-400 mb-2">
+                  {tense === "past" ? "עבר" : tense === "present" ? "הווה" : "עתיד"}
+                  {" · "}
+                  {PRONOUNS[pronounIdx].he}
+                </p>
+                <button
+                  onClick={() => speakHebrew(conjugated, 0.85)}
+                  className={`group inline-flex items-center gap-3 px-6 py-3 rounded-2xl transition-all active:scale-[0.98] ${
+                    activeVerb.binyan === "piel"
+                      ? "bg-gradient-to-br from-teal-50 to-cyan-50 hover:from-teal-100 hover:to-cyan-100"
+                      : "bg-gradient-to-br from-indigo-50 to-violet-50 hover:from-indigo-100 hover:to-violet-100"
+                  }`}
+                  title="השמע"
+                >
+                  <Volume2 className={`w-5 h-5 ${accentFor(activeVerb.binyan).icon} opacity-60 group-hover:opacity-100 transition`} />
+                  <span
+                    key={`${tense}-${pronounIdx}`}
+                    className="text-4xl md:text-5xl font-bold text-gray-900 animate-in fade-in zoom-in-95 duration-200"
+                  >
+                    {conjugated}
+                  </span>
+                </button>
+              </div>
+            </div>
+
+            {/* Controls */}
+            <div className="px-5 py-4 overflow-y-auto">
+              {/* Tense */}
+              <div className="mb-4">
+                <p className="text-xs font-semibold text-gray-500 mb-2">זמן</p>
+                <div className="grid grid-cols-3 gap-2">
+                  {([
+                    { key: "past", label: "עבר" },
+                    { key: "present", label: "הווה" },
+                    { key: "future", label: "עתיד" },
+                  ] as const).map((t) => (
+                    <button
+                      key={t.key}
+                      onClick={() => setTense(t.key)}
+                      className={`py-2.5 rounded-xl text-sm font-semibold transition-all ${
+                        tense === t.key
+                          ? activeVerb.binyan === "piel"
+                            ? "bg-teal-600 text-white shadow-md shadow-teal-200"
+                            : "bg-indigo-600 text-white shadow-md shadow-indigo-200"
+                          : "bg-gray-100 text-gray-600 hover:bg-gray-200"
+                      }`}
+                    >
+                      {t.label}
+                    </button>
+                  ))}
+                </div>
+              </div>
+
+              {/* Pronoun */}
+              <div>
+                <p className="text-xs font-semibold text-gray-500 mb-2">גוף</p>
+                <div className="grid grid-cols-4 gap-2">
+                  {PRONOUNS.map((p, i) => (
+                    <button
+                      key={p.he}
+                      onClick={() => setPronounIdx(i)}
+                      className={`py-2.5 px-2 rounded-xl text-sm font-semibold transition-all ${
+                        pronounIdx === i
+                          ? activeVerb.binyan === "piel"
+                            ? "bg-teal-100 text-teal-800 ring-2 ring-teal-400"
+                            : "bg-indigo-100 text-indigo-800 ring-2 ring-indigo-400"
+                          : "bg-gray-50 text-gray-700 hover:bg-gray-100 border border-gray-100"
+                      }`}
+                    >
+                      {p.he}
+                    </button>
+                  ))}
+                </div>
+              </div>
+            </div>
+          </div>
+        </div>
+      )}
     </div>
   );
 }
