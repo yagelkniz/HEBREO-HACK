@@ -142,7 +142,8 @@ export default function IndexMainMenu(props: IndexMainMenuProps) {
     { emoji: "🎭", label: isHe ? "סימולציה חיה (AI)" : "Live Simulation (AI)", hub: "conversation", level: "intermediate", action: () => { window.location.hash = "#/live-simulation"; } },
     // Map of Israel — interactive learning journey
     { emoji: "🗺️", label: isHe ? "מפת ישראל" : "Map of Israel", hub: "reading", level: "beginner", action: () => { window.location.hash = "#/map-of-israel"; } },
-    { emoji: "📖", label: isHe ? "פעלים בפיעל והפעיל" : "Piel & Hiphil Verbs", hub: "grammar", level: "intermediate", action: () => { window.location.hash = "#/piel-hiphil"; } },
+   { emoji: "📖", label: isHe ? "פעלים בפיעל והפעיל" : "Piel & Hiphil Verbs", hub: "grammar", level: "intermediate", action: () => { window.location.hash = "#/piel-hiphil"; } },
+   { emoji: "⏱️", label: isHe ? "משחק הזמנים" : "Tense Switch", hub: "grammar", level: "intermediate", action: () => { window.location.hash = "#/tense-switch"; } },
     // Foundations
     { emoji: "🔤", label: isHe ? "אלפבית" : "Alphabet", hub: "foundations", level: "beginner", action: () => setShowAlphabetCourse(true) },
     { emoji: "🔵", label: isHe ? "ניקוד" : "Nikud (Vowels)", hub: "foundations", level: "beginner", action: () => setShowNikud(true) },
