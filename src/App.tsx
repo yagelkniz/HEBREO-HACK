@@ -10,6 +10,7 @@ import MapOfIsrael from "./pages/MapOfIsrael";
 import ActivePassive from "./pages/ActivePassive";
 import JewishHolidays from "./pages/JewishHolidays";
 import PielHiphilBrowser from "./pages/PielHiphilBrowser";
+import TenseSwitch from "./pages/TenseSwitch";
 
 // Hebrew Flow imports
 import HebrewFlowLayout from "./components/hebrewFlow/HebrewFlowLayout";
@@ -38,6 +39,7 @@ const App = () => (
         <Route path="/active-passive" element={<ActivePassive />} />
         <Route path="/jewish-holidays" element={<JewishHolidays />} />
         <Route path="/piel-hiphil" element={<PielHiphilBrowser />} />
+        <Route path="/tense-switch" element={<TenseSwitch />} />
 
         {/* Hebrew Flow Routes */}
         <Route path="/hebrew-flow" element={<HebrewFlowLayout />}>
