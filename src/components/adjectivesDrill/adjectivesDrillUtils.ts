@@ -58,7 +58,7 @@ export function buildInflectionQuestions(pool: Adjective[], count: number): Infl
       .map((k) => (k === "ms" ? adj.ms : k === "fs" ? adj.fs : k === "mp" ? adj.mp : adj.fp))
       .filter((f) => f !== correctForm);
     const distractorPool = shuffleArray(Array.from(new Set(wrongForms)));
-    let distractors = distractorPool.slice(0, 3);
+    const distractors = distractorPool.slice(0, 3);
     if (distractors.length < 3) {
       const other = pool.filter((a) => a.id !== adj.id);
       const extra = shuffleArray(other).map((a) => formOf(a, target.gender, target.number));
