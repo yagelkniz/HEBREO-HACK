@@ -15,6 +15,7 @@ import PielDrillPage from "./pages/PielDrillPage";
 import HifilDrillPage from "./pages/HifilDrillPage";
 import PaalDrillPage from "./pages/PaalDrillPage";
 import HitpaelDrillPage from "./pages/HitpaelDrillPage";
+import AdjectivesDrillPage from "./pages/AdjectivesDrillPage";
 
 // Hebrew Flow imports
 import HebrewFlowLayout from "./components/hebrewFlow/HebrewFlowLayout";
@@ -48,6 +49,7 @@ const App = () => (
         <Route path="/hifil-drill" element={<HifilDrillPage />} />
         <Route path="/paal-drill" element={<PaalDrillPage />} />
         <Route path="/hitpael-drill" element={<HitpaelDrillPage />} />
+        <Route path="/adjectives-drill" element={<AdjectivesDrillPage />} />
 
         {/* Hebrew Flow Routes */}
         <Route path="/hebrew-flow" element={<HebrewFlowLayout />}>
