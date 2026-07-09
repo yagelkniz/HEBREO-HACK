@@ -1,4 +1,4 @@
-import { BinyanDrillData, DrillVerb, DrillSentence } from "@/components/binyanDrill/binyanDrillTypes";
+import { BinyanDrillData, DrillVerb, DrillSentence, Story } from "@/components/binyanDrill/binyanDrillTypes";
 
 // The 30 approved Pi'el verbs for this module, each fully inflected for all
 // 10 persons (אני/אתה/את/הוא/היא/אנחנו/אתם/אתן/הם/הן) across past/present/future.
@@ -398,6 +398,64 @@ const pielDrillSentences: DrillSentence[] = [
   { id: "p-fut-15", tense: "future", topic: "שיחות", sentence: "אם תשלחי הודעה, הם ___ אותה מיד.", correctForm: "יקבלו", correctFormNikud: "יְקַבְּלוּ", options: ["יקבלו", "קיבלו", "מקבלים", "תקבל"], optionsNikud: ["יְקַבְּלוּ", "קִבְּלוּ", "מְקַבְּלִים", "תְּקַבֵּל"], correctAnswer: 0, fullSentence: "אם תשלחי הודעה, הם יקבלו אותה מיד.", english: "If you send a message, they will receive it right away." },
 ];
 
+// Three short everyday stories (one per tense), built only from verbs in
+// pielDrillVerbs above. Each sentence's subject (יוסי/אמא/אנחנו/...) is
+// written so the expected person is unambiguous from context, since the
+// story UI shows only the infinitive, never the person label.
+const pielStories: Story[] = [
+  {
+    id: "piel-story-past",
+    tense: "past",
+    title: "יום עמוס בעבודה",
+    sentences: [
+      { before: "אתמול בבוקר יוסי ", after: " לצאת לעבודה כי הוא קם מאוחר.", verbInfinitive: "למהר", person: "הוא" },
+      { before: "בדרך הוא ", after: " את המפתחות של הרכב במשך חמש דקות.", verbInfinitive: "לחפש", person: "הוא" },
+      { before: "בעבודה, המנהלת ", after: " ממנו לסיים דוח דחוף.", verbInfinitive: "לבקש", person: "היא" },
+      { before: "יוסי ", after: " עם הצוות שלו על התוכנית החדשה.", verbInfinitive: "לדבר", person: "הוא" },
+      { before: "בצהריים הוא ", after: " קצת בפארק ליד המשרד כדי להירגע.", verbInfinitive: "לטייל", person: "הוא" },
+      { before: "אחר כך הוא ", after: " את השולחן שלו לפני הפגישה.", verbInfinitive: "לסדר", person: "הוא" },
+      { before: "בישיבה הוא ", after: " לכולם על הרעיון החדש שלו.", verbInfinitive: "לספר", person: "הוא" },
+      { before: "בסוף היום הוא ", after: " טעות קטנה בדוח.", verbInfinitive: "לתקן", person: "הוא" },
+      { before: "לפני שהלך הביתה, הוא ", after: " את החשבון של החנייה.", verbInfinitive: "לשלם", person: "הוא" },
+      { before: "בערב הוא ", after: " להירגע מול הטלוויזיה.", verbInfinitive: "לנסות", person: "הוא" },
+    ],
+  },
+  {
+    id: "piel-story-present",
+    tense: "present",
+    title: "יום רגיל של משפחה",
+    sentences: [
+      { before: "כל בוקר אמא ", after: " ארוחת בוקר לכל המשפחה.", verbInfinitive: "לבשל", person: "היא" },
+      { before: "אבא ", after: " את המטבח אחרי הארוחה.", verbInfinitive: "לנקות", person: "הוא" },
+      { before: "הילדים ", after: " בחצר לפני בית הספר.", verbInfinitive: "לשחק", person: "הם" },
+      { before: "בדרך לבית הספר, דנה ", after: " ציורים קטנים במחברת שלה.", verbInfinitive: "לצייר", person: "היא" },
+      { before: "המורה ", after: " את הכיתה שיר חדש בעברית.", verbInfinitive: "ללמד", person: "היא" },
+      { before: "בהפסקה, יוסי ", after: " בגיטרה לחברים שלו.", verbInfinitive: "לנגן", person: "הוא" },
+      { before: "אחר הצהריים אנחנו ", after: " את סבתא בבית שלה.", verbInfinitive: "לבקר", person: "אנחנו" },
+      { before: "היא ", after: " תמונות של הנכדים שלה כל פעם.", verbInfinitive: "לצלם", person: "היא" },
+      { before: "בערב המשפחה ", after: " לאבא שיחזור מהעבודה.", verbInfinitive: "לחכות", person: "היא" },
+      { before: "לפני השינה, יוסי ", after: " שמחר יהיה יום טוב יותר.", verbInfinitive: "לקוות", person: "הוא" },
+    ],
+  },
+  {
+    id: "piel-story-future",
+    tense: "future",
+    title: "התוכניות לחופשה",
+    sentences: [
+      { before: "בקיץ הקרוב אנחנו ", after: " בצפון הארץ.", verbInfinitive: "לטייל", person: "אנחנו" },
+      { before: "אני ", after: " מההורים שלי לבוא איתנו.", verbInfinitive: "לבקש", person: "אני" },
+      { before: "אבא ", after: " על המלון מראש.", verbInfinitive: "לשלם", person: "הוא" },
+      { before: "אמא ", after: " אוכל טעים לדרך.", verbInfinitive: "לבשל", person: "היא" },
+      { before: "הילדים ", after: " במים בים כל היום.", verbInfinitive: "לשחק", person: "הם" },
+      { before: "אני ", after: " הרבה תמונות מהטיול.", verbInfinitive: "לצלם", person: "אני" },
+      { before: "בערב אנחנו ", after: " סיפורים ליד המדורה.", verbInfinitive: "לספר", person: "אנחנו" },
+      { before: "בסוף הטיול אנחנו ", after: " בתחרות המשפחתית.", verbInfinitive: "לנצח", person: "אנחנו" },
+      { before: "לפני שנחזור הביתה, אני ", after: " מתנות קטנות לחברים.", verbInfinitive: "לחפש", person: "אני" },
+      { before: "כשנחזור, אני ", after: " לזכור כל רגע מהטיול.", verbInfinitive: "לנסות", person: "אני" },
+    ],
+  },
+];
+
 export const pielDrillData: BinyanDrillData = {
   binyanKey: "piel",
   binyanLabel: "פיעל",
@@ -405,4 +463,5 @@ export const pielDrillData: BinyanDrillData = {
   binyanDescription: "30 פעלים שכיחים בבניין פיעל, בשלושה זמנים - עבר, הווה ועתיד.",
   verbs: pielDrillVerbs,
   sentences: pielDrillSentences,
+  stories: pielStories,
 };

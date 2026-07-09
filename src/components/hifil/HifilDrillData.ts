@@ -1,4 +1,4 @@
-import { BinyanDrillData, DrillVerb, DrillSentence } from "@/components/binyanDrill/binyanDrillTypes";
+import { BinyanDrillData, DrillVerb, DrillSentence, Story } from "@/components/binyanDrill/binyanDrillTypes";
 
 // The 30 approved Hif'il verbs for this module, each fully inflected for all
 // 10 persons (אני/אתה/את/הוא/היא/אנחנו/אתם/אתן/הם/הן) across past/present/future.
@@ -398,6 +398,63 @@ const hifilDrillSentences: DrillSentence[] = [
   { id: "h-fut-15", tense: "future", topic: "שיחות", sentence: "מתי אתם ___ לי כשאני מדברת?", correctForm: "תקשיבו", correctFormNikud: "תַּקְשִׁיבוּ", options: ["תקשיבו", "הקשבתם", "מקשיבים", "יקשיבו"], optionsNikud: ["תַּקְשִׁיבוּ", "הִקְשַׁבְתֶּם", "מַקְשִׁיבִים", "יַקְשִׁיבוּ"], correctAnswer: 0, fullSentence: "מתי אתם תקשיבו לי כשאני מדברת?", english: "When will you listen to me when I'm talking?" },
 ];
 
+// Three short everyday stories (one per tense), built only from verbs in
+// hifilDrillVerbs above. Subjects are written so the expected person is
+// unambiguous from context, since the story UI shows only the infinitive.
+const hifilStories: Story[] = [
+  {
+    id: "hifil-story-past",
+    tense: "past",
+    title: "יום ראשון בעבודה החדשה",
+    sentences: [
+      { before: "היום דן ", after: " בעבודה חדשה במשרד.", verbInfinitive: "להתחיל", person: "הוא" },
+      { before: "הוא ", after: " מוקדם כדי לא לאחר.", verbInfinitive: "להגיע", person: "הוא" },
+      { before: "המנהלת ", after: " לו איך המערכת עובדת.", verbInfinitive: "להסביר", person: "היא" },
+      { before: "דן ", after: " בתשומת לב לכל מה שהיא אמרה.", verbInfinitive: "להקשיב", person: "הוא" },
+      { before: "בהפסקה, עמיתה לעבודה ", after: " אותו לארוחת צהריים.", verbInfinitive: "להזמין", person: "היא" },
+      { before: "בפגישה כולם ", after: " על התוכנית לחודש הבא.", verbInfinitive: "להחליט", person: "הם" },
+      { before: "אחר כך הוא ", after: " את שאר העובדים במשרד.", verbInfinitive: "להכיר", person: "הוא" },
+      { before: "בסוף היום הוא ", after: " מאוד מרוצה מהיום הראשון שלו.", verbInfinitive: "להרגיש", person: "הוא" },
+      { before: "לפני שהלך הביתה, הוא ", after: " לעצמו לעבוד קשה.", verbInfinitive: "להבטיח", person: "הוא" },
+      { before: "הוא ", after: " לסיים את כל המשימות שלו.", verbInfinitive: "להצליח", person: "הוא" },
+    ],
+  },
+  {
+    id: "hifil-story-present",
+    tense: "present",
+    title: "משפחה שאוהבת טיולים",
+    sentences: [
+      { before: "המשפחה שלי ", after: " טיולים בטבע על פני העיר.", verbInfinitive: "להעדיף", person: "היא" },
+      { before: "אבא ", after: " את התיקים כמה ימים לפני.", verbInfinitive: "להכין", person: "הוא" },
+      { before: "אמא ", after: " לכולם לקחת מים וכובע.", verbInfinitive: "להזכיר", person: "היא" },
+      { before: "אני ", after: " שהטיול הבא יהיה הכי טוב.", verbInfinitive: "להאמין", person: "אני" },
+      { before: "אחי ", after: " תמיד עוד ציוד לתרמיל.", verbInfinitive: "להוסיף", person: "הוא" },
+      { before: "אחותי ", after: " מפות טיולים לטלפון שלה.", verbInfinitive: "להוריד", person: "היא" },
+      { before: "כשאנחנו מגיעים, אנחנו ", after: " חופשיים ורגועים.", verbInfinitive: "להרגיש", person: "אנחנו" },
+      { before: "אבא ", after: " לנו על הצמחים והחיות באזור.", verbInfinitive: "להסביר", person: "הוא" },
+      { before: "בסוף כל טיול אנחנו ", after: " לאן ניסע בפעם הבאה.", verbInfinitive: "להחליט", person: "אנחנו" },
+      { before: "כולנו ", after: " שטיולים משפחתיים הם הכי כיפיים.", verbInfinitive: "להסכים", person: "אנחנו" },
+    ],
+  },
+  {
+    id: "hifil-story-future",
+    tense: "future",
+    title: "התוכנית לשנה הבאה",
+    sentences: [
+      { before: "בשנה הבאה אני ", after: " קורס חדש באוניברסיטה.", verbInfinitive: "להתחיל", person: "אני" },
+      { before: "אני מקווה שאני ", after: " בכל המבחנים.", verbInfinitive: "להצליח", person: "אני" },
+      { before: "ההורים שלי ", after: " לתמוך בי לאורך כל הדרך.", verbInfinitive: "להבטיח", person: "הם" },
+      { before: "אני ", after: " כבר עכשיו איזה מקצוע ללמוד.", verbInfinitive: "להחליט", person: "אני" },
+      { before: "המרצה ", after: " לנו את כל החומר בשיעור הראשון.", verbInfinitive: "להסביר", person: "הוא" },
+      { before: "אני ", after: " בתשומת לב בכל שיעור.", verbInfinitive: "להקשיב", person: "אני" },
+      { before: "חברים חדשים ", after: " אותי בקמפוס.", verbInfinitive: "להכיר", person: "הם" },
+      { before: "בסוף השנה אנחנו ", after: " יחד לטיול גדול.", verbInfinitive: "להגיע", person: "אנחנו" },
+      { before: "אני ", after: " את המשפחה שלי ליום הסיום.", verbInfinitive: "להזמין", person: "אני" },
+      { before: "כולנו ", after: " גאים כשנסיים את השנה הראשונה.", verbInfinitive: "להרגיש", person: "אנחנו" },
+    ],
+  },
+];
+
 export const hifilDrillData: BinyanDrillData = {
   binyanKey: "hifil",
   binyanLabel: "הפעיל",
@@ -405,4 +462,5 @@ export const hifilDrillData: BinyanDrillData = {
   binyanDescription: "30 פעלים שכיחים בבניין הפעיל, בשלושה זמנים - עבר, הווה ועתיד.",
   verbs: hifilDrillVerbs,
   sentences: hifilDrillSentences,
+  stories: hifilStories,
 };

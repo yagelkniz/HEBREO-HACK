@@ -41,6 +41,23 @@ export interface DrillSentence {
   english: string;
 }
 
+export interface StorySentence {
+  /** Plain text before the blank */
+  before: string;
+  /** Plain text after the blank, through the sentence's punctuation */
+  after: string;
+  /** Which verb (by infinitive, must exist in this binyan's verbs list) and person is expected */
+  verbInfinitive: string;
+  person: Person;
+}
+
+export interface Story {
+  id: string;
+  tense: Tense;
+  title: string;
+  sentences: StorySentence[];
+}
+
 export interface BinyanDrillData {
   binyanKey: string;
   binyanLabel: string;
@@ -48,4 +65,7 @@ export interface BinyanDrillData {
   binyanDescription: string;
   verbs: DrillVerb[];
   sentences: DrillSentence[];
+  /** Optional "story" cloze-drill content (one story per tense). Only binyanim
+   *  with hand-authored stories show the story entry point on the intro screen. */
+  stories?: Story[];
 }

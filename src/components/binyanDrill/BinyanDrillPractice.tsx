@@ -3,8 +3,8 @@ import { Button } from "@/components/ui/button";
 import { Card } from "@/components/ui/card";
 import { Switch } from "@/components/ui/switch";
 import { Progress } from "@/components/ui/progress";
-import { ArrowRight, ArrowLeft, Check, X, RotateCcw, Sparkles, Grid3x3, Shuffle } from "lucide-react";
-import { BinyanDrillData, DrillVerb, Person, PERSONS, Tense } from "./binyanDrillTypes";
+import { ArrowRight, ArrowLeft, Check, X, RotateCcw, Sparkles, Grid3x3, Shuffle, BookOpen, SkipForward } from "lucide-react";
+import { BinyanDrillData, DrillVerb, Person, PERSONS, Story, Tense } from "./binyanDrillTypes";
 import {
   StageAQuestion,
   StageBQuestion,
@@ -20,7 +20,19 @@ interface BinyanDrillPracticeProps {
   onBack: () => void;
 }
 
-type Phase = "intro" | "stageA" | "stageATransition" | "stageB" | "unitComplete" | "crossTableSetup" | "crossTable";
+type Phase =
+  | "intro"
+  | "stageA"
+  | "stageATransition"
+  | "stageB"
+  | "unitComplete"
+  | "crossTableSetup"
+  | "crossTable"
+  | "storyTenseSelect"
+  | "story"
+  | "storySummary";
+
+type BlankStatus = "correct" | "wrong" | "skipped";
 
 const TENSE_GRADIENT: Record<Tense, string> = {
   past: "from-amber-400 to-orange-500",
@@ -82,6 +94,82 @@ export default function BinyanDrillPractice({ data, onBack }: BinyanDrillPractic
   };
 
   const crossFilledCount = Object.keys(crossAnswers).length;
+
+  // Story cloze drill: one hand-authored story per tense (only present for
+  // binyanim that have data.stories), filled in one verb at a time by typing.
+  const [currentStory, setCurrentStory] = useState<Story | null>(null);
+  const [storyResults, setStoryResults] = useState<Record<number, BlankStatus>>({});
+  const [activeStoryIndex, setActiveStoryIndex] = useState<number | null>(null);
+  const [pendingWrongIndex, setPendingWrongIndex] = useState<number | null>(null);
+  const [storyInput, setStoryInput] = useState("");
+
+  const storyVerbForm = (sentence: Story["sentences"][number]): string => {
+    const verb = data.verbs.find((v) => v.infinitive === sentence.verbInfinitive);
+    return verb ? verb.conjugations[currentStory!.tense][sentence.person] : "";
+  };
+
+  const pickStory = (t: Tense) => {
+    const story = data.stories?.find((s) => s.tense === t) ?? null;
+    setCurrentStory(story);
+    setStoryResults({});
+    setActiveStoryIndex(null);
+    setPendingWrongIndex(null);
+    setStoryInput("");
+    setPhase("story");
+  };
+
+  const openStoryBlank = (idx: number) => {
+    if (storyResults[idx]) return;
+    setActiveStoryIndex(idx);
+    setPendingWrongIndex(null);
+    setStoryInput("");
+  };
+
+  // Typed answers are compared leniently: nikud'd forms strip to "defective"
+  // spelling (e.g. חִפֵּשׂ -> חפש), but students normally type the "plene"
+  // spelling (חיפש) since they never see nikud on a keyboard. Dropping internal
+  // ו/י from both sides after stripping nikud accepts either spelling without
+  // needing to hand-author a second plain-spelling field for every story verb.
+  const normalizeForCompare = (text: string) => removeNikud(text).replace(/[וי]/g, "").trim();
+
+  const checkStoryAnswer = (idx: number) => {
+    if (!currentStory) return;
+    const correctForm = storyVerbForm(currentStory.sentences[idx]);
+    const ok = normalizeForCompare(storyInput) === normalizeForCompare(correctForm);
+    if (ok) {
+      setStoryResults((prev) => ({ ...prev, [idx]: "correct" }));
+      setActiveStoryIndex(null);
+    } else {
+      setPendingWrongIndex(idx);
+    }
+  };
+
+  const retryStoryAnswer = (idx: number) => {
+    setPendingWrongIndex(null);
+    setActiveStoryIndex(idx);
+    setStoryInput("");
+  };
+
+  const acceptStoryWrong = (idx: number) => {
+    setStoryResults((prev) => ({ ...prev, [idx]: "wrong" }));
+    setPendingWrongIndex(null);
+  };
+
+  const skipStoryBlank = (idx: number) => {
+    setStoryResults((prev) => ({ ...prev, [idx]: "skipped" }));
+    setActiveStoryIndex(null);
+    setPendingWrongIndex(null);
+  };
+
+  const storyFilledCount = currentStory ? Object.keys(storyResults).length : 0;
+  const storyDone = currentStory !== null && storyFilledCount === currentStory.sentences.length;
+  const storyCorrectCount = Object.values(storyResults).filter((s) => s === "correct").length;
+  const storyHardVerbs = currentStory
+    ? currentStory.sentences
+        .map((s, i) => ({ s, i }))
+        .filter(({ i }) => storyResults[i] === "wrong" || storyResults[i] === "skipped")
+        .map(({ s, i }) => ({ infinitive: s.verbInfinitive, correctForm: storyVerbForm(s), status: storyResults[i] }))
+    : [];
 
   const startTense = (t: Tense) => {
     setTense(t);
@@ -190,7 +278,7 @@ export default function BinyanDrillPractice({ data, onBack }: BinyanDrillPractic
             כל זמן כולל שני שלבים: הטיה לפי גופים ({data.verbs.length} פעלים), ואחריו תרגול משפטים מחיי היומיום.
           </Card>
 
-          <Card className="p-4 bg-card/90">
+          <Card className={`p-4 bg-card/90 ${data.stories?.length ? "mb-6" : ""}`}>
             <button
               onClick={() => setPhase("crossTableSetup")}
               className="w-full flex items-center gap-3 p-3 rounded-xl hover:bg-muted transition-colors text-right"
@@ -205,6 +293,24 @@ export default function BinyanDrillPractice({ data, onBack }: BinyanDrillPractic
               <ArrowLeft className="h-4 w-4 text-muted-foreground shrink-0" />
             </button>
           </Card>
+
+          {data.stories && data.stories.length > 0 && (
+            <Card className="p-4 bg-card/90">
+              <button
+                onClick={() => setPhase("storyTenseSelect")}
+                className="w-full flex items-center gap-3 p-3 rounded-xl hover:bg-muted transition-colors text-right"
+              >
+                <span className="shrink-0 h-11 w-11 rounded-xl bg-gradient-to-br from-teal-500 to-cyan-600 text-white flex items-center justify-center">
+                  <BookOpen className="h-5 w-5" />
+                </span>
+                <span className="flex-1 min-w-0">
+                  <span className="block font-bold text-foreground">תרגול נוסף: סיפור</span>
+                  <span className="block text-xs text-muted-foreground">קראו סיפור קצר והשלימו את הפעלים לפי הזמן שבחרתם</span>
+                </span>
+                <ArrowLeft className="h-4 w-4 text-muted-foreground shrink-0" />
+              </button>
+            </Card>
+          )}
         </div>
       </div>
     );
@@ -562,6 +668,205 @@ export default function BinyanDrillPractice({ data, onBack }: BinyanDrillPractic
             </Button>
           </div>
         </div>
+      </div>
+    );
+  }
+
+  // ===== Story: pick tense =====
+  if (phase === "storyTenseSelect") {
+    const availableTenses = (["past", "present", "future"] as Tense[]).filter((t) =>
+      data.stories?.some((s) => s.tense === t)
+    );
+    return (
+      <div className="min-h-screen bg-gradient-to-br from-secondary to-accent p-4" dir="rtl" style={{ fontFamily: "'Heebo', sans-serif" }}>
+        <div className="max-w-2xl mx-auto">
+          <Header onBackClick={() => setPhase("intro")} title={`${data.binyanLabel} · סיפור`} />
+
+          <Card className="p-6 mb-6 bg-card/90 text-center">
+            <h1 className="text-2xl font-bold text-primary mb-2 flex items-center justify-center gap-2">
+              <BookOpen className="h-6 w-6" />
+              תרגול סיפור
+            </h1>
+            <p className="text-sm text-gray-500">בחרו זמן. הסיפור משתמש רק בפעלים של בניין {data.binyanLabel}.</p>
+          </Card>
+
+          <Card className="p-4 bg-card/90">
+            <div className="grid grid-cols-1 sm:grid-cols-3 gap-3">
+              {availableTenses.map((t) => (
+                <button
+                  key={t}
+                  onClick={() => pickStory(t)}
+                  className={`py-6 rounded-2xl text-white text-xl font-bold shadow-md hover:shadow-lg active:scale-95 transition-all bg-gradient-to-br ${TENSE_GRADIENT[t]}`}
+                >
+                  {TENSE_LABEL[t]}
+                </button>
+              ))}
+            </div>
+          </Card>
+        </div>
+      </div>
+    );
+  }
+
+  // ===== Story: read + fill in the verbs =====
+  if (phase === "story" && currentStory) {
+    return (
+      <div className="min-h-screen bg-gradient-to-br from-secondary to-accent p-4" dir="rtl" style={{ fontFamily: "'Heebo', sans-serif" }}>
+        <div className="max-w-2xl mx-auto">
+          <Header onBackClick={() => setPhase("intro")} title={`${data.binyanLabel} · ${TENSE_LABEL[currentStory.tense]} · סיפור`} />
+
+          <div className="mb-4 text-center">
+            <span className={`inline-block px-3 py-1 rounded-full text-sm bg-gradient-to-br text-white ${TENSE_GRADIENT[currentStory.tense]}`}>
+              {TENSE_LABEL[currentStory.tense]}
+            </span>
+          </div>
+
+          <p className="text-center text-sm text-gray-600 mb-3">
+            הושלמו {storyFilledCount} מתוך {currentStory.sentences.length} פעלים
+          </p>
+          <Progress value={(storyFilledCount / currentStory.sentences.length) * 100} className="mb-4 h-2" />
+
+          <Card className="p-6 bg-card/95 mb-4">
+            <h2 className="text-lg font-bold text-primary mb-4 text-center">{currentStory.title}</h2>
+            <p className="text-xl leading-[2.6] text-foreground text-right">
+              {currentStory.sentences.map((sentence, i) => {
+                const verb = data.verbs.find((v) => v.infinitive === sentence.verbInfinitive);
+                const correctForm = storyVerbForm(sentence);
+                const status = storyResults[i];
+
+                let blank: JSX.Element;
+                if (status === "correct") {
+                  blank = <span className="mx-1 font-bold text-green-700">{display(correctForm)}</span>;
+                } else if (status === "wrong") {
+                  blank = <span className="mx-1 font-bold text-red-700">{display(correctForm)}</span>;
+                } else if (status === "skipped") {
+                  blank = <span className="mx-1 font-bold text-amber-700">{display(correctForm)}</span>;
+                } else if (pendingWrongIndex === i) {
+                  blank = (
+                    <span className="inline-flex flex-wrap items-center gap-2 align-middle mx-1 bg-red-50 border border-red-200 rounded-lg px-2 py-1 text-sm">
+                      <span className="text-red-700">
+                        לא נכון. הצורה הנכונה: <b>{display(correctForm)}</b>
+                      </span>
+                      <button onClick={() => retryStoryAnswer(i)} className="text-primary underline font-medium">
+                        נסה שוב
+                      </button>
+                      <button onClick={() => acceptStoryWrong(i)} className="text-muted-foreground underline">
+                        המשך
+                      </button>
+                    </span>
+                  );
+                } else if (activeStoryIndex === i) {
+                  blank = (
+                    <span className="inline-flex items-center gap-1 align-middle mx-1">
+                      <input
+                        autoFocus
+                        dir="rtl"
+                        value={storyInput}
+                        onChange={(e) => setStoryInput(e.target.value)}
+                        onKeyDown={(e) => {
+                          if (e.key === "Enter") checkStoryAnswer(i);
+                        }}
+                        className="w-28 px-2 py-1 rounded-lg border-2 border-primary text-center text-base focus:outline-none"
+                        placeholder={verb ? display(verb.infinitiveNikud) : ""}
+                      />
+                      <button onClick={() => checkStoryAnswer(i)} className="text-xs px-2 py-1.5 rounded-lg bg-primary text-primary-foreground font-medium">
+                        בדוק
+                      </button>
+                      <button onClick={() => skipStoryBlank(i)} className="text-xs px-2 py-1.5 rounded-lg bg-muted text-muted-foreground font-medium">
+                        דלג לתשובה
+                      </button>
+                    </span>
+                  );
+                } else {
+                  blank = (
+                    <span className="inline-flex items-center gap-1 align-middle mx-1">
+                      <button
+                        onClick={() => openStoryBlank(i)}
+                        className="px-2 py-0.5 rounded-lg bg-teal-50 border-2 border-dashed border-teal-400 text-teal-700 font-bold hover:bg-teal-100 transition-colors"
+                      >
+                        [{verb ? display(verb.infinitiveNikud) : sentence.verbInfinitive}]
+                      </button>
+                      <button
+                        onClick={() => skipStoryBlank(i)}
+                        title="דלג לתשובה"
+                        className="text-muted-foreground hover:text-foreground"
+                      >
+                        <SkipForward className="h-4 w-4" />
+                      </button>
+                    </span>
+                  );
+                }
+
+                return (
+                  <span key={i}>
+                    {i > 0 ? " " : ""}
+                    {sentence.before}
+                    {blank}
+                    {sentence.after}
+                  </span>
+                );
+              })}
+            </p>
+          </Card>
+
+          {storyDone && (
+            <Button className="w-full" onClick={() => setPhase("storySummary")}>
+              <Sparkles className="h-4 w-4 ml-2" />
+              לסיכום
+            </Button>
+          )}
+        </div>
+      </div>
+    );
+  }
+
+  // ===== Story summary =====
+  if (phase === "storySummary" && currentStory) {
+    const total = currentStory.sentences.length;
+    const pct = total > 0 ? Math.round((storyCorrectCount / total) * 100) : 0;
+    return (
+      <div className="min-h-screen bg-gradient-to-br from-secondary to-accent flex items-center justify-center p-4" dir="rtl" style={{ fontFamily: "'Heebo', sans-serif" }}>
+        <Card className="p-8 max-w-md w-full text-center bg-card/95">
+          <div className="text-6xl mb-4">{pct >= 80 ? "🌟" : pct >= 60 ? "👍" : "💪"}</div>
+          <h2 className="text-2xl font-bold text-primary mb-2">
+            סיימתם את הסיפור: {currentStory.title}
+          </h2>
+          <p className="text-lg mb-1">
+            {storyCorrectCount} / {total} פעלים נכונים בפעם הראשונה
+          </p>
+          <p className="text-primary mb-6">{pct}%</p>
+
+          {storyHardVerbs.length > 0 && (
+            <div className="mb-6 text-right">
+              <h3 className="font-bold text-sm text-muted-foreground mb-2 text-center">פעלים שכדאי לחזור עליהם</h3>
+              <div className="space-y-1">
+                {storyHardVerbs.map(({ infinitive, correctForm, status }, i) => (
+                  <div key={i} className="flex items-center justify-between rounded-lg bg-secondary px-3 py-2 text-sm">
+                    <span className={status === "skipped" ? "text-amber-700" : "text-red-700"}>
+                      {status === "skipped" ? "דילוג" : "טעות"}
+                    </span>
+                    <span className="font-medium text-foreground">
+                      {display(correctForm)} <span className="text-muted-foreground">({infinitive})</span>
+                    </span>
+                  </div>
+                ))}
+              </div>
+            </div>
+          )}
+
+          <div className="flex flex-col gap-3">
+            <Button onClick={() => pickStory(currentStory.tense)}>
+              <RotateCcw className="h-4 w-4 ml-2" />
+              נסה שוב את הסיפור הזה
+            </Button>
+            <Button variant="outline" onClick={() => setPhase("storyTenseSelect")}>
+              סיפור בזמן אחר
+            </Button>
+            <Button variant="ghost" onClick={onBack}>
+              חזרה לתפריט הראשי
+            </Button>
+          </div>
+        </Card>
       </div>
     );
   }
