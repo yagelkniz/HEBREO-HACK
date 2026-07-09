@@ -341,6 +341,66 @@ export default function IndexMainMenu(props: IndexMainMenuProps) {
                 <span className="text-2xl opacity-80 group-hover:opacity-100 transition-opacity">➡️</span>
               </div>
             </button>
+            {/* Featured: Binyan Drill — Piel */}
+            <button
+              onClick={() => { window.location.hash = "#/piel-drill"; }}
+              style={{ opacity: cardsVisible ? 1 : 0, transform: cardsVisible ? "translateY(0)" : "translateY(20px)", transition: `opacity 0.4s ease 150ms, transform 0.4s ease 150ms` }}
+              className="group w-full mb-4 p-5 rounded-2xl bg-gradient-to-br from-orange-400 via-rose-500 to-purple-600 text-white shadow-md hover:shadow-lg active:scale-[0.98] transition-all text-right"
+            >
+              <div className="flex items-center gap-4">
+                <span className="text-5xl group-hover:scale-110 transition-transform duration-200 shrink-0">🧪</span>
+                <div className="flex-1 min-w-0">
+                  <div className="font-bold text-lg leading-tight">תרגול בניין פיעל</div>
+                  <div className="text-sm text-white/90 mt-1">בחרו זמן, הטיה לפי גופים ואז משפטים מחיי היומיום</div>
+                </div>
+                <span className="text-2xl opacity-80 group-hover:opacity-100 transition-opacity">➡️</span>
+              </div>
+            </button>
+            {/* Featured: Binyan Drill — Hifil */}
+            <button
+              onClick={() => { window.location.hash = "#/hifil-drill"; }}
+              style={{ opacity: cardsVisible ? 1 : 0, transform: cardsVisible ? "translateY(0)" : "translateY(20px)", transition: `opacity 0.4s ease 180ms, transform 0.4s ease 180ms` }}
+              className="group w-full mb-4 p-5 rounded-2xl bg-gradient-to-br from-blue-500 via-indigo-500 to-violet-600 text-white shadow-md hover:shadow-lg active:scale-[0.98] transition-all text-right"
+            >
+              <div className="flex items-center gap-4">
+                <span className="text-5xl group-hover:scale-110 transition-transform duration-200 shrink-0">🔬</span>
+                <div className="flex-1 min-w-0">
+                  <div className="font-bold text-lg leading-tight">תרגול בניין הפעיל</div>
+                  <div className="text-sm text-white/90 mt-1">בחרו זמן, הטיה לפי גופים ואז משפטים מחיי היומיום</div>
+                </div>
+                <span className="text-2xl opacity-80 group-hover:opacity-100 transition-opacity">➡️</span>
+              </div>
+            </button>
+            {/* Featured: Binyan Drill — Paal */}
+            <button
+              onClick={() => { window.location.hash = "#/paal-drill"; }}
+              style={{ opacity: cardsVisible ? 1 : 0, transform: cardsVisible ? "translateY(0)" : "translateY(20px)", transition: `opacity 0.4s ease 210ms, transform 0.4s ease 210ms` }}
+              className="group w-full mb-4 p-5 rounded-2xl bg-gradient-to-br from-emerald-500 via-green-500 to-teal-600 text-white shadow-md hover:shadow-lg active:scale-[0.98] transition-all text-right"
+            >
+              <div className="flex items-center gap-4">
+                <span className="text-5xl group-hover:scale-110 transition-transform duration-200 shrink-0">📗</span>
+                <div className="flex-1 min-w-0">
+                  <div className="font-bold text-lg leading-tight">תרגול בניין פעל (קל)</div>
+                  <div className="text-sm text-white/90 mt-1">בחרו זמן, הטיה לפי גופים ואז משפטים מחיי היומיום</div>
+                </div>
+                <span className="text-2xl opacity-80 group-hover:opacity-100 transition-opacity">➡️</span>
+              </div>
+            </button>
+            {/* Featured: Binyan Drill — Hitpael */}
+            <button
+              onClick={() => { window.location.hash = "#/hitpael-drill"; }}
+              style={{ opacity: cardsVisible ? 1 : 0, transform: cardsVisible ? "translateY(0)" : "translateY(20px)", transition: `opacity 0.4s ease 240ms, transform 0.4s ease 240ms` }}
+              className="group w-full mb-4 p-5 rounded-2xl bg-gradient-to-br from-pink-500 via-fuchsia-500 to-purple-600 text-white shadow-md hover:shadow-lg active:scale-[0.98] transition-all text-right"
+            >
+              <div className="flex items-center gap-4">
+                <span className="text-5xl group-hover:scale-110 transition-transform duration-200 shrink-0">🌀</span>
+                <div className="flex-1 min-w-0">
+                  <div className="font-bold text-lg leading-tight">תרגול בניין התפעל</div>
+                  <div className="text-sm text-white/90 mt-1">בחרו זמן, הטיה לפי גופים ואז משפטים מחיי היומיום</div>
+                </div>
+                <span className="text-2xl opacity-80 group-hover:opacity-100 transition-opacity">➡️</span>
+              </div>
+            </button>
             <div className="grid grid-cols-3 gap-3 mb-4">
               {([
                 { label: isHe ? "תרגילים" : "Total", value: allItems.length, color: "purple" },
