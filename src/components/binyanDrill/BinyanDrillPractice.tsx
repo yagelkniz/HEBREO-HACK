@@ -3,12 +3,13 @@ import { Button } from "@/components/ui/button";
 import { Card } from "@/components/ui/card";
 import { Switch } from "@/components/ui/switch";
 import { Progress } from "@/components/ui/progress";
-import { ArrowRight, Check, X, RotateCcw, Sparkles } from "lucide-react";
-import { BinyanDrillData, Tense } from "./binyanDrillTypes";
+import { ArrowRight, ArrowLeft, Check, X, RotateCcw, Sparkles, Grid3x3, Shuffle } from "lucide-react";
+import { BinyanDrillData, DrillVerb, Person, PERSONS, Tense } from "./binyanDrillTypes";
 import {
   StageAQuestion,
   StageBQuestion,
   TENSE_LABEL,
+  buildStageAQuestion,
   buildStageAQuestions,
   buildStageBQuestions,
   removeNikud,
@@ -19,7 +20,7 @@ interface BinyanDrillPracticeProps {
   onBack: () => void;
 }
 
-type Phase = "intro" | "stageA" | "stageATransition" | "stageB" | "unitComplete";
+type Phase = "intro" | "stageA" | "stageATransition" | "stageB" | "unitComplete" | "crossTableSetup" | "crossTable";
 
 const TENSE_GRADIENT: Record<Tense, string> = {
   past: "from-amber-400 to-orange-500",
@@ -42,7 +43,45 @@ export default function BinyanDrillPractice({ data, onBack }: BinyanDrillPractic
   const [stageBSelected, setStageBSelected] = useState<number | null>(null);
   const [stageBScore, setStageBScore] = useState(0);
 
+  // Cross-table drill: one verb x all 10 persons, filled cell by cell.
+  const [crossTense, setCrossTense] = useState<Tense>("past");
+  const [crossVerb, setCrossVerb] = useState<DrillVerb | null>(null);
+  const [openPerson, setOpenPerson] = useState<Person | null>(null);
+  const [crossAnswers, setCrossAnswers] = useState<Partial<Record<Person, number>>>({});
+
   const display = (nikudText: string) => (showNikud ? nikudText : removeNikud(nikudText));
+
+  const crossTableQuestions = useMemo(() => {
+    if (!crossVerb) return null;
+    const map = {} as Record<Person, StageAQuestion>;
+    PERSONS.forEach((p) => {
+      map[p] = buildStageAQuestion(crossVerb, crossTense, p);
+    });
+    return map;
+  }, [crossVerb, crossTense]);
+
+  const pickRandomVerb = (excludeInfinitive?: string) => {
+    const pool = excludeInfinitive ? data.verbs.filter((v) => v.infinitive !== excludeInfinitive) : data.verbs;
+    const verb = pool[Math.floor(Math.random() * pool.length)] ?? data.verbs[0];
+    setCrossVerb(verb);
+    setOpenPerson(null);
+    setCrossAnswers({});
+    setPhase("crossTable");
+  };
+
+  const chooseCrossVerb = (verb: DrillVerb) => {
+    setCrossVerb(verb);
+    setOpenPerson(null);
+    setCrossAnswers({});
+    setPhase("crossTable");
+  };
+
+  const answerCross = (person: Person, idx: number) => {
+    setCrossAnswers((prev) => ({ ...prev, [person]: idx }));
+    setOpenPerson(null);
+  };
+
+  const crossFilledCount = Object.keys(crossAnswers).length;
 
   const startTense = (t: Tense) => {
     setTense(t);
@@ -147,8 +186,24 @@ export default function BinyanDrillPractice({ data, onBack }: BinyanDrillPractic
             </div>
           </Card>
 
-          <Card className="p-4 bg-card/90 text-sm text-muted-foreground text-center">
+          <Card className="p-4 mb-6 bg-card/90 text-sm text-muted-foreground text-center">
             כל זמן כולל שני שלבים: הטיה לפי גופים ({data.verbs.length} פעלים), ואחריו תרגול משפטים מחיי היומיום.
+          </Card>
+
+          <Card className="p-4 bg-card/90">
+            <button
+              onClick={() => setPhase("crossTableSetup")}
+              className="w-full flex items-center gap-3 p-3 rounded-xl hover:bg-muted transition-colors text-right"
+            >
+              <span className="shrink-0 h-11 w-11 rounded-xl bg-gradient-to-br from-indigo-500 to-purple-600 text-white flex items-center justify-center">
+                <Grid3x3 className="h-5 w-5" />
+              </span>
+              <span className="flex-1 min-w-0">
+                <span className="block font-bold text-foreground">תרגול נוסף: טבלת הצלבה</span>
+                <span className="block text-xs text-muted-foreground">בחרו פועל וזמן, ומלאו את כל 10 הגופים תא אחרי תא</span>
+              </span>
+              <ArrowLeft className="h-4 w-4 text-muted-foreground shrink-0" />
+            </button>
           </Card>
         </div>
       </div>
@@ -369,6 +424,144 @@ export default function BinyanDrillPractice({ data, onBack }: BinyanDrillPractic
             </Button>
           </div>
         </Card>
+      </div>
+    );
+  }
+
+  // ===== Cross-table setup: pick tense + verb =====
+  if (phase === "crossTableSetup") {
+    return (
+      <div className="min-h-screen bg-gradient-to-br from-secondary to-accent p-4" dir="rtl" style={{ fontFamily: "'Heebo', sans-serif" }}>
+        <div className="max-w-2xl mx-auto">
+          <Header onBackClick={() => setPhase("intro")} title={`${data.binyanLabel} · טבלת הצלבה`} />
+
+          <Card className="p-6 mb-6 bg-card/90 text-center">
+            <h1 className="text-2xl font-bold text-primary mb-2 flex items-center justify-center gap-2">
+              <Grid3x3 className="h-6 w-6" />
+              טבלת הצלבה
+            </h1>
+            <p className="text-sm text-gray-500">בחרו זמן ופועל, ואז מלאו תא אחרי תא את כל 10 הגופים.</p>
+          </Card>
+
+          <Card className="p-4 mb-6 bg-card/90">
+            <h2 className="font-bold text-base mb-3 text-center">זמן</h2>
+            <div className="grid grid-cols-3 gap-3">
+              {(["past", "present", "future"] as Tense[]).map((t) => (
+                <button
+                  key={t}
+                  onClick={() => setCrossTense(t)}
+                  className={`py-3 rounded-xl text-white font-bold shadow-sm active:scale-95 transition-all bg-gradient-to-br ${TENSE_GRADIENT[t]} ${crossTense === t ? "ring-4 ring-primary/40" : "opacity-70"}`}
+                >
+                  {TENSE_LABEL[t]}
+                </button>
+              ))}
+            </div>
+          </Card>
+
+          <Card className="p-4 mb-6 bg-card/90">
+            <Button className="w-full mb-4" onClick={() => pickRandomVerb()}>
+              <Shuffle className="h-4 w-4 ml-2" />
+              פועל אקראי
+            </Button>
+            <h2 className="font-bold text-base mb-3 text-center">או בחרו פועל</h2>
+            <div className="grid grid-cols-2 md:grid-cols-3 gap-2 max-h-80 overflow-y-auto">
+              {data.verbs.map((v) => (
+                <Button key={v.infinitive} variant="outline" className="py-3 h-auto flex-col" onClick={() => chooseCrossVerb(v)}>
+                  <span className="text-base">{display(v.infinitiveNikud)}</span>
+                  <span className="text-[11px] text-muted-foreground">{v.english}</span>
+                </Button>
+              ))}
+            </div>
+          </Card>
+        </div>
+      </div>
+    );
+  }
+
+  // ===== Cross-table: fill all 10 persons for one verb =====
+  if (phase === "crossTable" && crossVerb && crossTableQuestions) {
+    return (
+      <div className="min-h-screen bg-gradient-to-br from-secondary to-accent p-4" dir="rtl" style={{ fontFamily: "'Heebo', sans-serif" }}>
+        <div className="max-w-2xl mx-auto">
+          <Header onBackClick={() => setPhase("intro")} title={`${data.binyanLabel} · טבלת הצלבה`} />
+
+          <Card className="p-4 mb-4 bg-card/95 text-center">
+            <div className="flex items-center justify-center gap-2 mb-1">
+              <span className={`inline-block px-3 py-1 rounded-full text-sm bg-gradient-to-br text-white ${TENSE_GRADIENT[crossTense]}`}>
+                {TENSE_LABEL[crossTense]}
+              </span>
+              <h2 className="text-2xl font-bold text-primary">{display(crossVerb.infinitiveNikud)}</h2>
+            </div>
+            <p className="text-xs text-muted-foreground">{crossVerb.english}</p>
+          </Card>
+
+          <p className="text-center text-sm text-gray-600 mb-3">מולאו {crossFilledCount} מתוך 10 גופים</p>
+          <Progress value={(crossFilledCount / 10) * 100} className="mb-4 h-2" />
+
+          <Card className="p-3 bg-card/95 mb-4">
+            <div className="space-y-2">
+              {PERSONS.map((person) => {
+                const q = crossTableQuestions[person];
+                const answered = crossAnswers[person];
+                const isOpen = openPerson === person;
+                return (
+                  <div key={person} className="rounded-xl border border-border overflow-hidden">
+                    <button
+                      onClick={() => {
+                        if (answered !== undefined) return;
+                        setOpenPerson(isOpen ? null : person);
+                      }}
+                      className={`w-full flex items-center justify-between p-3 transition-colors ${
+                        answered !== undefined
+                          ? answered === q.correctAnswer
+                            ? "bg-green-50"
+                            : "bg-red-50"
+                          : isOpen
+                          ? "bg-muted"
+                          : "bg-background hover:bg-muted"
+                      }`}
+                    >
+                      <span className="font-bold text-primary">{person}</span>
+                      {answered !== undefined ? (
+                        <span className="flex items-center gap-2">
+                          {answered === q.correctAnswer ? (
+                            <Check className="h-4 w-4 text-green-600" />
+                          ) : (
+                            <X className="h-4 w-4 text-red-600" />
+                          )}
+                          <span className={answered === q.correctAnswer ? "text-green-700" : "text-red-700"}>
+                            {display(q.correctForm)}
+                          </span>
+                        </span>
+                      ) : (
+                        <span className="text-sm text-muted-foreground">{isOpen ? "בחר/י תשובה" : "לחצו למילוי"}</span>
+                      )}
+                    </button>
+                    {isOpen && answered === undefined && (
+                      <div className="grid grid-cols-2 gap-2 p-3 pt-0 bg-muted/40">
+                        {q.options.map((option, idx) => (
+                          <Button key={idx} variant="outline" size="sm" onClick={() => answerCross(person, idx)}>
+                            {display(option)}
+                          </Button>
+                        ))}
+                      </div>
+                    )}
+                  </div>
+                );
+              })}
+            </div>
+          </Card>
+
+          <div className="flex flex-col gap-3">
+            <Button onClick={() => pickRandomVerb(crossVerb.infinitive)}>
+              <Shuffle className="h-4 w-4 ml-2" />
+              פועל אקראי
+            </Button>
+            <Button variant="outline" onClick={() => setPhase("crossTableSetup")}>
+              בחר/י פועל וזמן אחר
+            </Button>
+          </div>
+        </div>
       </div>
     );
   }
